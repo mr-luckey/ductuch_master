@@ -1,0 +1,24 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "files.exclude": {
+    ".dart_tool": true,
+    ".flutter-plugins-dependencies": true,
+    ".git": true,
+    ".github": true,
+    ".gitignore": true,
+    ".idea": true,
+    ".metadata": true,
+    ".vscode": true,
+    "Assets": true,
+    "README.md": true,
+    "analysis_options.yaml": true,
+    "build": true,
+    "ductuch_master.iml": true,
+    "ios": true,
+    "linux": true,
+    "macos": true,
+    "pubspec.lock": true,
+    "web": true,
+    "windows": true
+  }
+}
