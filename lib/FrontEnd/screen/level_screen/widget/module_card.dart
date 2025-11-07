@@ -1,5 +1,6 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import '../models/level_model.dart';
 
 class ModuleCard extends StatelessWidget {
@@ -24,11 +25,18 @@ class ModuleCard extends StatelessWidget {
           curve: Curves.easeInOut,
           transform: Matrix4.identity()
             ..translate(0.0, moduleInfo.isLocked ? 0.0 : -2.0),
-          child: Card(
-            elevation: moduleInfo.isLocked ? 1 : 2,
-            color: moduleInfo.isLocked
-                ? Theme.of(context).colorScheme.surface.withOpacity(0.6)
-                : Theme.of(context).colorScheme.surface,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: moduleInfo.isLocked
+                    ? Colors.white.withOpacity(0.05)
+                    : Colors.white.withOpacity(0.1),
+              ),
+              color: moduleInfo.isLocked
+                  ? Colors.white.withOpacity(0.01)
+                  : Colors.white.withOpacity(0.02),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(24),
               child: Column(
@@ -75,6 +83,8 @@ class ModuleCard extends StatelessWidget {
                                   color: Colors.green,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
+                                  fontFamily:
+                                      GoogleFonts.patrickHand().fontFamily,
                                 ),
                               ),
                             ],
@@ -101,6 +111,8 @@ class ModuleCard extends StatelessWidget {
                                   color: Colors.grey,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
+                                  fontFamily:
+                                      GoogleFonts.patrickHand().fontFamily,
                                 ),
                               ),
                             ],
@@ -112,8 +124,11 @@ class ModuleCard extends StatelessWidget {
                   // Title
                   Text(
                     moduleInfo.title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    style: TextStyle(
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -122,10 +137,10 @@ class ModuleCard extends StatelessWidget {
                   // Progress Text
                   Text(
                     '${moduleInfo.completedLessons}/${moduleInfo.lessonCount} lessons completed',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.onSurface.withOpacity(0.7),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white.withOpacity(0.6),
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -133,30 +148,35 @@ class ModuleCard extends StatelessWidget {
                   if (!moduleInfo.isLocked)
                     Column(
                       children: [
-                        LinearProgressIndicator(
-                          value: progress,
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.surfaceVariant,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            isCompleted
-                                ? Colors.green
-                                : Theme.of(context).colorScheme.primary,
+                        Container(
+                          height: 6,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            color: Colors.white.withOpacity(0.05),
                           ),
-                          borderRadius: BorderRadius.circular(4),
-                          minHeight: 8,
+                          child: FractionallySizedBox(
+                            alignment: Alignment.centerLeft,
+                            widthFactor: progress,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                color: isCompleted
+                                    ? Colors.green
+                                    : const Color(0xFF10B981),
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Text(
                             '${(progress * 100).round()}%',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface.withOpacity(0.7),
-                                ),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white.withOpacity(0.6),
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            ),
                           ),
                         ),
                       ],

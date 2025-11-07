@@ -140,34 +140,36 @@ class LevelScreen extends StatelessWidget {
     final currentLevel = levelInfo[level] ?? levelInfo['a1']!;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: CustomScrollView(
-        slivers: [
-          const SliverToBoxAdapter(child: SizedBox(height: 24)),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                final module = currentLevel.modules[index];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: ModuleCard(
-                    moduleInfo: module,
-                    onTap: () {
-                      Get.toNamed(
-                        '/lesson',
-                        arguments: {'moduleId': module.ID},
-                      );
-                      // Navigate to module details or lessons
-                      // Example: Get.to(ModuleDetailScreen(moduleId: module.ID));
-                    },
-                  ),
-                );
-              }, childCount: currentLevel.modules.length),
+      backgroundColor: const Color(0xFF0B0F14),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(child: SizedBox(height: 24)),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              sliver: SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final module = currentLevel.modules[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: ModuleCard(
+                      moduleInfo: module,
+                      onTap: () {
+                        Get.toNamed(
+                          '/lesson',
+                          arguments: {'moduleId': module.ID},
+                        );
+                        // Navigate to module details or lessons
+                        // Example: Get.to(ModuleDetailScreen(moduleId: module.ID));
+                      },
+                    ),
+                  );
+                }, childCount: currentLevel.modules.length),
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 40)),
-        ],
+            const SliverToBoxAdapter(child: SizedBox(height: 40)),
+          ],
+        ),
       ),
     );
   }

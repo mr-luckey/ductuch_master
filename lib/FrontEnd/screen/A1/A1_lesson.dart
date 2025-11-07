@@ -2,6 +2,7 @@ import 'package:ductuch_master/FrontEnd/screen/A1/Learn.dart';
 import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class A1LessonScreen extends StatelessWidget {
   final String moduleId;
@@ -260,100 +261,176 @@ class A1LessonScreen extends StatelessWidget {
     final List<dynamic> lessons = moduleData?['lessons'] ?? [];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(moduleTitle),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: lessons.length,
-        itemBuilder: (context, index) {
-          final lesson = lessons[index];
-
-          // Use Obx only for the specific widget that needs to react to changes
-          return Obx(() {
-            final isCompleted = lessonController.isLessonCompleted(
-              lesson['id'],
-            );
-
-            return Card(
-              margin: const EdgeInsets.only(bottom: 12),
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: isCompleted ? Colors.green : Colors.grey.shade300,
-                  width: isCompleted ? 2 : 1,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              elevation: isCompleted ? 4 : 1,
-              child: ListTile(
-                leading: _getLessonLeading(lesson, isCompleted),
-                title: Text(
-                  lesson['title'],
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    decoration: isCompleted
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none,
-                  ),
-                ),
-                subtitle: isCompleted
-                    ? null
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(lesson['content']),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                  vertical: 2,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: _getTypeColor(lesson['type']),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  lesson['type'],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                lesson['duration'],
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+      backgroundColor: const Color(0xFF0B0F14),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Top bar
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.white.withOpacity(0.1)),
+                    ),
+                    child: IconButton(
+                      onPressed: () => Get.back(),
+                      icon: const Icon(
+                        Icons.chevron_left,
+                        color: Colors.white70,
+                        size: 22,
                       ),
-                trailing: isCompleted
-                    ? const Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
-                        size: 24,
-                      )
-                    : const Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  Get.to(
-                    () => PhraseScreen(),
-                    // LessonDetailScreen(lesson: lesson, moduleId: moduleId),
-                  );
+                      padding: const EdgeInsets.all(6),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      moduleTitle,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Lessons list
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                itemCount: lessons.length,
+                itemBuilder: (context, index) {
+                  final lesson = lessons[index];
+
+                  // Use Obx only for the specific widget that needs to react to changes
+                  return Obx(() {
+                    final isCompleted = lessonController.isLessonCompleted(
+                      lesson['id'],
+                    );
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(
+                          color: isCompleted
+                              ? const Color(0xFF10B981).withOpacity(0.3)
+                              : Colors.white.withOpacity(0.1),
+                          width: isCompleted ? 2 : 1,
+                        ),
+                        color: Colors.white.withOpacity(0.02),
+                      ),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                        leading: _getLessonLeading(lesson, isCompleted),
+                        title: Text(
+                          lesson['title'],
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            decoration: isCompleted
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                          ),
+                        ),
+                        subtitle: isCompleted
+                            ? null
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    lesson['content'],
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontFamily:
+                                          GoogleFonts.patrickHand().fontFamily,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: _getTypeColor(
+                                            lesson['type'],
+                                          ).withOpacity(0.2),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                          border: Border.all(
+                                            color: _getTypeColor(
+                                              lesson['type'],
+                                            ).withOpacity(0.4),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          lesson['type'],
+                                          style: TextStyle(
+                                            color: _getTypeColor(
+                                              lesson['type'],
+                                            ),
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily:
+                                                GoogleFonts.patrickHand()
+                                                    .fontFamily,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        lesson['duration'],
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.6),
+                                          fontSize: 12,
+                                          fontFamily: GoogleFonts.patrickHand()
+                                              .fontFamily,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                        trailing: isCompleted
+                            ? const Icon(
+                                Icons.check_circle,
+                                color: Color(0xFF10B981),
+                                size: 24,
+                              )
+                            : Icon(
+                                Icons.arrow_forward_ios,
+                                size: 16,
+                                color: Colors.white.withOpacity(0.5),
+                              ),
+                        onTap: () {
+                          Get.to(
+                            () => PhraseScreen(),
+                            // LessonDetailScreen(lesson: lesson, moduleId: moduleId),
+                          );
+                        },
+                      ),
+                    );
+                  });
                 },
               ),
-            );
-          });
-        },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -364,32 +441,44 @@ class A1LessonScreen extends StatelessWidget {
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: Colors.green.withOpacity(0.2),
-          shape: BoxShape.circle,
+          color: const Color(0xFF10B981).withOpacity(0.2),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
         ),
-        child: const Icon(Icons.check, color: Colors.green),
+        child: const Icon(Icons.check, color: Color(0xFF10B981)),
       );
     }
     return _getLessonIcon(lesson['type']);
   }
 
   Widget _getLessonIcon(String type) {
+    final color = _getTypeColor(type);
+    return Container(
+      width: 40,
+      height: 40,
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Icon(_getIconForType(type), color: color, size: 20),
+    );
+  }
+
+  IconData _getIconForType(String type) {
     switch (type) {
       case 'vocabulary':
-        return const Icon(Icons.book, color: Colors.blue);
+        return Icons.book;
       case 'grammar':
-        return const Icon(Icons.auto_stories, color: Colors.green);
+        return Icons.auto_stories;
       case 'conversation':
-        return const Icon(Icons.chat, color: Colors.orange);
+        return Icons.chat;
       case 'practice':
-        return const Icon(
-          Icons.private_connectivity_rounded,
-          color: Colors.purple,
-        );
+        return Icons.private_connectivity_rounded;
       case 'quiz':
-        return const Icon(Icons.quiz, color: Colors.red);
+        return Icons.quiz;
       default:
-        return const Icon(Icons.article, color: Colors.grey);
+        return Icons.article;
     }
   }
 
@@ -487,13 +576,17 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildSectionContent(Map<String, dynamic> section) {
     return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             section['title'],
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
               color: _getTypeColor(section['type']),
+              fontFamily: GoogleFonts.patrickHand().fontFamily,
             ),
           ),
           const SizedBox(height: 16),
@@ -501,13 +594,18 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey[50],
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.grey[200]!),
+              color: Colors.white.withOpacity(0.02),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: Colors.white.withOpacity(0.1)),
             ),
             child: Text(
               section['content'],
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white.withOpacity(0.8),
+                fontFamily: GoogleFonts.patrickHand().fontFamily,
+                height: 1.5,
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -532,10 +630,16 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildTheoryContent() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Key Points:',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
         ),
         const SizedBox(height: 12),
         _buildKeyPoint(
@@ -550,10 +654,16 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildVocabularyContent() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Vocabulary List:',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
         ),
         const SizedBox(height: 12),
         _buildVocabularyItem('Hello', 'A common greeting'),
@@ -566,19 +676,32 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildExamplesContent() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Interactive Examples:',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
         ),
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.blue[50],
+            color: const Color(0xFF38BDF8).withOpacity(0.15),
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color(0xFF38BDF8).withOpacity(0.3)),
           ),
-          child: const Text('Try these examples in your own sentences!'),
+          child: Text(
+            'Try these examples in your own sentences!',
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.8),
+              fontFamily: GoogleFonts.patrickHand().fontFamily,
+            ),
+          ),
         ),
       ],
     );
@@ -586,21 +709,35 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
 
   Widget _buildExerciseContent() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Practice Exercise:',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
         ),
         const SizedBox(height: 12),
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.green[50],
-            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xFF10B981).withOpacity(0.15),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3)),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Complete the following exercises:'),
+              Text(
+                'Complete the following exercises:',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.8),
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                ),
+              ),
               const SizedBox(height: 16),
               _buildExerciseItem('Exercise 1: Multiple Choice'),
               _buildExerciseItem('Exercise 2: Fill in the Blanks'),
@@ -617,33 +754,99 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          Icon(icon, color: Colors.blue, size: 20),
+          Icon(icon, color: const Color(0xFF38BDF8), size: 20),
           const SizedBox(width: 12),
-          Expanded(child: Text(text)),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.8),
+                fontFamily: GoogleFonts.patrickHand().fontFamily,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildVocabularyItem(String word, String meaning) {
-    return Card(
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        color: Colors.white.withOpacity(0.02),
+      ),
       child: ListTile(
-        leading: const Icon(Icons.record_voice_over, color: Colors.purple),
-        title: Text(word, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(meaning),
-        trailing: const Icon(Icons.volume_up, color: Colors.blue),
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: const Color(0xFF8B5CF6).withOpacity(0.2),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Icon(
+            Icons.record_voice_over,
+            color: Color(0xFF8B5CF6),
+            size: 20,
+          ),
+        ),
+        title: Text(
+          word,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
+        ),
+        subtitle: Text(
+          meaning,
+          style: TextStyle(
+            color: Colors.white.withOpacity(0.7),
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.volume_up, color: Color(0xFF38BDF8)),
+          onPressed: () {},
+        ),
       ),
     );
   }
 
   Widget _buildExerciseItem(String text) {
-    return Card(
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        color: Colors.white.withOpacity(0.02),
+      ),
       child: ListTile(
-        leading: const Icon(Icons.assignment, color: Colors.orange),
-        title: Text(text),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF97316).withOpacity(0.2),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Icon(
+            Icons.assignment,
+            color: Color(0xFFF97316),
+            size: 20,
+          ),
+        ),
+        title: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          size: 16,
+          color: Colors.white.withOpacity(0.5),
+        ),
         onTap: () {
           // Handle exercise tap
         },
@@ -669,17 +872,42 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
     final isLastTab = _currentTabIndex == sections.length - 1;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0B0F14),
       appBar: AppBar(
-        title: Text(widget.lesson['title']),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Container(
+          margin: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white.withOpacity(0.1)),
+          ),
+          child: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(Icons.chevron_left, color: Colors.white70),
+            padding: const EdgeInsets.all(6),
+          ),
+        ),
+        title: Text(
+          widget.lesson['title'],
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         actions: [
           Obx(() {
             final isCompleted = lessonController.isLessonCompleted(
               widget.lesson['id'],
             );
             return isCompleted
-                ? const Padding(
-                    padding: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.check_circle, color: Colors.green),
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Icon(
+                      Icons.check_circle,
+                      color: const Color(0xFF10B981),
+                    ),
                   )
                 : const SizedBox.shrink();
           }),
@@ -688,13 +916,22 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           controller: _tabController,
           isScrollable: true,
           tabAlignment: TabAlignment.start,
+          indicatorColor: const Color(0xFF10B981),
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white.withOpacity(0.6),
           tabs: sections.map((section) {
             return Tab(
               child: Row(
                 children: [
                   _getSectionIcon(section['type']),
                   const SizedBox(width: 8),
-                  Text(section['title'], style: const TextStyle(fontSize: 12)),
+                  Text(
+                    section['title'],
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
+                  ),
                 ],
               ),
             );
@@ -717,8 +954,10 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(top: BorderSide(color: Colors.grey[300]!)),
+              color: const Color(0xFF111722),
+              border: Border(
+                top: BorderSide(color: Colors.white.withOpacity(0.1)),
+              ),
             ),
             child: Obx(() {
               final isCompleted = lessonController.isLessonCompleted(
@@ -728,21 +967,28 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
               if (isCompleted) {
                 return SizedBox(
                   width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () => Get.back(),
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.green),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFF10B981)),
                     ),
-                    child: const Text(
-                      'Back to Lessons',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                    child: OutlinedButton(
+                      onPressed: () => Get.back(),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFF10B981)),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        'Back to Lessons',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF10B981),
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
                       ),
                     ),
                   ),
@@ -752,44 +998,70 @@ class _LessonDetailScreenState extends State<LessonDetailScreen>
                   children: [
                     if (_currentTabIndex > 0)
                       Expanded(
-                        child: OutlinedButton(
-                          onPressed: _handlePrevious,
-                          style: OutlinedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.1),
                             ),
                           ),
-                          child: const Text('Previous'),
+                          child: OutlinedButton(
+                            onPressed: _handlePrevious,
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(
+                                color: Colors.white.withOpacity(0.1),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Text(
+                              'Previous',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily:
+                                    GoogleFonts.patrickHand().fontFamily,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     if (_currentTabIndex > 0) const SizedBox(width: 12),
                     Expanded(
                       flex: 2,
-                      child: ElevatedButton(
-                        onPressed: isLastTab
-                            ? () {
-                                lessonController.markLessonCompleted(
-                                  widget.lesson['id'],
-                                );
-                                Get.back();
-                              }
-                            : _handleNext,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: isLastTab
-                              ? Colors.green
-                              : Colors.blue,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: isLastTab
+                              ? const Color(0xFF10B981)
+                              : const Color(0xFF38BDF8),
                         ),
-                        child: Text(
-                          isLastTab ? 'Mark as Completed' : 'Next',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        child: ElevatedButton(
+                          onPressed: isLastTab
+                              ? () {
+                                  lessonController.markLessonCompleted(
+                                    widget.lesson['id'],
+                                  );
+                                  Get.back();
+                                }
+                              : _handleNext,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: Text(
+                            isLastTab ? 'Mark as Completed' : 'Next',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            ),
                           ),
                         ),
                       ),

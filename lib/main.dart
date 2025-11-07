@@ -1,8 +1,6 @@
-import 'package:ductuch_master/Constants/colors.dart';
 import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 import 'package:ductuch_master/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,13 +16,23 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'DeutschMaster',
       theme: ThemeData(
+        fontFamily: GoogleFonts.patrickHand().fontFamily,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF0B0F14),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF3B82F6), // Primary blue
-          primary: const Color(0xFF3B82F6),
-          secondary: const Color(0xFF6B7280),
-          background: const Color(0xFFF8FAFC),
+          seedColor: const Color(0xFF10B981),
+          brightness: Brightness.dark,
+          primary: const Color(0xFF10B981),
+          secondary: const Color(0xFF38BDF8),
+          surface: const Color(0xFF111722),
+          background: const Color(0xFF0B0F14),
         ),
         useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          foregroundColor: Colors.white,
+        ),
       ),
 
       debugShowCheckedModeBanner: false,
@@ -34,23 +42,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-// import 'package:flutter/material.dart';
-// import 'package:flutter_tts/flutter_tts.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Lingua - Listen & Learn',
-//       theme: ThemeData(fontFamily: 'Inter', useMaterial3: true),
-//       home: const PhraseScreen(),
-//       debugShowCheckedModeBanner: false,
-//     );
-//   }
-// }

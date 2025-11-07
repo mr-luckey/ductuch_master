@@ -1,6 +1,7 @@
 import 'package:ductuch_master/Constants/FontStyle.dart';
 import 'package:ductuch_master/Utilities/Models/level_model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import '../models/level_model.dart';
 
 class LevelCard extends StatelessWidget {
@@ -10,40 +11,30 @@ class LevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: level.isLocked ? 1 : 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Container(
-        height: 180,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              level.primaryColor.withOpacity(0.2),
-              level.primaryColor.withOpacity(0.05),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Level badge and title
-                  _buildHeader(context),
-                  const Spacer(),
-                  // Progress and module info
-                  _buildFooter(),
-                ],
-              ),
+    return Container(
+      height: 180,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        color: Colors.white.withOpacity(0.02),
+      ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Level badge and title
+                _buildHeader(context),
+                const Spacer(),
+                // Progress and module info
+                _buildFooter(),
+              ],
             ),
-            // if (level.isLocked) _buildLockedOverlay(),
-          ],
-        ),
+          ),
+          // if (level.isLocked) _buildLockedOverlay(),
+        ],
       ),
     );
   }
@@ -56,16 +47,18 @@ class LevelCard extends StatelessWidget {
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-            color: level.primaryColor,
+            color: const Color(0xFF10B981).withOpacity(0.2),
             borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3)),
           ),
           child: Center(
             child: Text(
               level.level,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
+                fontFamily: GoogleFonts.patrickHand().fontFamily,
               ),
             ),
           ),
@@ -75,11 +68,23 @@ class LevelCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(level.title, style: CustomStylee().MainStyle),
+              Text(
+                level.title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                ),
+              ),
               const SizedBox(height: 4),
               Text(
                 '${level.moduleCount} modules · ${level.lessonCount} lessons',
-                style: CustomStylee().Subheadstyle,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white.withOpacity(0.6),
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                ),
               ),
             ],
           ),
@@ -95,37 +100,61 @@ class LevelCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Progress', style: CustomStylee().Subheadstyle),
+              Text(
+                'Progress',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white.withOpacity(0.6),
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                ),
+              ),
               Text(
                 '${level.progress}%',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF1F2937),
+                  color: Colors.white,
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          LinearProgressIndicator(
-            value: level.progress / 100,
-            backgroundColor: Colors.grey.shade300,
-            color: level.primaryColor,
-            borderRadius: BorderRadius.circular(4),
+          Container(
+            height: 6,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              color: Colors.white.withOpacity(0.05),
+            ),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: level.progress / 100,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  color: const Color(0xFF10B981),
+                ),
+              ),
+            ),
           ),
         ],
         if (level.progress == 100) ...[
           const SizedBox(height: 12),
           Row(
             children: [
-              Icon(Icons.emoji_events, color: level.primaryColor, size: 16),
+              const Icon(
+                Icons.emoji_events,
+                color: Color(0xFF10B981),
+                size: 16,
+              ),
               const SizedBox(width: 4),
               Text(
                 'Completed!',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: level.primaryColor,
+                  color: const Color(0xFF10B981),
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
                 ),
               ),
             ],

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PhraseData {
   final String phrase;
-  final String ipa;
+  // final String ipa;
   final String translation;
   final String meaning;
   final String languageCode;
@@ -12,7 +13,7 @@ class PhraseData {
 
   PhraseData({
     required this.phrase,
-    required this.ipa,
+    // required this.ipa,
     required this.translation,
     required this.meaning,
     required this.languageCode,
@@ -31,7 +32,7 @@ class PhraseData {
   }) {
     return PhraseData(
       phrase: phrase ?? this.phrase,
-      ipa: ipa ?? this.ipa,
+      // ipa: ipa ?? this.ipa,
       translation: translation ?? this.translation,
       meaning: meaning ?? this.meaning,
       languageCode: languageCode ?? this.languageCode,
@@ -58,7 +59,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
   final List<PhraseData> _phrases = [
     PhraseData(
       phrase: "Ich trinke gerne Kaffee.",
-      ipa: "[ɪç ˈtʁɪŋkə ˈɡɛʁnə kaˈfeː]",
+      // ipa: "[ɪç ˈtʁɪŋkə ˈɡɛʁnə ka'feː]",
       translation: "I like to drink coffee.",
       meaning: "Meaning: expressing a personal preference.",
       languageCode: "de-DE",
@@ -66,7 +67,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     ),
     PhraseData(
       phrase: "Guten Morgen!",
-      ipa: "[ˈɡuːtn̩ ˈmɔʁɡn̩]",
+      // ipa: "[ˈɡuːtn̩ ˈmɔʁɡn̩]",
       translation: "Good morning!",
       meaning: "A common morning greeting.",
       languageCode: "de-DE",
@@ -74,7 +75,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     ),
     PhraseData(
       phrase: "Wie geht es Ihnen?",
-      ipa: "[viː ɡeːt ɛs ˈiːnən]",
+      // ipa: "[viː ɡeːt ɛs ˈiːnən]",
       translation: "How are you?",
       meaning: "Polite way to ask about someone's well-being.",
       languageCode: "de-DE",
@@ -302,19 +303,26 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     fontSize: isSmallScreen ? 10 : 11,
                     color: Colors.white.withOpacity(0.5),
                     letterSpacing: 1.0,
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               SizedBox(width: isSmallScreen ? 2 : 4),
-              Text('•', style: TextStyle(color: Colors.white.withOpacity(0.2))),
+              Text(
+                '•',
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.2),
+                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                ),
+              ),
               SizedBox(width: isSmallScreen ? 2 : 4),
               // Flexible(
               //   child: Text(
               //     'Listening Practice',
               //     style: TextStyle(
               //       fontSize: isSmallScreen ? 10 : 11,
-              //       color: Colors.white.withOpacity(0.6),
+              //       color: Colors.white.withOpacity(0.6, fontFamily: GoogleFonts.patrickHand().fontFamily),
               //     ),
               //     overflow: TextOverflow.ellipsis,
               //   ),
@@ -333,6 +341,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: Colors.white.withOpacity(0.6),
+                fontFamily: GoogleFonts.patrickHand().fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -414,6 +423,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                             style: TextStyle(
                               fontSize: isSmallScreen ? 10 : 11,
                               color: Colors.white.withOpacity(0.7),
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
                             ),
                           ),
                         ],
@@ -428,6 +438,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                         height: 1.2,
+                        fontFamily: GoogleFonts.patrickHand().fontFamily,
                       ),
                     ),
                   ],
@@ -462,13 +473,6 @@ class _PhraseScreenState extends State<PhraseScreen> {
             spacing: isSmallScreen ? 6 : 8,
             runSpacing: isSmallScreen ? 4 : 6,
             children: [
-              Text(
-                phrase.ipa,
-                style: TextStyle(
-                  fontSize: isSmallScreen ? 12 : 14,
-                  color: Colors.white.withOpacity(0.6),
-                ),
-              ),
               Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: isSmallScreen ? 4 : 6,
@@ -484,6 +488,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: Colors.white.withOpacity(0.7),
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
               ),
@@ -502,6 +507,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: Colors.white.withOpacity(0.7),
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
               ),
@@ -530,6 +536,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         style: TextStyle(
                           fontSize: isSmallScreen ? 14 : 15,
                           color: Colors.white.withOpacity(0.9),
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
                         ),
                       ),
                     ),
@@ -561,6 +568,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 12 : 13,
                     color: Colors.white.withOpacity(0.6),
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
               ],
@@ -727,6 +735,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 color: isSelected
                     ? Colors.white
                     : Colors.white.withOpacity(0.7),
+                fontFamily: GoogleFonts.patrickHand().fontFamily,
               ),
             ),
           ),
@@ -773,6 +782,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     color: _repeatOn
                         ? Colors.white
                         : Colors.white.withOpacity(0.7),
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
               ],
@@ -831,6 +841,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     fontSize: isSmallScreen ? 10 : 11,
                     fontWeight: FontWeight.w500,
                     color: isActive ? Colors.white : Colors.white70,
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
               ],
