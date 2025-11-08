@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class A1LessonScreen extends StatelessWidget {
+class A2LessonScreen extends StatelessWidget {
   final String moduleId;
 
-  A1LessonScreen({super.key, required this.moduleId});
+  A2LessonScreen({super.key, required this.moduleId});
 
   final LessonController lessonController = Get.find<LessonController>();
 
@@ -286,6 +286,8 @@ class A1LessonScreen extends StatelessWidget {
         return Icons.private_connectivity_rounded;
       case 'quiz':
         return Icons.quiz;
+      case 'writing':
+        return Icons.edit;
       default:
         return Icons.article;
     }
@@ -303,6 +305,8 @@ class A1LessonScreen extends StatelessWidget {
         return Colors.purple;
       case 'quiz':
         return Colors.red;
+      case 'writing':
+        return Colors.teal;
       default:
         return Colors.grey;
     }

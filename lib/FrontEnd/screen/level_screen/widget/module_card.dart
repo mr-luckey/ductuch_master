@@ -136,7 +136,7 @@ class ModuleCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   // Progress Text
                   Text(
-                    '${moduleInfo.completedLessons}/${moduleInfo.lessonCount} lessons completed',
+                    '${moduleInfo.completedLessons}/${moduleInfo.lessonCount} topics completed',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white.withOpacity(0.6),

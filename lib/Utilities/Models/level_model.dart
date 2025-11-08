@@ -27,47 +27,47 @@ class LevelModel {
     LevelModel(
       level: 'A1',
       title: 'Beginner',
-      moduleCount: 8,
-      lessonCount: 40,
-      progress: 75,
+      moduleCount: 4,
+      lessonCount: 15, // 3+4+4+4 topics
+      progress: 0,
       isLocked: false,
       ontap: () {
-        Get.toNamed('/second', arguments: 'A1');
+        Get.toNamed('/second', arguments: 'a1');
       },
       primaryColor: const Color(0xFF3B82F6),
     ),
     LevelModel(
       level: 'A2',
       title: 'Elementary',
-      moduleCount: 8,
-      lessonCount: 40,
-      progress: 30,
+      moduleCount: 4,
+      lessonCount: 16, // 4 topics each
+      progress: 0,
       isLocked: false,
       ontap: () {
-        Get.toNamed('/second', arguments: 'A2');
+        Get.toNamed('/second', arguments: 'a2');
       },
       primaryColor: const Color(0xFFF59E0B),
     ),
     LevelModel(
       level: 'B1',
       title: 'Intermediate',
-      moduleCount: 8,
-      lessonCount: 40,
+      moduleCount: 4,
+      lessonCount: 16, // 4 topics each
       progress: 0,
       isLocked: true,
       ontap: () {
-        Get.toNamed('/second', arguments: 'B1');
+        Get.toNamed('/second', arguments: 'b1');
       },
       primaryColor: const Color(0xFF10B981),
     ),
     LevelModel(
       level: 'B2',
       title: 'Upper Intermediate',
-      moduleCount: 8,
-      lessonCount: 40,
+      moduleCount: 4,
+      lessonCount: 16, // 4 topics each
       progress: 0,
       ontap: () {
-        Get.toNamed('/second', arguments: 'B2');
+        Get.toNamed('/second', arguments: 'b2');
       },
       isLocked: true,
       primaryColor: const Color(0xFF8B5CF6),
@@ -75,11 +75,11 @@ class LevelModel {
     LevelModel(
       level: 'C1',
       title: 'Advanced',
-      moduleCount: 8,
-      lessonCount: 40,
+      moduleCount: 0, // Empty for now
+      lessonCount: 0,
       progress: 0,
       ontap: () {
-        Get.toNamed('/second', arguments: 'C1');
+        Get.toNamed('/second', arguments: 'c1');
       },
       isLocked: true,
       primaryColor: const Color(0xFFEC4899),
@@ -87,10 +87,10 @@ class LevelModel {
     LevelModel(
       level: 'C2',
       title: 'Mastery',
-      moduleCount: 8,
-      lessonCount: 40,
+      moduleCount: 0, // Empty for now
+      lessonCount: 0,
       ontap: () {
-        Get.toNamed('/second', arguments: 'C2');
+        Get.toNamed('/second', arguments: 'c2');
       },
       progress: 0,
       isLocked: true,

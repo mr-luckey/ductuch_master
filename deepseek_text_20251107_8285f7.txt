@@ -1,0 +1,102 @@
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        GERMAN LEARNING PATH (A1 - B2)                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  LEVEL A1 (BEGINNER)
+  ├── 👋 Module 1: Hello!
+  │   ├── Greetings & Farewells
+  │   ├── The Alphabet & Pronunciation
+  │   └── Numbers 0-20
+  │
+  ├── 👤 Module 2: Me and You
+  │   ├── Personal Pronouns (I, you, he, she...)
+  │   ├── Verbs: `to be` (sein) & `to have` (haben)
+  │   ├── Introducing Yourself
+  │   └── Jobs & Nationalities
+  │
+  ├── 🏠 Module 3: At Home and Out
+  │   ├── Articles (der, die, das)
+  │   ├── Family & Hobbies
+  │   ├── Food & Drinks (In a Café)
+  │   └── Telling Time & Days of the Week
+  │
+  └── 📅 Module 4: Daily Life
+      ├── Regular Verbs (Present Tense)
+      ├── Numbers 20-100
+      ├── My City & Directions
+      └── Modal Verbs (can, must, want...)
+
+  LEVEL A2 (ELEMENTARY)
+  ├── 🗓️ Module 5: My Routine
+  │   ├── Daily Schedule
+  │   ├── Separable Verbs
+  │   ├── Accusative & Dative Cases
+  │   └── Prepositions (in, on, at, to...)
+  │
+  ├── 🛍️ Module 6: Shopping and More
+  │   ├── Clothing & Shopping
+  │   ├── Comparative & Superlative
+  │   ├── Money & Prices
+  │   └── Past Tense (Perfekt)
+  │
+  ├── ❤️ Module 7: Health and Feelings
+  │   ├── Body Parts & Health
+  │   ├── Emotions & Adjectives
+  │   ├── At the Doctor's
+  │   └── Two-Way Prepositions
+  │
+  └── ✈️ Module 8: Travel and Stories
+      ├── Travel & Holidays
+      ├── Narrating the Past
+      ├── Simple Past (Präteritum) of `to be` & `to have`
+      └── Weather & Seasons
+
+  LEVEL B1 (INTERMEDIATE)
+  ├── 💼 Module 9: Working Life
+  │   ├── Writing Formal Emails
+  │   ├── Job Applications
+  │   ├── Subordinate Clauses (because, that, if)
+  │   └── Reflexive Verbs
+  │
+  ├── 📰 Module 10: Media and Opinions
+  │   ├── Understanding News Headlines
+  │   ├── Expressing Opinions & Debating
+  │   ├── Passive Voice
+  │   └── Prepositions with Genitive
+  │
+  ├── 🎭 Module 11: Culture and Society
+  │   ├── German Customs & Culture
+  │   ├── Film & Book Reviews
+  │   ├── Adjective Endings
+  │   └── Relative Clauses
+  │
+  └── 💭 Module 12: Abstract Thinking
+      ├── Discussing Dreams & Hopes (Subjunctive Mood - Konjunktiv II)
+      ├── Complex Connectors (therefore, despite, although)
+      ├── Indirect Questions
+      └── Writing a Short Essay
+
+  LEVEL B2 (UPPER INTERMEDIATE)
+  ├── 🎯 Module 13: Precision and Style
+  │   ├── Synonyms & Stylistic Devices
+  │   ├── Formal vs. Informal Register
+  │   ├── Nominalization (Turning verbs into nouns)
+  │   └── Participle Attributes
+  │
+  ├── 🔬 Module 14: Specialized Language
+  │   ├── Discussing Complex Topics (Politics, Science)
+  │   ├── Academic Vocabulary
+  │   ├── Genitive Case in Depth
+  │   └── Figurative Language
+  │
+  ├── 💬 Module 15: Fluent Conversation
+  │   ├── Understanding Nuances & Humor
+  │   ├── Idioms & Proverbs
+  │   ├── Spontaneous Speech Practice
+  │   └── Regional Dialects
+  │
+  └── ✍️ Module 16: Expression and Analysis
+      ├── Writing Coherent Texts (Reports, Stories)
+      ├── Analyzing Literary Excerpts
+      ├── All Tenses (Active & Passive)
+      └── Final Mastery & Review

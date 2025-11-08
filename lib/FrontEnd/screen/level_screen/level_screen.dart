@@ -1,11 +1,8 @@
-import 'package:ductuch_master/Utilities/Models/model.dart';
+import 'package:ductuch_master/Data/learning_path_data.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/widget/module_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
-// import 'package:go_router/go_router.dart';
-// import '../widgets/module_card.dart';
-// import '../models/level_model.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LevelScreen extends StatelessWidget {
   final String level;
@@ -14,159 +11,195 @@ class LevelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final levelInfo = {
-      'a1': LevelInfo(
-        title: 'A1 - Beginner',
-        description: '',
-        ID: 'A1',
+    // Get level from constructor or route arguments
+    String currentLevelKey = level;
+    if (currentLevelKey.isEmpty) {
+      final args = Get.arguments;
+      if (args is String) {
+        currentLevelKey = args;
+      } else if (args is Map) {
+        currentLevelKey = args['level']?.toString() ?? '';
+      }
+    }
 
-        progress: 75,
-        modules: [
-          ModuleInfo(
-            ID: 'A1-L1',
-            title: 'Basics & Greetings',
-            lessonCount: 5,
-            completedLessons:
-                3, //I need to update this veriable when we press enter on the screen
-            //add an ID on ead module
-            //Pass that ID to the nxt screen to load the data according to that ID
-            icon: Icons.book,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A1-L2',
+    // Normalize to lowercase for lookup
+    currentLevelKey = currentLevelKey.toLowerCase();
 
-            title: 'Numbers & Time',
-            lessonCount: 5,
-            completedLessons: 4,
-            icon: Icons.calendar_today,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A1-L3',
+    // Get the level info, default to 'a1' if not found
+    final currentLevel =
+        LearningPathData.levelInfo[currentLevelKey] ??
+        LearningPathData.levelInfo['a1']!;
 
-            title: 'Family & People',
-            lessonCount: 5,
-            completedLessons: 3,
-            icon: Icons.people,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A1-L4',
-
-            title: 'Food & Dining',
-            lessonCount: 5,
-            completedLessons: 2,
-            icon: Icons.restaurant,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A1-L5',
-
-            title: 'Daily Routine',
-            lessonCount: 5,
-            completedLessons: 1,
-            icon: Icons.home,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A1-L6',
-            title: 'City & Directions',
-            lessonCount: 5,
-            completedLessons: 0,
-            icon: Icons.location_on,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A1-L7',
-            title: 'Animals & Nature',
-            lessonCount: 5,
-            completedLessons: 0,
-            icon: Icons.nature,
-            isLocked: true,
-          ),
-          ModuleInfo(
-            ID: 'A1-L8',
-            title: 'A1 Final Review',
-            lessonCount: 5,
-            completedLessons: 0,
-            icon: Icons.emoji_events,
-            isLocked: true,
-          ),
-        ],
-      ),
-      'a2': LevelInfo(
-        ID: 'A2',
-        title: 'A2 - Elementary',
-        description: '',
-        progress: 30,
-        modules: [
-          ModuleInfo(
-            ID: 'A2-L1',
-            title: 'Travel & Transportation',
-            lessonCount: 5,
-            completedLessons: 4,
-            icon: Icons.location_on,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A2-L2',
-            title: 'Shopping & Services',
-            lessonCount: 5,
-            completedLessons: 2,
-            icon: Icons.shopping_cart,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A2-L3',
-            title: 'Health & Body',
-            lessonCount: 5,
-            completedLessons: 0,
-            icon: Icons.health_and_safety,
-            isLocked: false,
-          ),
-          ModuleInfo(
-            ID: 'A2-L4',
-            title: 'Hobbies & Leisure',
-            lessonCount: 5,
-            completedLessons: 0,
-            icon: Icons.sports_esports,
-            isLocked: true,
-          ),
-        ],
-      ),
-    };
-
-    final currentLevel = levelInfo[level] ?? levelInfo['a1']!;
+    print(
+      'LevelScreen: Displaying level "$currentLevelKey" with ${currentLevel.modules.length} modules',
+    );
 
     return Scaffold(
       backgroundColor: const Color(0xFF0B0F14),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            const SliverToBoxAdapter(child: SizedBox(height: 24)),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  final module = currentLevel.modules[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: ModuleCard(
-                      moduleInfo: module,
-                      onTap: () {
-                        Get.toNamed(
-                          '/lesson',
-                          arguments: {'moduleId': module.ID},
-                        );
-                        // Navigate to module details or lessons
-                        // Example: Get.to(ModuleDetailScreen(moduleId: module.ID));
-                      },
+            // Header
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Back button and title row
+                    Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.1),
+                            ),
+                          ),
+                          child: IconButton(
+                            onPressed: () => Get.back(),
+                            icon: const Icon(
+                              Icons.chevron_left,
+                              color: Colors.white70,
+                              size: 22,
+                            ),
+                            padding: const EdgeInsets.all(6),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                currentLevel.title,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily:
+                                      GoogleFonts.patrickHand().fontFamily,
+                                ),
+                              ),
+                              if (currentLevel.description.isNotEmpty) ...[
+                                const SizedBox(height: 4),
+                                Text(
+                                  currentLevel.description,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white.withOpacity(0.6),
+                                    fontFamily:
+                                        GoogleFonts.patrickHand().fontFamily,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                }, childCount: currentLevel.modules.length),
+                  ],
+                ),
               ),
             ),
+            // Modules list or empty state
+            if (currentLevel.modules.isEmpty)
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.construction,
+                        size: 64,
+                        color: Colors.white.withOpacity(0.3),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Coming Soon',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white.withOpacity(0.7),
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'This level is under development',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white.withOpacity(0.5),
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            else
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final module = currentLevel.modules[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: ModuleCard(
+                        moduleInfo: module,
+                        onTap: () {
+                          print('Tapping module: ${module.ID}');
+
+                          // Determine the route based on the module's level prefix
+                          String route = '/lesson/a1'; // default fallback
+
+                          // Extract level from module ID (e.g., "A1-M1" -> "A1")
+                          final moduleLevel = module.ID
+                              .split('-')
+                              .first
+                              .toUpperCase();
+
+                          switch (moduleLevel) {
+                            case 'A1':
+                              route = '/lesson/a1';
+                              break;
+                            case 'A2':
+                              route = '/lesson/a2';
+                              break;
+                            case 'B1':
+                              route = '/lesson/b1';
+                              break;
+                            case 'B2':
+                              route = '/lesson/b2';
+                              break;
+                            case 'C1':
+                              route = '/lesson/c1';
+                              break;
+                            case 'C2':
+                              route = '/lesson/c2';
+                              break;
+                            default:
+                              print(
+                                'Warning: Unknown module level "$moduleLevel", defaulting to A1',
+                              );
+                              route = '/lesson/a1';
+                          }
+
+                          print(
+                            'Navigating to route: $route with moduleId: ${module.ID}',
+                          );
+
+                          Get.toNamed(
+                            route,
+                            arguments: {'moduleId': module.ID},
+                          );
+                        },
+                      ),
+                    );
+                  }, childCount: currentLevel.modules.length),
+                ),
+              ),
             const SliverToBoxAdapter(child: SizedBox(height: 40)),
           ],
         ),

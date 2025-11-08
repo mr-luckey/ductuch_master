@@ -1,4 +1,9 @@
 import 'package:ductuch_master/FrontEnd/screen/A1/A1_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/A2/A2_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/B1/B1_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/B2/B2_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/C1/C1_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/C2/C2_lesson.dart';
 import 'package:ductuch_master/FrontEnd/screen/Home/home_Screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/level_screen.dart';
 import 'package:get/get.dart';
@@ -6,14 +11,119 @@ import 'package:get/get.dart';
 class AppRoutes {
   static const home = '/';
   static const second = '/second';
+  static const lessonA1 = '/lesson/a1';
+  static const lessonA2 = '/lesson/a2';
+  static const lessonB1 = '/lesson/b1';
+  static const lessonB2 = '/lesson/b2';
+  static const lessonC1 = '/lesson/c1';
+  static const lessonC2 = '/lesson/c2';
 
   static final routes = [
     GetPage(name: home, page: () => HomePage()),
-    GetPage(name: second, page: () => LevelScreen()),
     GetPage(
-      name: '/lesson',
-      page: () => A1LessonScreen(moduleId: Get.arguments['moduleId'] ?? ''),
+      name: second,
+      page: () {
+        // Get the level argument from route
+        final args = Get.arguments;
+        String level = '';
+        if (args is String) {
+          level = args;
+        } else if (args is Map) {
+          level = args['level']?.toString() ?? '';
+        }
+        return LevelScreen(level: level);
+      },
     ),
-    // GetPage(name: second, page: () => const SecondScreen()),
+    // Separate routes for each level's lesson screen
+    GetPage(
+      name: lessonA1,
+      page: () {
+        final args = Get.arguments;
+        String moduleId = '';
+        if (args is Map) {
+          moduleId = args['moduleId']?.toString() ?? '';
+        } else if (args is String) {
+          moduleId = args;
+        }
+        return A1LessonScreen(
+          moduleId: moduleId.isNotEmpty ? moduleId : 'A1-M1',
+        );
+      },
+    ),
+    GetPage(
+      name: lessonA2,
+      page: () {
+        final args = Get.arguments;
+        String moduleId = '';
+        if (args is Map) {
+          moduleId = args['moduleId']?.toString() ?? '';
+        } else if (args is String) {
+          moduleId = args;
+        }
+        return A2LessonScreen(
+          moduleId: moduleId.isNotEmpty ? moduleId : 'A2-M5',
+        );
+      },
+    ),
+    GetPage(
+      name: lessonB1,
+      page: () {
+        final args = Get.arguments;
+        String moduleId = '';
+        if (args is Map) {
+          moduleId = args['moduleId']?.toString() ?? '';
+        } else if (args is String) {
+          moduleId = args;
+        }
+        return B1LessonScreen(
+          moduleId: moduleId.isNotEmpty ? moduleId : 'B1-M9',
+        );
+      },
+    ),
+    GetPage(
+      name: lessonB2,
+      page: () {
+        final args = Get.arguments;
+        String moduleId = '';
+        if (args is Map) {
+          moduleId = args['moduleId']?.toString() ?? '';
+        } else if (args is String) {
+          moduleId = args;
+        }
+        return B2LessonScreen(
+          moduleId: moduleId.isNotEmpty ? moduleId : 'B2-M13',
+        );
+      },
+    ),
+    GetPage(
+      name: lessonC1,
+      page: () {
+        final args = Get.arguments;
+        String moduleId = '';
+        if (args is Map) {
+          moduleId = args['moduleId']?.toString() ?? '';
+        } else if (args is String) {
+          moduleId = args;
+        }
+        return C1LessonScreen(
+          moduleId: moduleId.isNotEmpty ? moduleId : 'C1-M1',
+        );
+      },
+    ),
+    GetPage(
+      name: lessonC2,
+      page: () {
+        final args = Get.arguments;
+        String moduleId = '';
+        if (args is Map) {
+          moduleId = args['moduleId']?.toString() ?? '';
+        } else if (args is String) {
+          moduleId = args;
+        }
+        return C2LessonScreen(
+          moduleId: moduleId.isNotEmpty ? moduleId : 'C2-M1',
+        );
+      },
+    ),
   ];
 }
