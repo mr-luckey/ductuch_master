@@ -16,7 +16,7 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-  final ThemeService themeService = Get.find<ThemeService>();
+  final ThemeService themeService = Get.put(ThemeService());
   late PersistentTabController _controller;
 
   @override

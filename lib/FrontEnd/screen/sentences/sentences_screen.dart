@@ -1,6 +1,6 @@
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Services/tts_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,53 +28,25 @@ class SentencesScreen extends StatefulWidget {
 }
 
 class _SentencesScreenState extends State<SentencesScreen> {
-  final ThemeService themeService = Get.find<ThemeService>();
   final TtsService ttsService = Get.find<TtsService>();
   int _currentSentenceIndex = 0;
+  List<SentenceData> _sentences = [];
+  bool _isLoading = true;
 
-  // Sample sentences - in production, load from data source
-  final List<SentenceData> _sentences = [
-    SentenceData(
-      german: 'Guten Morgen!',
-      english: 'Good morning!',
-      meaning: 'A common greeting used in the morning',
-    ),
-    SentenceData(
-      german: 'Wie geht es dir?',
-      english: 'How are you?',
-      meaning: 'A common question to ask about someone\'s well-being',
-    ),
-    SentenceData(
-      german: 'Ich heiße Maria.',
-      english: 'My name is Maria.',
-      meaning: 'A way to introduce yourself',
-    ),
-    SentenceData(
-      german: 'Wo ist die Toilette?',
-      english: 'Where is the bathroom?',
-      meaning: 'A useful question when you need to find a restroom',
-    ),
-    SentenceData(
-      german: 'Ich verstehe nicht.',
-      english: 'I don\'t understand.',
-      meaning: 'Useful when you need clarification',
-    ),
-    SentenceData(
-      german: 'Kannst du das wiederholen?',
-      english: 'Can you repeat that?',
-      meaning: 'Ask someone to say something again',
-    ),
-    SentenceData(
-      german: 'Entschuldigung!',
-      english: 'Excuse me!',
-      meaning: 'Used to get attention or apologize',
-    ),
-    SentenceData(
-      german: 'Vielen Dank!',
-      english: 'Thank you very much!',
-      meaning: 'A polite way to express gratitude',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadSentences();
+  }
+
+  Future<void> _loadSentences() async {
+    final loadedSentences = await DataLoader.loadSentences();
+    setState(() {
+      _sentences = loadedSentences;
+      _isLoading = false;
+    });
+  }
+
 
   void _nextSentence() {
     if (ttsService.isPlaying) {
@@ -107,11 +79,16 @@ class _SentencesScreenState extends State<SentencesScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
-
+    if (_isLoading) {
       return Scaffold(
+        backgroundColor: const Color(0xFF0B0F14),
+        body: const Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
+      );
+    }
+
+    return Scaffold(
         backgroundColor: const Color(0xFF0B0F14),
         appBar: AppBar(
           backgroundColor: const Color(0xFF0B0F14),
@@ -168,7 +145,6 @@ class _SentencesScreenState extends State<SentencesScreen> {
           ),
         ),
       );
-    });
   }
 
   Widget _buildTopBar(bool isSmallScreen) {

@@ -1,6 +1,6 @@
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Services/tts_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,65 +32,26 @@ class PracticeScreen extends StatefulWidget {
 }
 
 class _PracticeScreenState extends State<PracticeScreen> {
-  final ThemeService themeService = Get.find<ThemeService>();
   final TtsService ttsService = Get.find<TtsService>();
   int _currentItemIndex = 0;
   Map<int, bool> _expandedExamples = {};
+  List<PracticeItem> _practiceItems = [];
+  bool _isLoading = true;
 
-  // Sample practice items - in production, load from data source
-  final List<PracticeItem> _practiceItems = [
-    PracticeItem(
-      german: 'sein',
-      english: 'to be',
-      meaning: 'The verb "to be" in German',
-      type: 'verb',
-      examples: [
-        'Ich bin müde. (I am tired.)',
-        'Du bist hier. (You are here.)',
-        'Er ist ein Lehrer. (He is a teacher.)',
-        'Wir sind Freunde. (We are friends.)',
-        'Sie sind glücklich. (They are happy.)',
-      ],
-    ),
-    PracticeItem(
-      german: 'haben',
-      english: 'to have',
-      meaning: 'The verb "to have" in German',
-      type: 'verb',
-      examples: [
-        'Ich habe ein Auto. (I have a car.)',
-        'Du hast Zeit. (You have time.)',
-        'Er hat Hunger. (He is hungry.)',
-        'Wir haben Spaß. (We have fun.)',
-        'Sie haben Recht. (They are right.)',
-      ],
-    ),
-    PracticeItem(
-      german: 'gehen',
-      english: 'to go',
-      meaning: 'The verb "to go" in German',
-      type: 'verb',
-      examples: [
-        'Ich gehe zur Schule. (I go to school.)',
-        'Du gehst nach Hause. (You go home.)',
-        'Er geht ins Kino. (He goes to the cinema.)',
-        'Wir gehen spazieren. (We go for a walk.)',
-        'Sie gehen einkaufen. (They go shopping.)',
-      ],
-    ),
-    PracticeItem(
-      german: 'Guten Morgen!',
-      english: 'Good morning!',
-      meaning: 'A common greeting',
-      type: 'sentence',
-    ),
-    PracticeItem(
-      german: 'Wie geht es dir?',
-      english: 'How are you?',
-      meaning: 'A common question',
-      type: 'sentence',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadPracticeItems();
+  }
+
+  Future<void> _loadPracticeItems() async {
+    final loadedItems = await DataLoader.loadPracticeItems();
+    setState(() {
+      _practiceItems = loadedItems;
+      _isLoading = false;
+    });
+  }
+
 
   void _toggleExamples(int index) {
     setState(() {
@@ -128,6 +89,15 @@ class _PracticeScreenState extends State<PracticeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
+
+    if (_isLoading) {
+      return Scaffold(
+        backgroundColor: const Color(0xFF0B0F14),
+        body: const Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
+      );
+    }
 
     return Scaffold(
         backgroundColor: const Color(0xFF0B0F14),

@@ -1,0 +1,3986 @@
+{
+
+"A1": [
+    {
+      "question": "What is 'Hello' in German?",
+      "options": ["Hallo", "Tschüss", "Danke", "Bitte"],
+      "correctAnswerIndex": 0,
+      "explanation": "Hallo is the German word for Hello."
+    },
+    {
+      "question": "How do you say 'Good morning' in German?",
+      "options": ["Guten Abend", "Guten Morgen", "Gute Nacht", "Guten Tag"],
+      "correctAnswerIndex": 1,
+      "explanation": "Guten Morgen means Good morning in German."
+    },
+    {
+      "question": "How do you say 'Goodbye' in German?",
+      "options": ["Hallo", "Danke", "Tschüss", "Ja"],
+      "correctAnswerIndex": 2,
+      "explanation": "Tschüss is a common and informal way to say Goodbye."
+    },
+    {
+      "question": "What is the translation for 'Thank you'?",
+      "options": ["Bitte", "Entschuldigung", "Danke", "Hallo"],
+      "correctAnswerIndex": 2,
+      "explanation": "Danke is the German word for Thank you."
+    },
+    {
+      "question": "How do you say 'Please' in German?",
+      "options": ["Danke", "Bitte", "Tschüss", "Nein"],
+      "correctAnswerIndex": 1,
+      "explanation": "Bitte means Please. It can also mean 'You're welcome'."
+    },
+    {
+      "question": "What does 'Ja' mean?",
+      "options": ["No", "Yes", "Please", "Thank you"],
+      "correctAnswerIndex": 1,
+      "explanation": "Ja is the German word for Yes."
+    },
+    {
+      "question": "What does 'Nein' mean?",
+      "options": ["Yes", "No", "Hello", "Goodbye"],
+      "correctAnswerIndex": 1,
+      "explanation": "Nein is the German word for No."
+    },
+    {
+      "question": "How do you say 'My name is...' in German?",
+      "options": ["Ich heiße...", "Ich bin...", "Wie heißt du?", "Mein Name..."],
+      "correctAnswerIndex": 0,
+      "explanation": "'Ich heiße...' is the most common way to say 'My name is...'."
+    },
+    {
+      "question": "What is the question 'Wie geht's?' in English?",
+      "options": ["What is your name?", "How are you?", "Where are you from?", "How old are you?"],
+      "correctAnswerIndex": 1,
+      "explanation": "'Wie geht's?' is the informal way to ask 'How are you?'."
+    },
+    {
+      "question": "How do you say 'I am from Germany'?",
+      "options": ["Ich komme aus Deutschland.", "Ich bin Deutschland.", "Ich heiße Deutschland.", "Ich wohne in Deutschland."],
+      "correctAnswerIndex": 0,
+      "explanation": "'Ich komme aus...' is used to state your country of origin."
+    },
+    {
+      "question": "What is the word for 'woman'?",
+      "options": ["der Mann", "die Frau", "das Kind", "der Junge"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Frau means the woman."
+    },
+    {
+      "question": "What is the word for 'man'?",
+      "options": ["die Frau", "das Mädchen", "der Mann", "der Junge"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Mann means the man."
+    },
+    {
+      "question": "What is the word for 'child'?",
+      "options": ["der Junge", "das Mädchen", "das Kind", "die Frau"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Kind means the child."
+    },
+    {
+      "question": "How do you say 'the book' in German?",
+      "options": ["der Tisch", "die Lampe", "das Buch", "der Stuhl"],
+      "correctAnswerIndex": 2,
+      "explanation": "The correct word for 'the book' is 'das Buch' (neuter gender)."
+    },
+    {
+      "question": "What is the number 'fünf' in English?",
+      "options": ["Four", "Five", "Six", "Seven"],
+      "correctAnswerIndex": 1,
+      "explanation": "Fünf is the German word for five."
+    },
+    {
+      "question": "How do you say 'ten' in German?",
+      "options": ["acht", "neun", "zehn", "elf"],
+      "correctAnswerIndex": 2,
+      "explanation": "Zehn is the German word for ten."
+    },
+    {
+      "question": "What is 'water' in German?",
+      "options": ["das Brot", "der Apfel", "das Wasser", "die Milch"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Wasser means the water."
+    },
+    {
+      "question": "How do you say 'apple'?",
+      "options": ["die Banane", "der Apfel", "die Orange", "die Erdbeere"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Apfel means the apple."
+    },
+    {
+      "question": "What is the word for 'house'?",
+      "options": ["die Wohnung", "das Haus", "das Zimmer", "die Tür"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Haus means the house."
+    },
+    {
+      "question": "How do you say 'I have a dog'?",
+      "options": ["Ich habe eine Katze.", "Ich bin ein Hund.", "Ich habe einen Hund.", "Ich mag Hunde."],
+      "correctAnswerIndex": 2,
+      "explanation": "'Ich habe einen Hund' is the correct translation. 'Hund' is a masculine noun, so it takes 'einen' in the accusative case."
+    },
+    {
+      "question": "What is the color 'red' in German?",
+      "options": ["blau", "grün", "gelb", "rot"],
+      "correctAnswerIndex": 3,
+      "explanation": "Rot is the German word for red."
+    },
+    {
+      "question": "How do you say 'blue'?",
+      "options": ["grün", "blau", "schwarz", "weiß"],
+      "correctAnswerIndex": 1,
+      "explanation": "Blau is the German word for blue."
+    },
+    {
+      "question": "What does 'Guten Tag' mean?",
+      "options": ["Good morning", "Good night", "Good day", "Goodbye"],
+      "correctAnswerIndex": 2,
+      "explanation": "'Guten Tag' is a formal greeting meaning 'Good day'."
+    },
+    {
+      "question": "How do you say 'Good evening'?",
+      "options": ["Guten Morgen", "Guten Tag", "Guten Abend", "Gute Nacht"],
+      "correctAnswerIndex": 2,
+      "explanation": "Guten Abend means Good evening."
+    },
+    {
+      "question": "What is 'Good night' in German?",
+      "options": ["Guten Abend", "Gute Nacht", "Guten Morgen", "Guten Tag"],
+      "correctAnswerIndex": 1,
+      "explanation": "Gute Nacht means Good night."
+    },
+    {
+      "question": "How do you ask 'Where is the bathroom?'",
+      "options": ["Wie viel kostet das?", "Wo ist die Toilette?", "Wie spät ist es?", "Sprechen Sie Englisch?"],
+      "correctAnswerIndex": 1,
+      "explanation": "'Wo ist die Toilette?' is the common way to ask for the bathroom."
+    },
+    {
+      "question": "What is the word for 'mother'?",
+      "options": ["der Vater", "die Mutter", "der Bruder", "die Schwester"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Mutter means the mother."
+    },
+    {
+      "question": "What is the word for 'father'?",
+      "options": ["die Mutter", "der Vater", "die Oma", "der Opa"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Vater means the father."
+    },
+    {
+      "question": "How do you say 'sister'?",
+      "options": ["der Bruder", "die Schwester", "die Tochter", "der Sohn"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Schwester means the sister."
+    },
+    {
+      "question": "What is 'brother' in German?",
+      "options": ["die Schwester", "der Bruder", "der Cousin", "die Tante"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Bruder means the brother."
+    },
+    {
+      "question": "How do you say 'I am 20 years old'?",
+      "options": ["Ich bin zwanzig Jahre alt.", "Ich habe zwanzig Jahre.", "Ich bin zwanzig alt.", "Ich werde zwanzig."],
+      "correctAnswerIndex": 0,
+      "explanation": "The correct phrase is 'Ich bin ... Jahre alt.'"
+    },
+    {
+      "question": "What is the word for 'cat'?",
+      "options": ["der Hund", "die Maus", "die Katze", "der Vogel"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Katze means the cat."
+    },
+    {
+      "question": "How do you say 'I live in Berlin'?",
+      "options": ["Ich komme aus Berlin.", "Ich heiße Berlin.", "Ich wohne in Berlin.", "Ich fahre nach Berlin."],
+      "correctAnswerIndex": 2,
+      "explanation": "'Ich wohne in...' is used to state where you live."
+    },
+    {
+      "question": "What is 'to eat' in German?",
+      "options": ["trinken", "essen", "schlafen", "lesen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Essen means to eat."
+    },
+    {
+      "question": "How do you say 'to drink'?",
+      "options": ["essen", "trinken", "gehen", "kommen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Trinken means to drink."
+    },
+    {
+      "question": "What does 'sprechen' mean?",
+      "options": ["to understand", "to speak", "to hear", "to listen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Sprechen means to speak."
+    },
+    {
+      "question": "How do you say 'I understand'?",
+      "options": ["Ich weiß.", "Ich verstehe.", "Ich spreche.", "Ich höre."],
+      "correctAnswerIndex": 1,
+      "explanation": "Ich verstehe means I understand."
+    },
+    {
+      "question": "What is the word for 'school'?",
+      "options": ["die Arbeit", "die Universität", "die Schule", "das Klassenzimmer"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Schule means the school."
+    },
+    {
+      "question": "How do you say 'teacher' (male)?",
+      "options": ["der Schüler", "die Lehrerin", "der Lehrer", "der Professor"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Lehrer means the (male) teacher."
+    },
+    {
+      "question": "What is 'student' (male) in German?",
+      "options": ["der Lehrer", "die Studentin", "der Student", "der Doktor"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Student means the (male) university student. 'Schüler' is for school pupils."
+    },
+    {
+      "question": "How do you say 'the car'?",
+      "options": ["das Auto", "das Fahrrad", "der Bus", "der Zug"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Auto means the car."
+    },
+    {
+      "question": "What is 'bicycle' in German?",
+      "options": ["das Motorrad", "das Flugzeug", "das Fahrrad", "der Wagen"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Fahrrad means the bicycle."
+    },
+    {
+      "question": "How do you ask 'How much is it?'",
+      "options": ["Was ist das?", "Wie viel kostet das?", "Wo ist das?", "Wie alt ist das?"],
+      "correctAnswerIndex": 1,
+      "explanation": "'Wie viel kostet das?' means 'How much does it cost?'"
+    },
+    {
+      "question": "What is 'one euro' in German?",
+      "options": ["ein Euro", "eine Euro", "eins Euro", "einem Euro"],
+      "correctAnswerIndex": 0,
+      "explanation": "The correct article for 'Euro' is 'der', so it's 'ein Euro'."
+    },
+    {
+      "question": "How do you say 'I would like to pay'?",
+      "options": ["Ich will zahlen.", "Ich möchte zahlen.", "Ich muss zahlen.", "Ich kann zahlen."],
+      "correctAnswerIndex": 1,
+      "explanation": "'Ich möchte...' is a polite way to say 'I would like to...'"
+    },
+    {
+      "question": "What is the word for 'today'?",
+      "options": ["gestern", "morgen", "heute", "jetzt"],
+      "correctAnswerIndex": 2,
+      "explanation": "Heute means today."
+    },
+    {
+      "question": "How do you say 'tomorrow'?",
+      "options": ["heute", "gestern", "morgen", "jetzt"],
+      "correctAnswerIndex": 2,
+      "explanation": "Morgen means tomorrow."
+    },
+    {
+      "question": "What does 'gestern' mean?",
+      "options": ["today", "yesterday", "tomorrow", "now"],
+      "correctAnswerIndex": 1,
+      "explanation": "Gestern means yesterday."
+    },
+    {
+      "question": "How do you say 'Monday'?",
+      "options": ["Dienstag", "Mittwoch", "Montag", "Sonntag"],
+      "correctAnswerIndex": 2,
+      "explanation": "Montag is Monday."
+    },
+    {
+      "question": "What is 'Wednesday' in German?",
+      "options": ["Dienstag", "Mittwoch", "Donnerstag", "Freitag"],
+      "correctAnswerIndex": 1,
+      "explanation": "Mittwoch is Wednesday."
+    },
+    {
+      "question": "How do you say 'January'?",
+      "options": ["Februar", "März", "Januar", "April"],
+      "correctAnswerIndex": 2,
+      "explanation": "Januar is January."
+    },
+    {
+      "question": "What is the word for 'spring'?",
+      "options": ["der Sommer", "der Herbst", "der Winter", "der Frühling"],
+      "correctAnswerIndex": 3,
+      "explanation": "Der Frühling means the spring."
+    },
+    {
+      "question": "How do you say 'summer'?",
+      "options": ["der Frühling", "der Sommer", "der Herbst", "der Winter"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Sommer means the summer."
+    },
+    {
+      "question": "What is 'small' in German?",
+      "options": ["groß", "klein", "lang", "kurz"],
+      "correctAnswerIndex": 1,
+      "explanation": "Klein means small."
+    },
+    {
+      "question": "How do you say 'big'?",
+      "options": ["klein", "alt", "neu", "groß"],
+      "correctAnswerIndex": 3,
+      "explanation": "Groß means big."
+    },
+    {
+      "question": "What does 'alt' mean?",
+      "options": ["new", "old", "young", "small"],
+      "correctAnswerIndex": 1,
+      "explanation": "Alt means old."
+    },
+    {
+      "question": "How do you say 'new'?",
+      "options": ["alt", "neu", "schön", "hässlich"],
+      "correctAnswerIndex": 1,
+      "explanation": "Neu means new."
+    },
+    {
+      "question": "What is 'beautiful' in German?",
+      "options": ["hässlich", "schön", "langweilig", "interessant"],
+      "correctAnswerIndex": 1,
+      "explanation": "Schön means beautiful or nice."
+    },
+    {
+      "question": "How do you say 'good'?",
+      "options": ["schlecht", "gut", "böse", "okay"],
+      "correctAnswerIndex": 1,
+      "explanation": "Gut means good."
+    },
+    {
+      "question": "What does 'schlecht' mean?",
+      "options": ["good", "bad", "fast", "slow"],
+      "correctAnswerIndex": 1,
+      "explanation": "Schlecht means bad."
+    },
+    {
+      "question": "How do you say 'I can'?",
+      "options": ["Ich will", "Ich muss", "Ich kann", "Ich mag"],
+      "correctAnswerIndex": 2,
+      "explanation": "Ich kann means I can."
+    },
+    {
+      "question": "What is 'I must' or 'I have to'?",
+      "options": ["Ich will", "Ich kann", "Ich muss", "Ich darf"],
+      "correctAnswerIndex": 2,
+      "explanation": "Ich muss means I must or I have to."
+    },
+    {
+      "question": "How do you say 'I want'?",
+      "options": ["Ich muss", "Ich kann", "Ich will", "Ich möchte"],
+      "correctAnswerIndex": 2,
+      "explanation": "Ich will means I want (with determination). 'Ich möchte' is more polite."
+    },
+    {
+      "question": "What is the word for 'to go'?",
+      "options": ["kommen", "gehen", "fahren", "fliegen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Gehen means to go or to walk."
+    },
+    {
+      "question": "How do you say 'to come'?",
+      "options": ["gehen", "kommen", "laufen", "reisen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Kommen means to come."
+    },
+    {
+      "question": "What does 'machen' mean?",
+      "options": ["to work", "to sleep", "to make/do", "to play"],
+      "correctAnswerIndex": 2,
+      "explanation": "Machen means to make or to do."
+    },
+    {
+      "question": "How do you say 'to work'?",
+      "options": ["spielen", "lernen", "arbeiten", "schlafen"],
+      "correctAnswerIndex": 2,
+      "explanation": "Arbeiten means to work."
+    },
+    {
+      "question": "What is 'to sleep' in German?",
+      "options": ["träumen", "schlafen", "essen", "wohnen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Schlafen means to sleep."
+    },
+    {
+      "question": "How do you say 'to read'?",
+      "options": ["schreiben", "lesen", "sehen", "hören"],
+      "correctAnswerIndex": 1,
+      "explanation": "Lesen means to read."
+    },
+    {
+      "question": "What is 'to write'?",
+      "options": ["lesen", "malen", "schreiben", "zeichnen"],
+      "correctAnswerIndex": 2,
+      "explanation": "Schreiben means to write."
+    },
+    {
+      "question": "How do you say 'the pen'?",
+      "options": ["der Bleistift", "der Stift", "der Kuli", "das Buch"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Stift is a common word for pen. 'Kuli' is also used for ballpoint pen."
+    },
+    {
+      "question": "What is 'the table'?",
+      "options": ["der Stuhl", "der Tisch", "die Lampe", "das Bett"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Tisch means the table."
+    },
+    {
+      "question": "How do you say 'the chair'?",
+      "options": ["der Tisch", "das Sofa", "der Stuhl", "der Sessel"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Stuhl means the chair."
+    },
+    {
+      "question": "What is 'the door'?",
+      "options": ["das Fenster", "die Wand", "die Decke", "die Tür"],
+      "correctAnswerIndex": 3,
+      "explanation": "Die Tür means the door."
+    },
+    {
+      "question": "How do you say 'the window'?",
+      "options": ["die Tür", "das Fenster", "das Haus", "die Mauer"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Fenster means the window."
+    },
+    {
+      "question": "What is 'the bed'?",
+      "options": ["der Schrank", "das Sofa", "das Bett", "der Tisch"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Bett means the bed."
+    },
+    {
+      "question": "How do you say 'the city'?",
+      "options": ["das Land", "das Dorf", "die Stadt", "die Straße"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Stadt means the city or town."
+    },
+    {
+      "question": "What is 'the country' (as in rural area)?",
+      "options": ["die Stadt", "das Dorf", "das Land", "die Nation"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Land can mean the country (as opposed to the city) or the country/nation."
+    },
+    {
+      "question": "How do you say 'the street'?",
+      "options": ["der Weg", "die Straße", "der Platz", "die Autobahn"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Straße means the street."
+    },
+    {
+      "question": "What is 'the money'?",
+      "options": ["die Bank", "das Geld", "der Kredit", "die Münze"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Geld means the money."
+    },
+    {
+      "question": "How do you say 'the time'?",
+      "options": ["die Uhr", "die Zeit", "der Tag", "das Jahr"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Zeit means the time. 'Die Uhr' is the clock or watch."
+    },
+    {
+      "question": "What is 'the clock' or 'the watch'?",
+      "options": ["die Zeit", "die Stunde", "die Uhr", "der Wecker"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Uhr means the clock or the watch."
+    },
+    {
+      "question": "How do you ask 'What time is it?'",
+      "options": ["Wie viel Uhr ist es?", "Welche Zeit ist es?", "Wann ist es?", "Wie lange?"],
+      "correctAnswerIndex": 0,
+      "explanation": "'Wie viel Uhr ist es?' is the common way to ask for the time."
+    },
+    {
+      "question": "What is 'the day'?",
+      "options": ["die Nacht", "der Tag", "die Woche", "das Jahr"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Tag means the day."
+    },
+    {
+      "question": "How do you say 'the night'?",
+      "options": ["der Tag", "der Abend", "die Nacht", "der Morgen"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Nacht means the night."
+    },
+    {
+      "question": "What is 'the week'?",
+      "options": ["das Wochenende", "der Monat", "die Woche", "das Jahr"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Woche means the week."
+    },
+    {
+      "question": "How do you say 'the year'?",
+      "options": ["das Jahr", "der Monat", "das Jahrzehnt", "das Jahrhundert"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Jahr means the year."
+    },
+    {
+      "question": "What is 'the weather'?",
+      "options": ["der Regen", "die Sonne", "das Wetter", "der Wind"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Wetter means the weather."
+    },
+    {
+      "question": "How do you say 'It is sunny'?",
+      "options": ["Es regnet.", "Es ist sonnig.", "Es ist windig.", "Es schneit."],
+      "correctAnswerIndex": 1,
+      "explanation": "'Es ist sonnig' means 'It is sunny'. 'Es ist sonnig' is also common."
+    },
+    {
+      "question": "What is 'It is raining'?",
+      "options": ["Es schneit.", "Es regnet.", "Es ist kalt.", "Es ist nass."],
+      "correctAnswerIndex": 1,
+      "explanation": "Es regnet means It is raining."
+    },
+    {
+      "question": "How do you say 'It is cold'?",
+      "options": ["Es ist heiß.", "Es ist kalt.", "Es ist warm.", "Es ist kühl."],
+      "correctAnswerIndex": 1,
+      "explanation": "Es ist kalt means It is cold."
+    },
+    {
+      "question": "What is 'the bread'?",
+      "options": ["der Kuchen", "das Brötchen", "das Brot", "die Butter"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Brot means the bread."
+    },
+    {
+      "question": "How do you say 'the milk'?",
+      "options": ["der Saft", "das Wasser", "die Milch", "der Wein"],
+      "correctAnswerIndex": 3,
+      "explanation": "Die Milch means the milk."
+    },
+    {
+      "question": "What is 'the coffee'?",
+      "options": ["der Tee", "der Kaffee", "das Bier", "der Saft"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Kaffee means the coffee."
+    },
+    {
+      "question": "How do you say 'the tea'?",
+      "options": ["der Kaffee", "der Tee", "der Kakao", "der Saft"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Tee means the tea."
+    },
+    {
+      "question": "What is 'the meat'?",
+      "options": ["das Fleisch", "der Fisch", "das Huhn", "das Schwein"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Fleisch means the meat."
+    },
+    {
+      "question": "How do you say 'the fish'?",
+      "options": ["das Fleisch", "der Fisch", "das Huhn", "das Rind"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Fisch means the fish."
+    },
+    {
+      "question": "What is 'the fruit'?",
+      "options": ["das Gemüse", "der Salat", "das Obst", "die Nudeln"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Obst means the fruit."
+    },
+    {
+      "question": "How do you say 'the vegetables'?",
+      "options": ["das Obst", "das Gemüse", "der Käse", "das Fleisch"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Gemüse means the vegetables."
+    },
+    {
+      "question": "What is 'the shoe'?",
+      "options": ["der Schuh", "die Socke", "der Hut", "der Handschuh"],
+      "correctAnswerIndex": 0,
+      "explanation": "Der Schuh means the shoe."
+    },
+    {
+      "question": "How do you say 'the shirt'?",
+      "options": ["die Hose", "das Hemd", "die Jacke", "der Pullover"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Hemd means the shirt."
+    },
+    {
+      "question": "What is 'the pants'?",
+      "options": ["das Hemd", "die Hose", "der Rock", "die Shorts"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Hose means the pants (singular in German)."
+    },
+    {
+      "question": "How do you say 'the hat'?",
+      "options": ["der Schal", "der Handschuh", "der Hut", "die Mütze"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Hut means the hat."
+    },
+    {
+      "question": "What is 'the bag'?",
+      "options": ["der Koffer", "die Tasche", "das Portemonnaie", "der Rucksack"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Tasche is a general word for bag."
+    },
+    {
+      "question": "How do you say 'the key'?",
+      "options": ["das Schloss", "die Tür", "der Schlüssel", "das Auto"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Schlüssel means the key."
+    },
+    {
+      "question": "What is 'the phone'?",
+      "options": ["das Telefon", "der Computer", "das Handy", "Both 1 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'das Telefon' (landline) and 'das Handy' (mobile phone) are correct."
+    },
+    {
+      "question": "How do you say 'the computer'?",
+      "options": ["der Laptop", "der Computer", "der Rechner", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'der Computer' and 'der Rechner' are used for computer."
+    },
+    {
+      "question": "What is 'the problem'?",
+      "options": ["die Frage", "die Antwort", "das Problem", "die Lösung"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Problem means the problem."
+    },
+    {
+      "question": "How do you say 'the question'?",
+      "options": ["die Antwort", "die Frage", "das Problem", "das Quiz"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Frage means the question."
+    },
+    {
+      "question": "What is 'the answer'?",
+      "options": ["die Frage", "die Antwort", "das Problem", "die Lösung"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Antwort means the answer."
+    },
+    {
+      "question": "How do you say 'the thing'?",
+      "options": ["das Ding", "die Sache", "der Gegenstand", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All three words can mean 'thing' or 'object' in different contexts."
+    },
+    {
+      "question": "What is 'the person'?",
+      "options": ["der Mann", "die Frau", "die Person", "das Individuum"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Person means the person."
+    },
+    {
+      "question": "How do you say 'the name'?",
+      "options": ["der Vorname", "der Nachname", "der Name", "das Wort"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Name means the name."
+    },
+    {
+      "question": "What is 'the word'?",
+      "options": ["der Satz", "die Sprache", "das Wort", "die Vokabel"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Wort means the word."
+    },
+    {
+      "question": "How do you say 'the language'?",
+      "options": ["das Wort", "die Vokabel", "die Sprache", "der Dialekt"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Sprache means the language."
+    },
+    {
+      "question": "What is 'English' (language) in German?",
+      "options": ["Amerikanisch", "Britisch", "Englisch", "Englischsprachig"],
+      "correctAnswerIndex": 2,
+      "explanation": "The language is called 'Englisch'."
+    },
+    {
+      "question": "How do you say 'German' (language)?",
+      "options": ["Deutschland", "Deutsch", "Germanisch", "Teutsch"],
+      "correctAnswerIndex": 1,
+      "explanation": "The language is called 'Deutsch'."
+    },
+    {
+      "question": "What is 'the country' (nation)?",
+      "options": ["die Stadt", "das Land", "die Nation", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'das Land' and 'die Nation' can mean country."
+    },
+    {
+      "question": "How do you say 'the world'?",
+      "options": ["die Erde", "der Planet", "die Welt", "das Universum"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Welt means the world."
+    },
+    {
+      "question": "What is 'the life'?",
+      "options": ["das Leben", "die Zeit", "die Seele", "der Tod"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Leben means the life."
+    },
+    {
+      "question": "How do you say 'the friend' (male)?",
+      "options": ["der Freund", "die Freundin", "der Bekannte", "der Kumpel"],
+      "correctAnswerIndex": 0,
+      "explanation": "Der Freund means the friend (male) or boyfriend."
+    },
+    {
+      "question": "What is 'the friend' (female)?",
+      "options": ["der Freund", "die Freundin", "die Bekannte", "die Kollegin"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Freundin means the friend (female) or girlfriend."
+    },
+    {
+      "question": "How do you say 'the family'?",
+      "options": ["die Eltern", "die Geschwister", "die Familie", "die Verwandten"],
+      "correctAnswerIndex": 2,
+      "explanation": "Die Familie means the family."
+    },
+    {
+      "question": "What is 'the home' or 'the house'?",
+      "options": ["das Zuhause", "das Heim", "das Haus", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All can be used to refer to home or house in different contexts."
+    },
+    {
+      "question": "How do you say 'the job' or 'the work'?",
+      "options": ["die Arbeit", "der Job", "die Stelle", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'die Arbeit' and 'der Job' are commonly used."
+    },
+    {
+      "question": "What is 'the company' or 'the firm'?",
+      "options": ["das Geschäft", "die Firma", "die Gesellschaft", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'die Firma' and 'die Gesellschaft' can mean company."
+    },
+    {
+      "question": "How do you say 'the price'?",
+      "options": ["das Geld", "der Wert", "der Preis", "die Kosten"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Preis means the price."
+    },
+    {
+      "question": "What is 'the store' or 'the shop'?",
+      "options": ["das Geschäft", "der Laden", "der Markt", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'das Geschäft' and 'der Laden' are common words for shop."
+    },
+    {
+      "question": "How do you say 'the restaurant'?",
+      "options": ["das Café", "die Bar", "das Restaurant", "die Kneipe"],
+      "correctAnswerIndex": 2,
+      "explanation": "Das Restaurant means the restaurant."
+    },
+    {
+      "question": "What is 'the hotel'?",
+      "options": ["das Hostel", "das Hotel", "die Herberge", "das Motel"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Hotel means the hotel."
+    },
+    {
+      "question": "How do you say 'the station'?",
+      "options": ["der Bahnhof", "die Station", "der Halt", "die Haltestelle"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Station is a general word for station. 'Bahnhof' is for train stations."
+    },
+    {
+      "question": "What is 'the airport'?",
+      "options": ["der Flughafen", "der Bahnhof", "der Hafen", "das Flugzeug"],
+      "correctAnswerIndex": 0,
+      "explanation": "Der Flughafen means the airport."
+    },
+    {
+      "question": "How do you say 'the train'?",
+      "options": ["der Bus", "das Auto", "der Zug", "die Bahn"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Zug means the train. 'Die Bahn' is also used."
+    },
+    {
+      "question": "What is 'the bus'?",
+      "options": ["der Zug", "das Auto", "der Bus", "das Fahrrad"],
+      "correctAnswerIndex": 2,
+      "explanation": "Der Bus means the bus."
+    },
+    {
+      "question": "How do you say 'the ticket'?",
+      "options": ["die Karte", "das Ticket", "die Fahrkarte", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All are used for ticket. 'Fahrkarte' is for transport, 'Eintrittskarte' for events."
+    },
+    {
+      "question": "What is 'the passport'?",
+      "options": ["der Ausweis", "der Reisepass", "die ID", "der Personalausweis"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Reisepass means the passport."
+    },
+    {
+      "question": "How do you say 'the map'?",
+      "options": ["die Karte", "die Landkarte", "der Plan", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'die Karte' and 'die Landkarte' mean map."
+    },
+    {
+      "question": "What is 'the suitcase'?",
+      "options": ["die Tasche", "der Koffer", "der Rucksack", "die Handtasche"],
+      "correctAnswerIndex": 1,
+      "explanation": "Der Koffer means the suitcase."
+    },
+    {
+      "question": "How do you say 'I am sorry'?",
+      "options": ["Es tut mir leid.", "Entschuldigung.", "Verzeihung.", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All three are common ways to say 'I'm sorry' or 'Excuse me'."
+    },
+    {
+      "question": "What is 'Excuse me' (to get attention)?",
+      "options": ["Entschuldigung", "Es tut mir leid", "Verzeihung", "Both 1 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'Entschuldigung' and 'Verzeihung' can be used to say 'Excuse me'."
+    },
+    {
+      "question": "How do you say 'You're welcome'?",
+      "options": ["Danke", "Bitte", "Gern geschehen", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'Bitte' and 'Gern geschehen' mean 'You're welcome'."
+    },
+    {
+      "question": "What is 'No problem'?",
+      "options": ["Kein Problem", "Nichts zu danken", "Macht nichts", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All are informal ways to say 'No problem' or 'Don't mention it'."
+    },
+    {
+      "question": "How do you say 'I don't know'?",
+      "options": ["Ich weiß nicht", "Ich kenne nicht", "Ich verstehe nicht", "Ich bin nicht"],
+      "correctAnswerIndex": 0,
+      "explanation": "'Ich weiß nicht' is used for facts. 'Ich kenne nicht' is for people/places."
+    },
+    {
+      "question": "What is 'I don't understand'?",
+      "options": ["Ich weiß nicht", "Ich verstehe nicht", "Ich kenne nicht", "Ich sehe nicht"],
+      "correctAnswerIndex": 1,
+      "explanation": "Ich verstehe nicht means I don't understand."
+    },
+    {
+      "question": "How do you ask 'Do you speak English?'",
+      "options": ["Sprechen Sie Deutsch?", "Sprechen Sie Englisch?", "Können Sie Englisch?", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'Sprechen Sie Englisch?' and 'Können Sie Englisch?' are correct."
+    },
+    {
+      "question": "What is 'Could you help me?'?",
+      "options": ["Hilfst du mir?", "Können Sie mir helfen?", "Brauchen Sie Hilfe?", "Helfen Sie mir?"],
+      "correctAnswerIndex": 1,
+      "explanation": "'Können Sie mir helfen?' is a polite way to ask for help."
+    },
+    {
+      "question": "How do you say 'I need...'?",
+      "options": ["Ich will...", "Ich muss...", "Ich brauche...", "Ich habe..."],
+      "correctAnswerIndex": 2,
+      "explanation": "Ich brauche... means I need..."
+    },
+    {
+      "question": "What is 'I like...'?",
+      "options": ["Ich mag...", "Ich liebe...", "Ich hasse...", "Ich will..."],
+      "correctAnswerIndex": 0,
+      "explanation": "Ich mag... means I like..."
+    },
+    {
+      "question": "How do you say 'I love you'?",
+      "options": ["Ich mag dich", "Ich liebe dich", "Ich hasse dich", "Ich brauche dich"],
+      "correctAnswerIndex": 1,
+      "explanation": "Ich liebe dich means I love you."
+    },
+    {
+      "question": "What is 'the love'?",
+      "options": ["die Liebe", "der Liebe", "das Liebe", "die Lieve"],
+      "correctAnswerIndex": 0,
+      "explanation": "Die Liebe means the love."
+    },
+    {
+      "question": "How do you say 'the happiness'?",
+      "options": ["das Glück", "die Freude", "das Froh", "die Zufriedenheit"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Glück means happiness or luck."
+    },
+    {
+      "question": "What is 'the sadness'?",
+      "options": ["die Traurigkeit", "das Leid", "der Kummer", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All can mean sadness or sorrow in different contexts."
+    },
+    {
+      "question": "How do you say 'the smile'?",
+      "options": ["das Lachen", "das Lächeln", "der Lacher", "die Freude"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Lächeln means the smile. 'Lachen' is to laugh."
+    },
+    {
+      "question": "What is 'the game'?",
+      "options": ["das Spiel", "die Game", "der Wettkampf", "das Match"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Spiel means the game."
+    },
+    {
+      "question": "How do you say 'to play'?",
+      "options": ["spielen", "spaßen", "spazieren", "sporteln"],
+      "correctAnswerIndex": 0,
+      "explanation": "Spielen means to play."
+    },
+    {
+      "question": "What is 'the music'?",
+      "options": ["der Musiker", "die Musik", "das Lied", "der Song"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Musik means the music."
+    },
+    {
+      "question": "How do you say 'the song'?",
+      "options": ["die Musik", "das Lied", "der Gesang", "die Melodie"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Lied means the song."
+    },
+    {
+      "question": "What is 'to sing'?",
+      "options": ["singen", "tanzen", "sprechen", "hören"],
+      "correctAnswerIndex": 0,
+      "explanation": "Singen means to sing."
+    },
+    {
+      "question": "How do you say 'to dance'?",
+      "options": ["springen", "tanzen", "laufen", "gehen"],
+      "correctAnswerIndex": 1,
+      "explanation": "Tanzen means to dance."
+    },
+    {
+      "question": "What is 'the film' or 'the movie'?",
+      "options": ["der Film", "das Kino", "die Schau", "das Video"],
+      "correctAnswerIndex": 0,
+      "explanation": "Der Film means the film or movie."
+    },
+    {
+      "question": "How do you say 'the book'?",
+      "options": ["das Buch", "der Text", "die Seite", "das Heft"],
+      "correctAnswerIndex": 0,
+      "explanation": "Das Buch means the book."
+    },
+    {
+      "question": "What is 'the newspaper'?",
+      "options": ["das Papier", "die Zeitung", "die Nachricht", "der Artikel"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Zeitung means the newspaper."
+    },
+    {
+      "question": "How do you say 'the news'?",
+      "options": ["die Neuigkeiten", "die Nachrichten", "die News", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'die Nachrichten' and 'die News' are used."
+    },
+    {
+      "question": "What is 'the information'?",
+      "options": ["die Information", "die Info", "die Auskunft", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All are used for information in different contexts."
+    },
+    {
+      "question": "How do you say 'the truth'?",
+      "options": ["die Wahrheit", "die Lüge", "das Recht", "die Ehrlichkeit"],
+      "correctAnswerIndex": 0,
+      "explanation": "Die Wahrheit means the truth."
+    },
+    {
+      "question": "What is 'the lie'?",
+      "options": ["die Lüge", "die Wahrheit", "der Fehler", "das Problem"],
+      "correctAnswerIndex": 0,
+      "explanation": "Die Lüge means the lie."
+    },
+    {
+      "question": "How do you say 'the story'?",
+      "options": ["die Geschichte", "das Märchen", "der Roman", "die Erzählung"],
+      "correctAnswerIndex": 0,
+      "explanation": "Die Geschichte means the story or history."
+    },
+    {
+      "question": "What is 'the history'?",
+      "options": ["die Geschichte", "die Historie", "das Geschichtsbuch", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'die Geschichte' and 'die Historie' can mean history."
+    },
+    {
+      "question": "How do you say 'the culture'?",
+      "options": ["die Kultur", "die Zivilisation", "die Gesellschaft", "das Volk"],
+      "correctAnswerIndex": 0,
+      "explanation": "Die Kultur means the culture."
+    },
+    {
+      "question": "What is 'the art'?",
+      "options": ["der Art", "die Kunst", "das Kunstwerk", "die Künste"],
+      "correctAnswerIndex": 1,
+      "explanation": "Die Kunst means the art."
+    },
+    {
+      "question": "How do you say 'the picture' or 'the painting'?",
+      "options": ["das Bild", "die Malerei", "das Gemälde", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All can refer to a picture or painting."
+    },
+    {
+      "question": "What is 'the photograph'?",
+      "options": ["das Foto", "die Fotografie", "der Photo", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'das Foto' and 'die Fotografie' are used."
+    },
+    {
+      "question": "How do you say 'the camera'?",
+      "options": ["die Kamera", "der Apparat", "das Fotogerät", "die Fotomaschine"],
+      "correctAnswerIndex": 0,
+      "explanation": "Die Kamera means the camera."
+    },
+    {
+      "question": "What is 'the gift' or 'the present'?",
+      "options": ["die Gabe", "das Geschenk", "die Präsent", "die Mitgift"],
+      "correctAnswerIndex": 1,
+      "explanation": "Das Geschenk means the gift."
+    },
+    {
+      "question": "How do you say 'the party'?",
+      "options": ["das Partei", "die Party", "die Feier", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'die Party' (anglicism) and 'die Feier' are used."
+    },
+    {
+      "question": "What is 'the holiday' or 'the vacation'?",
+      "options": ["der Feiertag", "der Urlaub", "die Ferien", "Both 2 & 3"],
+      "correctAnswerIndex": 3,
+      "explanation": "'Urlaub' is for individual vacation, 'Ferien' for school holidays."
+    },
+    {
+      "question": "How do you say 'Congratulations!'?",
+      "options": ["Gratuliere!", "Herzlichen Glückwunsch!", "Alles Gute!", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'Gratuliere!' and 'Herzlichen Glückwunsch!' are common."
+    },
+    {
+      "question": "What is 'Good luck!'?",
+      "options": ["Viel Erfolg!", "Viel Glück!", "Alles Gute!", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All are used to wish someone good luck."
+    },
+    {
+      "question": "How do you say 'Cheers!' (for toasting)?",
+      "options": ["Prost!", "Zum Wohl!", "Cheers!", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'Prost!' and 'Zum Wohl!' are used for toasting."
+    },
+    {
+      "question": "What is 'Bless you!' (after a sneeze)?",
+      "options": ["Gesundheit!", "Bless you!", "Zum Wohl!", "Prost!"],
+      "correctAnswerIndex": 0,
+      "explanation": "Gesundheit! is what you say when someone sneezes."
+    },
+    {
+      "question": "How do you say 'I wish you a happy birthday'?",
+      "options": ["Alles Gute zum Geburtstag!", "Herzlichen Glückwunsch zum Geburtstag!", "Frohen Geburtstag!", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All three are common birthday greetings."
+    },
+    {
+      "question": "What is 'Merry Christmas!'?",
+      "options": ["Frohe Weihnachten!", "Fröhliche Weihnachten!", "Schöne Weihnachten!", "All of the above"],
+      "correctAnswerIndex": 3,
+      "explanation": "All are common ways to wish someone a Merry Christmas."
+    },
+    {
+      "question": "How do you say 'Happy New Year!'?",
+      "options": ["Frohes neues Jahr!", "Gutes neues Jahr!", "Prosit Neujahr!", "Both 1 & 2"],
+      "correctAnswerIndex": 3,
+      "explanation": "Both 'Frohes neues Jahr!' and 'Gutes neues Jahr!' are common."
+    }
+  ],
+
+
+  
+    "A2": [
+      {
+        "question": "What is the past tense of 'gehen'?",
+        "options": ["geht", "ging", "gegangen", "gehe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ging' is the simple past (Präteritum) form of 'gehen'"
+      },
+      {
+        "question": "Which preposition is used with cities?",
+        "options": ["in", "an", "auf", "nach"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Nach' is used with cities and countries without article"
+      },
+      {
+        "question": "What is the correct article for 'Haus'?",
+        "options": ["der", "die", "das", "den"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Haus' is a neuter noun, so it takes 'das'"
+      },
+      {
+        "question": "How do you say 'I have to' in German?",
+        "options": ["ich kann", "ich will", "ich muss", "ich mag"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Ich muss' means 'I have to' or 'I must'"
+      },
+      {
+        "question": "What is the plural of 'Kind'?",
+        "options": ["Kinder", "Kinde", "Kinds", "Kindern"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Kind' is 'Kinder'"
+      },
+      {
+        "question": "Which word means 'sometimes'?",
+        "options": ["manchmal", "oft", "immer", "nie"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Manchmal' means 'sometimes'"
+      },
+      {
+        "question": "What is the correct form of 'sein' for 'du'?",
+        "options": ["bin", "bist", "ist", "sind"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Du bist' is the correct conjugation"
+      },
+      {
+        "question": "Which verb means 'to work'?",
+        "options": ["wohnen", "arbeiten", "studieren", "lernen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Arbeiten' means 'to work'"
+      },
+      {
+        "question": "What is the past participle of 'essen'?",
+        "options": ["isst", "aß", "gegessen", "essen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gegessen' is the past participle of 'essen'"
+      },
+      {
+        "question": "How do you say 'blue' in German?",
+        "options": ["rot", "blau", "grün", "gelb"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Blau' means blue"
+      },
+      {
+        "question": "Which preposition is used with days of the week?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Am' (contraction of 'an dem') is used with days"
+      },
+      {
+        "question": "What is the dative form of 'ich'?",
+        "options": ["mich", "mir", "mein", "mire"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Mir' is the dative form of 'ich'"
+      },
+      {
+        "question": "Which word means 'breakfast'?",
+        "options": ["Mittagessen", "Abendessen", "Frühstück", "Essen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Frühstück' means breakfast"
+      },
+      {
+        "question": "What is the correct question word for time?",
+        "options": ["Wo", "Wann", "Wer", "Was"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Wann' means 'when' and is used for time"
+      },
+      {
+        "question": "How do you form the comparative of 'gut'?",
+        "options": ["guter", "besser", "mehr gut", "guterer"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Besser' is the irregular comparative form of 'gut'"
+      },
+      {
+        "question": "Which preposition means 'since'?",
+        "options": ["bis", "seit", "während", "gegen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Seit' means 'since' or 'for' with time periods"
+      },
+      {
+        "question": "What is the correct form of 'haben' for 'er'?",
+        "options": ["habe", "hast", "hat", "haben"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Er hat' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'cheap'?",
+        "options": ["teuer", "billig", "gut", "schlecht"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Billig' means cheap or inexpensive"
+      },
+      {
+        "question": "How do you say 'I like' in German?",
+        "options": ["ich habe", "ich bin", "ich mag", "ich kann"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Ich mag' means 'I like'"
+      },
+      {
+        "question": "What is the accusative form of 'der'?",
+        "options": ["der", "die", "das", "den"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Den' is the accusative masculine form"
+      },
+      {
+        "question": "Which verb means 'to understand'?",
+        "options": ["hören", "sehen", "verstehen", "wissen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Verstehen' means to understand"
+      },
+      {
+        "question": "What is the past tense of 'kommen'?",
+        "options": ["kommt", "kam", "gekommen", "komme"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Kam' is the simple past form of 'kommen'"
+      },
+      {
+        "question": "How do you say 'never' in German?",
+        "options": ["manchmal", "oft", "nie", "immer"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Nie' or 'niemals' means never"
+      },
+      {
+        "question": "Which preposition means 'without'?",
+        "options": ["mit", "ohne", "gegen", "um"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ohne' means without"
+      },
+      {
+        "question": "What is the plural of 'Auto'?",
+        "options": ["Autos", "Auto", "Autosen", "Autoe"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Auto' is 'Autos'"
+      },
+      {
+        "question": "Which word means 'slowly'?",
+        "options": ["schnell", "langsam", "gut", "viel"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Langsam' means slowly"
+      },
+      {
+        "question": "What is the correct form of 'werden' for 'wir'?",
+        "options": ["werde", "wirst", "wird", "werden"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Wir werden' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'expensive' in German?",
+        "options": ["billig", "teuer", "gut", "neu"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Teuer' means expensive"
+      },
+      {
+        "question": "Which verb means 'to buy'?",
+        "options": ["verkaufen", "kaufen", "bezahlen", "nehmen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Kaufen' means to buy"
+      },
+      {
+        "question": "What is the past participle of 'trinken'?",
+        "options": ["trinkt", "trank", "getrunken", "trinken"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Getrunken' is the past participle of 'trinken'"
+      },
+      {
+        "question": "How do you say 'red' in German?",
+        "options": ["blau", "rot", "grün", "gelb"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Rot' means red"
+      },
+      {
+        "question": "Which preposition is used with time?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Um' is used with specific times"
+      },
+      {
+        "question": "What is the dative form of 'du'?",
+        "options": ["dich", "dir", "dein", "dure"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Dir' is the dative form of 'du'"
+      },
+      {
+        "question": "Which word means 'lunch'?",
+        "options": ["Frühstück", "Mittagessen", "Abendessen", "Essen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Mittagessen' means lunch"
+      },
+      {
+        "question": "What is the correct question word for place?",
+        "options": ["Wo", "Wann", "Wer", "Was"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Wo' means 'where' and is used for place"
+      },
+      {
+        "question": "How do you form the comparative of 'viel'?",
+        "options": ["vieler", "mehr", "vielerer", "mehrer"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Mehr' is the irregular comparative form of 'viel'"
+      },
+      {
+        "question": "Which preposition means 'until'?",
+        "options": ["seit", "bis", "während", "gegen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Bis' means until or by"
+      },
+      {
+        "question": "What is the correct form of 'können' for 'ich'?",
+        "options": ["kann", "kannst", "können", "könnt"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Ich kann' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'beautiful'?",
+        "options": ["hässlich", "schön", "alt", "neu"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schön' means beautiful"
+      },
+      {
+        "question": "How do you say 'I would like' in German?",
+        "options": ["ich will", "ich möchte", "ich mag", "ich habe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ich möchte' means 'I would like'"
+      },
+      {
+        "question": "What is the accusative form of 'die' (feminine)?",
+        "options": ["der", "die", "das", "den"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Die' remains the same in accusative feminine"
+      },
+      {
+        "question": "Which verb means 'to learn'?",
+        "options": ["lehren", "lernen", "studieren", "wissen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Lernen' means to learn"
+      },
+      {
+        "question": "What is the past tense of 'sehen'?",
+        "options": ["sieht", "sah", "gesehen", "sehe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Sah' is the simple past form of 'sehen'"
+      },
+      {
+        "question": "How do you say 'always' in German?",
+        "options": ["manchmal", "oft", "nie", "immer"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Immer' means always"
+      },
+      {
+        "question": "Which preposition means 'against'?",
+        "options": ["mit", "ohne", "gegen", "um"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gegen' means against"
+      },
+      {
+        "question": "What is the plural of 'Buch'?",
+        "options": ["Bücher", "Buchen", "Buchs", "Buch"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Buch' is 'Bücher'"
+      },
+      {
+        "question": "Which word means 'quickly'?",
+        "options": ["langsam", "schnell", "gut", "viel"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schnell' means quickly or fast"
+      },
+      {
+        "question": "What is the correct form of 'müssen' for 'sie' (she)?",
+        "options": ["muss", "musst", "müssen", "müsst"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Sie muss' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'new' in German?",
+        "options": ["alt", "neu", "gut", "schlecht"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Neu' means new"
+      },
+      {
+        "question": "Which verb means 'to sell'?",
+        "options": ["kaufen", "verkaufen", "bezahlen", "geben"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Verkaufen' means to sell"
+      },
+      {
+        "question": "What is the past participle of 'schlafen'?",
+        "options": ["schläft", "schlief", "geschlafen", "schlafen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Geschlafen' is the past participle of 'schlafen'"
+      },
+      {
+        "question": "How do you say 'green' in German?",
+        "options": ["blau", "rot", "grün", "gelb"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Grün' means green"
+      },
+      {
+        "question": "Which preposition is used with months?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Im' (contraction of 'in dem') is used with months"
+      },
+      {
+        "question": "What is the dative form of 'wir'?",
+        "options": ["uns", "unser", "wir", "unsere"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Uns' is the dative form of 'wir'"
+      },
+      {
+        "question": "Which word means 'dinner'?",
+        "options": ["Frühstück", "Mittagessen", "Abendessen", "Essen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Abendessen' means dinner"
+      },
+      {
+        "question": "What is the correct question word for people?",
+        "options": ["Wo", "Wann", "Wer", "Was"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Wer' means 'who' and is used for people"
+      },
+      {
+        "question": "How do you form the comparative of 'gern'?",
+        "options": ["gerner", "lieber", "mehr gern", "gernerer"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Lieber' is the irregular comparative form of 'gern'"
+      },
+      {
+        "question": "Which preposition means 'during'?",
+        "options": ["bis", "seit", "während", "gegen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Während' means during"
+      },
+      {
+        "question": "What is the correct form of 'dürfen' for 'ihr'?",
+        "options": ["darf", "darfst", "dürfen", "dürft"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Ihr dürft' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'old'?",
+        "options": ["neu", "alt", "jung", "schön"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Alt' means old"
+      },
+      {
+        "question": "How do you say 'I can' in German?",
+        "options": ["ich muss", "ich will", "ich kann", "ich mag"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Ich kann' means 'I can'"
+      },
+      {
+        "question": "What is the accusative form of 'das'?",
+        "options": ["der", "die", "das", "den"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Das' remains the same in accusative neuter"
+      },
+      {
+        "question": "Which verb means 'to read'?",
+        "options": ["schreiben", "lesen", "sehen", "hören"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Lesen' means to read"
+      },
+      {
+        "question": "What is the past tense of 'schreiben'?",
+        "options": ["schreibt", "schrieb", "geschrieben", "schreibe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schrieb' is the simple past form of 'schreiben'"
+      },
+      {
+        "question": "How do you say 'often' in German?",
+        "options": ["manchmal", "oft", "nie", "immer"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Oft' means often"
+      },
+      {
+        "question": "Which preposition means 'with'?",
+        "options": ["ohne", "mit", "gegen", "um"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Mit' means with"
+      },
+      {
+        "question": "What is the plural of 'Mann'?",
+        "options": ["Männer", "Mannen", "Manns", "Mann"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Mann' is 'Männer'"
+      },
+      {
+        "question": "Which word means 'well' or 'good'?",
+        "options": ["schlecht", "gut", "viel", "langsam"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Gut' means good or well"
+      },
+      {
+        "question": "What is the correct form of 'wollen' for 'er'?",
+        "options": ["will", "willst", "wollen", "wollt"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Er will' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'bad' in German?",
+        "options": ["gut", "schlecht", "neu", "alt"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schlecht' means bad"
+      },
+      {
+        "question": "Which verb means 'to write'?",
+        "options": ["lesen", "schreiben", "sprechen", "sagen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schreiben' means to write"
+      },
+      {
+        "question": "What is the past participle of 'lesen'?",
+        "options": ["liest", "las", "gelesen", "lesen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gelesen' is the past participle of 'lesen'"
+      },
+      {
+        "question": "How do you say 'yellow' in German?",
+        "options": ["blau", "rot", "grün", "gelb"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Gelb' means yellow"
+      },
+      {
+        "question": "Which preposition is used with years?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Im' (contraction of 'in dem') is used with years"
+      },
+      {
+        "question": "What is the dative form of 'ihr' (you plural)?",
+        "options": ["euch", "euer", "ihr", "ihre"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Euch' is the dative form of 'ihr'"
+      },
+      {
+        "question": "Which word means 'food'?",
+        "options": ["Trinken", "Essen", "Wasser", "Brot"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Essen' means food or to eat"
+      },
+      {
+        "question": "What is the correct question word for things?",
+        "options": ["Wo", "Wann", "Wer", "Was"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Was' means 'what' and is used for things"
+      },
+      {
+        "question": "How do you form the comparative of 'wenig'?",
+        "options": ["weniger", "wenig", "wenigerer", "mehr wenig"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Weniger' is the comparative form of 'wenig'"
+      },
+      {
+        "question": "Which preposition means 'about' or 'around'?",
+        "options": ["bis", "seit", "während", "um"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Um' means about or around"
+      },
+      {
+        "question": "What is the correct form of 'mögen' for 'du'?",
+        "options": ["mag", "magst", "mögen", "mögt"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Du magst' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'young'?",
+        "options": ["alt", "jung", "neu", "schön"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Jung' means young"
+      },
+      {
+        "question": "How do you say 'I want' in German?",
+        "options": ["ich muss", "ich will", "ich kann", "ich mag"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ich will' means 'I want'"
+      },
+      {
+        "question": "What is the accusative form of 'ein' (masculine)?",
+        "options": ["ein", "eine", "einen", "einem"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Einen' is the accusative masculine form of 'ein'"
+      },
+      {
+        "question": "Which verb means 'to speak'?",
+        "options": ["hören", "sehen", "sprechen", "sagen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Sprechen' means to speak"
+      },
+      {
+        "question": "What is the past tense of 'fahren'?",
+        "options": ["fährt", "fuhr", "gefahren", "fahre"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Fuhr' is the simple past form of 'fahren'"
+      },
+      {
+        "question": "How do you say 'yesterday' in German?",
+        "options": ["heute", "morgen", "gestern", "jetzt"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gestern' means yesterday"
+      },
+      {
+        "question": "Which preposition means 'for'?",
+        "options": ["gegen", "ohne", "für", "um"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Für' means for"
+      },
+      {
+        "question": "What is the plural of 'Frau'?",
+        "options": ["Frauen", "Fraus", "Frauen", "Frauer"],
+        "correctAnswerIndex": 2,
+        "explanation": "The plural of 'Frau' is 'Frauen'"
+      },
+      {
+        "question": "Which word means 'much' or 'many'?",
+        "options": ["wenig", "viel", "gut", "schlecht"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Viel' means much or many"
+      },
+      {
+        "question": "What is the correct form of 'sollen' for 'sie' (they)?",
+        "options": ["soll", "sollst", "sollen", "sollt"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Sie sollen' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'small' in German?",
+        "options": ["groß", "klein", "lang", "kurz"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Klein' means small"
+      },
+      {
+        "question": "Which verb means 'to hear'?",
+        "options": ["sehen", "hören", "sprechen", "fühlen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Hören' means to hear"
+      },
+      {
+        "question": "What is the past participle of 'fahren'?",
+        "options": ["fährt", "fuhr", "gefahren", "fahren"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gefahren' is the past participle of 'fahren'"
+      },
+      {
+        "question": "How do you say 'black' in German?",
+        "options": ["weiß", "schwarz", "braun", "grau"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schwarz' means black"
+      },
+      {
+        "question": "Which preposition is used with seasons?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Im' (contraction of 'in dem') is used with seasons"
+      },
+      {
+        "question": "What is the dative form of 'sie' (she)?",
+        "options": ["sie", "ihr", "ihre", "ihren"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ihr' is the dative form of 'sie' (she)"
+      },
+      {
+        "question": "Which word means 'drink'?",
+        "options": ["Essen", "Trinken", "Wasser", "Bier"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Trinken' means drink or to drink"
+      },
+      {
+        "question": "What is the correct question word for reason?",
+        "options": ["Wo", "Wann", "Warum", "Was"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Warum' means 'why' and is used for reason"
+      },
+      {
+        "question": "How do you form the comparative of 'hoch'?",
+        "options": ["höher", "hoch", "hocher", "mehr hoch"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Höher' is the comparative form of 'hoch'"
+      },
+      {
+        "question": "Which preposition means 'through'?",
+        "options": ["über", "unter", "durch", "gegen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Durch' means through"
+      },
+      {
+        "question": "What is the correct form of 'wissen' for 'ich'?",
+        "options": ["weiß", "weißt", "wissen", "wisst"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Ich weiß' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'big'?",
+        "options": ["klein", "groß", "lang", "kurz"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Groß' means big or tall"
+      },
+      {
+        "question": "How do you say 'I know' in German?",
+        "options": ["ich kenne", "ich weiß", "ich kann", "ich verstehe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ich weiß' means 'I know' (a fact)"
+      },
+      {
+        "question": "What is the accusative form of 'kein' (feminine)?",
+        "options": ["kein", "keine", "keinen", "keinem"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Keine' is the accusative feminine form of 'kein'"
+      },
+      {
+        "question": "Which verb means 'to give'?",
+        "options": ["nehmen", "geben", "bekommen", "machen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Geben' means to give"
+      },
+      {
+        "question": "What is the past tense of 'geben'?",
+        "options": ["gibt", "gab", "gegeben", "gebe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Gab' is the simple past form of 'geben'"
+      },
+      {
+        "question": "How do you say 'tomorrow' in German?",
+        "options": ["heute", "morgen", "gestern", "jetzt"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Morgen' means tomorrow"
+      },
+      {
+        "question": "Which preposition means 'above' or 'over'?",
+        "options": ["unter", "über", "neben", "zwischen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Über' means above or over"
+      },
+      {
+        "question": "What is the plural of 'Kind'?",
+        "options": ["Kinder", "Kinde", "Kinds", "Kindern"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Kind' is 'Kinder'"
+      },
+      {
+        "question": "Which word means 'little' or 'few'?",
+        "options": ["viel", "wenig", "gut", "schlecht"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Wenig' means little or few"
+      },
+      {
+        "question": "What is the correct form of 'möchten' for 'wir'?",
+        "options": ["möchte", "möchtest", "möchten", "möchtet"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Wir möchten' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'long' in German?",
+        "options": ["kurz", "lang", "groß", "klein"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Lang' means long"
+      },
+      {
+        "question": "Which verb means 'to take'?",
+        "options": ["geben", "nehmen", "bekommen", "machen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Nehmen' means to take"
+      },
+      {
+        "question": "What is the past participle of 'nehmen'?",
+        "options": ["nimmt", "nahm", "genommen", "nehmen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Genommen' is the past participle of 'nehmen'"
+      },
+      {
+        "question": "How do you say 'white' in German?",
+        "options": ["schwarz", "weiß", "blau", "rot"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Weiß' means white"
+      },
+      {
+        "question": "Which preposition is used with parts of the day?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Am' (contraction of 'an dem') is used with parts of the day"
+      },
+      {
+        "question": "What is the dative form of 'Sie' (formal)?",
+        "options": ["Sie", "Ihnen", "Ihre", "Ihren"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ihnen' is the dative form of 'Sie' (formal)"
+      },
+      {
+        "question": "Which word means 'water'?",
+        "options": ["Bier", "Wein", "Wasser", "Saft"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Wasser' means water"
+      },
+      {
+        "question": "What is the correct question word for manner?",
+        "options": ["Wo", "Wann", "Wie", "Was"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Wie' means 'how' and is used for manner"
+      },
+      {
+        "question": "How do you form the comparative of 'gut'?",
+        "options": ["guter", "besser", "mehr gut", "guterer"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Besser' is the irregular comparative form of 'gut'"
+      },
+      {
+        "question": "Which preposition means 'under'?",
+        "options": ["über", "unter", "neben", "zwischen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Unter' means under"
+      },
+      {
+        "question": "What is the correct form of 'sein' for 'wir'?",
+        "options": ["bin", "bist", "ist", "sind"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Wir sind' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'short'?",
+        "options": ["lang", "kurz", "groß", "klein"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Kurz' means short"
+      },
+      {
+        "question": "How do you say 'I am' in German?",
+        "options": ["ich bin", "ich habe", "ich kann", "ich will"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Ich bin' means 'I am'"
+      },
+      {
+        "question": "What is the accusative form of 'mein' (neuter)?",
+        "options": ["mein", "meine", "meinen", "meinem"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Mein' remains the same in accusative neuter"
+      },
+      {
+        "question": "Which verb means 'to make' or 'to do'?",
+        "options": ["geben", "nehmen", "machen", "tun"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Machen' means to make or to do"
+      },
+      {
+        "question": "What is the past tense of 'sein'?",
+        "options": ["ist", "war", "gewesen", "bin"],
+        "correctAnswerIndex": 1,
+        "explanation": "'War' is the simple past form of 'sein'"
+      },
+      {
+        "question": "How do you say 'today' in German?",
+        "options": ["heute", "morgen", "gestern", "jetzt"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Heute' means today"
+      },
+      {
+        "question": "Which preposition means 'next to'?",
+        "options": ["über", "unter", "neben", "zwischen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Neben' means next to"
+      },
+      {
+        "question": "What is the plural of 'Tisch'?",
+        "options": ["Tische", "Tisch", "Tischen", "Tischs"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Tisch' is 'Tische'"
+      },
+      {
+        "question": "Which word means 'fast'?",
+        "options": ["langsam", "schnell", "gut", "schlecht"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Schnell' means fast"
+      },
+      {
+        "question": "What is the correct form of 'haben' for 'du'?",
+        "options": ["habe", "hast", "hat", "haben"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Du hast' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'good' in German?",
+        "options": ["schlecht", "gut", "neu", "alt"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Gut' means good"
+      },
+      {
+        "question": "Which verb means 'to come'?",
+        "options": ["gehen", "kommen", "fahren", "laufen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Kommen' means to come"
+      },
+      {
+        "question": "What is the past participle of 'kommen'?",
+        "options": ["kommt", "kam", "gekommen", "kommen"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gekommen' is the past participle of 'kommen'"
+      },
+      {
+        "question": "How do you say 'brown' in German?",
+        "options": ["schwarz", "weiß", "braun", "grau"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Braun' means brown"
+      },
+      {
+        "question": "Which preposition is used with dates?",
+        "options": ["in", "an", "um", "zu"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Am' (contraction of 'an dem') is used with dates"
+      },
+      {
+        "question": "What is the dative form of 'der'?",
+        "options": ["der", "die", "das", "dem"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Dem' is the dative masculine/neuter form"
+      },
+      {
+        "question": "Which word means 'bread'?",
+        "options": ["Wasser", "Bier", "Brot", "Käse"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Brot' means bread"
+      },
+      {
+        "question": "What is the correct question word for possession?",
+        "options": ["Wo", "Wessen", "Wer", "Was"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Wessen' means 'whose' and is used for possession"
+      },
+      {
+        "question": "How do you form the comparative of 'bald'?",
+        "options": ["balder", "eher", "mehr bald", "balderer"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Eher' is the irregular comparative form of 'bald'"
+      },
+      {
+        "question": "Which preposition means 'between'?",
+        "options": ["über", "unter", "neben", "zwischen"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Zwischen' means between"
+      },
+      {
+        "question": "What is the correct form of 'werden' for 'du'?",
+        "options": ["werde", "wirst", "wird", "werden"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Du wirst' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'right' (direction)?",
+        "options": ["links", "rechts", "geradeaus", "hier"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Rechts' means right (direction)"
+      },
+      {
+        "question": "How do you say 'I have' in German?",
+        "options": ["ich bin", "ich habe", "ich kann", "ich will"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Ich habe' means 'I have'"
+      },
+      {
+        "question": "What is the accusative form of 'dieser' (feminine)?",
+        "options": ["dieser", "diese", "dieses", "diesen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Diese' is the accusative feminine form of 'dieser'"
+      },
+      {
+        "question": "Which verb means 'to help'?",
+        "options": ["holen", "helfen", "nehmen", "geben"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Helfen' means to help"
+      },
+      {
+        "question": "What is the past tense of 'helfen'?",
+        "options": ["hilft", "half", "geholfen", "helfe"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Half' is the simple past form of 'helfen'"
+      },
+      {
+        "question": "How do you say 'now' in German?",
+        "options": ["heute", "morgen", "gestern", "jetzt"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Jetzt' means now"
+      },
+      {
+        "question": "Which preposition means 'from'?",
+        "options": ["zu", "von", "aus", "nach"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Von' means from"
+      },
+      {
+        "question": "What is the plural of 'Hund'?",
+        "options": ["Hunde", "Hund", "Hunden", "Hunds"],
+        "correctAnswerIndex": 0,
+        "explanation": "The plural of 'Hund' is 'Hunde'"
+      },
+      {
+        "question": "Which word means 'left' (direction)?",
+        "options": ["links", "rechts", "geradeaus", "hier"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Links' means left (direction)"
+      },
+      {
+        "question": "What is the correct form of 'können' for 'wir'?",
+        "options": ["kann", "kannst", "können", "könnt"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Wir können' is the correct conjugation"
+      },
+      {
+        "question": "How do you say 'hot' in German?",
+        "options": ["kalt", "heiß", "warm", "kühl"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Heiß' means hot"
+      },
+      {
+        "question": "Which verb means 'to find'?",
+        "options": ["suchen", "finden", "sehen", "nehmen"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Finden' means to find"
+      },
+      {
+        "question": "What is the past participle of 'finden'?",
+        "options": ["findet", "fand", "gefunden", "finden"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Gefunden' is the past participle of 'finden'"
+      },
+      {
+        "question": "How do you say 'gray' in German?",
+        "options": ["schwarz", "weiß", "braun", "grau"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Grau' means gray"
+      },
+      {
+        "question": "Which preposition means 'to' or 'towards'?",
+        "options": ["von", "zu", "aus", "nach"],
+        "correctAnswerIndex": 1,
+        "explanation": "'Zu' means to or towards"
+      },
+      {
+        "question": "What is the dative form of 'die' (feminine)?",
+        "options": ["der", "die", "das", "den"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Der' is the dative feminine form"
+      },
+      {
+        "question": "Which word means 'cold'?",
+        "options": ["heiß", "warm", "kalt", "kühl"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Kalt' means cold"
+      },
+      {
+        "question": "What is the correct question word for choice?",
+        "options": ["Welche", "Wo", "Wann", "Wer"],
+        "correctAnswerIndex": 0,
+        "explanation": "'Welche' means 'which' and is used for choice"
+      },
+      {
+        "question": "How do you form the superlative of 'gut'?",
+        "options": ["gutest", "best", "am besten", "gutesten"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Am besten' is the superlative form of 'gut'"
+      },
+      {
+        "question": "Which preposition means 'at' (location)?",
+        "options": ["in", "an", "bei", "zu"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Bei' means at (someone's place) or near"
+      },
+      {
+        "question": "What is the correct form of 'müssen' for 'ihr'?",
+        "options": ["muss", "musst", "müssen", "müsst"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Ihr müsst' is the correct conjugation"
+      },
+      {
+        "question": "Which word means 'warm'?",
+        "options": ["kalt", "heiß", "warm", "kühl"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Warm' means warm"
+      },
+      {
+        "question": "How do you say 'I should' in German?",
+        "options": ["ich muss", "ich will", "ich soll", "ich kann"],
+        "correctAnswerIndex": 2,
+        "explanation": "'Ich soll' means 'I should' or 'I am supposed to'"
+      },
+      {
+        "question": "What is the accusative form of 'welcher' (masculine)?",
+        "options": ["welcher", "welche", "welches", "welchen"],
+        "correctAnswerIndex": 3,
+        "explanation": "'Welchen' is the accusative masculine form of 'welcher'"
+      }
+    ],
+  
+
+
+  
+    
+      "B1": [
+        {
+          "question": "What is the subjunctive form of 'sein'?",
+          "options": ["wäre", "ist", "war", "gewesen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Wäre' is the Konjunktiv II form of 'sein'"
+        },
+        {
+          "question": "Which conjunction introduces a conditional clause?",
+          "options": ["weil", "dass", "wenn", "obwohl"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Wenn' introduces conditional clauses (if/when)"
+        },
+        {
+          "question": "What is the correct passive form of 'Man liest das Buch'?",
+          "options": ["Das Buch wird gelesen", "Das Buch liest", "Das Buch wurde gelesen", "Das Buch ist gelesen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das Buch wird gelesen' is the present passive construction"
+        },
+        {
+          "question": "Which preposition always takes the genitive case?",
+          "options": ["trotz", "durch", "für", "mit"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Trotz' is one of the prepositions that always takes the genitive case"
+        },
+        {
+          "question": "What is the correct relative pronoun for masculine nouns in nominative?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Der' is the relative pronoun for masculine nouns in nominative"
+        },
+        {
+          "question": "Which verb requires the dative case?",
+          "options": ["besuchen", "helfen", "kaufen", "sehen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Helfen' is a verb that takes the dative case (jemandem helfen)"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'haben'?",
+          "options": ["hätte", "hatte", "habe", "hätten"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Hätte' is the Konjunktiv II form of 'haben'"
+        },
+        {
+          "question": "Which conjunction means 'although'?",
+          "options": ["weil", "obwohl", "damit", "wenn"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Obwohl' means 'although' or 'even though'"
+        },
+        {
+          "question": "What is the correct passive form in past tense: 'Man baute das Haus'?",
+          "options": ["Das Haus wird gebaut", "Das Haus wurde gebaut", "Das Haus ist gebaut", "Das Haus hatte gebaut"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Das Haus wurde gebaut' is the simple past passive"
+        },
+        {
+          "question": "Which preposition pair means 'on the one hand... on the other hand'?",
+          "options": ["entweder...oder", "weder...noch", "einerseits...andererseits", "zwar...aber"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Einerseits...andererseits' means 'on the one hand...on the other hand'"
+        },
+        {
+          "question": "What is the correct relative pronoun for plural nouns in dative?",
+          "options": ["der", "die", "denen", "dessen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Denen' is the relative pronoun for plural nouns in dative"
+        },
+        {
+          "question": "Which verb means 'to recommend'?",
+          "options": ["vorschlagen", "empfehlen", "bitten", "erzählen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Empfehlen' means to recommend"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'können'?",
+          "options": ["kann", "konnte", "könnte", "gekonnt"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Könnte' is the Konjunktiv II form of 'können'"
+        },
+        {
+          "question": "Which conjunction introduces a purpose clause?",
+          "options": ["weil", "dass", "damit", "obwohl"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Damit' introduces purpose clauses (so that/in order to)"
+        },
+        {
+          "question": "What is the passive form with modal verb: 'Man muss den Text lesen'?",
+          "options": ["Der Text muss gelesen werden", "Der Text muss lesen", "Der Text wurde gelesen müssen", "Der Text ist zu lesen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Der Text muss gelesen werden' is the passive with modal verb"
+        },
+        {
+          "question": "Which preposition always takes the dative case?",
+          "options": ["gegen", "ohne", "aus", "durch"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Aus' is one of the prepositions that always takes the dative case"
+        },
+        {
+          "question": "What is the correct relative pronoun for feminine nouns in genitive?",
+          "options": ["der", "die", "deren", "denen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Deren' is the relative pronoun for feminine nouns in genitive"
+        },
+        {
+          "question": "Which verb requires both accusative and dative objects?",
+          "options": ["geben", "gehen", "kommen", "schlafen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Geben' takes both accusative (what is given) and dative (to whom)"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'werden'?",
+          "options": ["wurde", "würde", "werde", "worden"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Würde' is the Konjunktiv II form of 'werden'"
+        },
+        {
+          "question": "Which conjunction means 'so that' or 'in order that'?",
+          "options": ["weil", "dass", "damit", "obwohl"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Damit' means 'so that' or 'in order that'"
+        },
+        {
+          "question": "What is the passive form in perfect tense: 'Man hat das Auto repariert'?",
+          "options": ["Das Auto wird repariert", "Das Auto wurde repariert", "Das Auto ist repariert worden", "Das Auto hatte repariert"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Das Auto ist repariert worden' is the perfect tense passive"
+        },
+        {
+          "question": "Which preposition pair means 'either...or'?",
+          "options": ["entweder...oder", "weder...noch", "sowohl...als auch", "zwar...aber"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Entweder...oder' means 'either...or'"
+        },
+        {
+          "question": "What is the correct relative pronoun for neuter nouns in accusative?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Das' is the relative pronoun for neuter nouns in accusative"
+        },
+        {
+          "question": "Which verb means 'to suggest'?",
+          "options": ["empfehlen", "vorschlagen", "bitten", "erzählen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Vorschlagen' means to suggest"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'müssen'?",
+          "options": ["muss", "musste", "müsste", "gemusst"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Müsste' is the Konjunktiv II form of 'müssen'"
+        },
+        {
+          "question": "Which conjunction introduces a causal clause?",
+          "options": ["weil", "dass", "damit", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Weil' introduces causal clauses (because)"
+        },
+        {
+          "question": "What is the passive form with 'lassen': 'Man lässt das Haus bauen'?",
+          "options": ["Das Haus lässt bauen", "Das Haus wird bauen lassen", "Das Haus wird gebaut lassen", "Das Haus lässt sich bauen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das Haus lässt bauen' is the construction with 'lassen' for having something done"
+        },
+        {
+          "question": "Which preposition always takes the accusative case?",
+          "options": ["mit", "nach", "durch", "zu"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Durch' is one of the prepositions that always takes the accusative case"
+        },
+        {
+          "question": "What is the correct relative pronoun for masculine nouns in genitive?",
+          "options": ["der", "die", "dessen", "denen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dessen' is the relative pronoun for masculine nouns in genitive"
+        },
+        {
+          "question": "Which verb means 'to apologize'?",
+          "options": ["danken", "entschuldigen", "bitten", "gratulieren"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Entschuldigen' means to apologize"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'sollen'?",
+          "options": ["soll", "sollte", "sollte", "gesollt"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Sollte' is the Konjunktiv II form of 'sollen'"
+        },
+        {
+          "question": "Which conjunction means 'as if'?",
+          "options": ["als ob", "weil", "dass", "wenn"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Als ob' means 'as if'"
+        },
+        {
+          "question": "What is the passive form with two objects: 'Man gibt dem Kind das Buch'?",
+          "options": ["Dem Kind wird das Buch gegeben", "Das Buch wird dem Kind gegeben", "Beide sind richtig", "Keine ist richtig"],
+          "correctAnswerIndex": 2,
+          "explanation": "Both versions are correct in German passive with two objects"
+        },
+        {
+          "question": "Which preposition pair means 'neither...nor'?",
+          "options": ["entweder...oder", "weder...noch", "sowohl...als auch", "zwar...aber"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Weder...noch' means 'neither...nor'"
+        },
+        {
+          "question": "What is the correct relative pronoun for plural nouns in accusative?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Die' is the relative pronoun for plural nouns in accusative"
+        },
+        {
+          "question": "Which verb means 'to congratulate'?",
+          "options": ["danken", "entschuldigen", "bitten", "gratulieren"],
+          "correctAnswerIndex": 3,
+          "explanation": "'Gratulieren' means to congratulate"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'wollen'?",
+          "options": ["will", "wollte", "wollte", "gewollt"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Wollte' is the Konjunktiv II form of 'wollen'"
+        },
+        {
+          "question": "Which conjunction introduces a temporal clause for simultaneous actions?",
+          "options": ["bevor", "nachdem", "während", "bis"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Während' introduces temporal clauses for simultaneous actions (while)"
+        },
+        {
+          "question": "What is the passive alternative with 'sein + zu + infinitive'?",
+          "options": ["Das Problem ist zu lösen", "Das Problem wird gelöst", "Das Problem kann gelöst werden", "Das Problem muss gelöst werden"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das Problem ist zu lösen' is an alternative passive construction"
+        },
+        {
+          "question": "Which preposition takes dative for location and accusative for direction?",
+          "options": ["in", "an", "auf", "Alle sind richtig"],
+          "correctAnswerIndex": 3,
+          "explanation": "All these prepositions are two-way prepositions (Wechselpräpositionen)"
+        },
+        {
+          "question": "What is the correct relative pronoun for feminine nouns in dative?",
+          "options": ["der", "die", "deren", "denen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Der' is the relative pronoun for feminine nouns in dative"
+        },
+        {
+          "question": "Which verb means 'to refuse'?",
+          "options": ["annehmen", "ablehnen", "bieten", "versuchen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Ablehnen' means to refuse or reject"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'dürfen'?",
+          "options": ["darf", "durfte", "dürfte", "gedurft"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dürfte' is the Konjunktiv II form of 'dürfen'"
+        },
+        {
+          "question": "Which conjunction means 'before'?",
+          "options": ["bevor", "nachdem", "während", "bis"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Bevor' means 'before'"
+        },
+        {
+          "question": "What is the passive form in future tense: 'Man wird das Haus bauen'?",
+          "options": ["Das Haus wird gebaut werden", "Das Haus wird gebaut", "Das Haus ist gebaut worden", "Das Haus würde gebaut"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das Haus wird gebaut werden' is the future passive"
+        },
+        {
+          "question": "Which preposition pair means 'both...and'?",
+          "options": ["entweder...oder", "weder...noch", "sowohl...als auch", "zwar...aber"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Sowohl...als auch' means 'both...and'"
+        },
+        {
+          "question": "What is the correct relative pronoun for neuter nouns in genitive?",
+          "options": ["der", "die", "dessen", "denen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dessen' is the relative pronoun for neuter nouns in genitive"
+        },
+        {
+          "question": "Which verb means 'to attempt' or 'to try'?",
+          "options": ["versuchen", "hoffen", "wünschen", "denken"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Versuchen' means to attempt or try"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'mögen'?",
+          "options": ["mag", "mochte", "möchte", "gemocht"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Möchte' is the Konjunktiv II form of 'mögen'"
+        },
+        {
+          "question": "Which conjunction means 'after'?",
+          "options": ["bevor", "nachdem", "während", "bis"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Nachdem' means 'after'"
+        },
+        {
+          "question": "What is the passive form with 'sich lassen': 'Das Problem lässt sich lösen'?",
+          "options": ["Das Problem kann gelöst werden", "Das Problem wird gelöst", "Das Problem ist zu lösen", "Das Problem muss gelöst werden"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das Problem lässt sich lösen' means 'The problem can be solved'"
+        },
+        {
+          "question": "Which preposition means 'despite'?",
+          "options": ["wegen", "trotz", "während", "gegenüber"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Trotz' means 'despite' or 'in spite of'"
+        },
+        {
+          "question": "What is the correct relative pronoun for plural nouns in genitive?",
+          "options": ["der", "die", "deren", "denen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Deren' is the relative pronoun for plural nouns in genitive"
+        },
+        {
+          "question": "Which verb means 'to promise'?",
+          "options": ["versprechen", "erzählen", "sagen", "meinen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Versprechen' means to promise"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'wissen'?",
+          "options": ["weiß", "wusste", "wüsste", "gewusst"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Wüsste' is the Konjunktiv II form of 'wissen'"
+        },
+        {
+          "question": "Which conjunction means 'until'?",
+          "options": ["bevor", "nachdem", "während", "bis"],
+          "correctAnswerIndex": 3,
+          "explanation": "'Bis' means 'until'"
+        },
+        {
+          "question": "What is the passive form in pluperfect tense: 'Man hatte das Auto repariert'?",
+          "options": ["Das Auto wird repariert worden sein", "Das Auto war repariert worden", "Das Auto ist repariert worden", "Das Auto wurde repariert"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Das Auto war repariert worden' is the pluperfect passive"
+        },
+        {
+          "question": "Which preposition means 'because of'?",
+          "options": ["trotz", "wegen", "während", "gegenüber"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Wegen' means 'because of'"
+        },
+        {
+          "question": "What is the correct relative pronoun for masculine nouns in dative?",
+          "options": ["der", "die", "dem", "den"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dem' is the relative pronoun for masculine nouns in dative"
+        },
+        {
+          "question": "Which verb means 'to complain'?",
+          "options": ["beschweren", "erklären", "erzählen", "fragen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Beschweren' means to complain"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'geben'?",
+          "options": ["gibt", "gab", "gäbe", "gegeben"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Gäbe' is the Konjunktiv II form of 'geben'"
+        },
+        {
+          "question": "Which conjunction means 'as soon as'?",
+          "options": ["sobald", "nachdem", "während", "bis"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Sobald' means 'as soon as'"
+        },
+        {
+          "question": "What is the passive form in future perfect: 'Man wird das Haus gebaut haben'?",
+          "options": ["Das Haus wird gebaut worden sein", "Das Haus wird gebaut werden", "Das Haus ist gebaut worden", "Das Haus war gebaut worden"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das Haus wird gebaut worden sein' is the future perfect passive"
+        },
+        {
+          "question": "Which preposition means 'according to'?",
+          "options": ["laut", "gegen", "um", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Laut' means 'according to'"
+        },
+        {
+          "question": "What is the correct relative pronoun for feminine nouns in accusative?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Die' is the relative pronoun for feminine nouns in accusative"
+        },
+        {
+          "question": "Which verb means 'to agree'?",
+          "options": ["zustimmen", "ablehnen", "vorschlagen", "meinen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Zustimmen' means to agree"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'kommen'?",
+          "options": ["kommt", "kam", "käme", "gekommen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Käme' is the Konjunktiv II form of 'kommen'"
+        },
+        {
+          "question": "Which conjunction means 'since' (temporal)?",
+          "options": ["weil", "seitdem", "obwohl", "damit"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Seitdem' means 'since' in temporal sense"
+        },
+        {
+          "question": "What is the passive form with impersonal subject: 'Es wurde getanzt'?",
+          "options": ["Man tanzte", "Es hat getanzt", "Getanzt wurde", "Alle sind richtig"],
+          "correctAnswerIndex": 3,
+          "explanation": "All these are alternative ways to express the impersonal passive"
+        },
+        {
+          "question": "Which preposition means 'opposite'?",
+          "options": ["neben", "gegenüber", "zwischen", "hinter"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Gegenüber' means 'opposite'"
+        },
+        {
+          "question": "What is the correct relative pronoun for neuter nouns in dative?",
+          "options": ["der", "die", "dem", "den"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dem' is the relative pronoun for neuter nouns in dative"
+        },
+        {
+          "question": "Which verb means 'to remind'?",
+          "options": ["erinnern", "denken", "glauben", "wissen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Erinnern' means to remind"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'sehen'?",
+          "options": ["sieht", "sah", "sähe", "gesehen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Sähe' is the Konjunktiv II form of 'sehen'"
+        },
+        {
+          "question": "Which conjunction means 'whenever'?",
+          "options": ["wenn", "als", "sobald", "wann"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Wenn' can mean 'whenever' for repeated actions"
+        },
+        {
+          "question": "What is the passive form with modal verb in past: 'Man musste den Text lesen'?",
+          "options": ["Der Text musste gelesen werden", "Der Text muss gelesen worden sein", "Der Text wurde gelesen müssen", "Der Text ist zu lesen gewesen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Der Text musste gelesen werden' is the past passive with modal verb"
+        },
+        {
+          "question": "Which preposition means 'during'?",
+          "options": ["während", "gegen", "um", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Während' means 'during'"
+        },
+        {
+          "question": "What is the correct relative pronoun for plural nouns in nominative?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Die' is the relative pronoun for plural nouns in nominative"
+        },
+        {
+          "question": "Which verb means 'to succeed'?",
+          "options": ["versuchen", "gelingen", "scheitern", "hoffen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Gelingen' means to succeed"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'gehen'?",
+          "options": ["geht", "ging", "ginge", "gegangen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Ginge' is the Konjunktiv II form of 'gehen'"
+        },
+        {
+          "question": "Which conjunction means 'as long as'?",
+          "options": ["solange", "sobald", "während", "bis"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Solange' means 'as long as'"
+        },
+        {
+          "question": "What is the passive form with 'bekommen/kriegen': 'Ich bekam das Buch geschenkt'?",
+          "options": ["Mir wurde das Buch geschenkt", "Das Buch wurde mir geschenkt", "Ich habe das Buch geschenkt bekommen", "Alle sind richtig"],
+          "correctAnswerIndex": 3,
+          "explanation": "All these are correct ways to express receiving something"
+        },
+        {
+          "question": "Which preposition means 'except'?",
+          "options": ["außer", "innerhalb", "wegen", "trotz"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Außer' means 'except' or 'besides'"
+        },
+        {
+          "question": "What is the correct relative pronoun after prepositions?",
+          "options": ["depends on gender/case", "always 'der'", "always 'die'", "always 'das'"],
+          "correctAnswerIndex": 0,
+          "explanation": "The relative pronoun after prepositions depends on the gender and case of the noun"
+        },
+        {
+          "question": "Which verb means 'to fail'?",
+          "options": ["versuchen", "gelingen", "scheitern", "hoffen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Scheitern' means to fail"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'sprechen'?",
+          "options": ["spricht", "sprach", "spräche", "gesprochen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Spräche' is the Konjunktiv II form of 'sprechen'"
+        },
+        {
+          "question": "Which conjunction means 'provided that'?",
+          "options": ["falls", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Falls' means 'if' or 'provided that'"
+        },
+        {
+          "question": "What is the passive form in subjunctive: 'Wenn man das machen würde'?",
+          "options": ["Wenn das gemacht werden würde", "Wenn das gemacht wird", "Wenn das gemacht worden wäre", "Wenn das gemacht wird sein"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Wenn das gemacht werden würde' is the passive in Konjunktiv II"
+        },
+        {
+          "question": "Which preposition means 'within'?",
+          "options": ["außerhalb", "innerhalb", "während", "gegen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Innerhalb' means 'within' or 'inside of'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Der Mann, ____ Auto dort steht'?",
+          "options": ["der", "die", "dessen", "denen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dessen' is used for masculine possessive relative clauses"
+        },
+        {
+          "question": "Which verb means 'to manage' or 'to cope'?",
+          "options": ["schaffen", "versuchen", "hoffen", "wollen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Schaffen' means to manage or cope with something"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'nehmen'?",
+          "options": ["nimmt", "nahm", "nähme", "genommen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Nähme' is the Konjunktiv II form of 'nehmen'"
+        },
+        {
+          "question": "Which conjunction means 'in case'?",
+          "options": ["falls", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Falls' means 'in case' or 'if'"
+        },
+        {
+          "question": "What is the passive form with 'sein' for states: 'Die Tür ist geöffnet'?",
+          "options": ["statal passive", "process passive", "modal passive", "future passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is the statal passive (Zustandspassiv) describing a state"
+        },
+        {
+          "question": "Which preposition means 'outside of'?",
+          "options": ["innerhalb", "außerhalb", "während", "gegen"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Außerhalb' means 'outside of'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Die Frau, ____ ich helfe'?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Der' is used because 'helfen' requires dative case"
+        },
+        {
+          "question": "Which verb means 'to deserve'?",
+          "options": ["verdienen", "bekommen", "geben", "nehmen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Verdienen' means to deserve or earn"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'tun'?",
+          "options": ["tut", "tat", "täte", "getan"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Täte' is the Konjunktiv II form of 'tun'"
+        },
+        {
+          "question": "Which conjunction means 'unless'?",
+          "options": ["es sei denn", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Es sei denn' means 'unless'"
+        },
+        {
+          "question": "What is the passive form with reflexive verb: 'Das versteht sich von selbst'?",
+          "options": ["reflexive passive", "impersonal passive", "statal passive", "modal passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is a reflexive passive construction"
+        },
+        {
+          "question": "Which preposition means 'concerning'?",
+          "options": ["bezüglich", "während", "gegen", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Bezüglich' means 'concerning' or 'regarding'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Das Kind, ____ Mutter ich kenne'?",
+          "options": ["der", "die", "dessen", "denen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dessen' is used for neuter possessive relative clauses"
+        },
+        {
+          "question": "Which verb means 'to avoid'?",
+          "options": ["vermeiden", "versuchen", "hoffen", "wollen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Vermeiden' means to avoid"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'fahren'?",
+          "options": ["fährt", "fuhr", "führe", "gefahren"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Führe' is the Konjunktiv II form of 'fahren'"
+        },
+        {
+          "question": "Which conjunction means 'whereas'?",
+          "options": ["während", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Während' can mean 'whereas' for contrast"
+        },
+        {
+          "question": "What is the passive form in conditional: 'Wenn das gemacht worden wäre'?",
+          "options": ["Konjunktiv II passive", "present passive", "future passive", "modal passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is the passive in Konjunktiv II for unreal conditions"
+        },
+        {
+          "question": "Which preposition means 'via' or 'by means of'?",
+          "options": ["durch", "für", "gegen", "ohne"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Durch' means 'through', 'via', or 'by means of'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Die Bücher, ____ ich lese'?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 1,
+          "explanation": "'Die' is used for plural accusative relative clauses"
+        },
+        {
+          "question": "Which verb means 'to achieve'?",
+          "options": ["erreichen", "versuchen", "hoffen", "wollen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Erreichen' means to achieve or reach"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'laufen'?",
+          "options": ["läuft", "lief", "liefe", "gelaufen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Liefe' is the Konjunktiv II form of 'laufen'"
+        },
+        {
+          "question": "Which conjunction means 'so that' (consecutive)?",
+          "options": ["so dass", "damit", "weil", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'So dass' means 'so that' for consecutive clauses"
+        },
+        {
+          "question": "What is the passive form with infinitive: 'Das ist nicht zu ändern'?",
+          "options": ["infinitive passive", "present passive", "future passive", "modal passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is the passive with 'sein + zu + infinitive'"
+        },
+        {
+          "question": "Which preposition means 'along'?",
+          "options": ["entlang", "gegen", "um", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Entlang' means 'along'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Der Freund, ____ ich vertraue'?",
+          "options": ["der", "die", "dem", "den"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dem' is used because 'vertrauen' requires dative case"
+        },
+        {
+          "question": "Which verb means 'to support'?",
+          "options": ["unterstützen", "verstehen", "helfen", "geben"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Unterstützen' means to support"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'schlafen'?",
+          "options": ["schläft", "schlief", "schliefe", "geschlafen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Schliefe' is the Konjunktiv II form of 'schlafen'"
+        },
+        {
+          "question": "Which conjunction means 'in order to'?",
+          "options": ["um zu", "damit", "weil", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Um zu' with infinitive means 'in order to'"
+        },
+        {
+          "question": "What is the passive form with adjective: 'Der Wein ist getrunken'?",
+          "options": ["statal passive", "process passive", "modal passive", "future passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is the statal passive describing a state"
+        },
+        {
+          "question": "Which preposition means 'among'?",
+          "options": ["unter", "über", "neben", "zwischen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Unter' can mean 'among' when used with plural nouns"
+        },
+        {
+          "question": "What is the correct relative clause: 'Das Haus, in ____ ich wohne'?",
+          "options": ["dem", "den", "das", "die"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Dem' is used because 'in' requires dative for location"
+        },
+        {
+          "question": "Which verb means 'to prevent'?",
+          "options": ["verhindern", "helfen", "geben", "nehmen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Verhindern' means to prevent"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'trinken'?",
+          "options": ["trinkt", "trank", "tränke", "getrunken"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Tränke' is the Konjunktiv II form of 'trinken'"
+        },
+        {
+          "question": "Which conjunction means 'without'?",
+          "options": ["ohne zu", "um zu", "damit", "weil"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Ohne zu' with infinitive means 'without'"
+        },
+        {
+          "question": "What is the passive form with participle: 'Die geöffnete Tür'?",
+          "options": ["participial adjective", "process passive", "modal passive", "future passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is a participial adjective derived from a passive participle"
+        },
+        {
+          "question": "Which preposition means 'according to' (opinion)?",
+          "options": ["laut", "nach", "zufolge", "Alle sind richtig"],
+          "correctAnswerIndex": 3,
+          "explanation": "All these prepositions can mean 'according to'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Die Stadt, aus ____ ich komme'?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Der' is used because 'aus' requires dative case"
+        },
+        {
+          "question": "Which verb means 'to convince'?",
+          "options": ["überzeugen", "sagen", "erzählen", "meinen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Überzeugen' means to convince"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'schreiben'?",
+          "options": ["schreibt", "schrieb", "schriebe", "geschrieben"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Schriebe' is the Konjunktiv II form of 'schreiben'"
+        },
+        {
+          "question": "Which conjunction means 'by' (with gerund)?",
+          "options": ["indem", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Indem' means 'by' or 'by means of'"
+        },
+        {
+          "question": "What is the passive form with 'werden' for changes: 'Er wird Lehrer'?",
+          "options": ["not passive", "process passive", "statal passive", "modal passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is not passive - 'werden' here means 'to become'"
+        },
+        {
+          "question": "Which preposition means 'instead of'?",
+          "options": ["anstatt", "während", "gegen", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Anstatt' means 'instead of'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Der Weg, ____ wir gehen'?",
+          "options": ["der", "die", "das", "den"],
+          "correctAnswerIndex": 3,
+          "explanation": "'Den' is used because 'Weg' is masculine accusative"
+        },
+        {
+          "question": "Which verb means 'to admit'?",
+          "options": ["zugeben", "sagen", "erzählen", "meinen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Zugeben' means to admit"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'lesen'?",
+          "options": ["liest", "las", "läse", "gelesen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Läse' is the Konjunktiv II form of 'lesen'"
+        },
+        {
+          "question": "Which conjunction means 'while' (contrasting)?",
+          "options": ["während", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Während' can mean 'while' for contrasting ideas"
+        },
+        {
+          "question": "What is the passive form with 'sein' and modal: 'Das ist zu machen'?",
+          "options": ["infinitive passive", "present passive", "future passive", "modal passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This is the passive with 'sein + zu + infinitive' expressing necessity"
+        },
+        {
+          "question": "Which preposition means 'on account of'?",
+          "options": ["aufgrund", "während", "gegen", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Aufgrund' means 'on account of' or 'due to'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Die Idee, auf ____ ich komme'?",
+          "options": ["die", "der", "das", "den"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Die' is used because 'auf' requires accusative for direction"
+        },
+        {
+          "question": "Which verb means 'to deny'?",
+          "options": ["leugnen", "sagen", "erzählen", "meinen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Leugnen' means to deny"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'singen'?",
+          "options": ["singt", "sang", "sänge", "gesungen"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Sänge' is the Konjunktiv II form of 'singen'"
+        },
+        {
+          "question": "Which conjunction means 'as' (comparison)?",
+          "options": ["wie", "als", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Wie' means 'as' for comparisons of equality"
+        },
+        {
+          "question": "What is the passive form with 'lassen' for permission: 'Das lässt sich machen'?",
+          "options": ["potential passive", "process passive", "statal passive", "modal passive"],
+          "correctAnswerIndex": 0,
+          "explanation": "This construction with 'lassen sich' expresses possibility"
+        },
+        {
+          "question": "Which preposition means 'concerning' or 'about'?",
+          "options": ["hinsichtlich", "während", "gegen", "durch"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Hinsichtlich' means 'concerning' or 'with regard to'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Der Grund, ____ ich komme'?",
+          "options": ["warum", "wo", "wann", "was"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Warum' is used for 'reason why' relative clauses"
+        },
+        {
+          "question": "Which verb means 'to suspect'?",
+          "options": ["verdächtigen", "denken", "glauben", "wissen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Verdächtigen' means to suspect"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'bringen'?",
+          "options": ["bringt", "brachte", "brächte", "gebracht"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Brächte' is the Konjunktiv II form of 'bringen'"
+        },
+        {
+          "question": "Which conjunction means 'than'?",
+          "options": ["als", "wie", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Als' means 'than' for comparisons of inequality"
+        },
+        {
+          "question": "What is the passive form in indirect speech?",
+          "options": ["er werde gesehen", "er wird gesehen", "er wurde gesehen", "er ist gesehen worden"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Er werde gesehen' is the passive in indirect speech (Konjunktiv I)"
+        },
+        {
+          "question": "Which preposition means 'in front of'?",
+          "options": ["vor", "hinter", "neben", "zwischen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Vor' means 'in front of' or 'before'"
+        },
+        {
+          "question": "What is the correct relative clause: 'Der Tag, ____ ich geboren wurde'?",
+          "options": ["an dem", "in dem", "auf dem", "zu dem"],
+          "correctAnswerIndex": 0,
+          "explanation": "'An dem' is used with days and dates"
+        },
+        {
+          "question": "Which verb means 'to accuse'?",
+          "options": ["beschuldigen", "sagen", "erzählen", "meinen"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Beschuldigen' means to accuse"
+        },
+        {
+          "question": "What is the Konjunktiv II form of 'denken'?",
+          "options": ["denkt", "dachte", "dächte", "gedacht"],
+          "correctAnswerIndex": 2,
+          "explanation": "'Dächte' is the Konjunktiv II form of 'denken'"
+        },
+        {
+          "question": "Which conjunction means 'as if' (alternative)?",
+          "options": ["als wenn", "weil", "dass", "obwohl"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Als wenn' is an alternative to 'als ob' meaning 'as if'"
+        },
+        {
+          "question": "What is the passive form with 'gehören': 'Das gehört gemacht'?",
+          "options": ["Das gehört gemacht", "Das wird gemacht", "Das ist gemacht worden", "Das muss gemacht werden"],
+          "correctAnswerIndex": 0,
+          "explanation": "'Das gehört gemacht' is an idiomatic passive-like construction"
+        }
+      ],
+    
+
+
+
+      
+        "B2": [
+          {
+            "question": "What is the genitive form of 'der Mann'?",
+            "options": ["des Mannes", "dem Mann", "den Mann", "der Mann"],
+            "correctAnswerIndex": 0,
+            "explanation": "Des Mannes is the genitive form"
+          },
+          {
+            "question": "Which preposition requires the genitive case?",
+            "options": ["trotz", "durch", "für", "gegen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Trotz requires the genitive case"
+          },
+          {
+            "question": "Complete the sentence: Wenn ich mehr Zeit ___, würde ich mehr reisen.",
+            "options": ["hätte", "habe", "hatte", "hätten"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II form of 'haben' is required here"
+          },
+          {
+            "question": "Which sentence uses the passive voice correctly?",
+            "options": ["Das Buch wird gelesen", "Das Buch ist gelesen worden", "Das Buch liest sich", "Das Buch wurde gelesen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Present passive voice is formed with 'wird' + past participle"
+          },
+          {
+            "question": "What is the correct relative pronoun? Der Mann, ___ gestern hier war, ist mein Onkel.",
+            "options": ["der", "den", "dem", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Nominative masculine relative pronoun 'der' is needed"
+          },
+          {
+            "question": "Which conjunction creates a subordinate clause?",
+            "options": ["weil", "und", "oder", "aber"],
+            "correctAnswerIndex": 0,
+            "explanation": "Weil is a subordinating conjunction that sends the verb to the end"
+          },
+          {
+            "question": "What's the correct adjective ending? Das ist ein ___ interessantes Buch.",
+            "options": ["-", "-es", "-em", "-en"],
+            "correctAnswerIndex": 0,
+            "explanation": "After indefinite article in nominative neuter, no ending is needed"
+          },
+          {
+            "question": "Which verb requires the dative case?",
+            "options": ["helfen", "sehen", "kaufen", "lesen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Helfen is a verb that takes dative object"
+          },
+          {
+            "question": "Complete: Ich wünschte, ich ___ mehr Geld.",
+            "options": ["hätte", "habe", "hatte", "hätte gehabt"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of haben is required for unreal wishes"
+          },
+          {
+            "question": "What's the correct plural form of 'das Kind'?",
+            "options": ["die Kinder", "die Kinds", "die Kinde", "die Kindern"],
+            "correctAnswerIndex": 0,
+            "explanation": "Kinder is the irregular plural of Kind"
+          },
+          {
+            "question": "Which sentence uses the correct word order?",
+            "options": ["Gestern habe ich im Kino einen Film gesehen", "Gestern ich habe im Kino einen Film gesehen", "Ich habe gestern im Kino gesehen einen Film", "Im Kino ich habe gestern einen Film gesehen"],
+            "correctAnswerIndex": 0,
+            "explanation": "In main clauses with time expression, verb comes second"
+          },
+          {
+            "question": "What's the correct preposition with 'sich interessieren'?",
+            "options": ["für", "an", "über", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich interessieren always takes für + accusative"
+          },
+          {
+            "question": "Complete the passive sentence: Das Haus ___ gebaut.",
+            "options": ["wird", "ist", "hat", "wurde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Present passive is formed with wird + past participle"
+          },
+          {
+            "question": "Which relative pronoun is correct? Die Frau, ___ Auto dort steht, ist meine Chefin.",
+            "options": ["deren", "der", "die", "derer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Genitive feminine relative pronoun deren is needed"
+          },
+          {
+            "question": "What's the correct form of 'hoch' in comparative?",
+            "options": ["höher", "hocher", "höhrer", "hochrer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Hoch becomes höher in comparative form"
+          },
+          {
+            "question": "Which sentence uses Konjunktiv I correctly for indirect speech?",
+            "options": ["Er sagte, er habe keine Zeit", "Er sagte, er hat keine Zeit", "Er sagte, er hätte keine Zeit", "Er sagte, er hatte keine Zeit"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv I is used for indirect speech to indicate neutrality"
+          },
+          {
+            "question": "What's the correct preposition with 'warten'?",
+            "options": ["auf", "für", "um", "zu"],
+            "correctAnswerIndex": 0,
+            "explanation": "Warten always takes auf + accusative"
+          },
+          {
+            "question": "Complete: Wenn ich du ___, würde ich das nicht tun.",
+            "options": ["wäre", "bin", "war", "würde sein"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of sein is required in hypothetical comparisons"
+          },
+          {
+            "question": "Which verb is separable?",
+            "options": ["anfangen", "besuchen", "verstehen", "erklären"],
+            "correctAnswerIndex": 0,
+            "explanation": "Anfangen is a separable prefix verb"
+          },
+          {
+            "question": "What's the correct adjective ending? Ich gebe dem ___ Mann das Buch.",
+            "options": ["alten", "alte", "altem", "alter"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative masculine requires -en ending"
+          },
+          {
+            "question": "Which preposition always takes accusative?",
+            "options": ["durch", "bei", "mit", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Durch is one of the accusative prepositions"
+          },
+          {
+            "question": "Complete the Nebensatz: Ich weiß nicht, ob er ___ kommt.",
+            "options": ["heute", "kommt heute", "heute kommt", "kommt"],
+            "correctAnswerIndex": 0,
+            "explanation": "In subordinate clauses, time expressions come before the verb"
+          },
+          {
+            "question": "What's the correct plural of 'die Mutter'?",
+            "options": ["die Mütter", "die Muttern", "die Mutter", "die Müttern"],
+            "correctAnswerIndex": 0,
+            "explanation": "Mütter is the irregular plural with umlaut"
+          },
+          {
+            "question": "Which sentence uses the correct passive transformation?",
+            "options": ["Man repariert das Auto → Das Auto wird repariert", "Man repariert das Auto → Das Auto ist repariert", "Man repariert das Auto → Das Auto repariert", "Man repariert das Auto → Das Auto wurde repariert"],
+            "correctAnswerIndex": 0,
+            "explanation": "Present active with 'man' becomes present passive with 'wird'"
+          },
+          {
+            "question": "What's the correct reflexive pronoun? Ich wasche ___ die Hände.",
+            "options": ["mir", "mich", "dich", "uns"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich waschen takes dative reflexive for body parts"
+          },
+          {
+            "question": "Complete: Je mehr ich lerne, ___ ich weiß.",
+            "options": ["desto weniger", "umso wenige", "je wenig", "desto wenig"],
+            "correctAnswerIndex": 0,
+            "explanation": "Comparative correlative structure requires 'desto' + comparative"
+          },
+          {
+            "question": "Which word is a subordinating conjunction?",
+            "options": ["bevor", "denn", "oder", "sondern"],
+            "correctAnswerIndex": 0,
+            "explanation": "Bevor is a subordinating conjunction that sends verb to end"
+          },
+          {
+            "question": "What's the correct genitive form? Das ist das Auto ___ Vaters.",
+            "options": ["des", "der", "dem", "den"],
+            "correctAnswerIndex": 0,
+            "explanation": "Masculine genitive requires des"
+          },
+          {
+            "question": "Which sentence uses the correct prepositional adverb?",
+            "options": ["Ich denke oft daran", "Ich denke oft an es", "Ich denke oft daran es", "Ich denke oft an davon"],
+            "correctAnswerIndex": 0,
+            "explanation": "Prepositional adverb daran replaces preposition + pronoun"
+          },
+          {
+            "question": "Complete: Er tut so, als ___ er alles.",
+            "options": ["wüsste", "weiß", "wusste", "wissen würde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Als ob/als requires Konjunktiv II for unreal comparisons"
+          },
+          {
+            "question": "What's the correct form of 'werden' in Konjunktiv II?",
+            "options": ["würde", "würden", "werde", "wurde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Würde is the Konjunktiv II form of werden"
+          },
+          {
+            "question": "Which preposition takes dative?",
+            "options": ["aus", "bis", "ohne", "gegen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Aus is one of the dative prepositions"
+          },
+          {
+            "question": "Complete the relative clause: Der Film, ___ wir gesehen haben, war toll.",
+            "options": ["den", "der", "dem", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Accusative masculine relative pronoun den is needed"
+          },
+          {
+            "question": "What's the correct comparative of 'gut'?",
+            "options": ["besser", "mehr gut", "guter", "guteter"],
+            "correctAnswerIndex": 0,
+            "explanation": "Besser is the irregular comparative of gut"
+          },
+          {
+            "question": "Which sentence uses the correct double infinitive construction?",
+            "options": ["Ich habe schwimmen können", "Ich habe können schwimmen", "Ich habe geschwommen können", "Ich könnte schwimmen haben"],
+            "correctAnswerIndex": 0,
+            "explanation": "With modal verbs in perfect, both verbs remain in infinitive"
+          },
+          {
+            "question": "What's the correct preposition with 'sich beschweren'?",
+            "options": ["über", "an", "von", "für"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich beschweren takes über + accusative"
+          },
+          {
+            "question": "Complete: ___ du doch hier wärst!",
+            "options": ["Wären", "Wärst", "Wäre", "Wart"],
+            "correctAnswerIndex": 1,
+            "explanation": "Konjunktiv II of sein with du requires wärst"
+          },
+          {
+            "question": "Which verb is always used with sein in perfect tense?",
+            "options": ["gehen", "machen", "lesen", "kaufen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Gehen is a motion verb that uses sein in perfect"
+          },
+          {
+            "question": "What's the correct adjective ending? Mit den ___ Kindern spiele ich gern.",
+            "options": ["kleinen", "kleine", "kleinem", "kleiner"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative plural requires -en ending"
+          },
+          {
+            "question": "Which sentence has correct word order in a subordinate clause?",
+            "options": ["Weil ich gestern krank war", "Weil ich war gestern krank", "Weil gestern ich krank war", "Weil krank ich gestern war"],
+            "correctAnswerIndex": 0,
+            "explanation": "In subordinate clauses, verb goes to the end and subject comes after conjunction"
+          },
+          {
+            "question": "What's the correct plural of 'der Professor'?",
+            "options": ["die Professoren", "die Professore", "die Professors", "die Professor"],
+            "correctAnswerIndex": 0,
+            "explanation": "Professoren is the regular plural for masculine nouns ending in -or"
+          },
+          {
+            "question": "Complete the passive sentence: Der Brief ___ geschrieben.",
+            "options": ["wurde", "ist", "hat", "wird"],
+            "correctAnswerIndex": 0,
+            "explanation": "Simple past passive is formed with wurde + past participle"
+          },
+          {
+            "question": "Which relative pronoun for neuter genitive?",
+            "options": ["dessen", "deren", "dem", "den"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dessen is the genitive neuter relative pronoun"
+          },
+          {
+            "question": "What's the correct form of 'lassen' in Konjunktiv II?",
+            "options": ["ließe", "ließ", "lassen würde", "gelassen hätte"],
+            "correctAnswerIndex": 0,
+            "explanation": "Ließe is the Konjunktiv II form of lassen"
+          },
+          {
+            "question": "Which preposition requires genitive?",
+            "options": ["während", "gegen", "durch", "ohne"],
+            "correctAnswerIndex": 0,
+            "explanation": "Während is one of the genitive prepositions"
+          },
+          {
+            "question": "Complete: Ich hoffe, dass er ___ kommt.",
+            "options": ["bald", "kommt bald", "bald kommt", "kommt"],
+            "correctAnswerIndex": 2,
+            "explanation": "In subordinate clauses, the conjugated verb goes to the end"
+          },
+          {
+            "question": "What's the correct comparative of 'viel'?",
+            "options": ["mehr", "vieler", "mehrer", "vielerer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Mehr is the irregular comparative of viel"
+          },
+          {
+            "question": "Which sentence uses the correct indefinite pronoun?",
+            "options": ["Man muss vorsichtig sein", "Mann muss vorsichtig sein", "Ein man muss vorsichtig sein", "Einer muss vorsichtig sein"],
+            "correctAnswerIndex": 0,
+            "explanation": "Man is the correct indefinite pronoun for 'one'"
+          },
+          {
+            "question": "What's the correct preposition with 'sich freuen'?",
+            "options": ["auf", "für", "über", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich freuen takes auf for future events, über for past/present"
+          },
+          {
+            "question": "Complete: ___ ich das gewusst hätte!",
+            "options": ["Hätte", "Hättest", "Hätten", "Hat"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of haben in first person singular"
+          },
+          {
+            "question": "Which verb is irregular in simple past?",
+            "options": ["gehen", "machen", "arbeiten", "wohnen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Gehen has irregular simple past form ging"
+          },
+          {
+            "question": "What's the correct adjective ending? Er hat einen ___ Hund.",
+            "options": ["kleinen", "kleine", "kleinem", "kleiner"],
+            "correctAnswerIndex": 0,
+            "explanation": "Accusative masculine after indefinite article requires -en"
+          },
+          {
+            "question": "Which sentence has correct negation?",
+            "options": ["Ich habe kein Geld", "Ich habe nicht Geld", "Ich habe keine Geld", "Ich habe nicht kein Geld"],
+            "correctAnswerIndex": 0,
+            "explanation": "Kein is used to negate nouns without articles"
+          },
+          {
+            "question": "What's the correct plural of 'das Museum'?",
+            "options": ["die Museen", "die Museums", "die Museum", "die Musee"],
+            "correctAnswerIndex": 0,
+            "explanation": "Museen is the plural of Museum"
+          },
+          {
+            "question": "Complete the passive: Hier ___ nicht geraucht.",
+            "options": ["wird", "ist", "hat", "wurde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Impersonal passive with werden"
+          },
+          {
+            "question": "Which relative pronoun for plural dative?",
+            "options": ["denen", "deren", "die", "der"],
+            "correctAnswerIndex": 0,
+            "explanation": "Denen is the dative plural relative pronoun"
+          },
+          {
+            "question": "What's the correct superlative of 'gern'?",
+            "options": ["am liebsten", "am gernsten", "gernst", "liebsten"],
+            "correctAnswerIndex": 0,
+            "explanation": "Am liebsten is the superlative of gern"
+          },
+          {
+            "question": "Which sentence uses Konjunktiv I correctly?",
+            "options": ["Sie sagte, sie komme aus Berlin", "Sie sagte, sie kommt aus Berlin", "Sie sagte, sie käme aus Berlin", "Sie sagte, sie kam aus Berlin"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv I komme indicates indirect speech"
+          },
+          {
+            "question": "What's the correct preposition with 'denken'?",
+            "options": ["an", "für", "über", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Denken takes an + accusative"
+          },
+          {
+            "question": "Complete: Wenn ich Zeit ___, käme ich mit.",
+            "options": ["hätte", "habe", "hatte", "hätte gehabt"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of haben in conditional sentences"
+          },
+          {
+            "question": "Which verb has a vowel change in present tense?",
+            "options": ["lesen", "machen", "sagen", "wohnen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Lesen changes e → ie in du/er forms"
+          },
+          {
+            "question": "What's the correct adjective ending? Das sind die Bücher ___ Schüler.",
+            "options": ["der", "die", "den", "des"],
+            "correctAnswerIndex": 0,
+            "explanation": "Genitive plural requires der"
+          },
+          {
+            "question": "Which sentence uses the correct two-way preposition?",
+            "options": ["Ich stelle die Vase auf den Tisch", "Ich stelle die Vase an den Tisch", "Ich stelle die Vase in den Tisch", "Ich stelle die Vase über den Tisch"],
+            "correctAnswerIndex": 0,
+            "explanation": "Auf takes accusative for movement/direction"
+          },
+          {
+            "question": "What's the correct form of 'können' in simple past?",
+            "options": ["konnte", "könnte", "kann", "gekonnt"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konnte is the simple past of können"
+          },
+          {
+            "question": "Which preposition always takes dative?",
+            "options": ["mit", "durch", "für", "gegen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Mit is one of the dative prepositions"
+          },
+          {
+            "question": "Complete the relative clause: Die Stadt, in ___ ich wohne, ist schön.",
+            "options": ["der", "die", "den", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative feminine relative pronoun der is needed after in"
+          },
+          {
+            "question": "What's the correct comparative of 'hoch'?",
+            "options": ["höher", "hocher", "höhrer", "hochrer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Höher is the comparative of hoch"
+          },
+          {
+            "question": "Which sentence uses the correct infinitive with zu?",
+            "options": ["Ich versuche, das Problem zu lösen", "Ich versuche, das Problem lösen", "Ich versuche das Problem zu lösen", "Ich versuche zu das Problem lösen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Versuchen requires zu + infinitive, separated by comma"
+          },
+          {
+            "question": "What's the correct preposition with 'sich kümmern'?",
+            "options": ["um", "für", "über", "an"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich kümmern takes um + accusative"
+          },
+          {
+            "question": "Complete: Er tat so, als ___ er mich nicht.",
+            "options": ["kenne", "kennt", "kannte", "kennen würde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Als ob/als with Konjunktiv I for indirect speech"
+          },
+          {
+            "question": "Which verb uses haben in perfect tense?",
+            "options": ["arbeiten", "gehen", "kommen", "werden"],
+            "correctAnswerIndex": 0,
+            "explanation": "Arbeiten is not a motion verb, so it uses haben"
+          },
+          {
+            "question": "What's the correct adjective ending? Ich helfe dem ___ Mann.",
+            "options": ["alten", "alte", "altem", "alter"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative masculine requires -en ending"
+          },
+          {
+            "question": "Which sentence has correct word order with time expressions?",
+            "options": ["Morgen fahre ich nach Berlin", "Ich fahre morgen nach Berlin", "Ich fahre nach Berlin morgen", "Nach Berlin ich fahre morgen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Time expressions often come first in main clauses for emphasis"
+          },
+          {
+            "question": "What's the correct plural of 'der Junge'?",
+            "options": ["die Jungen", "die Junge", "die Jungs", "die Jungens"],
+            "correctAnswerIndex": 0,
+            "explanation": "Jungen is the regular plural form"
+          },
+          {
+            "question": "Complete the passive: Das Problem ___ gelöst.",
+            "options": ["wurde", "ist", "hat", "wird"],
+            "correctAnswerIndex": 0,
+            "explanation": "Simple past passive with wurde"
+          },
+          {
+            "question": "Which relative pronoun for feminine genitive?",
+            "options": ["deren", "der", "die", "derer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Deren is the genitive feminine relative pronoun"
+          },
+          {
+            "question": "What's the correct form of 'müssen' in Konjunktiv II?",
+            "options": ["müsste", "musste", "muss", "gemusst hätte"],
+            "correctAnswerIndex": 0,
+            "explanation": "Müsste is the Konjunktiv II form of müssen"
+          },
+          {
+            "question": "Which preposition requires genitive?",
+            "options": ["statt", "gegen", "durch", "ohne"],
+            "correctAnswerIndex": 0,
+            "explanation": "Statt is one of the genitive prepositions"
+          },
+          {
+            "question": "Complete: Sie fragte, ob er ___ komme.",
+            "options": ["heute", "kommt heute", "heute kommt", "kommt"],
+            "correctAnswerIndex": 0,
+            "explanation": "In indirect questions, time expressions come before the verb"
+          },
+          {
+            "question": "What's the correct comparative of 'bald'?",
+            "options": ["eher", "balder", "mehr bald", "baldiger"],
+            "correctAnswerIndex": 0,
+            "explanation": "Eher is the comparative of bald"
+          },
+          {
+            "question": "Which sentence uses the correct reflexive verb?",
+            "options": ["Ich erinnere mich an dich", "Ich erinnere dich an mich", "Ich erinnere an dich", "Ich mich erinnere an dich"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich erinnern takes accusative reflexive pronoun"
+          },
+          {
+            "question": "What's the correct preposition with 'sorgen'?",
+            "options": ["für", "um", "über", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sorgen takes für + accusative"
+          },
+          {
+            "question": "Complete: ___ du mir doch geholfen!",
+            "options": ["Hättest", "Hätte", "Hätten", "Hast"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of haben with du requires hättest"
+          },
+          {
+            "question": "Which verb has irregular perfect tense?",
+            "options": ["essen", "machen", "sagen", "wohnen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Essen has irregular past participle gegessen"
+          },
+          {
+            "question": "What's the correct adjective ending? Sie spricht mit der ___ Frau.",
+            "options": ["jungen", "junge", "jungem", "jungen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative feminine requires -en ending"
+          },
+          {
+            "question": "Which sentence uses the correct indefinite article?",
+            "options": ["Er ist ein guter Freund", "Er ist einen guten Freund", "Er ist einem guten Freund", "Er ist einer guter Freund"],
+            "correctAnswerIndex": 0,
+            "explanation": "Nominative masculine after sein requires ein"
+          },
+          {
+            "question": "What's the correct plural of 'der Bus'?",
+            "options": ["die Busse", "die Buse", "die Bus", "die Büse"],
+            "correctAnswerIndex": 0,
+            "explanation": "Busse is the plural of Bus"
+          },
+          {
+            "question": "Complete the passive: Das Essen ___ gekocht.",
+            "options": ["wird", "ist", "hat", "wurde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Present passive with wird"
+          },
+          {
+            "question": "Which relative pronoun for neuter dative?",
+            "options": ["dem", "der", "den", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dem is the dative neuter relative pronoun"
+          },
+          {
+            "question": "What's the correct superlative of 'viel'?",
+            "options": ["am meisten", "am vielsten", "vielst", "meisten"],
+            "correctAnswerIndex": 0,
+            "explanation": "Am meisten is the superlative of viel"
+          },
+          {
+            "question": "Which sentence uses the correct conditional?",
+            "options": ["Wenn ich reich wäre, würde ich reisen", "Wenn ich reich bin, würde ich reisen", "Wenn ich reich wäre, reiste ich", "Wenn ich reich wäre, ich würde reisen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Conditional sentences require Konjunktiv II in wenn-clause"
+          },
+          {
+            "question": "What's the correct preposition with 'träumen'?",
+            "options": ["von", "für", "über", "an"],
+            "correctAnswerIndex": 0,
+            "explanation": "Träumen takes von + dative"
+          },
+          {
+            "question": "Complete: Ich wünschte, er ___ hier.",
+            "options": ["wäre", "ist", "war", "würde sein"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of sein for unreal wishes"
+          },
+          {
+            "question": "Which verb is strong (irregular)?",
+            "options": ["schreiben", "machen", "sagen", "wohnen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Schreiben has irregular forms schrieb, geschrieben"
+          },
+          {
+            "question": "What's the correct adjective ending? Das ist das Auto ___ Bruders.",
+            "options": ["meines", "meine", "meinem", "meinen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Genitive masculine requires meines"
+          },
+          {
+            "question": "Which sentence uses the correct preposition case?",
+            "options": ["Ich warte auf den Bus", "Ich warte auf dem Bus", "Ich warte an den Bus", "Ich warte für den Bus"],
+            "correctAnswerIndex": 0,
+            "explanation": "Warten auf takes accusative"
+          },
+          {
+            "question": "What's the correct form of 'dürfen' in simple past?",
+            "options": ["durfte", "dürfte", "darf", "gedurft"],
+            "correctAnswerIndex": 0,
+            "explanation": "Durfte is the simple past of dürfen"
+          },
+          {
+            "question": "Which preposition always takes accusative?",
+            "options": ["ohne", "mit", "aus", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Ohne is one of the accusative prepositions"
+          },
+          {
+            "question": "Complete the relative clause: Der Mann, mit ___ ich spreche, ist mein Vater.",
+            "options": ["dem", "der", "den", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative masculine relative pronoun dem after mit"
+          },
+          {
+            "question": "What's the correct comparative of 'gern'?",
+            "options": ["lieber", "gerner", "mehr gern", "gernlicher"],
+            "correctAnswerIndex": 0,
+            "explanation": "Lieber is the comparative of gern"
+          },
+          {
+            "question": "Which sentence uses the correct participle construction?",
+            "options": ["Das gestern gekaufte Buch ist interessant", "Das gestern gekauft Buch ist interessant", "Das gestern kaufte Buch ist interessant", "Das gestern kaufende Buch ist interessant"],
+            "correctAnswerIndex": 0,
+            "explanation": "Extended attribute with past participle"
+          },
+          {
+            "question": "What's the correct preposition with 'sich verabschieden'?",
+            "options": ["von", "für", "über", "an"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich verabschieden takes von + dative"
+          },
+          {
+            "question": "Complete: Wenn ich das ___!, wäre ich glücklich.",
+            "options": ["wüsste", "weiß", "wusste", "wissen würde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of wissen"
+          },
+          {
+            "question": "Which verb uses sein in perfect tense?",
+            "options": ["sterben", "machen", "lesen", "schreiben"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sterben indicates change of state and uses sein"
+          },
+          {
+            "question": "What's the correct adjective ending? Ich sehe die ___ Häuser.",
+            "options": ["alten", "alte", "altem", "alter"],
+            "correctAnswerIndex": 0,
+            "explanation": "Accusative plural requires -en ending"
+          },
+          {
+            "question": "Which sentence has correct word order with modal verb?",
+            "options": ["Ich kann heute nicht kommen", "Ich kann nicht kommen heute", "Ich nicht kann heute kommen", "Heute ich kann nicht kommen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Modal verb comes in second position, infinitive at the end"
+          },
+          {
+            "question": "What's the correct plural of 'das Foto'?",
+            "options": ["die Fotos", "die Foto", "die Fotose", "die Fotien"],
+            "correctAnswerIndex": 0,
+            "explanation": "Fotos is the regular plural (can also be Fotografien)"
+          },
+          {
+            "question": "Complete the passive: Die Tür ___ geöffnet.",
+            "options": ["wurde", "ist", "hat", "wird"],
+            "correctAnswerIndex": 0,
+            "explanation": "Simple past passive with wurde"
+          },
+          {
+            "question": "Which relative pronoun for plural accusative?",
+            "options": ["die", "der", "den", "denen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Die is the accusative plural relative pronoun"
+          },
+          {
+            "question": "What's the correct form of 'sollen' in Konjunktiv II?",
+            "options": ["sollte", "sollte", "soll", "gesollt hätte"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sollte is the Konjunktiv II form of sollen"
+          },
+          {
+            "question": "Which preposition requires genitive?",
+            "options": ["wegen", "gegen", "durch", "ohne"],
+            "correctAnswerIndex": 0,
+            "explanation": "Wegen is one of the genitive prepositions"
+          },
+          {
+            "question": "Complete: Sie meinte, sie ___ müde.",
+            "options": ["sei", "ist", "wäre", "war"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv I for indirect speech"
+          },
+          {
+            "question": "What's the correct comparative of 'wenig'?",
+            "options": ["weniger", "weniger", "wenigere", "wenigster"],
+            "correctAnswerIndex": 0,
+            "explanation": "Weniger is the comparative of wenig"
+          },
+          {
+            "question": "Which sentence uses the correct impersonal expression?",
+            "options": ["Es gibt viele Probleme", "Es hat viele Probleme", "Es sind viele Probleme", "Es macht viele Probleme"],
+            "correctAnswerIndex": 0,
+            "explanation": "Es gibt is used for 'there is/are'"
+          },
+          {
+            "question": "What's the correct preposition with 'sich beklagen'?",
+            "options": ["über", "für", "von", "an"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich beklagen takes über + accusative"
+          },
+          {
+            "question": "Complete: ___ er doch auf mich gewartet!",
+            "options": ["Hätte", "Hättest", "Hätten", "Hat"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of haben in third person singular"
+          },
+          {
+            "question": "Which verb has a stem vowel change in du/er forms?",
+            "options": ["fahren", "machen", "sagen", "wohnen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Fahren changes a → ä in du/er forms"
+          },
+          {
+            "question": "What's the correct adjective ending? Er gibt dem ___ Kind das Spielzeug.",
+            "options": ["kleinen", "kleine", "kleinem", "kleiner"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative neuter requires -en ending"
+          },
+          {
+            "question": "Which sentence uses the correct demonstrative pronoun?",
+            "options": ["Dieser Mann ist mein Lehrer", "Diesen Mann ist mein Lehrer", "Diesem Mann ist mein Lehrer", "Dieses Mann ist mein Lehrer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Nominative masculine demonstrative pronoun"
+          },
+          {
+            "question": "What's the correct plural of 'der Kuss'?",
+            "options": ["die Küsse", "die Kusse", "die Küss", "die Küssen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Küsse is the plural with umlaut"
+          },
+          {
+            "question": "Complete the passive: Das Problem muss ___ werden.",
+            "options": ["gelöst", "lösen", "löst", "gelöst werden"],
+            "correctAnswerIndex": 0,
+            "explanation": "Passive with modal verb requires past participle"
+          },
+          {
+            "question": "Which relative pronoun for masculine genitive?",
+            "options": ["dessen", "deren", "der", "den"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dessen is the genitive masculine relative pronoun"
+          },
+          {
+            "question": "What's the correct superlative of 'gut'?",
+            "options": ["am besten", "am gutesten", "gutst", "besten"],
+            "correctAnswerIndex": 0,
+            "explanation": "Am besten is the superlative of gut"
+          },
+          {
+            "question": "Which sentence uses the correct indirect object?",
+            "options": ["Ich schenke meiner Mutter Blumen", "Ich schenke meine Mutter Blumen", "Ich schenke meinem Mutter Blumen", "Ich schenke meinen Mutter Blumen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Schenken takes dative object (recipient)"
+          },
+          {
+            "question": "What's the correct preposition with 'sich entscheiden'?",
+            "options": ["für", "um", "über", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich entscheiden takes für + accusative"
+          },
+          {
+            "question": "Complete: Wenn ich du ___, würde ich das machen.",
+            "options": ["wäre", "bin", "war", "würde sein"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of sein in hypothetical comparisons"
+          },
+          {
+            "question": "Which verb is weak (regular)?",
+            "options": ["kaufen", "essen", "lesen", "schlafen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Kaufen has regular forms kaufte, gekauft"
+          },
+          {
+            "question": "What's the correct adjective ending? Das ist die Tasche ___ Freundin.",
+            "options": ["meiner", "meine", "meinem", "meinen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Genitive feminine requires meiner"
+          },
+          {
+            "question": "Which sentence uses the correct two-way preposition with location?",
+            "options": ["Das Buch liegt auf dem Tisch", "Das Buch liegt auf den Tisch", "Das Buch liegt an dem Tisch", "Das Buch liegt in dem Tisch"],
+            "correctAnswerIndex": 0,
+            "explanation": "Auf takes dative for location (where)"
+          },
+          {
+            "question": "What's the correct form of 'wollen' in simple past?",
+            "options": ["wollte", "wollte", "will", "gewollt"],
+            "correctAnswerIndex": 0,
+            "explanation": "Wollte is the simple past of wollen"
+          },
+          {
+            "question": "Which preposition always takes dative?",
+            "options": ["zu", "durch", "für", "gegen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Zu is one of the dative prepositions"
+          },
+          {
+            "question": "Complete the relative clause: Die Frau, ___ ich helfe, ist alt.",
+            "options": ["der", "die", "den", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative feminine relative pronoun der after helfen"
+          },
+          {
+            "question": "What's the correct comparative of 'oft'?",
+            "options": ["öfter", "oftter", "mehr oft", "oftlicher"],
+            "correctAnswerIndex": 0,
+            "explanation": "Öfter is the comparative of oft"
+          },
+          {
+            "question": "Which sentence uses the correct infinitive construction?",
+            "options": ["Ich habe vor, morgen zu kommen", "Ich habe vor morgen zu kommen", "Ich habe vor, morgen kommen", "Ich vorhabe, morgen zu kommen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Vorhaben requires zu + infinitive, separated by comma"
+          },
+          {
+            "question": "What's the correct preposition with 'sich unterhalten'?",
+            "options": ["über", "für", "von", "an"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich unterhalten takes über + accusative"
+          },
+          {
+            "question": "Complete: Er behauptete, er ___ das nicht.",
+            "options": ["wisse", "weiß", "wüsste", "wusste"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv I for indirect speech with wissen"
+          },
+          {
+            "question": "Which verb uses haben in perfect tense?",
+            "options": ["studieren", "gehen", "kommen", "fahren"],
+            "correctAnswerIndex": 0,
+            "explanation": "Studieren is not a motion verb, so it uses haben"
+          },
+          {
+            "question": "What's the correct adjective ending? Ich sehe den ___ Baum.",
+            "options": ["großen", "große", "großem", "großer"],
+            "correctAnswerIndex": 0,
+            "explanation": "Accusative masculine requires -en ending"
+          },
+          {
+            "question": "Which sentence has correct word order with separable prefix?",
+            "options": ["Er kommt morgen an", "Er ankommt morgen", "Er kommt an morgen", "Morgen er kommt an"],
+            "correctAnswerIndex": 0,
+            "explanation": "Separable prefix goes to the end in main clauses"
+          },
+          {
+            "question": "What's the correct plural of 'der Chef'?",
+            "options": ["die Chefs", "die Chefe", "die Chef", "die Chefen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Chefs is the regular plural (can also be Chefs)"
+          },
+          {
+            "question": "Complete the passive: Das Buch kann ___ werden.",
+            "options": ["gelesen", "lesen", "liest", "gelesen werden"],
+            "correctAnswerIndex": 0,
+            "explanation": "Passive with modal verb requires past participle"
+          },
+          {
+            "question": "Which relative pronoun for feminine dative?",
+            "options": ["der", "die", "den", "deren"],
+            "correctAnswerIndex": 0,
+            "explanation": "Der is the dative feminine relative pronoun"
+          },
+          {
+            "question": "What's the correct form of 'mögen' in Konjunktiv II?",
+            "options": ["möchte", "mochte", "mag", "gemocht hätte"],
+            "correctAnswerIndex": 0,
+            "explanation": "Möchte is the Konjunktiv II form of mögen"
+          },
+          {
+            "question": "Which preposition requires genitive?",
+            "options": ["innerhalb", "gegen", "durch", "ohne"],
+            "correctAnswerIndex": 0,
+            "explanation": "Innerhalb is one of the genitive prepositions"
+          },
+          {
+            "question": "Complete: Er fragte, wann ich ___.",
+            "options": ["komme", "kommst", "käme", "kam"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv I for indirect questions"
+          },
+          {
+            "question": "What's the correct comparative of 'nah'?",
+            "options": ["näher", "naher", "mehr nah", "nählicher"],
+            "correctAnswerIndex": 0,
+            "explanation": "Näher is the comparative of nah"
+          },
+          {
+            "question": "Which sentence uses the correct possessive pronoun?",
+            "options": ["Das ist mein Buch", "Das ist meine Buch", "Das ist meinen Buch", "Das ist meinem Buch"],
+            "correctAnswerIndex": 0,
+            "explanation": "Nominative neuter possessive pronoun mein"
+          },
+          {
+            "question": "What's the correct preposition with 'sich freuen' for future events?",
+            "options": ["auf", "für", "über", "von"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sich freuen takes auf for anticipated future events"
+          },
+          {
+            "question": "Complete: ___ ich doch mehr Zeit!",
+            "options": ["Hätte", "Hättest", "Hätten", "Hat"],
+            "correctAnswerIndex": 0,
+            "explanation": "Konjunktiv II of haben in first person singular"
+          },
+          {
+            "question": "Which verb has irregular imperative?",
+            "options": ["sein", "machen", "sagen", "wohnen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Sein has irregular imperative forms (sei, seid, seien)"
+          },
+          {
+            "question": "What's the correct adjective ending? Sie spricht mit den ___ Kindern.",
+            "options": ["kleinen", "kleine", "kleinem", "kleiner"],
+            "correctAnswerIndex": 0,
+            "explanation": "Dative plural requires -en ending"
+          },
+          {
+            "question": "Which sentence uses the correct indefinite pronoun?",
+            "options": ["Jeder muss das wissen", "Jede muss das wissen", "Jedes muss das wissen", "Jeden muss das wissen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Jeder is the nominative masculine form"
+          },
+          {
+            "question": "What's the correct plural of 'der See' (lake)?",
+            "options": ["die Seen", "die See", "die Sees", "die Seeen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Seen is the plural of See (lake)"
+          },
+          {
+            "question": "Complete the passive: Hier ___ gearbeitet.",
+            "options": ["wird", "ist", "hat", "wurde"],
+            "correctAnswerIndex": 0,
+            "explanation": "Impersonal passive with werden"
+          },
+          {
+            "question": "Which relative pronoun for neuter accusative?",
+            "options": ["das", "der", "den", "dessen"],
+            "correctAnswerIndex": 0,
+            "explanation": "Das is the accusative neuter relative pronoun"
+          },
+          {
+            "question": "What's the correct superlative of 'bald'?",
+            "options": ["am ehesten", "am baldsten", "baldst", "ehesten"],
+            "correctAnswerIndex": 0,
+            "explanation": "Am ehesten is the superlative of bald"
+          },
+          {
+            "question": "Which sentence uses the correct conditional perfect?",
+            "options": ["Wenn ich gewusst hätte, wäre ich gekommen", "Wenn ich wüsste, wäre ich gekommen", "Wenn ich wissen würde, wäre ich gekommen", "Wenn ich gewusst hätte, kam ich"],
+            "correctAnswerIndex": 0,
+            "explanation": "Conditional perfect requires hätte + past participle in wenn-clause"
+          }
+        ]
+      
+}
+

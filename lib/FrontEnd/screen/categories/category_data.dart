@@ -15,8 +15,9 @@ class CategoryInfo {
 }
 
 /// Category Data - contains all category words
+/// Data is now loaded from JSON files via DataLoader
 class CategoryData {
-  static final List<CategoryInfo> categories = [
+  static List<CategoryInfo> categories = [
     CategoryInfo(
       name: 'Fruit Names',
       icon: Icons.apple,

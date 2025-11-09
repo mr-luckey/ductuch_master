@@ -1,0 +1,1871 @@
+[
+  {
+    "german": "Guten Morgen!",
+    "english": "Good morning!",
+    "meaning": "A common greeting used in the morning",
+    "type": "sentence"
+  },
+  {
+    "german": "der Hund",
+    "english": "the dog",
+    "meaning": "A common pet animal",
+    "type": "noun",
+    "plural": "die Hunde"
+  },
+  {
+    "german": "schnell",
+    "english": "fast/quick",
+    "meaning": "Moving or capable of moving at high speed",
+    "type": "adjective"
+  },
+  {
+    "german": "gehen",
+    "english": "to go",
+    "meaning": "To move from one place to another",
+    "type": "verb"
+  },
+  {
+    "german": "Wie geht es dir?",
+    "english": "How are you?",
+    "meaning": "A common question to ask about someone's well-being",
+    "type": "sentence"
+  },
+  {
+    "german": "die Katze",
+    "english": "the cat",
+    "meaning": "A common pet animal",
+    "type": "noun",
+    "plural": "die Katzen"
+  },
+  {
+    "german": "langsam",
+    "english": "slow",
+    "meaning": "Moving or operating at low speed",
+    "type": "adjective"
+  },
+  {
+    "german": "kommen",
+    "english": "to come",
+    "meaning": "To move toward or arrive at a place",
+    "type": "verb"
+  },
+  {
+    "german": "Ich verstehe nicht",
+    "english": "I don't understand",
+    "meaning": "Useful when you need clarification",
+    "type": "sentence"
+  },
+  {
+    "german": "das Haus",
+    "english": "the house",
+    "meaning": "A building for living in",
+    "type": "noun",
+    "plural": "die Häuser"
+  },
+  {
+    "german": "groß",
+    "english": "big/large",
+    "meaning": "Of considerable size or extent",
+    "type": "adjective"
+  },
+  {
+    "german": "sprechen",
+    "english": "to speak",
+    "meaning": "To talk or communicate verbally",
+    "type": "verb"
+  },
+  {
+    "german": "Wo ist die Toilette?",
+    "english": "Where is the bathroom?",
+    "meaning": "A useful question when you need to find a restroom",
+    "type": "sentence"
+  },
+  {
+    "german": "das Auto",
+    "english": "the car",
+    "meaning": "A road vehicle with an engine",
+    "type": "noun",
+    "plural": "die Autos"
+  },
+  {
+    "german": "klein",
+    "english": "small/little",
+    "meaning": "Of limited size or extent",
+    "type": "adjective"
+  },
+  {
+    "german": "essen",
+    "english": "to eat",
+    "meaning": "To consume food",
+    "type": "verb"
+  },
+  {
+    "german": "Wie viel kostet das?",
+    "english": "How much does this cost?",
+    "meaning": "Asking for the price of something",
+    "type": "sentence"
+  },
+  {
+    "german": "das Buch",
+    "english": "the book",
+    "meaning": "A written or printed work",
+    "type": "noun",
+    "plural": "die Bücher"
+  },
+  {
+    "german": "schön",
+    "english": "beautiful/pretty",
+    "meaning": "Pleasing the senses or mind aesthetically",
+    "type": "adjective"
+  },
+  {
+    "german": "trinken",
+    "english": "to drink",
+    "meaning": "To consume liquid",
+    "type": "verb"
+  },
+  {
+    "german": "Entschuldigung!",
+    "english": "Excuse me!/Sorry!",
+    "meaning": "Used to get attention or apologize",
+    "type": "sentence"
+  },
+  {
+    "german": "die Stadt",
+    "english": "the city",
+    "meaning": "A large human settlement",
+    "type": "noun",
+    "plural": "die Städte"
+  },
+  {
+    "german": "gut",
+    "english": "good",
+    "meaning": "Of high quality or standard",
+    "type": "adjective"
+  },
+  {
+    "german": "schlafen",
+    "english": "to sleep",
+    "meaning": "To rest in a state of natural unconsciousness",
+    "type": "verb"
+  },
+  {
+    "german": "Vielen Dank!",
+    "english": "Thank you very much!",
+    "meaning": "A polite way to express gratitude",
+    "type": "sentence"
+  },
+  {
+    "german": "der Tisch",
+    "english": "the table",
+    "meaning": "A piece of furniture with a flat top",
+    "type": "noun",
+    "plural": "die Tische"
+  },
+  {
+    "german": "schlecht",
+    "english": "bad",
+    "meaning": "Of poor quality or low standard",
+    "type": "adjective"
+  },
+  {
+    "german": "arbeiten",
+    "english": "to work",
+    "meaning": "To engage in physical or mental activity",
+    "type": "verb"
+  },
+  {
+    "german": "Ich habe Hunger",
+    "english": "I am hungry",
+    "meaning": "Expressing that you need to eat",
+    "type": "sentence"
+  },
+  {
+    "german": "das Wasser",
+    "english": "the water",
+    "meaning": "A clear liquid essential for life",
+    "type": "noun",
+    "plural": "die Wasser"
+  },
+  {
+    "german": "teuer",
+    "english": "expensive",
+    "meaning": "Costing a lot of money",
+    "type": "adjective"
+  },
+  {
+    "german": "lernen",
+    "english": "to learn",
+    "meaning": "To acquire knowledge or skill",
+    "type": "verb"
+  },
+  {
+    "german": "Ich komme aus Amerika",
+    "english": "I come from America",
+    "meaning": "Stating your country of origin",
+    "type": "sentence"
+  },
+  {
+    "german": "die Zeit",
+    "english": "the time",
+    "meaning": "The indefinite continued progress of existence",
+    "type": "noun",
+    "plural": "die Zeiten"
+  },
+  {
+    "german": "billig",
+    "english": "cheap",
+    "meaning": "Low in price",
+    "type": "adjective"
+  },
+  {
+    "german": "lesen",
+    "english": "to read",
+    "meaning": "To look at and comprehend written matter",
+    "type": "verb"
+  },
+  {
+    "german": "Wie spät ist es?",
+    "english": "What time is it?",
+    "meaning": "Asking for the current time",
+    "type": "sentence"
+  },
+  {
+    "german": "das Kind",
+    "english": "the child",
+    "meaning": "A young human being",
+    "type": "noun",
+    "plural": "die Kinder"
+  },
+  {
+    "german": "alt",
+    "english": "old",
+    "meaning": "Having lived for a long time",
+    "type": "adjective"
+  },
+  {
+    "german": "schreiben",
+    "english": "to write",
+    "meaning": "To mark letters, words, or symbols",
+    "type": "verb"
+  },
+  {
+    "german": "Sprechen Sie Englisch?",
+    "english": "Do you speak English?",
+    "meaning": "Asking if someone can communicate in English",
+    "type": "sentence"
+  },
+  {
+    "german": "die Arbeit",
+    "english": "the work",
+    "meaning": "Activity involving mental or physical effort",
+    "type": "noun",
+    "plural": "die Arbeiten"
+  },
+  {
+    "german": "neu",
+    "english": "new",
+    "meaning": "Not existing before",
+    "type": "adjective"
+  },
+  {
+    "german": "machen",
+    "english": "to make/do",
+    "meaning": "To create or perform something",
+    "type": "verb"
+  },
+  {
+    "german": "Ich heiße Maria",
+    "english": "My name is Maria",
+    "meaning": "A way to introduce yourself",
+    "type": "sentence"
+  },
+  {
+    "german": "das Essen",
+    "english": "the food",
+    "meaning": "Any nutritious substance that people eat",
+    "type": "noun",
+    "plural": "die Essen"
+  },
+  {
+    "german": "jung",
+    "english": "young",
+    "meaning": "Having lived or existed for only a short time",
+    "type": "adjective"
+  },
+  {
+    "german": "kaufen",
+    "english": "to buy",
+    "meaning": "To acquire something in exchange for payment",
+    "type": "verb"
+  },
+  {
+    "german": "Wo wohnst du?",
+    "english": "Where do you live?",
+    "meaning": "Asking about someone's residence",
+    "type": "sentence"
+  },
+  {
+    "german": "das Geld",
+    "english": "the money",
+    "meaning": "A medium of exchange",
+    "type": "noun",
+    "plural": "die Gelder"
+  },
+  {
+    "german": "heiß",
+    "english": "hot",
+    "meaning": "Having a high temperature",
+    "type": "adjective"
+  },
+  {
+    "german": "verkaufen",
+    "english": "to sell",
+    "meaning": "To give something in exchange for money",
+    "type": "verb"
+  },
+  {
+    "german": "Ich bin müde",
+    "english": "I am tired",
+    "meaning": "Expressing fatigue",
+    "type": "sentence"
+  },
+  {
+    "german": "die Familie",
+    "english": "the family",
+    "meaning": "A group of related people",
+    "type": "noun",
+    "plural": "die Familien"
+  },
+  {
+    "german": "kalt",
+    "english": "cold",
+    "meaning": "Having a low temperature",
+    "type": "adjective"
+  },
+  {
+    "german": "wohnen",
+    "english": "to live/reside",
+    "meaning": "To have one's home in a particular place",
+    "type": "verb"
+  },
+  {
+    "german": "Das ist gut",
+    "english": "That is good",
+    "meaning": "Expressing approval",
+    "type": "sentence"
+  },
+  {
+    "german": "der Freund",
+    "english": "the friend (male)",
+    "meaning": "A person whom one knows and likes",
+    "type": "noun",
+    "plural": "die Freunde"
+  },
+  {
+    "german": "schwierig",
+    "english": "difficult",
+    "meaning": "Needing much effort or skill to accomplish",
+    "type": "adjective"
+  },
+  {
+    "german": "verstehen",
+    "english": "to understand",
+    "meaning": "To comprehend the meaning of something",
+    "type": "verb"
+  },
+  {
+    "german": "Das ist schlecht",
+    "english": "That is bad",
+    "meaning": "Expressing disapproval",
+    "type": "sentence"
+  },
+  {
+    "german": "die Freundin",
+    "english": "the friend (female)",
+    "meaning": "A female person whom one knows and likes",
+    "type": "noun",
+    "plural": "die Freundinnen"
+  },
+  {
+    "german": "einfach",
+    "english": "easy/simple",
+    "meaning": "Achieved without great effort",
+    "type": "adjective"
+  },
+  {
+    "german": "fahren",
+    "english": "to drive/travel",
+    "meaning": "To operate and control a vehicle",
+    "type": "verb"
+  },
+  {
+    "german": "Kannst du das wiederholen?",
+    "english": "Can you repeat that?",
+    "meaning": "Asking someone to say something again",
+    "type": "sentence"
+  },
+  {
+    "german": "das Problem",
+    "english": "the problem",
+    "meaning": "A matter regarded as unwelcome",
+    "type": "noun",
+    "plural": "die Probleme"
+  },
+  {
+    "german": "wichtig",
+    "english": "important",
+    "meaning": "Of great significance or value",
+    "type": "adjective"
+  },
+  {
+    "german": "sehen",
+    "english": "to see",
+    "meaning": "To perceive with the eyes",
+    "type": "verb"
+  },
+  {
+    "german": "Ich weiß nicht",
+    "english": "I don't know",
+    "meaning": "Expressing lack of knowledge",
+    "type": "sentence"
+  },
+  {
+    "german": "die Lösung",
+    "english": "the solution",
+    "meaning": "A means of solving a problem",
+    "type": "noun",
+    "plural": "die Lösungen"
+  },
+  {
+    "german": "interessant",
+    "english": "interesting",
+    "meaning": "Arousing curiosity or interest",
+    "type": "adjective"
+  },
+  {
+    "german": "hören",
+    "english": "to hear",
+    "meaning": "To perceive sound with the ears",
+    "type": "verb"
+  },
+  {
+    "german": "Es tut mir leid",
+    "english": "I'm sorry",
+    "meaning": "Apologizing for something",
+    "type": "sentence"
+  },
+  {
+    "german": "die Frage",
+    "english": "the question",
+    "meaning": "A sentence worded to elicit information",
+    "type": "noun",
+    "plural": "die Fragen"
+  },
+  {
+    "german": "langweilig",
+    "english": "boring",
+    "meaning": "Not interesting or exciting",
+    "type": "adjective"
+  },
+  {
+    "german": "fragen",
+    "english": "to ask",
+    "meaning": "To say something to obtain information",
+    "type": "verb"
+  },
+  {
+    "german": "Kein Problem",
+    "english": "No problem",
+    "meaning": "A casual response to an apology or request",
+    "type": "sentence"
+  },
+  {
+    "german": "die Antwort",
+    "english": "the answer",
+    "meaning": "A response to a question",
+    "type": "noun",
+    "plural": "die Antworten"
+  },
+  {
+    "german": "sauber",
+    "english": "clean",
+    "meaning": "Free from dirt or impurities",
+    "type": "adjective"
+  },
+  {
+    "german": "antworten",
+    "english": "to answer",
+    "meaning": "To respond to a question",
+    "type": "verb"
+  },
+  {
+    "german": "Alles Gute zum Geburtstag!",
+    "english": "Happy Birthday!",
+    "meaning": "The standard birthday greeting",
+    "type": "sentence"
+  },
+  {
+    "german": "der Geburtstag",
+    "english": "the birthday",
+    "meaning": "The anniversary of the day on which a person was born",
+    "type": "noun",
+    "plural": "die Geburtstage"
+  },
+  {
+    "german": "schmutzig",
+    "english": "dirty",
+    "meaning": "Covered or marked with an unclean substance",
+    "type": "adjective"
+  },
+  {
+    "german": "feiern",
+    "english": "to celebrate",
+    "meaning": "To acknowledge a significant event",
+    "type": "verb"
+  },
+  {
+    "german": "Frohe Weihnachten!",
+    "english": "Merry Christmas!",
+    "meaning": "Christmas greeting",
+    "type": "sentence"
+  },
+  {
+    "german": "das Geschenk",
+    "english": "the gift",
+    "meaning": "A thing given willingly to someone without payment",
+    "type": "noun",
+    "plural": "die Geschenke"
+  },
+  {
+    "german": "glücklich",
+    "english": "happy",
+    "meaning": "Feeling or showing pleasure or contentment",
+    "type": "adjective"
+  },
+  {
+    "german": "schenken",
+    "english": "to give (as a gift)",
+    "meaning": "To give something as a present",
+    "type": "verb"
+  },
+  {
+    "german": "Guten Appetit!",
+    "english": "Enjoy your meal!",
+    "meaning": "Said before eating a meal",
+    "type": "sentence"
+  },
+  {
+    "german": "das Restaurant",
+    "english": "the restaurant",
+    "meaning": "A place where meals are served to customers",
+    "type": "noun",
+    "plural": "die Restaurants"
+  },
+  {
+    "german": "traurig",
+    "english": "sad",
+    "meaning": "Feeling or showing sorrow",
+    "type": "adjective"
+  },
+  {
+    "german": "bestellen",
+    "english": "to order",
+    "meaning": "To request something to be made or supplied",
+    "type": "verb"
+  },
+  {
+    "german": "Prost!",
+    "english": "Cheers!",
+    "meaning": "Said when clinking glasses for a toast",
+    "type": "sentence"
+  },
+  {
+    "german": "das Bier",
+    "english": "the beer",
+    "meaning": "An alcoholic drink made from malt and hops",
+    "type": "noun",
+    "plural": "die Biere"
+  },
+  {
+    "german": "voll",
+    "english": "full",
+    "meaning": "Containing or holding as much as possible",
+    "type": "adjective"
+  },
+  {
+    "german": "bezahlen",
+    "english": "to pay",
+    "meaning": "To give money for goods or services",
+    "type": "verb"
+  },
+  {
+    "german": "Zahlen, bitte!",
+    "english": "Check, please!",
+    "meaning": "Asking for the bill in a restaurant",
+    "type": "sentence"
+  },
+  {
+    "german": "die Rechnung",
+    "english": "the bill",
+    "meaning": "A statement of money owed",
+    "type": "noun",
+    "plural": "die Rechnungen"
+  },
+  {
+    "german": "leer",
+    "english": "empty",
+    "meaning": "Containing nothing",
+    "type": "adjective"
+  },
+  {
+    "german": "kosten",
+    "english": "to cost",
+    "meaning": "To require payment of a specified price",
+    "type": "verb"
+  },
+  {
+    "german": "Ich habe Durst",
+    "english": "I am thirsty",
+    "meaning": "Expressing need for a drink",
+    "type": "sentence"
+  },
+  {
+    "german": "das Wasser",
+    "english": "the water",
+    "meaning": "A clear liquid essential for life",
+    "type": "noun",
+    "plural": "die Wasser"
+  },
+  {
+    "german": "durstig",
+    "english": "thirsty",
+    "meaning": "Feeling a need to drink",
+    "type": "adjective"
+  },
+  {
+    "german": "hungrig",
+    "english": "hungry",
+    "meaning": "Feeling a need to eat",
+    "type": "adjective"
+  },
+  {
+    "german": "Ich liebe dich",
+    "english": "I love you",
+    "meaning": "A strong declaration of affection",
+    "type": "sentence"
+  },
+  {
+    "german": "die Liebe",
+    "english": "the love",
+    "meaning": "An intense feeling of deep affection",
+    "type": "noun",
+    "plural": "die Liebe"
+  },
+  {
+    "german": "lieben",
+    "english": "to love",
+    "meaning": "To feel deep affection for someone",
+    "type": "verb"
+  },
+  {
+    "german": "Ich vermisse dich",
+    "english": "I miss you",
+    "meaning": "Telling someone you miss them",
+    "type": "sentence"
+  },
+  {
+    "german": "der Tag",
+    "english": "the day",
+    "meaning": "A period of 24 hours",
+    "type": "noun",
+    "plural": "die Tage"
+  },
+  {
+    "german": "täglich",
+    "english": "daily",
+    "meaning": "Done, produced, or occurring every day",
+    "type": "adjective"
+  },
+  {
+    "german": "leben",
+    "english": "to live",
+    "meaning": "To remain alive",
+    "type": "verb"
+  },
+  {
+    "german": "Gute Nacht!",
+    "english": "Good night!",
+    "meaning": "Said before going to sleep",
+    "type": "sentence"
+  },
+  {
+    "german": "die Nacht",
+    "english": "the night",
+    "meaning": "The period of darkness in each 24 hours",
+    "type": "noun",
+    "plural": "die Nächte"
+  },
+  {
+    "german": "nächtlich",
+    "english": "nocturnal",
+    "meaning": "Done, occurring, or active at night",
+    "type": "adjective"
+  },
+  {
+    "german": "träumen",
+    "english": "to dream",
+    "meaning": "To experience dreams during sleep",
+    "type": "verb"
+  },
+  {
+    "german": "Auf Wiedersehen!",
+    "english": "Goodbye!",
+    "meaning": "A formal way to say goodbye",
+    "type": "sentence"
+  },
+  {
+    "german": "der Abschied",
+    "english": "the farewell",
+    "meaning": "An act of parting or leaving",
+    "type": "noun",
+    "plural": "die Abschiede"
+  },
+  {
+    "german": "endgültig",
+    "english": "final",
+    "meaning": "Not able to be changed or reversed",
+    "type": "adjective"
+  },
+  {
+    "german": "verlassen",
+    "english": "to leave/abandon",
+    "meaning": "To go away from",
+    "type": "verb"
+  },
+  {
+    "german": "Bis später!",
+    "english": "See you later!",
+    "meaning": "Used when you expect to see the person again later",
+    "type": "sentence"
+  },
+  {
+    "german": "die Zukunft",
+    "english": "the future",
+    "meaning": "The time or period following the present",
+    "type": "noun",
+    "plural": "die Zukunft"
+  },
+  {
+    "german": "zukünftig",
+    "english": "future",
+    "meaning": "Occurring in or relating to the future",
+    "type": "adjective"
+  },
+  {
+    "german": "planen",
+    "english": "to plan",
+    "meaning": "To decide on and arrange in advance",
+    "type": "verb"
+  },
+  {
+    "german": "Viel Glück!",
+    "english": "Good luck!",
+    "meaning": "Wishing someone luck",
+    "type": "sentence"
+  },
+  {
+    "german": "das Glück",
+    "english": "the luck/happiness",
+    "meaning": "Success or failure brought by chance",
+    "type": "noun",
+    "plural": "die Glücke"
+  },
+  {
+    "german": "glücklich",
+    "english": "lucky/happy",
+    "meaning": "Having or bringing good luck",
+    "type": "adjective"
+  },
+  {
+    "german": "gewinnen",
+    "english": "to win",
+    "meaning": "To be successful in a contest or conflict",
+    "type": "verb"
+  },
+  {
+    "german": "Herzlichen Glückwunsch!",
+    "english": "Congratulations!",
+    "meaning": "Congratulating someone on an achievement",
+    "type": "sentence"
+  },
+  {
+    "german": "der Erfolg",
+    "english": "the success",
+    "meaning": "The accomplishment of an aim or purpose",
+    "type": "noun",
+    "plural": "die Erfolge"
+  },
+  {
+    "german": "erfolgreich",
+    "english": "successful",
+    "meaning": "Accomplishing a desired aim or result",
+    "type": "adjective"
+  },
+  {
+    "german": "gelingen",
+    "english": "to succeed",
+    "meaning": "To achieve the desired aim or result",
+    "type": "verb"
+  },
+  {
+    "german": "Alles klar!",
+    "english": "All clear!/Okay!",
+    "meaning": "Expressing understanding or agreement",
+    "type": "sentence"
+  },
+  {
+    "german": "die Klarheit",
+    "english": "the clarity",
+    "meaning": "The quality of being clear and understandable",
+    "type": "noun",
+    "plural": "die Klarheit"
+  },
+  {
+    "german": "klar",
+    "english": "clear",
+    "meaning": "Easy to perceive, understand, or interpret",
+    "type": "adjective"
+  },
+  {
+    "german": "erklären",
+    "english": "to explain",
+    "meaning": "To make clear or understandable",
+    "type": "verb"
+  },
+  {
+    "german": "Das ist fantastisch!",
+    "english": "That is fantastic!",
+    "meaning": "Expressing great enthusiasm",
+    "type": "sentence"
+  },
+  {
+    "german": "die Fantasie",
+    "english": "the fantasy",
+    "meaning": "The faculty or activity of imagining things",
+    "type": "noun",
+    "plural": "die Fantasien"
+  },
+  {
+    "german": "fantastisch",
+    "english": "fantastic",
+    "meaning": "Extraordinarily good or attractive",
+    "type": "adjective"
+  },
+  {
+    "german": "vorstellen",
+    "english": "to imagine/introduce",
+    "meaning": "To form a mental image or concept of",
+    "type": "verb"
+  },
+  {
+    "german": "Es regnet",
+    "english": "It is raining",
+    "meaning": "Stating current weather condition",
+    "type": "sentence"
+  },
+  {
+    "german": "der Regen",
+    "english": "the rain",
+    "meaning": "Moisture condensed from the atmosphere falling in drops",
+    "type": "noun",
+    "plural": "die Regen"
+  },
+  {
+    "german": "regnerisch",
+    "english": "rainy",
+    "meaning": "Having a lot of rain",
+    "type": "adjective"
+  },
+  {
+    "german": "regnen",
+    "english": "to rain",
+    "meaning": "To have rain falling from the clouds",
+    "type": "verb"
+  },
+  {
+    "german": "Es ist kalt",
+    "english": "It is cold",
+    "meaning": "Describing the temperature",
+    "type": "sentence"
+  },
+  {
+    "german": "die Kälte",
+    "english": "the cold",
+    "meaning": "The absence of heat",
+    "type": "noun",
+    "plural": "die Kälte"
+  },
+  {
+    "german": "kalt",
+    "english": "cold",
+    "meaning": "Of or at a low temperature",
+    "type": "adjective"
+  },
+  {
+    "german": "frieren",
+    "english": "to freeze/feel cold",
+    "meaning": "To be very cold",
+    "type": "verb"
+  },
+  {
+    "german": "Es ist warm",
+    "english": "It is warm",
+    "meaning": "Describing pleasant temperature",
+    "type": "sentence"
+  },
+  {
+    "german": "die Wärme",
+    "english": "the warmth",
+    "meaning": "The quality, state, or sensation of being warm",
+    "type": "noun",
+    "plural": "die Wärme"
+  },
+  {
+    "german": "warm",
+    "english": "warm",
+    "meaning": "Of or at a fairly or comfortably high temperature",
+    "type": "adjective"
+  },
+  {
+    "german": "wärmen",
+    "english": "to warm",
+    "meaning": "To make or become warm",
+    "type": "verb"
+  },
+  {
+    "german": "Ich bin krank",
+    "english": "I am sick",
+    "meaning": "Stating that you are ill",
+    "type": "sentence"
+  },
+  {
+    "german": "die Krankheit",
+    "english": "the illness",
+    "meaning": "A disease or period of sickness",
+    "type": "noun",
+    "plural": "die Krankheiten"
+  },
+  {
+    "german": "krank",
+    "english": "sick/ill",
+    "meaning": "Affected by physical or mental illness",
+    "type": "adjective"
+  },
+  {
+    "german": "erkranken",
+    "english": "to fall ill",
+    "meaning": "To become sick",
+    "type": "verb"
+  },
+  {
+    "german": "Gute Besserung!",
+    "english": "Get well soon!",
+    "meaning": "Wishing someone a speedy recovery",
+    "type": "sentence"
+  },
+  {
+    "german": "die Gesundheit",
+    "english": "the health",
+    "meaning": "The state of being free from illness",
+    "type": "noun",
+    "plural": "die Gesundheit"
+  },
+  {
+    "german": "gesund",
+    "english": "healthy",
+    "meaning": "In good health",
+    "type": "adjective"
+  },
+  {
+    "german": "heilen",
+    "english": "to heal",
+    "meaning": "To become sound or healthy again",
+    "type": "verb"
+  },
+  {
+    "german": "Ich habe Kopfschmerzen",
+    "english": "I have a headache",
+    "meaning": "Stating a common ailment",
+    "type": "sentence"
+  },
+  {
+    "german": "der Schmerz",
+    "english": "the pain",
+    "meaning": "Physical suffering or discomfort",
+    "type": "noun",
+    "plural": "die Schmerzen"
+  },
+  {
+    "german": "schmerzhaft",
+    "english": "painful",
+    "meaning": "Causing physical pain",
+    "type": "adjective"
+  },
+  {
+    "german": "schmerzen",
+    "english": "to hurt",
+    "meaning": "To cause physical pain or injury",
+    "type": "verb"
+  },
+  {
+    "german": "Wo ist der Bahnhof?",
+    "english": "Where is the train station?",
+    "meaning": "Asking for directions to the station",
+    "type": "sentence"
+  },
+  {
+    "german": "der Bahnhof",
+    "english": "the train station",
+    "meaning": "A place where trains stop",
+    "type": "noun",
+    "plural": "die Bahnhöfe"
+  },
+  {
+    "german": "nah",
+    "english": "near/close",
+    "meaning": "At a short distance away",
+    "type": "adjective"
+  },
+  {
+    "german": "ankommen",
+    "english": "to arrive",
+    "meaning": "To reach a destination",
+    "type": "verb"
+  },
+  {
+    "german": "Wann fährt der Zug?",
+    "english": "When does the train leave?",
+    "meaning": "Asking for departure time",
+    "type": "sentence"
+  },
+  {
+    "german": "der Zug",
+    "english": "the train",
+    "meaning": "A series of connected railway cars",
+    "type": "noun",
+    "plural": "die Züge"
+  },
+  {
+    "german": "pünktlich",
+    "english": "punctual",
+    "meaning": "Happening or doing something at the agreed time",
+    "type": "adjective"
+  },
+  {
+    "german": "abfahren",
+    "english": "to depart",
+    "meaning": "To leave, especially to start a journey",
+    "type": "verb"
+  },
+  {
+    "german": "Einmal Berlin, bitte",
+    "english": "One ticket to Berlin, please",
+    "meaning": "Purchasing a train ticket",
+    "type": "sentence"
+  },
+  {
+    "german": "die Fahrkarte",
+    "english": "the ticket",
+    "meaning": "A piece of paper giving right to travel",
+    "type": "noun",
+    "plural": "die Fahrkarten"
+  },
+  {
+    "german": "einfach",
+    "english": "one-way",
+    "meaning": "Valid for an outward journey only",
+    "type": "adjective"
+  },
+  {
+    "german": "reisen",
+    "english": "to travel",
+    "meaning": "To make a journey",
+    "type": "verb"
+  },
+  {
+    "german": "Ich habe mich verlaufen",
+    "english": "I am lost",
+    "meaning": "Stating that you don't know where you are",
+    "type": "sentence"
+  },
+  {
+    "german": "der Weg",
+    "english": "the way/path",
+    "meaning": "A route, course, or track",
+    "type": "noun",
+    "plural": "die Wege"
+  },
+  {
+    "german": "verloren",
+    "english": "lost",
+    "meaning": "Unable to find one's way",
+    "type": "adjective"
+  },
+  {
+    "german": "sich verirren",
+    "english": "to get lost",
+    "meaning": "To lose one's way",
+    "type": "verb"
+  },
+  {
+    "german": "Kannst du mir helfen?",
+    "english": "Can you help me?",
+    "meaning": "Asking for assistance",
+    "type": "sentence"
+  },
+  {
+    "german": "die Hilfe",
+    "english": "the help",
+    "meaning": "Assistance or support",
+    "type": "noun",
+    "plural": "die Hilfen"
+  },
+  {
+    "german": "hilfreich",
+    "english": "helpful",
+    "meaning": "Giving or ready to give help",
+    "type": "adjective"
+  },
+  {
+    "german": "helfen",
+    "english": "to help",
+    "meaning": "To make it easier for someone to do something",
+    "type": "verb"
+  },
+  {
+    "german": "Danke für deine Hilfe",
+    "english": "Thank you for your help",
+    "meaning": "Expressing gratitude for assistance",
+    "type": "sentence"
+  },
+  {
+    "german": "der Dank",
+    "english": "the thanks",
+    "meaning": "The expression of gratitude",
+    "type": "noun",
+    "plural": "die Dank"
+  },
+  {
+    "german": "dankbar",
+    "english": "thankful/grateful",
+    "meaning": "Pleased and relieved",
+    "type": "adjective"
+  },
+  {
+    "german": "danken",
+    "english": "to thank",
+    "meaning": "To express gratitude",
+    "type": "verb"
+  },
+  {
+    "german": "Bitte schön!",
+    "english": "You're welcome!",
+    "meaning": "Polite response to thank you",
+    "type": "sentence"
+  },
+  {
+    "german": "die Höflichkeit",
+    "english": "the politeness",
+    "meaning": "Behavior that is respectful and considerate",
+    "type": "noun",
+    "plural": "die Höflichkeit"
+  },
+  {
+    "german": "höflich",
+    "english": "polite",
+    "meaning": "Having or showing behavior that is respectful",
+    "type": "adjective"
+  },
+  {
+    "german": "grüßen",
+    "english": "to greet",
+    "meaning": "To give a word or sign of welcome",
+    "type": "verb"
+  },
+  {
+    "german": "Was machst du beruflich?",
+    "english": "What do you do for a living?",
+    "meaning": "Asking about someone's profession",
+    "type": "sentence"
+  },
+  {
+    "german": "der Beruf",
+    "english": "the profession",
+    "meaning": "A paid occupation",
+    "type": "noun",
+    "plural": "die Berufe"
+  },
+  {
+    "german": "beruflich",
+    "english": "professional",
+    "meaning": "Relating to or connected with a profession",
+    "type": "adjective"
+  },
+  {
+    "german": "arbeiten",
+    "english": "to work",
+    "meaning": "To have a job",
+    "type": "verb"
+  },
+  {
+    "german": "Ich bin Lehrer",
+    "english": "I am a teacher (male)",
+    "meaning": "Stating your profession",
+    "type": "sentence"
+  },
+  {
+    "german": "der Lehrer",
+    "english": "the teacher (male)",
+    "meaning": "A person who teaches",
+    "type": "noun",
+    "plural": "die Lehrer"
+  },
+  {
+    "german": "lehrreich",
+    "english": "instructive",
+    "meaning": "Providing knowledge or information",
+    "type": "adjective"
+  },
+  {
+    "german": "lehren",
+    "english": "to teach",
+    "meaning": "To impart knowledge or skill",
+    "type": "verb"
+  },
+  {
+    "german": "Ich studiere",
+    "english": "I am a university student",
+    "meaning": "Stating that you are a student",
+    "type": "sentence"
+  },
+  {
+    "german": "das Studium",
+    "english": "the studies",
+    "meaning": "The devotion of time and attention to gaining knowledge",
+    "type": "noun",
+    "plural": "die Studien"
+  },
+  {
+    "german": "studentisch",
+    "english": "student (adj.)",
+    "meaning": "Relating to students",
+    "type": "adjective"
+  },
+  {
+    "german": "studieren",
+    "english": "to study (at university)",
+    "meaning": "To devote time and attention to learning",
+    "type": "verb"
+  },
+  {
+    "german": "Was sind deine Hobbys?",
+    "english": "What are your hobbies?",
+    "meaning": "Asking about someone's interests",
+    "type": "sentence"
+  },
+  {
+    "german": "das Hobby",
+    "english": "the hobby",
+    "meaning": "An activity done regularly for pleasure",
+    "type": "noun",
+    "plural": "die Hobbys"
+  },
+  {
+    "german": "hobbyhaft",
+    "english": "amateur",
+    "meaning": "Engaged in as a hobby",
+    "type": "adjective"
+  },
+  {
+    "german": "sammeln",
+    "english": "to collect",
+    "meaning": "To bring together or accumulate",
+    "type": "verb"
+  },
+  {
+    "german": "Ich lese gern",
+    "english": "I like to read",
+    "meaning": "Stating a hobby",
+    "type": "sentence"
+  },
+  {
+    "german": "das Buch",
+    "english": "the book",
+    "meaning": "A written or printed work",
+    "type": "noun",
+    "plural": "die Bücher"
+  },
+  {
+    "german": "lesenswert",
+    "english": "worth reading",
+    "meaning": "Good enough to be read",
+    "type": "adjective"
+  },
+  {
+    "german": "lesen",
+    "english": "to read",
+    "meaning": "To look at and comprehend written matter",
+    "type": "verb"
+  },
+  {
+    "german": "Ich höre Musik",
+    "english": "I listen to music",
+    "meaning": "Stating an activity you enjoy",
+    "type": "sentence"
+  },
+  {
+    "german": "die Musik",
+    "english": "the music",
+    "meaning": "Vocal or instrumental sounds",
+    "type": "noun",
+    "plural": "die Musiken"
+  },
+  {
+    "german": "musikalisch",
+    "english": "musical",
+    "meaning": "Related to or having talent for music",
+    "type": "adjective"
+  },
+  {
+    "german": "hören",
+    "english": "to listen",
+    "meaning": "To give attention to sound",
+    "type": "verb"
+  },
+  {
+    "german": "Ich sehe fern",
+    "english": "I watch TV",
+    "meaning": "Stating an activity you enjoy",
+    "type": "sentence"
+  },
+  {
+    "german": "der Fernseher",
+    "english": "the television",
+    "meaning": "A device for receiving broadcast signals",
+    "type": "noun",
+    "plural": "die Fernseher"
+  },
+  {
+    "german": "unterhaltsam",
+    "english": "entertaining",
+    "meaning": "Providing amusement or enjoyment",
+    "type": "adjective"
+  },
+  {
+    "german": "ansehen",
+    "english": "to watch",
+    "meaning": "To look at or view",
+    "type": "verb"
+  },
+  {
+    "german": "Ich spiele Fußball",
+    "english": "I play soccer",
+    "meaning": "Stating a sport you play",
+    "type": "sentence"
+  },
+  {
+    "german": "der Sport",
+    "english": "the sport",
+    "meaning": "Physical activity for competition",
+    "type": "noun",
+    "plural": "die Sporte"
+  },
+  {
+    "german": "sportlich",
+    "english": "athletic",
+    "meaning": "Relating to or interested in sports",
+    "type": "adjective"
+  },
+  {
+    "german": "spielen",
+    "english": "to play",
+    "meaning": "To engage in activity for enjoyment",
+    "type": "verb"
+  },
+  {
+    "german": "Magst du Sport?",
+    "english": "Do you like sports?",
+    "meaning": "Asking about an interest in sports",
+    "type": "sentence"
+  },
+  {
+    "german": "das Interesse",
+    "english": "the interest",
+    "meaning": "The feeling of wanting to know about something",
+    "type": "noun",
+    "plural": "die Interessen"
+  },
+  {
+    "german": "interessiert",
+    "english": "interested",
+    "meaning": "Showing curiosity or concern about something",
+    "type": "adjective"
+  },
+  {
+    "german": "mögen",
+    "english": "to like",
+    "meaning": "To find agreeable, enjoyable, or satisfactory",
+    "type": "verb"
+  },
+  {
+    "german": "Das gefällt mir",
+    "english": "I like that",
+    "meaning": "Expressing that something pleases you",
+    "type": "sentence"
+  },
+  {
+    "german": "der Geschmack",
+    "english": "the taste",
+    "meaning": "The sensation of flavor perceived in the mouth",
+    "type": "noun",
+    "plural": "die Geschmäcker"
+  },
+  {
+    "german": "geschmackvoll",
+    "english": "tasteful",
+    "meaning": "Showing good aesthetic judgment",
+    "type": "adjective"
+  },
+  {
+    "german": "gefallen",
+    "english": "to please/appeal to",
+    "meaning": "To be attractive or interesting to someone",
+    "type": "verb"
+  },
+  {
+    "german": "Das gefällt mir nicht",
+    "english": "I don't like that",
+    "meaning": "Expressing that something does not please you",
+    "type": "sentence"
+  },
+  {
+    "german": "die Abneigung",
+    "english": "the dislike",
+    "meaning": "A feeling of distaste or hostility",
+    "type": "noun",
+    "plural": "die Abneigungen"
+  },
+  {
+    "german": "unangenehm",
+    "english": "unpleasant",
+    "meaning": "Causing discomfort or unease",
+    "type": "adjective"
+  },
+  {
+    "german": "ablehnen",
+    "english": "to reject",
+    "meaning": "To refuse to accept or consider",
+    "type": "verb"
+  },
+  {
+    "german": "Ich habe keine Ahnung",
+    "english": "I have no idea",
+    "meaning": "Expressing complete lack of knowledge",
+    "type": "sentence"
+  },
+  {
+    "german": "die Ahnung",
+    "english": "the idea/notion",
+    "meaning": "A conception or awareness of something",
+    "type": "noun",
+    "plural": "die Ahnungen"
+  },
+  {
+    "german": "ahnungslos",
+    "english": "clueless",
+    "meaning": "Having no knowledge or understanding",
+    "type": "adjective"
+  },
+  {
+    "german": "ahnen",
+    "english": "to suspect/sense",
+    "meaning": "To have an impression of the existence of something",
+    "type": "verb"
+  },
+  {
+    "german": "Das ist wahr",
+    "english": "That is true",
+    "meaning": "Agreeing that something is correct",
+    "type": "sentence"
+  },
+  {
+    "german": "die Wahrheit",
+    "english": "the truth",
+    "meaning": "The quality or state of being true",
+    "type": "noun",
+    "plural": "die Wahrheit"
+  },
+  {
+    "german": "wahr",
+    "english": "true",
+    "meaning": "In accordance with fact or reality",
+    "type": "adjective"
+  },
+  {
+    "german": "wahrnehmen",
+    "english": "to perceive",
+    "meaning": "To become aware of something through the senses",
+    "type": "verb"
+  },
+  {
+    "german": "Das ist falsch",
+    "english": "That is wrong",
+    "meaning": "Stating that something is incorrect",
+    "type": "sentence"
+  },
+  {
+    "german": "der Fehler",
+    "english": "the mistake",
+    "meaning": "An act or judgment that is misguided or wrong",
+    "type": "noun",
+    "plural": "die Fehler"
+  },
+  {
+    "german": "falsch",
+    "english": "wrong/false",
+    "meaning": "Not correct or true",
+    "type": "adjective"
+  },
+  {
+    "german": "irren",
+    "english": "to be wrong",
+    "meaning": "To make a mistake or be incorrect",
+    "type": "verb"
+  },
+  {
+    "german": "Vielleicht",
+    "english": "Maybe",
+    "meaning": "Expressing uncertainty",
+    "type": "sentence"
+  },
+  {
+    "german": "die Möglichkeit",
+    "english": "the possibility",
+    "meaning": "A thing that may happen or be the case",
+    "type": "noun",
+    "plural": "die Möglichkeiten"
+  },
+  {
+    "german": "möglich",
+    "english": "possible",
+    "meaning": "Able to be done or achieved",
+    "type": "adjective"
+  },
+  {
+    "german": "können",
+    "english": "to be able to/can",
+    "meaning": "To have the ability to do something",
+    "type": "verb"
+  },
+  {
+    "german": "Natürlich!",
+    "english": "Of course!",
+    "meaning": "Emphatic agreement",
+    "type": "sentence"
+  },
+  {
+    "german": "die Natur",
+    "english": "the nature",
+    "meaning": "The physical world and its phenomena",
+    "type": "noun",
+    "plural": "die Natur"
+  },
+  {
+    "german": "natürlich",
+    "english": "natural",
+    "meaning": "Existing in or derived from nature",
+    "type": "adjective"
+  },
+  {
+    "german": "wachsen",
+    "english": "to grow",
+    "meaning": "To undergo natural development",
+    "type": "verb"
+  },
+  {
+    "german": "Auf jeden Fall!",
+    "english": "In any case!/Definitely!",
+    "meaning": "Emphatic agreement or confirmation",
+    "type": "sentence"
+  },
+  {
+    "german": "der Fall",
+    "english": "the case",
+    "meaning": "An instance of something occurring",
+    "type": "noun",
+    "plural": "die Fälle"
+  },
+  {
+    "german": "sicher",
+    "english": "sure/certain",
+    "meaning": "Confident in what one thinks or knows",
+    "type": "adjective"
+  },
+  {
+    "german": "sicherstellen",
+    "english": "to ensure",
+    "meaning": "To make certain that something happens",
+    "type": "verb"
+  },
+  {
+    "german": "Kein Problem!",
+    "english": "No problem!",
+    "meaning": "A casual response to an apology or request",
+    "type": "sentence"
+  },
+  {
+    "german": "das Problem",
+    "english": "the problem",
+    "meaning": "A matter regarded as unwelcome",
+    "type": "noun",
+    "plural": "die Probleme"
+  },
+  {
+    "german": "problemlos",
+    "english": "without problems",
+    "meaning": "Easy and without difficulties",
+    "type": "adjective"
+  },
+  {
+    "german": "lösen",
+    "english": "to solve",
+    "meaning": "To find an answer to a problem",
+    "type": "verb"
+  },
+  {
+    "german": "Genau!",
+    "english": "Exactly!",
+    "meaning": "Agreeing emphatically",
+    "type": "sentence"
+  },
+  {
+    "german": "die Genauigkeit",
+    "english": "the accuracy",
+    "meaning": "The quality or state of being correct or precise",
+    "type": "noun",
+    "plural": "die Genauigkeit"
+  },
+  {
+    "german": "genau",
+    "english": "exact/precise",
+    "meaning": "Accurate or correct in all details",
+    "type": "adjective"
+  },
+  {
+    "german": "bestimmen",
+    "english": "to determine",
+    "meaning": "To ascertain or establish exactly",
+    "type": "verb"
+  },
+  {
+    "german": "Wirklich?",
+    "english": "Really?",
+    "meaning": "Expressing surprise or seeking confirmation",
+    "type": "sentence"
+  },
+  {
+    "german": "die Wirklichkeit",
+    "english": "the reality",
+    "meaning": "The world or the state of things as they actually exist",
+    "type": "noun",
+    "plural": "die Wirklichkeit"
+  },
+  {
+    "german": "wirklich",
+    "english": "real/actual",
+    "meaning": "Actually existing as a thing or occurring in fact",
+    "type": "adjective"
+  },
+  {
+    "german": "realisieren",
+    "english": "to realize",
+    "meaning": "To become fully aware of something as a fact",
+    "type": "verb"
+  },
+  {
+    "german": "Super!",
+    "english": "Great!",
+    "meaning": "Expressing excitement or that something is excellent",
+    "type": "sentence"
+  },
+  {
+    "german": "die Superlativ",
+    "english": "the superlative",
+    "meaning": "The highest degree of comparison",
+    "type": "noun",
+    "plural": "die Superlative"
+  },
+  {
+    "german": "super",
+    "english": "super/great",
+    "meaning": "Very good or pleasant; excellent",
+    "type": "adjective"
+  },
+  {
+    "german": "übertreffen",
+    "english": "to exceed/surpass",
+    "meaning": "To be better than; to outdo",
+    "type": "verb"
+  },
+  {
+    "german": "Toll!",
+    "english": "Awesome!",
+    "meaning": "Another way to express that something is great",
+    "type": "sentence"
+  },
+  {
+    "german": "die Begeisterung",
+    "english": "the enthusiasm",
+    "meaning": "Intense and eager enjoyment, interest, or approval",
+    "type": "noun",
+    "plural": "die Begeisterung"
+  },
+  {
+    "german": "begeistert",
+    "english": "enthusiastic",
+    "meaning": "Having or showing intense and eager enjoyment",
+    "type": "adjective"
+  },
+  {
+    "german": "begeistern",
+    "english": "to excite/thrill",
+    "meaning": "To make someone feel very enthusiastic",
+    "type": "verb"
+  },
+  {
+    "german": "Prima!",
+    "english": "Excellent!",
+    "meaning": "Expressing that something is very good",
+    "type": "sentence"
+  },
+  {
+    "german": "die Qualität",
+    "english": "the quality",
+    "meaning": "The standard of something as measured against other things",
+    "type": "noun",
+    "plural": "die Qualität"
+  },
+  {
+    "german": "qualitativ",
+    "english": "qualitative",
+    "meaning": "Relating to or concerned with quality",
+    "type": "adjective"
+  },
+  {
+    "german": "qualifizieren",
+    "english": "to qualify",
+    "meaning": "To be entitled to a particular benefit or privilege",
+    "type": "verb"
+  },
+  {
+    "german": "Wunderbar!",
+    "english": "Wonderful!",
+    "meaning": "Expressing great pleasure or admiration",
+    "type": "sentence"
+  },
+  {
+    "german": "das Wunder",
+    "english": "the wonder/miracle",
+    "meaning": "A remarkable event or person",
+    "type": "noun",
+    "plural": "die Wunder"
+  },
+  {
+    "german": "wunderbar",
+    "english": "wonderful",
+    "meaning": "Inspiring delight, pleasure, or admiration",
+    "type": "adjective"
+  },
+  {
+    "german": "bewundern",
+    "english": "to admire",
+    "meaning": "To regard with respect or warm approval",
+    "type": "verb"
+  },
+  {
+    "german": "Fantastisch!",
+    "english": "Fantastic!",
+    "meaning": "Expressing that something is extraordinarily good",
+    "type": "sentence"
+  },
+  {
+    "german": "die Fantasie",
+    "english": "the fantasy",
+    "meaning": "The faculty or activity of imagining things",
+    "type": "noun",
+    "plural": "die Fantasien"
+  },
+  {
+    "german": "fantastisch",
+    "english": "fantastic",
+    "meaning": "Extraordinarily good or attractive",
+    "type": "adjective"
+  },
+  {
+    "german": "träumen",
+    "english": "to dream",
+    "meaning": "To indulge in daydreams or fantasies",
+    "type": "verb"
+  },
+  {
+    "german": "Unglaublich!",
+    "english": "Unbelievable!",
+    "meaning": "Expressing astonishment or disbelief",
+    "type": "sentence"
+  },
+  {
+    "german": "der Glaube",
+    "english": "the belief",
+    "meaning": "Trust, faith, or confidence in someone or something",
+    "type": "noun",
+    "plural": "die Glaube"
+  },
+  {
+    "german": "unglaublich",
+    "english": "unbelievable",
+    "meaning": "Not able to be believed; unlikely to be true",
+    "type": "adjective"
+  },
+  {
+    "german": "glauben",
+    "english": "to believe",
+    "meaning": "To accept that something is true",
+    "type": "verb"
+  },
+  {
+    "german": "Das ist ja Wahnsinn!",
+    "english": "That's crazy!",
+    "meaning": "Expressing that something is insane or amazing",
+    "type": "sentence"
+  },
+  {
+    "german": "der Wahnsinn",
+    "english": "the madness/insanity",
+    "meaning": "The state of being mentally ill",
+    "type": "noun",
+    "plural": "die Wahnsinn"
+  },
+  {
+    "german": "wahnsinnig",
+    "english": "crazy/mad",
+    "meaning": "Mentally deranged; extremely foolish or irrational",
+    "type": "adjective"
+  },
+  {
+    "german": "verrückt spielen",
+    "english": "to go crazy",
+    "meaning": "To behave in a wild or erratic way",
+    "type": "verb"
+  }
+]

@@ -1,6 +1,6 @@
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Services/tts_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,61 +30,25 @@ class NounsScreen extends StatefulWidget {
 }
 
 class _NounsScreenState extends State<NounsScreen> {
-  final ThemeService themeService = Get.find<ThemeService>();
   final TtsService ttsService = Get.find<TtsService>();
   int _currentNounIndex = 0;
+  List<NounData> _nouns = [];
+  bool _isLoading = true;
 
-  // Sample nouns - in production, load from data source
-  final List<NounData> _nouns = [
-    NounData(
-      singular: 'Der Hund',
-      plural: 'Die Hunde',
-      english: 'the dog / the dogs',
-      meaning: 'A common pet animal',
-    ),
-    NounData(
-      singular: 'Die Frau',
-      plural: 'Die Frauen',
-      english: 'the woman / the women',
-      meaning: 'An adult female person',
-    ),
-    NounData(
-      singular: 'Das Kind',
-      plural: 'Die Kinder',
-      english: 'the child / the children',
-      meaning: 'A young person',
-    ),
-    NounData(
-      singular: 'Der Tisch',
-      plural: 'Die Tische',
-      english: 'the table / the tables',
-      meaning: 'A piece of furniture',
-    ),
-    NounData(
-      singular: 'Die Tür',
-      plural: 'Die Türen',
-      english: 'the door / the doors',
-      meaning: 'An entrance or exit',
-    ),
-    NounData(
-      singular: 'Das Buch',
-      plural: 'Die Bücher',
-      english: 'the book / the books',
-      meaning: 'A written or printed work',
-    ),
-    NounData(
-      singular: 'Der Mann',
-      plural: 'Die Männer',
-      english: 'the man / the men',
-      meaning: 'An adult male person',
-    ),
-    NounData(
-      singular: 'Das Haus',
-      plural: 'Die Häuser',
-      english: 'the house / the houses',
-      meaning: 'A building for living',
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadNouns();
+  }
+
+  Future<void> _loadNouns() async {
+    final loadedNouns = await DataLoader.loadNouns();
+    setState(() {
+      _nouns = loadedNouns;
+      _isLoading = false;
+    });
+  }
+
 
   void _nextNoun() {
     if (ttsService.isPlaying) {
@@ -122,11 +86,16 @@ class _NounsScreenState extends State<NounsScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
-
+    if (_isLoading) {
       return Scaffold(
+        backgroundColor: const Color(0xFF0B0F14),
+        body: const Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
+      );
+    }
+
+    return Scaffold(
         backgroundColor: const Color(0xFF0B0F14),
         appBar: AppBar(
           backgroundColor: const Color(0xFF0B0F14),
@@ -183,7 +152,6 @@ class _NounsScreenState extends State<NounsScreen> {
           ),
         ),
       );
-    });
   }
 
   Widget _buildTopBar(bool isSmallScreen) {

@@ -131,143 +131,154 @@ class A1LessonScreen extends StatelessWidget {
                   ],
                 ),
               ),
-            // Topics list
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: topics.length,
-                itemBuilder: (context, index) {
-                  final topic = topics[index];
+              // Topics list
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: topics.length,
+                  itemBuilder: (context, index) {
+                    final topic = topics[index];
 
-                  // Use Obx only for the specific widget that needs to react to changes
-                  return Obx(() {
-                    final isCompleted = lessonController.isLessonCompleted(
-                      topic['id'],
-                    );
+                    // Use Obx only for the specific widget that needs to react to changes
+                    return Obx(() {
+                      final isCompleted = lessonController.isLessonCompleted(
+                        topic['id'],
+                      );
 
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: isCompleted
-                              ? primaryColor.withOpacity(0.5)
-                              : borderColor,
-                          width: isCompleted ? 2 : 1,
-                        ),
-                        color: surfaceColor,
-                      ),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                        leading: _getTopicLeading(topic, isCompleted, primaryColor),
-                        title: Text(
-                          topic['title'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: textColor,
-                            fontFamily: GoogleFonts.patrickHand().fontFamily,
-                            decoration: isCompleted
-                                ? TextDecoration.lineThrough
-                                : TextDecoration.none,
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: isCompleted
+                                ? primaryColor.withOpacity(0.5)
+                                : borderColor,
+                            width: isCompleted ? 2 : 1,
                           ),
+                          color: surfaceColor,
                         ),
-                        subtitle: isCompleted
-                            ? null
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    topic['content'],
-                                    style: TextStyle(
-                                      color: secondaryTextColor,
-                                      fontFamily:
-                                          GoogleFonts.patrickHand().fontFamily,
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          leading: _getTopicLeading(
+                            topic,
+                            isCompleted,
+                            primaryColor,
+                          ),
+                          title: Text(
+                            topic['title'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: textColor,
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                              decoration: isCompleted
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none,
+                            ),
+                          ),
+                          subtitle: isCompleted
+                              ? null
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      topic['content'],
+                                      style: TextStyle(
+                                        color: secondaryTextColor,
+                                        fontFamily: GoogleFonts.patrickHand()
+                                            .fontFamily,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 8,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: _getTypeColor(
-                                            topic['type'],
-                                          ).withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                            8,
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 4,
                                           ),
-                                          border: Border.all(
+                                          decoration: BoxDecoration(
                                             color: _getTypeColor(
                                               topic['type'],
-                                            ).withOpacity(0.4),
+                                            ).withOpacity(0.2),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            border: Border.all(
+                                              color: _getTypeColor(
+                                                topic['type'],
+                                              ).withOpacity(0.4),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            topic['type'],
+                                            style: TextStyle(
+                                              color: _getTypeColor(
+                                                topic['type'],
+                                              ),
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily:
+                                                  GoogleFonts.patrickHand()
+                                                      .fontFamily,
+                                            ),
                                           ),
                                         ),
-                                        child: Text(
-                                          topic['type'],
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          topic['duration'],
                                           style: TextStyle(
-                                            color: _getTypeColor(topic['type']),
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w500,
+                                            color: secondaryTextColor,
+                                            fontSize: 12,
                                             fontFamily:
                                                 GoogleFonts.patrickHand()
                                                     .fontFamily,
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        topic['duration'],
-                                        style: TextStyle(
-                                          color: secondaryTextColor,
-                                          fontSize: 12,
-                                          fontFamily: GoogleFonts.patrickHand()
-                                              .fontFamily,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                          trailing: isCompleted
+                              ? Icon(
+                                  Icons.check_circle,
+                                  color: primaryColor,
+                                  size: 24,
+                                )
+                              : Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                  color: secondaryTextColor,
+                                ),
+                          onTap: () {
+                            Get.to(
+                              () => PhraseScreen(
+                                topicId: topic['id'],
+                                topicTitle: topic['title'],
                               ),
-                        trailing: isCompleted
-                            ? Icon(
-                                Icons.check_circle,
-                                color: primaryColor,
-                                size: 24,
-                              )
-                            : Icon(
-                                Icons.arrow_forward_ios,
-                                size: 16,
-                                color: secondaryTextColor,
-                              ),
-                        onTap: () {
-                          Get.to(
-                            () => PhraseScreen(
-                              topicId: topic['id'],
-                              topicTitle: topic['title'],
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  });
-                },
+                            );
+                          },
+                        ),
+                      );
+                    });
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
     });
   }
 
-  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted, Color primaryColor) {
+  Widget _getTopicLeading(
+    Map<String, dynamic> topic,
+    bool isCompleted,
+    Color primaryColor,
+  ) {
     if (isCompleted) {
       return Container(
         width: 40,

@@ -1,6 +1,6 @@
 import 'package:ductuch_master/FrontEnd/screen/categories/category_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/categories/category_data.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
+import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,101 +8,121 @@ import 'package:google_fonts/google_fonts.dart';
 
 /// Categories List Screen - displays all category cards
 /// Uses the same card design as learn.dart
-class CategoriesListScreen extends StatelessWidget {
+class CategoriesListScreen extends StatefulWidget {
   const CategoriesListScreen({super.key});
 
   @override
+  State<CategoriesListScreen> createState() => _CategoriesListScreenState();
+}
+
+class _CategoriesListScreenState extends State<CategoriesListScreen> {
+  List<CategoryInfo> categories = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    final loadedCategories = await DataLoader.loadCategories();
+    setState(() {
+      categories = loadedCategories;
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final themeService = Get.find<ThemeService>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
     final isTablet = screenWidth > 600;
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
-
-      return Scaffold(
+    return Scaffold(
+      backgroundColor: const Color(0xFF0B0F14),
+      appBar: AppBar(
         backgroundColor: const Color(0xFF0B0F14),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF0B0F14),
-          title: Text(
-            'Categories',
-            style: TextStyle(
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: isTablet ? 24 : 20,
-            ),
-          ),
-          actions: [
-            TtsSpeedDropdown(),
-          ],
-        ),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth > 500
-                      ? 500
-                      : constraints.maxWidth,
-                ),
-                margin: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                  vertical: constraints.maxWidth > 500 ? 30 : 20,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: isSmallScreen ? 4 : 6),
-                    Text(
-                      'Content Categories',
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 20 : 24,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
-                      ),
-                    ),
-                    SizedBox(height: isSmallScreen ? 8 : 12),
-                    Text(
-                      'Explore words by category',
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 12 : 14,
-                        color: Colors.white.withOpacity(0.6),
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
-                      ),
-                    ),
-                    SizedBox(height: isSmallScreen ? 20 : 24),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: CategoryData.categories.length,
-                        itemBuilder: (context, index) {
-                          final category = CategoryData.categories[index];
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              bottom: isSmallScreen ? 12 : 16,
-                            ),
-                            child: _buildCategoryCard(
-                              category.name,
-                              category.icon,
-                              category.words,
-                              isSmallScreen,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
+        title: Text(
+          'Categories',
+          style: TextStyle(
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: isTablet ? 24 : 20,
           ),
         ),
-      );
-    });
+        actions: [TtsSpeedDropdown()],
+      ),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                maxWidth: constraints.maxWidth > 500
+                    ? 500
+                    : constraints.maxWidth,
+              ),
+              margin: EdgeInsets.symmetric(
+                horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                vertical: constraints.maxWidth > 500 ? 30 : 20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: isSmallScreen ? 4 : 6),
+                  Text(
+                    'Content Categories',
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 20 : 24,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
+                  ),
+                  SizedBox(height: isSmallScreen ? 8 : 12),
+                  Text(
+                    'Explore words by category',
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 12 : 14,
+                      color: Colors.white.withOpacity(0.6),
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
+                  ),
+                  SizedBox(height: isSmallScreen ? 20 : 24),
+                  Expanded(
+                    child: isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: categories.length,
+                            itemBuilder: (context, index) {
+                              final category = categories[index];
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: isSmallScreen ? 12 : 16,
+                                ),
+                                child: _buildCategoryCard(
+                                  category.name,
+                                  category.icon,
+                                  category.words,
+                                  isSmallScreen,
+                                ),
+                              );
+                            },
+                          ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 
   Widget _buildCategoryCard(
@@ -121,10 +141,9 @@ class CategoriesListScreen extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Get.to(() => CategoryScreen(
-                  categoryName: categoryName,
-                  words: words,
-                ));
+            Get.to(
+              () => CategoryScreen(categoryName: categoryName, words: words),
+            );
           },
           borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
           child: Padding(
@@ -184,4 +203,3 @@ class CategoriesListScreen extends StatelessWidget {
     );
   }
 }
-

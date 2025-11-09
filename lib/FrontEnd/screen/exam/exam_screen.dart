@@ -1,5 +1,5 @@
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,7 +30,6 @@ class ExamScreen extends StatefulWidget {
 }
 
 class _ExamScreenState extends State<ExamScreen> {
-  final ThemeService themeService = Get.find<ThemeService>();
   String? selectedLevel;
   List<ExamQuestion> currentQuestions = [];
   int currentQuestionIndex = 0;
@@ -141,14 +140,41 @@ class _ExamScreenState extends State<ExamScreen> {
     return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
 
+  Map<String, List<ExamQuestion>> _examQuestions = {};
+  bool _isLoadingQuestions = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadExamQuestions();
+  }
+
+  Future<void> _loadExamQuestions() async {
+    setState(() {
+      _isLoadingQuestions = true;
+    });
+    final loadedQuestions = await DataLoader.loadExamQuestions();
+    setState(() {
+      _examQuestions = loadedQuestions;
+      _isLoadingQuestions = false;
+    });
+  }
+
   List<ExamQuestion> _getQuestionsForLevel(String level) {
-    // Generate 150+ questions for each level
-    // In a real app, these would come from a database or API
-    List<ExamQuestion> questions = [];
+    // Get questions from loaded JSON data
+    final questions = _examQuestions[level] ?? [];
     
-    // Sample questions - in production, load from data source
+    // If we have questions, return them. Otherwise, generate sample questions
+    if (questions.isNotEmpty) {
+      // For now, return the loaded questions. In production, you might want to
+      // expand this to 150+ questions by duplicating or loading more from JSON
+      return questions;
+    }
+    
+    // Fallback: Generate sample questions if JSON doesn't have enough
+    List<ExamQuestion> fallbackQuestions = [];
     for (int i = 0; i < 150; i++) {
-      questions.add(ExamQuestion(
+      fallbackQuestions.add(ExamQuestion(
         question: 'Question ${i + 1} for level $level: What is the correct answer?',
         options: ['Option A', 'Option B', 'Option C', 'Option D'],
         correctAnswerIndex: i % 4,
@@ -156,7 +182,7 @@ class _ExamScreenState extends State<ExamScreen> {
       ));
     }
     
-    return questions;
+    return fallbackQuestions;
   }
 
   void _resetExam() {

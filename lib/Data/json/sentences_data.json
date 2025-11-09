@@ -1,0 +1,1212 @@
+[
+  {
+    "german": "Guten Morgen!",
+    "english": "Good morning!",
+    "meaning": "A common greeting used in the morning"
+  },
+  {
+    "german": "Guten Tag!",
+    "english": "Good day!",
+    "meaning": "A formal greeting used during the day"
+  },
+  {
+    "german": "Guten Abend!",
+    "english": "Good evening!",
+    "meaning": "A greeting used in the evening"
+  },
+  {
+    "german": "Gute Nacht!",
+    "english": "Good night!",
+    "meaning": "Said before going to sleep"
+  },
+  {
+    "german": "Hallo!",
+    "english": "Hello!",
+    "meaning": "A casual, universal greeting"
+  },
+  {
+    "german": "Tschüss!",
+    "english": "Bye!",
+    "meaning": "A casual way to say goodbye"
+  },
+  {
+    "german": "Auf Wiedersehen!",
+    "english": "Goodbye!",
+    "meaning": "A formal way to say goodbye"
+  },
+  {
+    "german": "Bis später!",
+    "english": "See you later!",
+    "meaning": "Used when you expect to see the person again later"
+  },
+  {
+    "german": "Bis morgen!",
+    "english": "See you tomorrow!",
+    "meaning": "Used when you have plans to meet the next day"
+  },
+  {
+    "german": "Wie geht es dir?",
+    "english": "How are you? (informal)",
+    "meaning": "A common question to ask a friend about their well-being"
+  },
+  {
+    "german": "Wie geht es Ihnen?",
+    "english": "How are you? (formal)",
+    "meaning": "The formal/polite version to ask about someone's well-being"
+  },
+  {
+    "german": "Mir geht es gut.",
+    "english": "I'm fine.",
+    "meaning": "A standard response to say you are doing well"
+  },
+  {
+    "german": "Es geht so.",
+    "english": "So-so.",
+    "meaning": "A response meaning you are okay, not great, not bad"
+  },
+  {
+    "german": "Nicht so gut.",
+    "english": "Not so well.",
+    "meaning": "A response when you are not doing well"
+  },
+  {
+    "german": "Was ist los?",
+    "english": "What's wrong? / What's up?",
+    "meaning": "Asking what the matter is or what is happening"
+  },
+  {
+    "german": "Alles in Ordnung?",
+    "english": "Is everything okay?",
+    "meaning": "Checking if someone is alright or if everything is fine"
+  },
+  {
+    "german": "Wie heißt du?",
+    "english": "What's your name? (informal)",
+    "meaning": "Asking a friend or peer for their name"
+  },
+  {
+    "german": "Wie heißen Sie?",
+    "english": "What's your name? (formal)",
+    "meaning": "The formal/polite way to ask for someone's name"
+  },
+  {
+    "german": "Ich heiße Maria.",
+    "english": "My name is Maria.",
+    "meaning": "A way to introduce yourself"
+  },
+  {
+    "german": "Ich bin der Thomas.",
+    "english": "I am Thomas.",
+    "meaning": "Another common way to introduce yourself"
+  },
+  {
+    "german": "Freut mich.",
+    "english": "Nice to meet you.",
+    "meaning": "Said after introducing yourself"
+  },
+  {
+    "german": "Woher kommst du?",
+    "english": "Where are you from? (informal)",
+    "meaning": "Asking about someone's origin"
+  },
+  {
+    "german": "Ich komme aus Amerika.",
+    "english": "I am from America.",
+    "meaning": "Stating your country of origin"
+  },
+  {
+    "german": "Wo wohnst du?",
+    "english": "Where do you live? (informal)",
+    "meaning": "Asking where someone resides"
+  },
+  {
+    "german": "Ich wohne in Berlin.",
+    "english": "I live in Berlin.",
+    "meaning": "Stating the city you live in"
+  },
+  {
+    "german": "Sprechen Sie Englisch?",
+    "english": "Do you speak English?",
+    "meaning": "Asking if someone can communicate in English"
+  },
+  {
+    "german": "Ich spreche ein bisschen Deutsch.",
+    "english": "I speak a little German.",
+    "meaning": "Stating your limited proficiency in German"
+  },
+  {
+    "german": "Ich verstehe nicht.",
+    "english": "I don't understand.",
+    "meaning": "Useful when you need clarification"
+  },
+  {
+    "german": "Kannst du das wiederholen?",
+    "english": "Can you repeat that? (informal)",
+    "meaning": "Ask someone to say something again"
+  },
+  {
+    "german": "Können Sie das wiederholen?",
+    "english": "Can you repeat that? (formal)",
+    "meaning": "The formal way to ask for repetition"
+  },
+  {
+    "german": "Was bedeutet das?",
+    "english": "What does that mean?",
+    "meaning": "Asking for the meaning of a word or phrase"
+  },
+  {
+    "german": "Wie sagt man das auf Deutsch?",
+    "english": "How do you say this in German?",
+    "meaning": "Asking for a translation into German"
+  },
+  {
+    "german": "Langsamer, bitte.",
+    "english": "Slower, please.",
+    "meaning": "Asking someone to slow down their speech"
+  },
+  {
+    "german": "Entschuldigung!",
+    "english": "Excuse me! / Sorry!",
+    "meaning": "Used to get attention, apologize, or say 'pardon me'"
+  },
+  {
+    "german": "Es tut mir leid.",
+    "english": "I'm sorry.",
+    "meaning": "A formal apology"
+  },
+  {
+    "german": "Kein Problem.",
+    "english": "No problem.",
+    "meaning": "A casual response to 'sorry' or 'thank you'"
+  },
+  {
+    "german": "Vielen Dank!",
+    "english": "Thank you very much!",
+    "meaning": "A polite way to express gratitude"
+  },
+  {
+    "german": "Danke schön!",
+    "english": "Thank you!",
+    "meaning": "A common way to say thank you"
+  },
+  {
+    "german": "Bitte.",
+    "english": "Please. / You're welcome.",
+    "meaning": "Used both to make a polite request and as a response to 'thank you'"
+  },
+  {
+    "german": "Ja.",
+    "english": "Yes.",
+    "meaning": "Affirmative response"
+  },
+  {
+    "german": "Nein.",
+    "english": "No.",
+    "meaning": "Negative response"
+  },
+  {
+    "german": "Vielleicht.",
+    "english": "Maybe.",
+    "meaning": "Expressing uncertainty"
+  },
+  {
+    "german": "Okay.",
+    "english": "Okay.",
+    "meaning": "Expressing agreement or understanding"
+  },
+  {
+    "german": "Natürlich!",
+    "english": "Of course!",
+    "meaning": "Emphatic agreement"
+  },
+  {
+    "german": "Das ist gut.",
+    "english": "That is good.",
+    "meaning": "Expressing that something is positive"
+  },
+  {
+    "german": "Das ist schlecht.",
+    "english": "That is bad.",
+    "meaning": "Expressing that something is negative"
+  },
+  {
+    "german": "Super!",
+    "english": "Great!",
+    "meaning": "Expressing excitement or that something is excellent"
+  },
+  {
+    "german": "Toll!",
+    "english": "Awesome!",
+    "meaning": "Another way to express that something is great"
+  },
+  {
+    "german": "Wie viel Uhr ist es?",
+    "english": "What time is it?",
+    "meaning": "Asking for the current time"
+  },
+  {
+    "german": "Es ist zwei Uhr.",
+    "english": "It is two o'clock.",
+    "meaning": "Stating the time (on the hour)"
+  },
+  {
+    "german": "Es ist halb drei.",
+    "english": "It is half past two. (Literally: half to three)",
+    "meaning": "Stating the time as 2:30"
+  },
+  {
+    "german": "Es ist Viertel nach eins.",
+    "english": "It is a quarter past one.",
+    "meaning": "Stating the time as 1:15"
+  },
+  {
+    "german": "Es ist Viertel vor eins.",
+    "english": "It is a quarter to one.",
+    "meaning": "Stating the time as 12:45"
+  },
+  {
+    "german": "Es ist zehn nach sieben.",
+    "english": "It is ten past seven.",
+    "meaning": "Stating the time as 7:10"
+  },
+  {
+    "german": "Es ist zwanzig vor vier.",
+    "english": "It is twenty to four.",
+    "meaning": "Stating the time as 3:40"
+  },
+  {
+    "german": "Um wie viel Uhr?",
+    "english": "At what time?",
+    "meaning": "Asking for the specific time an event occurs"
+  },
+  {
+    "german": "Wie spät ist es?",
+    "english": "How late is it?",
+    "meaning": "Another common way to ask for the time"
+  },
+  {
+    "german": "Heute.",
+    "english": "Today.",
+    "meaning": "Referring to the current day"
+  },
+  {
+    "german": "Morgen.",
+    "english": "Tomorrow.",
+    "meaning": "Referring to the day after today"
+  },
+  {
+    "german": "Gestern.",
+    "english": "Yesterday.",
+    "meaning": "Referring to the day before today"
+  },
+  {
+    "german": "Jetzt.",
+    "english": "Now.",
+    "meaning": "Referring to the present moment"
+  },
+  {
+    "german": "Später.",
+    "english": "Later.",
+    "meaning": "Referring to a time after the present"
+  },
+  {
+    "german": "Wo ist die Toilette?",
+    "english": "Where is the bathroom?",
+    "meaning": "A useful question when you need to find a restroom"
+  },
+  {
+    "german": "Wo ist der Bahnhof?",
+    "english": "Where is the train station?",
+    "meaning": "Asking for directions to the station"
+  },
+  {
+    "german": "Wo ist der Flughafen?",
+    "english": "Where is the airport?",
+    "meaning": "Asking for directions to the airport"
+  },
+  {
+    "german": "Wo ist das Hotel?",
+    "english": "Where is the hotel?",
+    "meaning": "Asking for the location of a hotel"
+  },
+  {
+    "german": "Wie komme ich zum Museum?",
+    "english": "How do I get to the museum?",
+    "meaning": "Asking for directions to a specific place"
+  },
+  {
+    "german": "Links.",
+    "english": "Left.",
+    "meaning": "Giving a direction"
+  },
+  {
+    "german": "Rechts.",
+    "english": "Right.",
+    "meaning": "Giving a direction"
+  },
+  {
+    "german": "Geradeaus.",
+    "english": "Straight ahead.",
+    "meaning": "Telling someone to continue forward"
+  },
+  {
+    "german": "Ist es weit?",
+    "english": "Is it far?",
+    "meaning": "Asking about the distance to a location"
+  },
+  {
+    "german": "In der Nähe.",
+    "english": "Nearby.",
+    "meaning": "Indicating that something is close"
+  },
+  {
+    "german": "Weit weg.",
+    "english": "Far away.",
+    "meaning": "Indicating that something is distant"
+  },
+  {
+    "german": "Ich habe mich verlaufen.",
+    "english": "I'm lost.",
+    "meaning": "Stating that you don't know where you are"
+  },
+  {
+    "german": "Kannst du mir das auf der Karte zeigen?",
+    "english": "Can you show me on the map? (informal)",
+    "meaning": "Asking for a visual indication of location"
+  },
+  {
+    "german": "Ich möchte eine Fahrkarte nach Köln.",
+    "english": "I would like a ticket to Cologne.",
+    "meaning": "Stating your purchase intention at a ticket counter"
+  },
+  {
+    "german": "Eine einfache Fahrt, bitte.",
+    "english": "A one-way ticket, please.",
+    "meaning": "Specifying the type of ticket you want"
+  },
+  {
+    "german": "Hin und zurück, bitte.",
+    "english": "Round trip, please.",
+    "meaning": "Asking for a return ticket"
+  },
+  {
+    "german": "Wann fährt der nächste Zug?",
+    "english": "When does the next train leave?",
+    "meaning": "Asking for the departure time of the next train"
+  },
+  {
+    "german": "Von welchem Gleis?",
+    "english": "From which platform?",
+    "meaning": "Asking which platform the train departs from"
+  },
+  {
+    "german": "Ich möchte ein Taxi rufen.",
+    "english": "I would like to call a taxi.",
+    "meaning": "Requesting a taxi service"
+  },
+  {
+    "german": "Fahren Sie zum Stadtzentrum.",
+    "english": "Drive to the city center.",
+    "meaning": "Giving a destination to a taxi driver"
+  },
+  {
+    "german": "Wie viel kostet das?",
+    "english": "How much does that cost?",
+    "meaning": "Asking for the price of an item"
+  },
+  {
+    "german": "Das ist zu teuer.",
+    "english": "That is too expensive.",
+    "meaning": "Stating that the price is too high"
+  },
+  {
+    "german": "Haben Sie das billiger?",
+    "english": "Do you have this cheaper?",
+    "meaning": "Asking if there is a less expensive version"
+  },
+  {
+    "german": "Ich schaue mich nur um.",
+    "english": "I'm just looking around.",
+    "meaning": "Telling a shop assistant you are browsing"
+  },
+  {
+    "german": "Kann ich mit Karte zahlen?",
+    "english": "Can I pay with a card?",
+    "meaning": "Asking if card payment is accepted"
+  },
+  {
+    "german": "Ich nehme das.",
+    "english": "I'll take it.",
+    "meaning": "Telling the seller you want to buy an item"
+  },
+  {
+    "german": "Die Rechnung, bitte.",
+    "english": "The bill, please.",
+    "meaning": "Asking for the check in a restaurant"
+  },
+  {
+    "german": "Stimmt so.",
+    "english": "Keep the change.",
+    "meaning": "Telling the waiter/server they can keep the extra money as a tip"
+  },
+  {
+    "german": "Ich hätte gern einen Kaffee.",
+    "english": "I would like a coffee.",
+    "meaning": "Ordering a coffee in a cafe"
+  },
+  {
+    "german": "Ein Bier, bitte.",
+    "english": "A beer, please.",
+    "meaning": "Ordering a beer"
+  },
+  {
+    "german": "Ein Glas Wasser.",
+    "english": "A glass of water.",
+    "meaning": "Ordering water"
+  },
+  {
+    "german": "Was empfehlen Sie?",
+    "english": "What do you recommend?",
+    "meaning": "Asking for a recommendation (e.g., in a restaurant)"
+  },
+  {
+    "german": "Ich bin Vegetarier.",
+    "english": "I am a vegetarian. (male)",
+    "meaning": "Stating your dietary preference"
+  },
+  {
+    "german": "Ich bin Vegetarierin.",
+    "english": "I am a vegetarian. (female)",
+    "meaning": "Stating your dietary preference"
+  },
+  {
+    "german": "Ohne Zwiebeln, bitte.",
+    "english": "Without onions, please.",
+    "meaning": "Making a specific request about your food order"
+  },
+  {
+    "german": "Das schmeckt sehr gut.",
+    "english": "This tastes very good.",
+    "meaning": "Complimenting the food"
+  },
+  {
+    "german": "Prost!",
+    "english": "Cheers!",
+    "meaning": "Said when clinking glasses for a toast"
+  },
+  {
+    "german": "Ich habe Hunger.",
+    "english": "I am hungry.",
+    "meaning": "Stating that you need to eat"
+  },
+  {
+    "german": "Ich habe Durst.",
+    "english": "I am thirsty.",
+    "meaning": "Stating that you need to drink"
+  },
+  {
+    "german": "Kann ich die Speisekarte haben?",
+    "english": "Can I have the menu?",
+    "meaning": "Asking for the menu in a restaurant"
+  },
+  {
+    "german": "Ich habe eine Reservierung.",
+    "english": "I have a reservation.",
+    "meaning": "Informing the staff that you booked a table"
+  },
+  {
+    "german": "Wo kann ich einkaufen?",
+    "english": "Where can I go shopping?",
+    "meaning": "Asking for shopping locations"
+  },
+  {
+    "german": "Ich suche eine Apotheke.",
+    "english": "I'm looking for a pharmacy.",
+    "meaning": "Asking for directions to a pharmacy"
+  },
+  {
+    "german": "Kann ich hier parken?",
+    "english": "Can I park here?",
+    "meaning": "Asking if parking is allowed in a specific spot"
+  },
+  {
+    "german": "Wie ist das Wetter?",
+    "english": "How is the weather?",
+    "meaning": "Asking about the current weather conditions"
+  },
+  {
+    "german": "Es ist sonnig.",
+    "english": "It is sunny.",
+    "meaning": "Describing the weather"
+  },
+  {
+    "german": "Es regnet.",
+    "english": "It is raining.",
+    "meaning": "Stating that it is currently raining"
+  },
+  {
+    "german": "Es schneit.",
+    "english": "It is snowing.",
+    "meaning": "Stating that it is currently snowing"
+  },
+  {
+    "german": "Es ist kalt.",
+    "english": "It is cold.",
+    "meaning": "Describing the temperature"
+  },
+  {
+    "german": "Es ist warm.",
+    "english": "It is warm.",
+    "meaning": "Describing the temperature"
+  },
+  {
+    "german": "Es ist windig.",
+    "english": "It is windy.",
+    "meaning": "Describing the weather"
+  },
+  {
+    "german": "Wie ist die Temperatur?",
+    "english": "What is the temperature?",
+    "meaning": "Asking for the specific temperature"
+  },
+  {
+    "german": "Hilfe!",
+    "english": "Help!",
+    "meaning": "Shouting for assistance in an emergency"
+  },
+  {
+    "german": "Rufen Sie einen Krankenwagen!",
+    "english": "Call an ambulance!",
+    "meaning": "Instruction in a medical emergency"
+  },
+  {
+    "german": "Rufen Sie die Polizei!",
+    "english": "Call the police!",
+    "meaning": "Instruction in an emergency requiring the police"
+  },
+  {
+    "german": "Ich brauche einen Arzt.",
+    "english": "I need a doctor.",
+    "meaning": "Stating that you require medical attention"
+  },
+  {
+    "german": "Wo ist das nächste Krankenhaus?",
+    "english": "Where is the nearest hospital?",
+    "meaning": "Asking for the location of a hospital"
+  },
+  {
+    "german": "Ich habe mich verletzt.",
+    "english": "I'm hurt.",
+    "meaning": "Informing someone that you are injured"
+  },
+  {
+    "german": "Es tut hier weh.",
+    "english": "It hurts here.",
+    "meaning": "Pointing to where you feel pain"
+  },
+  {
+    "german": "Ich bin krank.",
+    "english": "I am sick.",
+    "meaning": "Stating that you are ill"
+  },
+  {
+    "german": "Ich habe Fieber.",
+    "english": "I have a fever.",
+    "meaning": "Stating a specific symptom"
+  },
+  {
+    "german": "Ich habe Kopfschmerzen.",
+    "english": "I have a headache.",
+    "meaning": "Stating a common ailment"
+  },
+  {
+    "german": "Allergisch gegen Nüsse.",
+    "english": "Allergic to nuts.",
+    "meaning": "Stating a serious allergy"
+  },
+  {
+    "german": "Was ist deine Telefonnummer?",
+    "english": "What is your phone number? (informal)",
+    "meaning": "Asking for someone's contact number"
+  },
+  {
+    "german": "Kann ich deine Nummer haben?",
+    "english": "Can I have your number? (informal)",
+    "meaning": "A casual way to ask for a phone number"
+  },
+  {
+    "german": "Was ist deine E-Mail-Adresse?",
+    "english": "What is your email address? (informal)",
+    "meaning": "Asking for an email address"
+  },
+  {
+    "german": "Kannst du mich anrufen?",
+    "english": "Can you call me? (informal)",
+    "meaning": "Asking someone to call you"
+  },
+  {
+    "german": "Ich schicke dir eine Nachricht.",
+    "english": "I'll send you a message.",
+    "meaning": "Informing someone you will message them"
+  },
+  {
+    "german": "Hast du WhatsApp?",
+    "english": "Do you have WhatsApp?",
+    "meaning": "Asking if someone uses a specific messaging app"
+  },
+  {
+    "german": "Lass uns treffen.",
+    "english": "Let's meet up.",
+    "meaning": "Suggesting to get together"
+  },
+  {
+    "german": "Wann hast du Zeit?",
+    "english": "When are you free? (informal)",
+    "meaning": "Asking about someone's availability"
+  },
+  {
+    "german": "Kommst du zur Party?",
+    "english": "Are you coming to the party? (informal)",
+    "meaning": "Asking about someone's plans to attend an event"
+  },
+  {
+    "german": "Das ist meine Adresse.",
+    "english": "This is my address.",
+    "meaning": "Providing your location details"
+  },
+  {
+    "german": "Was machst du beruflich?",
+    "english": "What do you do for a living? (informal)",
+    "meaning": "Asking about someone's profession"
+  },
+  {
+    "german": "Ich bin Lehrer.",
+    "english": "I am a teacher. (male)",
+    "meaning": "Stating your profession"
+  },
+  {
+    "german": "Ich bin Ärztin.",
+    "english": "I am a doctor. (female)",
+    "meaning": "Stating your profession"
+  },
+  {
+    "german": "Ich studiere.",
+    "english": "I am a university student.",
+    "meaning": "Stating that you are a student"
+  },
+  {
+    "german": "Ich suche Arbeit.",
+    "english": "I am looking for work.",
+    "meaning": "Stating that you are job-seeking"
+  },
+  {
+    "german": "Wie alt bist du?",
+    "english": "How old are you? (informal)",
+    "meaning": "Asking someone's age (use with caution, can be impolite)"
+  },
+  {
+    "german": "Ich bin dreißig Jahre alt.",
+    "english": "I am thirty years old.",
+    "meaning": "Stating your age"
+  },
+  {
+    "german": "Alles Gute zum Geburtstag!",
+    "english": "Happy Birthday!",
+    "meaning": "The standard birthday greeting"
+  },
+  {
+    "german": "Frohe Weihnachten!",
+    "english": "Merry Christmas!",
+    "meaning": "Christmas greeting"
+  },
+  {
+    "german": "Guten Rutsch!",
+    "english": "Happy New Year! (Literally: Good slide!)",
+    "meaning": "A common greeting for New Year's Eve"
+  },
+  {
+    "german": "Viel Glück!",
+    "english": "Good luck!",
+    "meaning": "Wishing someone luck"
+  },
+  {
+    "german": "Herzlichen Glückwunsch!",
+    "english": "Congratulations!",
+    "meaning": "Congratulating someone on an achievement"
+  },
+  {
+    "german": "Gute Besserung!",
+    "english": "Get well soon!",
+    "meaning": "Wishing someone a speedy recovery"
+  },
+  {
+    "german": "Kannst du mir helfen?",
+    "english": "Can you help me? (informal)",
+    "meaning": "Asking for assistance"
+  },
+  {
+    "german": "Ich brauche Hilfe.",
+    "english": "I need help.",
+    "meaning": "Stating that you require assistance"
+  },
+  {
+    "german": "Keine Ahnung.",
+    "english": "No idea.",
+    "meaning": "Stating that you don't know the answer"
+  },
+  {
+    "german": "Das weiß ich nicht.",
+    "english": "I don't know that.",
+    "meaning": "A more formal way to say you don't know"
+  },
+  {
+    "german": "Ich habe eine Frage.",
+    "english": "I have a question.",
+    "meaning": "Preface before asking something"
+  },
+  {
+    "german": "Was ist das?",
+    "english": "What is that?",
+    "meaning": "Asking for identification of an object"
+  },
+  {
+    "german": "Wer ist das?",
+    "english": "Who is that?",
+    "meaning": "Asking for identification of a person"
+  },
+  {
+    "german": "Wann?",
+    "english": "When?",
+    "meaning": "Asking for a point in time"
+  },
+  {
+    "german": "Warum?",
+    "english": "Why?",
+    "meaning": "Asking for a reason"
+  },
+  {
+    "german": "Wie?",
+    "english": "How?",
+    "meaning": "Asking about manner or method"
+  },
+  {
+    "german": "Welche?",
+    "english": "Which?",
+    "meaning": "Asking for a selection from options"
+  },
+  {
+    "german": "Wo?",
+    "english": "Where?",
+    "meaning": "Asking for a location"
+  },
+  {
+    "german": "Ich habe es vergessen.",
+    "english": "I forgot it.",
+    "meaning": "Admitting you have forgotten something"
+  },
+  {
+    "german": "Warte einen Moment.",
+    "english": "Wait a moment.",
+    "meaning": "Asking someone to pause briefly"
+  },
+  {
+    "german": "Ich bin fertig.",
+    "english": "I'm finished.",
+    "meaning": "Stating that you have completed a task"
+  },
+  {
+    "german": "Das ist einfach.",
+    "english": "That is easy.",
+    "meaning": "Stating that something is not difficult"
+  },
+  {
+    "german": "Das ist schwierig.",
+    "english": "That is difficult.",
+    "meaning": "Stating that something is hard"
+  },
+  {
+    "german": "Ich bin müde.",
+    "english": "I am tired.",
+    "meaning": "Stating that you need to rest"
+  },
+  {
+    "german": "Ich muss gehen.",
+    "english": "I have to go.",
+    "meaning": "Stating that you need to leave"
+  },
+  {
+    "german": "Hast du Geschwister?",
+    "english": "Do you have siblings? (informal)",
+    "meaning": "Asking about family"
+  },
+  {
+    "german": "Ich habe eine Schwester.",
+    "english": "I have a sister.",
+    "meaning": "Talking about your family"
+  },
+  {
+    "german": "Ich habe einen Bruder.",
+    "english": "I have a brother.",
+    "meaning": "Talking about your family"
+  },
+  {
+    "german": "Was sind deine Hobbys?",
+    "english": "What are your hobbies? (informal)",
+    "meaning": "Asking about someone's interests"
+  },
+  {
+    "german": "Ich lese gern.",
+    "english": "I like to read.",
+    "meaning": "Stating a hobby"
+  },
+  {
+    "german": "Ich reise gern.",
+    "english": "I like to travel.",
+    "meaning": "Stating a hobby"
+  },
+  {
+    "german": "Ich höre Musik.",
+    "english": "I listen to music.",
+    "meaning": "Stating an activity you enjoy"
+  },
+  {
+    "german": "Ich sehe fern.",
+    "english": "I watch TV.",
+    "meaning": "Stating an activity you enjoy"
+  },
+  {
+    "german": "Magst du Sport?",
+    "english": "Do you like sports? (informal)",
+    "meaning": "Asking about an interest in sports"
+  },
+  {
+    "german": "Ich spiele Fußball.",
+    "english": "I play soccer.",
+    "meaning": "Stating a sport you play"
+  },
+  {
+    "german": "Welche Musik hörst du gern?",
+    "english": "What music do you like to listen to? (informal)",
+    "meaning": "Asking about musical taste"
+  },
+  {
+    "german": "Hast du Haustiere?",
+    "english": "Do you have pets? (informal)",
+    "meaning": "Asking if someone owns animals"
+  },
+  {
+    "german": "Ich habe einen Hund.",
+    "english": "I have a dog.",
+    "meaning": "Stating you have a pet"
+  },
+  {
+    "german": "Ich habe eine Katze.",
+    "english": "I have a cat.",
+    "meaning": "Stating you have a pet"
+  },
+  {
+    "german": "Das ist mein Freund.",
+    "english": "This is my boyfriend.",
+    "meaning": "Introducing a male partner"
+  },
+  {
+    "german": "Das ist meine Freundin.",
+    "english": "This is my girlfriend.",
+    "meaning": "Introducing a female partner"
+  },
+  {
+    "german": "Ich liebe dich.",
+    "english": "I love you.",
+    "meaning": "A strong declaration of affection"
+  },
+  {
+    "german": "Ich vermisse dich.",
+    "english": "I miss you.",
+    "meaning": "Telling someone you miss them"
+  },
+  {
+    "german": "Kannst du das?",
+    "english": "Can you do that? (informal)",
+    "meaning": "Asking about someone's ability"
+  },
+  {
+    "german": "Ich kann schwimmen.",
+    "english": "I can swim.",
+    "meaning": "Stating an ability"
+  },
+  {
+    "german": "Ich kann nicht kochen.",
+    "english": "I can't cook.",
+    "meaning": "Stating a lack of ability"
+  },
+  {
+    "german": "Ich muss lernen.",
+    "english": "I have to study.",
+    "meaning": "Stating an obligation"
+  },
+  {
+    "german": "Ich will ins Kino gehen.",
+    "english": "I want to go to the cinema.",
+    "meaning": "Expressing a desire or want"
+  },
+  {
+    "german": "Ich mag Schokolade.",
+    "english": "I like chocolate.",
+    "meaning": "Expressing a preference for something"
+  },
+  {
+    "german": "Ich mag das nicht.",
+    "english": "I don't like that.",
+    "meaning": "Expressing dislike for something"
+  },
+  {
+    "german": "Das ist langweilig.",
+    "english": "That is boring.",
+    "meaning": "Expressing that something is not interesting"
+  },
+  {
+    "german": "Das ist interessant.",
+    "english": "That is interesting.",
+    "meaning": "Expressing that something is engaging"
+  },
+  {
+    "german": "Das ist lustig.",
+    "english": "That is funny.",
+    "meaning": "Expressing that something is humorous"
+  },
+  {
+    "german": "Ich habe Recht.",
+    "english": "I am right.",
+    "meaning": "Stating that your opinion or fact is correct"
+  },
+  {
+    "german": "Du hast Unrecht.",
+    "english": "You are wrong.",
+    "meaning": "Stating that someone else is incorrect"
+  },
+  {
+    "german": "Vorsicht!",
+    "english": "Careful! / Look out!",
+    "meaning": "A warning to be cautious"
+  },
+  {
+    "german": "Achtung!",
+    "english": "Attention! / Watch out!",
+    "meaning": "A stronger warning"
+  },
+  {
+    "german": "Nicht rauchen.",
+    "english": "No smoking.",
+    "meaning": "Reading a common sign"
+  },
+  {
+    "german": "Eingang.",
+    "english": "Entrance.",
+    "meaning": "Identifying an entrance"
+  },
+  {
+    "german": "Ausgang.",
+    "english": "Exit.",
+    "meaning": "Identifying an exit"
+  },
+  {
+    "german": "Offen.",
+    "english": "Open.",
+    "meaning": "Stating that a place is open for business"
+  },
+  {
+    "german": "Geschlossen.",
+    "english": "Closed.",
+    "meaning": "Stating that a place is not open"
+  },
+  {
+    "german": "Besetzt.",
+    "english": "Occupied.",
+    "meaning": "Commonly seen on a bathroom door"
+  },
+  {
+    "german": "Frei.",
+    "english": "Vacant.",
+    "meaning": "Commonly seen on a bathroom door"
+  },
+  {
+    "german": "Ich habe kein Geld.",
+    "english": "I have no money.",
+    "meaning": "Stating a lack of funds"
+  },
+  {
+    "german": "Ich habe keinen Hunger.",
+    "english": "I'm not hungry.",
+    "meaning": "Politely declining food"
+  },
+  {
+    "german": "Das ist nicht wichtig.",
+    "english": "That is not important.",
+    "meaning": "Minimizing the significance of something"
+  },
+  {
+    "german": "Das ist sehr wichtig.",
+    "english": "That is very important.",
+    "meaning": "Emphasizing the significance of something"
+  },
+  {
+    "german": "Ich bin busy.",
+    "english": "I am busy.",
+    "meaning": "Stating that you are occupied (note: 'busy' is commonly used in German)"
+  },
+  {
+    "german": "Hast du Zeit?",
+    "english": "Do you have time? (informal)",
+    "meaning": "Asking if someone is available"
+  },
+  {
+    "german": "Komm herein!",
+    "english": "Come in!",
+    "meaning": "Inviting someone to enter a room"
+  },
+  {
+    "german": "Mach die Tür zu, bitte.",
+    "english": "Close the door, please.",
+    "meaning": "Making a polite request"
+  },
+  {
+    "german": "Es klingelt.",
+    "english": "The doorbell is ringing.",
+    "meaning": "Noticing the doorbell"
+  },
+  {
+    "german": "Es ist spät.",
+    "english": "It is late.",
+    "meaning": "Noting the time is late in the day/night"
+  },
+  {
+    "german": "Guten Appetit!",
+    "english": "Enjoy your meal!",
+    "meaning": "Said before eating a meal"
+  },
+  {
+    "german": "Ich bin satt.",
+    "english": "I'm full.",
+    "meaning": "Stating you have eaten enough"
+  },
+  {
+    "german": "Zusammen oder getrennt?",
+    "english": "Together or separate?",
+    "meaning": "A waiter asking how the bill should be split"
+  },
+  {
+    "german": "Ich habe mich verlaufen.",
+    "english": "I am lost.",
+    "meaning": "Stating that you don't know where you are"
+  },
+  {
+    "german": "Kannst du das übersetzen?",
+    "english": "Can you translate this? (informal)",
+    "meaning": "Asking for a translation"
+  },
+  {
+    "german": "Ich lerne Deutsch.",
+    "english": "I am learning German.",
+    "meaning": "Explaining what you are studying"
+  },
+  {
+    "german": "Das ist fantastisch!",
+    "english": "That is fantastic!",
+    "meaning": "Expressing great enthusiasm"
+  },
+  {
+    "german": "Das gefällt mir.",
+    "english": "I like that.",
+    "meaning": "Expressing that something pleases you"
+  },
+  {
+    "german": "Das gefällt mir nicht.",
+    "english": "I don't like that.",
+    "meaning": "Expressing that something does not please you"
+  },
+  {
+    "german": "Kein Wort!",
+    "english": "Not a word!",
+    "meaning": "Telling someone to be quiet about something"
+  },
+  {
+    "german": "Ich habe es verstanden.",
+    "english": "I understood it.",
+    "meaning": "Confirming comprehension"
+  },
+  {
+    "german": "Ich habe es nicht verstanden.",
+    "english": "I didn't understand it.",
+    "meaning": "Stating a lack of comprehension"
+  },
+  {
+    "german": "Das ist mein.",
+    "english": "That is mine.",
+    "meaning": "Claiming ownership (Note: Correct is 'Das ist meins' but 'mein' is often used colloquially)"
+  },
+  {
+    "german": "Das ist deins.",
+    "english": "That is yours.",
+    "meaning": "Acknowledging something belongs to someone else"
+  },
+  {
+    "german": "Wirklich?",
+    "english": "Really?",
+    "meaning": "Expressing surprise or seeking confirmation"
+  },
+  {
+    "german": "Ehrlich?",
+    "english": "Honestly?",
+    "meaning": "Asking if something is true"
+  },
+  {
+    "german": "Kein Problem.",
+    "english": "No problem.",
+    "meaning": "A casual response to an apology or request"
+  },
+  {
+    "german": "Mach's gut!",
+    "english": "Take care! / All the best!",
+    "meaning": "A friendly, informal way to say goodbye"
+  },
+  {
+    "german": "Viel Spaß!",
+    "english": "Have fun!",
+    "meaning": "Wishing someone an enjoyable time"
+  },
+  {
+    "german": "Ich auch.",
+    "english": "Me too.",
+    "meaning": "Agreeing or stating the same applies to you"
+  },
+  {
+    "german": "Ich nicht.",
+    "english": "Not me.",
+    "meaning": "Stating that something does not apply to you"
+  },
+  {
+    "german": "Genau!",
+    "english": "Exactly!",
+    "meaning": "Agreeing emphatically"
+  },
+  {
+    "german": "Klar!",
+    "english": "Of course! / Clearly!",
+    "meaning": "Expressing that something is obvious or agreed upon"
+  },
+  {
+    "german": "Quatsch!",
+    "english": "Nonsense!",
+    "meaning": "Dismissing something as untrue or silly"
+  },
+  {
+    "german": "Ruhe, bitte!",
+    "english": "Quiet, please!",
+    "meaning": "Asking for silence"
+  },
+  {
+    "german": "Still!",
+    "english": "Quiet! / Hush!",
+    "meaning": "A more direct command for silence"
+  }
+]

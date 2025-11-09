@@ -1,6 +1,6 @@
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Services/tts_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,86 +30,26 @@ class VerbsScreen extends StatefulWidget {
 }
 
 class _VerbsScreenState extends State<VerbsScreen> {
-  final ThemeService themeService = Get.find<ThemeService>();
   final TtsService ttsService = Get.find<TtsService>();
   int _currentVerbIndex = 0;
   Map<int, bool> _expandedExamples = {};
+  List<VerbData> _verbs = [];
+  bool _isLoading = true;
 
-  // Sample verbs - in production, load from data source
-  final List<VerbData> _verbs = [
-    VerbData(
-      infinitive: 'sein',
-      english: 'to be',
-      conjugation: 'ich bin, du bist, er/sie/es ist',
-      examples: [
-        'Ich bin müde. (I am tired.)',
-        'Du bist hier. (You are here.)',
-        'Er ist ein Lehrer. (He is a teacher.)',
-        'Wir sind Freunde. (We are friends.)',
-        'Sie sind glücklich. (They are happy.)',
-      ],
-    ),
-    VerbData(
-      infinitive: 'haben',
-      english: 'to have',
-      conjugation: 'ich habe, du hast, er/sie/es hat',
-      examples: [
-        'Ich habe ein Auto. (I have a car.)',
-        'Du hast Zeit. (You have time.)',
-        'Er hat Hunger. (He is hungry.)',
-        'Wir haben Spaß. (We have fun.)',
-        'Sie haben Recht. (They are right.)',
-      ],
-    ),
-    VerbData(
-      infinitive: 'gehen',
-      english: 'to go',
-      conjugation: 'ich gehe, du gehst, er/sie/es geht',
-      examples: [
-        'Ich gehe zur Schule. (I go to school.)',
-        'Du gehst nach Hause. (You go home.)',
-        'Er geht ins Kino. (He goes to the cinema.)',
-        'Wir gehen spazieren. (We go for a walk.)',
-        'Sie gehen einkaufen. (They go shopping.)',
-      ],
-    ),
-    VerbData(
-      infinitive: 'kommen',
-      english: 'to come',
-      conjugation: 'ich komme, du kommst, er/sie/es kommt',
-      examples: [
-        'Ich komme aus Deutschland. (I come from Germany.)',
-        'Du kommst zu spät. (You come too late.)',
-        'Er kommt heute. (He comes today.)',
-        'Wir kommen morgen. (We come tomorrow.)',
-        'Sie kommen zusammen. (They come together.)',
-      ],
-    ),
-    VerbData(
-      infinitive: 'machen',
-      english: 'to make/do',
-      conjugation: 'ich mache, du machst, er/sie/es macht',
-      examples: [
-        'Ich mache Hausaufgaben. (I do homework.)',
-        'Du machst einen Fehler. (You make a mistake.)',
-        'Er macht Sport. (He does sports.)',
-        'Wir machen eine Pause. (We take a break.)',
-        'Sie machen Musik. (They make music.)',
-      ],
-    ),
-    VerbData(
-      infinitive: 'sagen',
-      english: 'to say',
-      conjugation: 'ich sage, du sagst, er/sie/es sagt',
-      examples: [
-        'Ich sage die Wahrheit. (I tell the truth.)',
-        'Du sagst nichts. (You say nothing.)',
-        'Er sagt "Hallo". (He says "Hello".)',
-        'Wir sagen "Danke". (We say "Thank you".)',
-        'Sie sagen immer "Ja". (They always say "Yes".)',
-      ],
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadVerbs();
+  }
+
+  Future<void> _loadVerbs() async {
+    final loadedVerbs = await DataLoader.loadVerbs();
+    setState(() {
+      _verbs = loadedVerbs;
+      _isLoading = false;
+    });
+  }
+
 
   void _toggleExamples(int index) {
     setState(() {
@@ -148,11 +88,16 @@ class _VerbsScreenState extends State<VerbsScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
-
+    if (_isLoading) {
       return Scaffold(
+        backgroundColor: const Color(0xFF0B0F14),
+        body: const Center(
+          child: CircularProgressIndicator(color: Colors.white),
+        ),
+      );
+    }
+
+    return Scaffold(
         backgroundColor: const Color(0xFF0B0F14),
         appBar: AppBar(
           backgroundColor: const Color(0xFF0B0F14),
@@ -209,7 +154,6 @@ class _VerbsScreenState extends State<VerbsScreen> {
           ),
         ),
       );
-    });
   }
 
   Widget _buildTopBar(bool isSmallScreen) {
