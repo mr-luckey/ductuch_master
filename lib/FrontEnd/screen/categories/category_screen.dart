@@ -5,116 +5,64 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Noun model with singular and plural forms
-class NounData {
-  final String singular; // e.g., "Der Hund"
-  final String plural; // e.g., "Die Hunde"
+/// Category word model
+class CategoryWord {
+  final String german;
   final String english;
   final String? meaning;
 
-  NounData({
-    required this.singular,
-    required this.plural,
+  CategoryWord({
+    required this.german,
     required this.english,
     this.meaning,
   });
 }
 
-/// Nouns Screen - displays German nouns with singular and plural forms
+/// Category Screen - displays words from a specific category
 /// Uses the same card design as learn.dart
-class NounsScreen extends StatefulWidget {
-  const NounsScreen({super.key});
+class CategoryScreen extends StatefulWidget {
+  final String categoryName;
+  final List<CategoryWord> words;
+
+  const CategoryScreen({
+    super.key,
+    required this.categoryName,
+    required this.words,
+  });
 
   @override
-  State<NounsScreen> createState() => _NounsScreenState();
+  State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
-class _NounsScreenState extends State<NounsScreen> {
+class _CategoryScreenState extends State<CategoryScreen> {
   final ThemeService themeService = Get.find<ThemeService>();
   final TtsService ttsService = Get.find<TtsService>();
-  int _currentNounIndex = 0;
+  int _currentWordIndex = 0;
 
-  // Sample nouns - in production, load from data source
-  final List<NounData> _nouns = [
-    NounData(
-      singular: 'Der Hund',
-      plural: 'Die Hunde',
-      english: 'the dog / the dogs',
-      meaning: 'A common pet animal',
-    ),
-    NounData(
-      singular: 'Die Frau',
-      plural: 'Die Frauen',
-      english: 'the woman / the women',
-      meaning: 'An adult female person',
-    ),
-    NounData(
-      singular: 'Das Kind',
-      plural: 'Die Kinder',
-      english: 'the child / the children',
-      meaning: 'A young person',
-    ),
-    NounData(
-      singular: 'Der Tisch',
-      plural: 'Die Tische',
-      english: 'the table / the tables',
-      meaning: 'A piece of furniture',
-    ),
-    NounData(
-      singular: 'Die Tür',
-      plural: 'Die Türen',
-      english: 'the door / the doors',
-      meaning: 'An entrance or exit',
-    ),
-    NounData(
-      singular: 'Das Buch',
-      plural: 'Die Bücher',
-      english: 'the book / the books',
-      meaning: 'A written or printed work',
-    ),
-    NounData(
-      singular: 'Der Mann',
-      plural: 'Die Männer',
-      english: 'the man / the men',
-      meaning: 'An adult male person',
-    ),
-    NounData(
-      singular: 'Das Haus',
-      plural: 'Die Häuser',
-      english: 'the house / the houses',
-      meaning: 'A building for living',
-    ),
-  ];
-
-  void _nextNoun() {
+  void _nextWord() {
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
     setState(() {
-      _currentNounIndex = (_currentNounIndex + 1) % _nouns.length;
+      _currentWordIndex = (_currentWordIndex + 1) % widget.words.length;
     });
   }
 
-  void _previousNoun() {
+  void _previousWord() {
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
     setState(() {
-      _currentNounIndex = (_currentNounIndex - 1) % _nouns.length;
-      if (_currentNounIndex < 0) {
-        _currentNounIndex = _nouns.length - 1;
+      _currentWordIndex = (_currentWordIndex - 1) % widget.words.length;
+      if (_currentWordIndex < 0) {
+        _currentWordIndex = widget.words.length - 1;
       }
     });
   }
 
-  Future<void> _playSingular() async {
-    final currentNoun = _nouns[_currentNounIndex];
-    await ttsService.speak(currentNoun.singular);
-  }
-
-  Future<void> _playPlural() async {
-    final currentNoun = _nouns[_currentNounIndex];
-    await ttsService.speak(currentNoun.plural);
+  Future<void> _playCurrentWord() async {
+    final currentWord = widget.words[_currentWordIndex];
+    await ttsService.speak(currentWord.german);
   }
 
   @override
@@ -131,7 +79,7 @@ class _NounsScreenState extends State<NounsScreen> {
         appBar: AppBar(
           backgroundColor: const Color(0xFF0B0F14),
           title: Text(
-            'Nouns',
+            widget.categoryName,
             style: TextStyle(
               fontFamily: GoogleFonts.patrickHand().fontFamily,
               color: Colors.white,
@@ -162,7 +110,7 @@ class _NounsScreenState extends State<NounsScreen> {
                     SizedBox(height: isSmallScreen ? 4 : 6),
                     _buildTopBar(isSmallScreen),
                     SizedBox(height: isSmallScreen ? 12 : 16),
-                    _buildNounHeader(isSmallScreen),
+                    _buildCategoryHeader(isSmallScreen),
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     Expanded(
                       child: SingleChildScrollView(
@@ -209,7 +157,7 @@ class _NounsScreenState extends State<NounsScreen> {
     );
   }
 
-  Widget _buildNounHeader(bool isSmallScreen) {
+  Widget _buildCategoryHeader(bool isSmallScreen) {
     return Row(
       children: [
         Flexible(
@@ -218,7 +166,7 @@ class _NounsScreenState extends State<NounsScreen> {
             children: [
               Flexible(
                 child: Text(
-                  'German Nouns',
+                  widget.categoryName,
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: Colors.white.withOpacity(0.5),
@@ -235,7 +183,7 @@ class _NounsScreenState extends State<NounsScreen> {
         Row(
           children: [
             Text(
-              '${_currentNounIndex + 1}/${_nouns.length}',
+              '${_currentWordIndex + 1}/${widget.words.length}',
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: Colors.white.withOpacity(0.6),
@@ -271,7 +219,7 @@ class _NounsScreenState extends State<NounsScreen> {
   }
 
   Widget _buildMainCard(bool isSmallScreen) {
-    final currentNoun = _nouns[_currentNounIndex];
+    final currentWord = widget.words[_currentWordIndex];
 
     return Container(
       decoration: BoxDecoration(
@@ -316,7 +264,7 @@ class _NounsScreenState extends State<NounsScreen> {
                           ),
                           SizedBox(width: isSmallScreen ? 3 : 4),
                           Text(
-                            'NOUN',
+                            widget.categoryName.toUpperCase(),
                             style: TextStyle(
                               fontSize: isSmallScreen ? 10 : 11,
                               color: Colors.white.withOpacity(0.7),
@@ -327,86 +275,15 @@ class _NounsScreenState extends State<NounsScreen> {
                       ),
                     ),
                     SizedBox(height: isSmallScreen ? 6 : 8),
-                    // Singular form
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            currentNoun.singular,
-                            style: TextStyle(
-                              fontSize: isSmallScreen ? 20 : 24,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              height: 1.2,
-                              fontFamily: GoogleFonts.patrickHand().fontFamily,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              isSmallScreen ? 6 : 8,
-                            ),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.1),
-                            ),
-                          ),
-                          child: IconButton(
-                            onPressed: _playSingular,
-                            icon: Icon(
-                              ttsService.isTextPlaying(currentNoun.singular)
-                                  ? Icons.volume_up
-                                  : Icons.volume_up_outlined,
-                              size: isSmallScreen ? 16 : 18,
-                              color: ttsService.isTextPlaying(currentNoun.singular)
-                                  ? const Color(0xFF10B981)
-                                  : Colors.white.withOpacity(0.8),
-                            ),
-                            padding: isSmallScreen ? const EdgeInsets.all(4) : null,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: isSmallScreen ? 8 : 12),
-                    // Plural form
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            currentNoun.plural,
-                            style: TextStyle(
-                              fontSize: isSmallScreen ? 18 : 22,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white.withOpacity(0.9),
-                              height: 1.2,
-                              fontFamily: GoogleFonts.patrickHand().fontFamily,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              isSmallScreen ? 6 : 8,
-                            ),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.1),
-                            ),
-                          ),
-                          child: IconButton(
-                            onPressed: _playPlural,
-                            icon: Icon(
-                              ttsService.isTextPlaying(currentNoun.plural)
-                                  ? Icons.volume_up
-                                  : Icons.volume_up_outlined,
-                              size: isSmallScreen ? 16 : 18,
-                              color: ttsService.isTextPlaying(currentNoun.plural)
-                                  ? const Color(0xFF10B981)
-                                  : Colors.white.withOpacity(0.8),
-                            ),
-                            padding: isSmallScreen ? const EdgeInsets.all(4) : null,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      currentWord.german,
+                      style: TextStyle(
+                        fontSize: isSmallScreen ? 20 : 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        height: 1.2,
+                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                      ),
                     ),
                   ],
                 ),
@@ -451,18 +328,47 @@ class _NounsScreenState extends State<NounsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  currentNoun.english,
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 14 : 15,
-                    color: Colors.white.withOpacity(0.9),
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        currentWord.english,
+                        style: TextStyle(
+                          fontSize: isSmallScreen ? 14 : 15,
+                          color: Colors.white.withOpacity(0.9),
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          isSmallScreen ? 6 : 8,
+                        ),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.1),
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: _playCurrentWord,
+                        icon: Icon(
+                          ttsService.isTextPlaying(currentWord.german)
+                              ? Icons.volume_up
+                              : Icons.volume_up_outlined,
+                          size: isSmallScreen ? 16 : 18,
+                          color: ttsService.isTextPlaying(currentWord.german)
+                              ? const Color(0xFF10B981)
+                              : Colors.white.withOpacity(0.8),
+                        ),
+                        padding: isSmallScreen ? const EdgeInsets.all(4) : null,
+                      ),
+                    ),
+                  ],
                 ),
-                if (currentNoun.meaning != null) ...[
+                if (currentWord.meaning != null) ...[
                   SizedBox(height: isSmallScreen ? 2 : 4),
                   Text(
-                    currentNoun.meaning!,
+                    currentWord.meaning!,
                     style: TextStyle(
                       fontSize: isSmallScreen ? 12 : 13,
                       color: Colors.white.withOpacity(0.6),
@@ -483,7 +389,7 @@ class _NounsScreenState extends State<NounsScreen> {
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
-              widthFactor: (_currentNounIndex + 1) / _nouns.length,
+              widthFactor: (_currentWordIndex + 1) / widget.words.length,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
@@ -498,7 +404,7 @@ class _NounsScreenState extends State<NounsScreen> {
   }
 
   Widget _buildExternalNavigationControls(bool isSmallScreen) {
-    final currentNoun = _nouns[_currentNounIndex];
+    final currentWord = widget.words[_currentWordIndex];
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
@@ -512,7 +418,7 @@ class _NounsScreenState extends State<NounsScreen> {
               color: Colors.white.withOpacity(0.05),
             ),
             child: IconButton(
-              onPressed: _previousNoun,
+              onPressed: _previousWord,
               icon: Icon(
                 Icons.chevron_left,
                 size: isSmallScreen ? 28 : 32,
@@ -537,9 +443,9 @@ class _NounsScreenState extends State<NounsScreen> {
                   ],
                 ),
                 child: IconButton(
-                  onPressed: _playSingular,
+                  onPressed: _playCurrentWord,
                   icon: Icon(
-                    ttsService.isTextPlaying(currentNoun.singular)
+                    ttsService.isTextPlaying(currentWord.german)
                         ? Icons.stop
                         : Icons.volume_up,
                     size: isSmallScreen ? 36 : 42,
@@ -548,7 +454,7 @@ class _NounsScreenState extends State<NounsScreen> {
                   padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
                 ),
               ),
-              if (ttsService.isTextPlaying(currentNoun.singular))
+              if (ttsService.isTextPlaying(currentWord.german))
                 Positioned(
                   top: 8,
                   right: 8,
@@ -570,7 +476,7 @@ class _NounsScreenState extends State<NounsScreen> {
               color: Colors.white.withOpacity(0.05),
             ),
             child: IconButton(
-              onPressed: _nextNoun,
+              onPressed: _nextWord,
               icon: Icon(
                 Icons.chevron_right,
                 size: isSmallScreen ? 28 : 32,
@@ -584,3 +490,4 @@ class _NounsScreenState extends State<NounsScreen> {
     );
   }
 }
+

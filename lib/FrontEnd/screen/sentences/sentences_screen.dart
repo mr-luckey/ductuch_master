@@ -1,9 +1,25 @@
 import 'package:ductuch_master/Utilities/Services/theme_service.dart';
+import 'package:ductuch_master/Utilities/Services/tts_service.dart';
+import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// Sentence model
+class SentenceData {
+  final String german;
+  final String english;
+  final String? meaning;
+
+  SentenceData({
+    required this.german,
+    required this.english,
+    this.meaning,
+  });
+}
+
+/// Sentences Screen - displays German sentences with TTS
+/// Uses the same card design as learn.dart
 class SentencesScreen extends StatefulWidget {
   const SentencesScreen({super.key});
 
@@ -12,345 +28,499 @@ class SentencesScreen extends StatefulWidget {
 }
 
 class _SentencesScreenState extends State<SentencesScreen> {
-  FlutterTts flutterTts = FlutterTts();
-  bool _isPlaying = false;
-  String? _currentPlayingText;
+  final ThemeService themeService = Get.find<ThemeService>();
+  final TtsService ttsService = Get.find<TtsService>();
+  int _currentSentenceIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _initTTS();
-  }
+  // Sample sentences - in production, load from data source
+  final List<SentenceData> _sentences = [
+    SentenceData(
+      german: 'Guten Morgen!',
+      english: 'Good morning!',
+      meaning: 'A common greeting used in the morning',
+    ),
+    SentenceData(
+      german: 'Wie geht es dir?',
+      english: 'How are you?',
+      meaning: 'A common question to ask about someone\'s well-being',
+    ),
+    SentenceData(
+      german: 'Ich heiße Maria.',
+      english: 'My name is Maria.',
+      meaning: 'A way to introduce yourself',
+    ),
+    SentenceData(
+      german: 'Wo ist die Toilette?',
+      english: 'Where is the bathroom?',
+      meaning: 'A useful question when you need to find a restroom',
+    ),
+    SentenceData(
+      german: 'Ich verstehe nicht.',
+      english: 'I don\'t understand.',
+      meaning: 'Useful when you need clarification',
+    ),
+    SentenceData(
+      german: 'Kannst du das wiederholen?',
+      english: 'Can you repeat that?',
+      meaning: 'Ask someone to say something again',
+    ),
+    SentenceData(
+      german: 'Entschuldigung!',
+      english: 'Excuse me!',
+      meaning: 'Used to get attention or apologize',
+    ),
+    SentenceData(
+      german: 'Vielen Dank!',
+      english: 'Thank you very much!',
+      meaning: 'A polite way to express gratitude',
+    ),
+  ];
 
-  Future<void> _initTTS() async {
-    await flutterTts.setSpeechRate(0.8);
-    await flutterTts.setPitch(1.0);
-    await flutterTts.setVolume(1.0);
-    await flutterTts.setLanguage('de-DE');
-    
-    flutterTts.setCompletionHandler(() {
-      setState(() {
-        _isPlaying = false;
-        _currentPlayingText = null;
-      });
-    });
-
-    flutterTts.setErrorHandler((msg) {
-      setState(() {
-        _isPlaying = false;
-        _currentPlayingText = null;
-      });
-    });
-  }
-
-  Future<void> _speak(String text) async {
-    if (_isPlaying && _currentPlayingText == text) {
-      await flutterTts.stop();
-      setState(() {
-        _isPlaying = false;
-        _currentPlayingText = null;
-      });
-      return;
+  void _nextSentence() {
+    if (ttsService.isPlaying) {
+      ttsService.stop();
     }
-
     setState(() {
-      _isPlaying = true;
-      _currentPlayingText = text;
+      _currentSentenceIndex = (_currentSentenceIndex + 1) % _sentences.length;
     });
-
-    try {
-      await flutterTts.speak(text);
-    } catch (e) {
-      setState(() {
-        _isPlaying = false;
-        _currentPlayingText = null;
-      });
-    }
   }
 
-  @override
-  void dispose() {
-    flutterTts.stop();
-    super.dispose();
+  void _previousSentence() {
+    if (ttsService.isPlaying) {
+      ttsService.stop();
+    }
+    setState(() {
+      _currentSentenceIndex = (_currentSentenceIndex - 1) % _sentences.length;
+      if (_currentSentenceIndex < 0) {
+        _currentSentenceIndex = _sentences.length - 1;
+      }
+    });
+  }
+
+  Future<void> _playCurrentSentence() async {
+    final currentSentence = _sentences[_currentSentenceIndex];
+    await ttsService.speak(currentSentence.german);
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeService = Get.find<ThemeService>();
     final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
-    final padding = isTablet ? 24.0 : 16.0;
-    final titleSize = isTablet ? 36.0 : 28.0;
-    final subtitleSize = isTablet ? 18.0 : 16.0;
+    final isSmallScreen = screenWidth < 360;
 
     return Obx(() {
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
 
-      final backgroundColor = isDark
-          ? scheme.backgroundDark
-          : scheme.background;
-      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-      final secondaryTextColor = isDark
-          ? scheme.textSecondaryDark
-          : scheme.textSecondary;
-
       return Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: const Color(0xFF0B0F14),
         appBar: AppBar(
+          backgroundColor: const Color(0xFF0B0F14),
           title: Text(
-            'Small Sentences',
+            'Sentences',
             style: TextStyle(
               fontFamily: GoogleFonts.patrickHand().fontFamily,
-              color: textColor,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
-              fontSize: isTablet ? 24 : 20,
+              fontSize: screenWidth > 600 ? 24 : 20,
             ),
           ),
           actions: [
-            IconButton(
-              icon: Icon(
-                isDark ? Icons.light_mode : Icons.dark_mode,
-                color: textColor,
-              ),
-              onPressed: () => themeService.toggleDarkMode(),
-            ),
-            PopupMenuButton<String>(
-              icon: Icon(Icons.palette, color: textColor),
-              onSelected: (value) {
-                final index = int.parse(value);
-                themeService.changeScheme(index);
-              },
-              itemBuilder: (context) => ThemeService.colorSchemes
-                  .asMap()
-                  .entries
-                  .map(
-                    (entry) => PopupMenuItem(
-                      value: entry.key.toString(),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              color: entry.value.primary,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(entry.value.name),
-                        ],
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
+            TtsSpeedDropdown(),
           ],
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(padding),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: isTablet ? 800 : double.infinity,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Small Sentences Book',
-                    style: TextStyle(
-                      fontSize: titleSize,
-                      fontWeight: FontWeight.bold,
-                      color: textColor,
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return Container(
+                width: double.infinity,
+                constraints: BoxConstraints(
+                  maxWidth: constraints.maxWidth > 500
+                      ? 500
+                      : constraints.maxWidth,
+                ),
+                margin: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                  vertical: constraints.maxWidth > 500 ? 30 : 20,
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: isSmallScreen ? 4 : 6),
+                    _buildTopBar(isSmallScreen),
+                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    _buildSentenceHeader(isSmallScreen),
+                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            _buildMainCard(isSmallScreen),
+                            SizedBox(height: isSmallScreen ? 20 : 24),
+                            _buildExternalNavigationControls(isSmallScreen),
+                            SizedBox(height: isSmallScreen ? 16 : 20),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Practice with common German phrases and sentences',
-                    style: TextStyle(
-                      fontSize: subtitleSize,
-                      color: secondaryTextColor,
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
-                    ),
-                  ),
-                  SizedBox(height: 24),
-                _buildSentenceCard(
-                  context,
-                  'Guten Morgen!',
-                  'Good morning!',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
+                  ],
                 ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Wie geht es dir?',
-                  'How are you?',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Ich heiße Maria.',
-                  'My name is Maria.',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Wo ist die Toilette?',
-                  'Where is the bathroom?',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Ich verstehe nicht.',
-                  'I don\'t understand.',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Kannst du das wiederholen?',
-                  'Can you repeat that?',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Entschuldigung!',
-                  'Excuse me!',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                const SizedBox(height: 12),
-                _buildSentenceCard(
-                  context,
-                  'Vielen Dank!',
-                  'Thank you very much!',
-                  scheme,
-                  isDark,
-                  textColor,
-                  secondaryTextColor,
-                ),
-                ],
-              ),
-            ),
+              );
+            },
           ),
         ),
       );
     });
   }
 
-  Widget _buildSentenceCard(
-    BuildContext context,
-    String german,
-    String english,
-    scheme,
-    bool isDark,
-    Color textColor,
-    Color secondaryTextColor,
-  ) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
-    final padding = isTablet ? 24.0 : 20.0;
-    final iconSize = isTablet ? 28.0 : 24.0;
-    final titleSize = isTablet ? 24.0 : 20.0;
-    final subtitleSize = isTablet ? 18.0 : 16.0;
+  Widget _buildTopBar(bool isSmallScreen) {
+    return Row(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.white.withOpacity(0.1)),
+          ),
+          child: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.chevron_left,
+              color: Colors.white70,
+              size: isSmallScreen ? 20 : 22,
+            ),
+            tooltip: 'Back',
+            padding: isSmallScreen ? const EdgeInsets.all(6) : null,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSentenceHeader(bool isSmallScreen) {
+    return Row(
+      children: [
+        Flexible(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Text(
+                  'Small Sentences',
+                  style: TextStyle(
+                    fontSize: isSmallScreen ? 10 : 11,
+                    color: Colors.white.withOpacity(0.5),
+                    letterSpacing: 1.0,
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Spacer(),
+        Row(
+          children: [
+            Text(
+              '${_currentSentenceIndex + 1}/${_sentences.length}',
+              style: TextStyle(
+                fontSize: isSmallScreen ? 10 : 11,
+                color: Colors.white.withOpacity(0.6),
+                fontFamily: GoogleFonts.patrickHand().fontFamily,
+              ),
+            ),
+            SizedBox(width: isSmallScreen ? 6 : 8),
+            Row(
+              children: List.generate(4, (index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(
+                    horizontal: isSmallScreen ? 0.5 : 1,
+                  ),
+                  width: index == 0
+                      ? (isSmallScreen ? 12 : 16)
+                      : (isSmallScreen ? 6 : 8),
+                  height: isSmallScreen ? 4 : 6,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2),
+                    color: index == 0
+                        ? Colors.white.withOpacity(0.7)
+                        : index < 2
+                            ? Colors.white.withOpacity(0.3)
+                            : Colors.white.withOpacity(0.15),
+                  ),
+                );
+              }),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMainCard(bool isSmallScreen) {
+    final currentSentence = _sentences[_currentSentenceIndex];
 
     return Container(
-      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
-        color: isDark
-            ? scheme.surfaceDark.withOpacity(0.5)
-            : scheme.surface.withOpacity(0.5),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark
-              ? scheme.primaryDark.withOpacity(0.2)
-              : scheme.primary.withOpacity(0.2),
-        ),
+        borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        color: Colors.white.withOpacity(0.02),
       ),
+      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Header with tag
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: EdgeInsets.all(isTablet ? 14 : 12),
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? scheme.secondaryDark.withOpacity(0.2)
-                      : scheme.secondary.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(
-                  Icons.chat_bubble,
-                  color: isDark ? scheme.secondaryDark : scheme.secondary,
-                  size: iconSize,
-                ),
-              ),
-              SizedBox(width: isTablet ? 20 : 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      german,
-                      style: TextStyle(
-                        fontSize: titleSize,
-                        fontWeight: FontWeight.bold,
-                        color: textColor,
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isSmallScreen ? 6 : 8,
+                        vertical: isSmallScreen ? 3 : 4,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.1),
+                        ),
+                        color: Colors.white.withOpacity(0.05),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: isSmallScreen ? 5 : 6,
+                            height: isSmallScreen ? 5 : 6,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFF10B981),
+                            ),
+                          ),
+                          SizedBox(width: isSmallScreen ? 3 : 4),
+                          Text(
+                            'SENTENCE',
+                            style: TextStyle(
+                              fontSize: isSmallScreen ? 10 : 11,
+                              color: Colors.white.withOpacity(0.7),
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: isTablet ? 10 : 8),
+                    SizedBox(height: isSmallScreen ? 6 : 8),
                     Text(
-                      english,
+                      currentSentence.german,
                       style: TextStyle(
-                        fontSize: subtitleSize,
-                        color: secondaryTextColor,
+                        fontSize: isSmallScreen ? 20 : 24,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        height: 1.2,
                         fontFamily: GoogleFonts.patrickHand().fontFamily,
                       ),
                     ),
                   ],
                 ),
               ),
-              IconButton(
-                icon: Icon(
-                  _isPlaying && _currentPlayingText == german
-                      ? Icons.volume_up
-                      : Icons.volume_down,
-                  color: _isPlaying && _currentPlayingText == german
-                      ? (isDark ? scheme.secondaryDark : scheme.secondary)
-                      : secondaryTextColor,
-                  size: iconSize,
+            ],
+          ),
+          SizedBox(height: isSmallScreen ? 6 : 8),
+          Wrap(
+            spacing: isSmallScreen ? 6 : 8,
+            runSpacing: isSmallScreen ? 4 : 6,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isSmallScreen ? 4 : 6,
+                  vertical: isSmallScreen ? 1 : 2,
                 ),
-                onPressed: () => _speak(german),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  color: Colors.white.withOpacity(0.05),
+                ),
+                child: Text(
+                  'DE',
+                  style: TextStyle(
+                    fontSize: isSmallScreen ? 10 : 11,
+                    color: Colors.white.withOpacity(0.7),
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  ),
+                ),
               ),
             ],
+          ),
+          SizedBox(height: isSmallScreen ? 10 : 12),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
+              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              color: Colors.white.withOpacity(0.03),
+            ),
+            padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        currentSentence.english,
+                        style: TextStyle(
+                          fontSize: isSmallScreen ? 14 : 15,
+                          color: Colors.white.withOpacity(0.9),
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          isSmallScreen ? 6 : 8,
+                        ),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.1),
+                        ),
+                      ),
+                      child: IconButton(
+                        onPressed: _playCurrentSentence,
+                        icon: Icon(
+                          ttsService.isTextPlaying(currentSentence.german)
+                              ? Icons.volume_up
+                              : Icons.volume_up_outlined,
+                          size: isSmallScreen ? 16 : 18,
+                          color: ttsService.isTextPlaying(currentSentence.german)
+                              ? const Color(0xFF10B981)
+                              : Colors.white.withOpacity(0.8),
+                        ),
+                        padding: isSmallScreen ? const EdgeInsets.all(4) : null,
+                      ),
+                    ),
+                  ],
+                ),
+                if (currentSentence.meaning != null) ...[
+                  SizedBox(height: isSmallScreen ? 2 : 4),
+                  Text(
+                    currentSentence.meaning!,
+                    style: TextStyle(
+                      fontSize: isSmallScreen ? 12 : 13,
+                      color: Colors.white.withOpacity(0.6),
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          SizedBox(height: isSmallScreen ? 12 : 16),
+          Container(
+            height: isSmallScreen ? 4 : 6,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(3),
+              color: Colors.white.withOpacity(0.05),
+            ),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: (_currentSentenceIndex + 1) / _sentences.length,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  color: Colors.white.withOpacity(0.7),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExternalNavigationControls(bool isSmallScreen) {
+    final currentSentence = _sentences[_currentSentenceIndex];
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              color: Colors.white.withOpacity(0.05),
+            ),
+            child: IconButton(
+              onPressed: _previousSentence,
+              icon: Icon(
+                Icons.chevron_left,
+                size: isSmallScreen ? 28 : 32,
+                color: Colors.white.withOpacity(0.9),
+              ),
+              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+            ),
+          ),
+          Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
+                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  color: Colors.white.withOpacity(0.05),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white.withOpacity(0.1),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  onPressed: _playCurrentSentence,
+                  icon: Icon(
+                    ttsService.isTextPlaying(currentSentence.german)
+                        ? Icons.stop
+                        : Icons.volume_up,
+                    size: isSmallScreen ? 36 : 42,
+                    color: Colors.white,
+                  ),
+                  padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
+                ),
+              ),
+              if (ttsService.isTextPlaying(currentSentence.german))
+                Positioned(
+                  top: 8,
+                  right: 8,
+                  child: Container(
+                    width: isSmallScreen ? 10 : 12,
+                    height: isSmallScreen ? 10 : 12,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF10B981),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              color: Colors.white.withOpacity(0.05),
+            ),
+            child: IconButton(
+              onPressed: _nextSentence,
+              icon: Icon(
+                Icons.chevron_right,
+                size: isSmallScreen ? 28 : 32,
+                color: Colors.white.withOpacity(0.9),
+              ),
+              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+            ),
           ),
         ],
       ),

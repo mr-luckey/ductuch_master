@@ -2,7 +2,7 @@ import 'package:ductuch_master/FrontEnd/screen/learn/learn_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/nouns/nouns_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/verbs/verbs_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/sentences/sentences_screen.dart';
-import 'package:ductuch_master/FrontEnd/screen/blank/blank_screen.dart';
+import 'package:ductuch_master/FrontEnd/screen/more/more_screen.dart';
 import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,7 +81,7 @@ class _MainNavigationState extends State<MainNavigation> {
       const NounsScreen(),
       const VerbsScreen(),
       const SentencesScreen(),
-      const BlankScreen(),
+      const MoreScreen(),
     ];
   }
 
