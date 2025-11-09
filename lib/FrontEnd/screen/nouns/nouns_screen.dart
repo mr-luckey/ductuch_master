@@ -1,14 +1,87 @@
 import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NounsScreen extends StatelessWidget {
+class NounsScreen extends StatefulWidget {
   const NounsScreen({super.key});
+
+  @override
+  State<NounsScreen> createState() => _NounsScreenState();
+}
+
+class _NounsScreenState extends State<NounsScreen> {
+  FlutterTts flutterTts = FlutterTts();
+  bool _isPlaying = false;
+  String? _currentPlayingText;
+
+  @override
+  void initState() {
+    super.initState();
+    _initTTS();
+  }
+
+  Future<void> _initTTS() async {
+    await flutterTts.setSpeechRate(0.8);
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setVolume(1.0);
+    await flutterTts.setLanguage('de-DE');
+    
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        _isPlaying = false;
+        _currentPlayingText = null;
+      });
+    });
+
+    flutterTts.setErrorHandler((msg) {
+      setState(() {
+        _isPlaying = false;
+        _currentPlayingText = null;
+      });
+    });
+  }
+
+  Future<void> _speak(String text) async {
+    if (_isPlaying && _currentPlayingText == text) {
+      await flutterTts.stop();
+      setState(() {
+        _isPlaying = false;
+        _currentPlayingText = null;
+      });
+      return;
+    }
+
+    setState(() {
+      _isPlaying = true;
+      _currentPlayingText = text;
+    });
+
+    try {
+      await flutterTts.speak(text);
+    } catch (e) {
+      setState(() {
+        _isPlaying = false;
+        _currentPlayingText = null;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final padding = isTablet ? 24.0 : 16.0;
+    final titleSize = isTablet ? 36.0 : 28.0;
+    final subtitleSize = isTablet ? 18.0 : 16.0;
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -31,6 +104,7 @@ class NounsScreen extends StatelessWidget {
               fontFamily: GoogleFonts.patrickHand().fontFamily,
               color: textColor,
               fontWeight: FontWeight.bold,
+              fontSize: isTablet ? 24 : 20,
             ),
           ),
           actions: [
@@ -75,30 +149,35 @@ class NounsScreen extends StatelessWidget {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'German Nouns',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+            padding: EdgeInsets.all(padding),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: isTablet ? 800 : double.infinity,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'German Nouns',
+                    style: TextStyle(
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Learn essential German nouns with their articles',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: secondaryTextColor,
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  SizedBox(height: 8),
+                  Text(
+                    'Learn essential German nouns with their articles',
+                    style: TextStyle(
+                      fontSize: subtitleSize,
+                      color: secondaryTextColor,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 24),
+                  SizedBox(height: 24),
                 _buildNounCard(
+                  context,
                   'der Mann',
                   'the man',
                   'masculine',
@@ -109,6 +188,7 @@ class NounsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildNounCard(
+                  context,
                   'die Frau',
                   'the woman',
                   'feminine',
@@ -119,6 +199,7 @@ class NounsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildNounCard(
+                  context,
                   'das Kind',
                   'the child',
                   'neuter',
@@ -129,6 +210,7 @@ class NounsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildNounCard(
+                  context,
                   'der Tisch',
                   'the table',
                   'masculine',
@@ -139,6 +221,7 @@ class NounsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildNounCard(
+                  context,
                   'die Tür',
                   'the door',
                   'feminine',
@@ -149,6 +232,7 @@ class NounsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 _buildNounCard(
+                  context,
                   'das Buch',
                   'the book',
                   'neuter',
@@ -157,7 +241,8 @@ class NounsScreen extends StatelessWidget {
                   textColor,
                   secondaryTextColor,
                 ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -166,6 +251,7 @@ class NounsScreen extends StatelessWidget {
   }
 
   Widget _buildNounCard(
+    BuildContext context,
     String german,
     String english,
     String gender,
@@ -174,6 +260,13 @@ class NounsScreen extends StatelessWidget {
     Color textColor,
     Color secondaryTextColor,
   ) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final padding = isTablet ? 24.0 : 20.0;
+    final iconSize = isTablet ? 60.0 : 50.0;
+    final titleSize = isTablet ? 24.0 : 20.0;
+    final subtitleSize = isTablet ? 16.0 : 14.0;
+
     Color genderColor;
     switch (gender) {
       case 'masculine':
@@ -190,7 +283,7 @@ class NounsScreen extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: isDark
             ? scheme.surfaceDark.withOpacity(0.5)
@@ -205,8 +298,8 @@ class NounsScreen extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: iconSize,
+            height: iconSize,
             decoration: BoxDecoration(
               color: genderColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
@@ -217,12 +310,12 @@ class NounsScreen extends StatelessWidget {
                 style: TextStyle(
                   color: genderColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: titleSize * 0.8,
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: isTablet ? 20 : 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -230,17 +323,17 @@ class NounsScreen extends StatelessWidget {
                 Text(
                   german,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: titleSize,
                     fontWeight: FontWeight.bold,
                     color: textColor,
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   english,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: subtitleSize,
                     color: secondaryTextColor,
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
@@ -248,8 +341,24 @@ class NounsScreen extends StatelessWidget {
               ],
             ),
           ),
+          IconButton(
+            icon: Icon(
+              _isPlaying && _currentPlayingText == german
+                  ? Icons.volume_up
+                  : Icons.volume_down,
+              color: _isPlaying && _currentPlayingText == german
+                  ? (isDark ? scheme.primaryDark : scheme.primary)
+                  : secondaryTextColor,
+              size: isTablet ? 28 : 24,
+            ),
+            onPressed: () => _speak(german),
+          ),
+          SizedBox(width: 8),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: EdgeInsets.symmetric(
+              horizontal: isTablet ? 14 : 12,
+              vertical: isTablet ? 8 : 6,
+            ),
             decoration: BoxDecoration(
               color: genderColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
@@ -258,7 +367,7 @@ class NounsScreen extends StatelessWidget {
               gender,
               style: TextStyle(
                 color: genderColor,
-                fontSize: 12,
+                fontSize: subtitleSize * 0.85,
                 fontWeight: FontWeight.w600,
               ),
             ),

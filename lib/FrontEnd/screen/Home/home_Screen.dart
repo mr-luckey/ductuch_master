@@ -1,6 +1,8 @@
 import 'package:ductuch_master/FrontEnd/screen/Home/Widget/level_card.dart';
 import 'package:ductuch_master/Utilities/Models/level_model.dart';
+import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,33 +10,48 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0F14),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(children: [_buildContentSection(context)]),
+    final themeService = Get.find<ThemeService>();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final padding = isTablet ? 24.0 : 16.0;
+    final titleSize = isTablet ? 36.0 : 28.0;
+
+    return Obx(() {
+      final scheme = themeService.currentScheme;
+      final isDark = themeService.isDarkMode.value;
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+
+      return Scaffold(
+        backgroundColor: backgroundColor,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(children: [_buildContentSection(context, scheme, isDark, textColor, padding, titleSize, isTablet)]),
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget _buildContentSection(BuildContext context) {
+  Widget _buildContentSection(BuildContext context, scheme, bool isDark, Color textColor, double padding, double titleSize, bool isTablet) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(padding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: isTablet ? 24 : 20),
           Text(
             'Your Learning Path',
             style: TextStyle(
-              fontSize: 28,
-              color: Colors.white,
+              fontSize: titleSize,
+              color: textColor,
               fontFamily: GoogleFonts.patrickHand().fontFamily,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: isTablet ? 20 : 16),
           _buildLevelsGrid(),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:ductuch_master/Data/learning_path_data.dart';
 import 'package:ductuch_master/FrontEnd/screen/A1/Learn.dart';
 import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 import 'package:ductuch_master/Utilities/Models/model.dart';
+import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -71,8 +72,28 @@ class A2LessonScreen extends StatelessWidget {
     final String moduleTitle = moduleData?['title'] ?? 'Module Not Found';
     final List<dynamic> topics = moduleData?['topics'] ?? [];
 
+    final themeService = Get.find<ThemeService>();
+    
+    return Obx(() {
+      final scheme = themeService.currentScheme;
+      final isDark = themeService.isDarkMode.value;
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+      final secondaryTextColor = isDark
+          ? scheme.textSecondaryDark
+          : scheme.textSecondary;
+      final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+      final surfaceColor = isDark
+          ? scheme.surfaceDark.withOpacity(0.5)
+          : scheme.surface.withOpacity(0.5);
+      final borderColor = isDark
+          ? scheme.primaryDark.withOpacity(0.2)
+          : scheme.primary.withOpacity(0.2);
+
     return Scaffold(
-      backgroundColor: const Color(0xFF0B0F14),
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -84,13 +105,13 @@ class A2LessonScreen extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.white.withOpacity(0.1)),
+                      border: Border.all(color: borderColor),
                     ),
                     child: IconButton(
                       onPressed: () => Get.back(),
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.chevron_left,
-                        color: Colors.white70,
+                        color: textColor,
                         size: 22,
                       ),
                       padding: const EdgeInsets.all(6),
@@ -103,7 +124,7 @@ class A2LessonScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: textColor,
                         fontFamily: GoogleFonts.patrickHand().fontFamily,
                       ),
                     ),
@@ -131,23 +152,23 @@ class A2LessonScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
                           color: isCompleted
-                              ? const Color(0xFF10B981).withOpacity(0.3)
-                              : Colors.white.withOpacity(0.1),
+                              ? primaryColor.withOpacity(0.5)
+                              : borderColor,
                           width: isCompleted ? 2 : 1,
                         ),
-                        color: Colors.white.withOpacity(0.02),
+                        color: surfaceColor,
                       ),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
                           vertical: 12,
                         ),
-                        leading: _getTopicLeading(topic, isCompleted),
+                        leading: _getTopicLeading(topic, isCompleted, primaryColor),
                         title: Text(
                           topic['title'],
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: textColor,
                             fontFamily: GoogleFonts.patrickHand().fontFamily,
                             decoration: isCompleted
                                 ? TextDecoration.lineThrough
@@ -163,7 +184,7 @@ class A2LessonScreen extends StatelessWidget {
                                   Text(
                                     topic['content'],
                                     style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
+                                      color: secondaryTextColor,
                                       fontFamily:
                                           GoogleFonts.patrickHand().fontFamily,
                                     ),
@@ -205,7 +226,7 @@ class A2LessonScreen extends StatelessWidget {
                                       Text(
                                         topic['duration'],
                                         style: TextStyle(
-                                          color: Colors.white.withOpacity(0.6),
+                                          color: secondaryTextColor,
                                           fontSize: 12,
                                           fontFamily: GoogleFonts.patrickHand()
                                               .fontFamily,
@@ -216,15 +237,15 @@ class A2LessonScreen extends StatelessWidget {
                                 ],
                               ),
                         trailing: isCompleted
-                            ? const Icon(
+                            ? Icon(
                                 Icons.check_circle,
-                                color: Color(0xFF10B981),
+                                color: primaryColor,
                                 size: 24,
                               )
                             : Icon(
                                 Icons.arrow_forward_ios,
                                 size: 16,
-                                color: Colors.white.withOpacity(0.5),
+                                color: secondaryTextColor,
                               ),
                         onTap: () {
                           Get.to(
@@ -244,19 +265,20 @@ class A2LessonScreen extends StatelessWidget {
         ),
       ),
     );
+    });
   }
 
-  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted) {
+  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted, Color primaryColor) {
     if (isCompleted) {
       return Container(
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: const Color(0xFF10B981).withOpacity(0.2),
+          color: primaryColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
+          border: Border.all(color: primaryColor.withOpacity(0.4)),
         ),
-        child: const Icon(Icons.check, color: Color(0xFF10B981)),
+        child: Icon(Icons.check, color: primaryColor),
       );
     }
     return _getTopicIcon(topic['type']);

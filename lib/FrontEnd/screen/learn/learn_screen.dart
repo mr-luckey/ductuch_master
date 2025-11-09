@@ -11,6 +11,12 @@ class LearnScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth > 600;
+    final padding = isTablet ? 24.0 : 16.0;
+    final titleSize = isTablet ? 36.0 : 28.0;
+    final subtitleSize = isTablet ? 18.0 : 16.0;
+    final spacing = isTablet ? 32.0 : 24.0;
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -33,6 +39,7 @@ class LearnScreen extends StatelessWidget {
               fontFamily: GoogleFonts.patrickHand().fontFamily,
               color: textColor,
               fontWeight: FontWeight.bold,
+              fontSize: isTablet ? 24 : 20,
             ),
           ),
           actions: [
@@ -40,11 +47,12 @@ class LearnScreen extends StatelessWidget {
               icon: Icon(
                 isDark ? Icons.light_mode : Icons.dark_mode,
                 color: textColor,
+                size: isTablet ? 28 : 24,
               ),
               onPressed: () => themeService.toggleDarkMode(),
             ),
             PopupMenuButton<String>(
-              icon: Icon(Icons.palette, color: textColor),
+              icon: Icon(Icons.palette, color: textColor, size: isTablet ? 28 : 24),
               onSelected: (value) {
                 final index = int.parse(value);
                 themeService.changeScheme(index);
@@ -77,31 +85,36 @@ class LearnScreen extends StatelessWidget {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Your Learning Path',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+            padding: EdgeInsets.all(padding),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: isTablet ? 800 : double.infinity,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Your Learning Path',
+                    style: TextStyle(
+                      fontSize: titleSize,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Choose a level to start learning',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: secondaryTextColor,
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  SizedBox(height: 8),
+                  Text(
+                    'Choose a level to start learning',
+                    style: TextStyle(
+                      fontSize: subtitleSize,
+                      color: secondaryTextColor,
+                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                _buildLevelsList(),
-              ],
+                  SizedBox(height: spacing),
+                  _buildLevelsList(),
+                ],
+              ),
             ),
           ),
         ),
