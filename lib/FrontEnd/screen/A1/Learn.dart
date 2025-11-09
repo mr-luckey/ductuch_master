@@ -1,5 +1,7 @@
+import 'package:ductuch_master/Data/lesson_content_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PhraseData {
@@ -43,7 +45,10 @@ class PhraseData {
 }
 
 class PhraseScreen extends StatefulWidget {
-  const PhraseScreen({super.key});
+  final String? topicId;
+  final String? topicTitle;
+
+  const PhraseScreen({super.key, this.topicId, this.topicTitle});
 
   @override
   State<PhraseScreen> createState() => _PhraseScreenState();
@@ -55,38 +60,37 @@ class _PhraseScreenState extends State<PhraseScreen> {
   bool _repeatOn = false;
   bool _isPlaying = false;
   late FlutterTts _flutterTts;
-
-  final List<PhraseData> _phrases = [
-    PhraseData(
-      phrase: "Ich trinke gerne Kaffee.",
-      // ipa: "[ɪç ˈtʁɪŋkə ˈɡɛʁnə ka'feː]",
-      translation: "I like to drink coffee.",
-      meaning: "Meaning: expressing a personal preference.",
-      languageCode: "de-DE",
-      level: "A1",
-    ),
-    PhraseData(
-      phrase: "Guten Morgen!",
-      // ipa: "[ˈɡuːtn̩ ˈmɔʁɡn̩]",
-      translation: "Good morning!",
-      meaning: "A common morning greeting.",
-      languageCode: "de-DE",
-      level: "A1",
-    ),
-    PhraseData(
-      phrase: "Wie geht es Ihnen?",
-      // ipa: "[viː ɡeːt ɛs ˈiːnən]",
-      translation: "How are you?",
-      meaning: "Polite way to ask about someone's well-being.",
-      languageCode: "de-DE",
-      level: "A1",
-    ),
-  ];
+  late List<PhraseData> _phrases;
 
   @override
   void initState() {
     super.initState();
+    // Get topic ID from widget or route arguments
+    final topicId =
+        widget.topicId ??
+        (Get.arguments is Map ? Get.arguments['topicId'] : null) ??
+        'A1-M1-T1';
+
+    // Load phrases from lesson content data
+    _phrases =
+        LessonContentData.topicContent[topicId] ??
+        [
+          PhraseData(
+            phrase: "Guten Tag!",
+            translation: "Good day!",
+            meaning: "A common greeting.",
+            languageCode: "de-DE",
+            level: "A1",
+          ),
+        ];
+
     _initTTS();
+  }
+
+  String get _topicTitle {
+    return widget.topicTitle ??
+        (Get.arguments is Map ? Get.arguments['topicTitle'] : null) ??
+        'Lesson';
   }
 
   void _initTTS() async {
@@ -272,7 +276,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
             border: Border.all(color: Colors.white.withOpacity(0.1)),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () => Get.back(),
             icon: Icon(
               Icons.chevron_left,
               color: Colors.white70,
@@ -298,7 +302,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
             children: [
               Flexible(
                 child: Text(
-                  'Lesson 1',
+                  _topicTitle,
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: Colors.white.withOpacity(0.5),

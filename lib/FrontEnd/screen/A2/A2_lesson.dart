@@ -228,8 +228,10 @@ class A2LessonScreen extends StatelessWidget {
                               ),
                         onTap: () {
                           Get.to(
-                            () => PhraseScreen(),
-                            // TopicDetailScreen(topic: topic, moduleId: moduleId),
+                            () => PhraseScreen(
+                              topicId: topic['id'],
+                              topicTitle: topic['title'],
+                            ),
                           );
                         },
                       ),
