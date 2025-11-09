@@ -54,7 +54,7 @@ class LevelModel {
       moduleCount: 4,
       lessonCount: 16, // 4 topics each
       progress: 0,
-      isLocked: true,
+      isLocked: false,
       ontap: () {
         Get.toNamed('/second', arguments: 'b1');
       },
@@ -69,7 +69,7 @@ class LevelModel {
       ontap: () {
         Get.toNamed('/second', arguments: 'b2');
       },
-      isLocked: true,
+      isLocked: false,
       primaryColor: const Color(0xFF8B5CF6),
     ),
     LevelModel(
@@ -81,7 +81,7 @@ class LevelModel {
       ontap: () {
         Get.toNamed('/second', arguments: 'c1');
       },
-      isLocked: true,
+      isLocked: false,
       primaryColor: const Color(0xFFEC4899),
     ),
     LevelModel(
@@ -93,7 +93,7 @@ class LevelModel {
         Get.toNamed('/second', arguments: 'c2');
       },
       progress: 0,
-      isLocked: true,
+      isLocked: false,
       primaryColor: const Color(0xFFEF4444),
     ),
   ];

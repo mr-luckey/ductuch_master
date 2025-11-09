@@ -99,7 +99,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.business_center,
-          isLocked: true,
+          isLocked: false,
         ),
         ModuleInfo(
           ID: 'B1-M10',
@@ -107,7 +107,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.newspaper,
-          isLocked: true,
+          isLocked: false,
         ),
         ModuleInfo(
           ID: 'B1-M11',
@@ -115,7 +115,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.theater_comedy,
-          isLocked: true,
+          isLocked: false,
         ),
         ModuleInfo(
           ID: 'B1-M12',
@@ -123,7 +123,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.psychology,
-          isLocked: true,
+          isLocked: false,
         ),
       ],
     ),
@@ -140,7 +140,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.precision_manufacturing,
-          isLocked: true,
+          isLocked: false,
         ),
         ModuleInfo(
           ID: 'B2-M14',
@@ -148,7 +148,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.science,
-          isLocked: true,
+          isLocked: false,
         ),
         ModuleInfo(
           ID: 'B2-M15',
@@ -156,7 +156,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.chat_bubble_outline,
-          isLocked: true,
+          isLocked: false,
         ),
         ModuleInfo(
           ID: 'B2-M16',
@@ -164,7 +164,7 @@ class LearningPathData {
           lessonCount: 4,
           completedLessons: 0,
           icon: Icons.edit_note,
-          isLocked: true,
+          isLocked: false,
         ),
       ],
     ),

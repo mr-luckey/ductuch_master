@@ -6,10 +6,12 @@ import 'package:ductuch_master/FrontEnd/screen/C1/C1_lesson.dart';
 import 'package:ductuch_master/FrontEnd/screen/C2/C2_lesson.dart';
 import 'package:ductuch_master/FrontEnd/screen/Home/home_Screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/level_screen.dart';
+import 'package:ductuch_master/FrontEnd/screen/main_navigation.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
-  static const home = '/';
+  static const mainNavigation = '/';
+  static const home = '/home';
   static const second = '/second';
   static const lessonA1 = '/lesson/a1';
   static const lessonA2 = '/lesson/a2';
@@ -19,6 +21,7 @@ class AppRoutes {
   static const lessonC2 = '/lesson/c2';
 
   static final routes = [
+    GetPage(name: mainNavigation, page: () => const MainNavigation()),
     GetPage(name: home, page: () => HomePage()),
     GetPage(
       name: second,
