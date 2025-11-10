@@ -223,17 +223,21 @@ class A1LessonScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                          trailing: isCompleted
-                              ? Icon(
-                                  Icons.check_circle,
-                                  color: primaryColor,
-                                  size: 24,
-                                )
-                              : Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 16,
-                                  color: secondaryTextColor,
-                                ),
+                          trailing: SizedBox(
+                            width: 28,
+                            height: 28,
+                            child: Checkbox(
+                              value: isCompleted,
+                              onChanged: null, // auto-checked via listening action
+                              shape: const CircleBorder(),
+                              side: BorderSide(color: secondaryTextColor.withOpacity(0.4)),
+                              checkColor: Colors.white,
+                              fillColor: WidgetStateProperty.resolveWith((states) {
+                                if (isCompleted) return primaryColor;
+                                return Colors.transparent;
+                              }),
+                            ),
+                          ),
                           onTap: () {
                             Get.to(
                               () => PhraseScreen(

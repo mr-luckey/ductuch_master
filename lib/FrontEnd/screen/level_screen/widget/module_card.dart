@@ -1,6 +1,9 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+import 'package:ductuch_master/Data/learning_path_data.dart';
 // import '../models/level_model.dart';
 
 class ModuleCard extends StatelessWidget {
@@ -11,10 +14,20 @@ class ModuleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progress = moduleInfo.completedLessons / moduleInfo.lessonCount;
-    final isCompleted = moduleInfo.completedLessons == moduleInfo.lessonCount;
+    final lessonController = Get.find<LessonController>();
+    final moduleId = moduleInfo.ID.toString();
 
-    return MouseRegion(
+    return Obx(() {
+      final totalTopics =
+          LearningPathData.moduleTopics[moduleId]?.length ?? moduleInfo.lessonCount;
+      final completedTopics = lessonController.completedLessons
+          .where((t) => t.startsWith('$moduleId-'))
+          .length;
+      final double progress =
+          totalTopics == 0 ? 0 : (completedTopics / totalTopics).clamp(0.0, 1.0);
+      final bool isCompleted = totalTopics > 0 && completedTopics >= totalTopics;
+
+      return MouseRegion(
       cursor: moduleInfo.isLocked
           ? SystemMouseCursors.basic
           : SystemMouseCursors.click,
@@ -50,12 +63,36 @@ class ModuleCard extends StatelessWidget {
                         width: 48,
                         height: 48,
                         decoration: BoxDecoration(
-                          color: _getIconColor(context),
+                          color: moduleInfo.isLocked
+                              ? Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withOpacity(0.2)
+                              : (isCompleted
+                                  ? Colors.green.withOpacity(0.2)
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withOpacity(0.2)),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
-                          _getIcon(),
-                          color: _getIconColor(context).computeLuminance() > 0.5
+                          moduleInfo.isLocked
+                              ? Icons.lock
+                              : (isCompleted ? Icons.check : moduleInfo.icon),
+                          color: (moduleInfo.isLocked
+                                      ? Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withOpacity(0.2)
+                                      : (isCompleted
+                                          ? Colors.green.withOpacity(0.2)
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                              .withOpacity(0.2)))
+                                  .computeLuminance() >
+                                  0.5
                               ? Colors.black
                               : Colors.white,
                           size: 24,
@@ -136,7 +173,7 @@ class ModuleCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   // Progress Text
                   Text(
-                    '${moduleInfo.completedLessons}/${moduleInfo.lessonCount} topics completed',
+                    '$completedTopics/$totalTopics topics completed',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.white.withOpacity(0.6),
@@ -188,6 +225,7 @@ class ModuleCard extends StatelessWidget {
         ),
       ),
     );
+    });
   }
 
   Color _getIconColor(BuildContext context) {

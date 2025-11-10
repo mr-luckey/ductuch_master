@@ -3,6 +3,8 @@ import 'package:ductuch_master/FrontEnd/screen/level_screen/widget/module_card.d
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 
 class LevelScreen extends StatelessWidget {
   final String level;
@@ -11,6 +13,7 @@ class LevelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lessonController = Get.find<LessonController>();
     // Get level from constructor or route arguments
     String currentLevelKey = level;
     if (currentLevelKey.isEmpty) {
@@ -35,6 +38,9 @@ class LevelScreen extends StatelessWidget {
     );
 
     final textTheme = Theme.of(context).textTheme;
+    final levelCodeUpper = currentLevelKey.toUpperCase();
+    final progressPercent = lessonController.levelProgressPercent(levelCodeUpper);
+    final allDone = progressPercent >= 100;
 
     return Scaffold(
         body: SafeArea(
@@ -81,6 +87,40 @@ class LevelScreen extends StatelessWidget {
                                     fontFamily:
                                         GoogleFonts.patrickHand().fontFamily,
                                   ),
+                                ),
+                                const SizedBox(height: 6),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        height: 6,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(3),
+                                          color: Colors.white.withOpacity(0.08),
+                                        ),
+                                        child: FractionallySizedBox(
+                                          alignment: Alignment.centerLeft,
+                                          widthFactor: (progressPercent / 100).clamp(0.0, 1.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(3),
+                                              color: Colors.white.withOpacity(0.7),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      '$progressPercent%',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: textTheme.bodyMedium?.color?.withOpacity(0.8),
+                                        fontFamily:
+                                            GoogleFonts.patrickHand().fontFamily,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 if (currentLevel.description.isNotEmpty) ...[
                                   const SizedBox(height: 4),
@@ -199,6 +239,49 @@ class LevelScreen extends StatelessWidget {
                         ),
                       );
                     }, childCount: currentLevel.modules.length),
+                  ),
+                ),
+              if (allDone)
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: Colors.white.withOpacity(0.1)),
+                        color: const Color(0xFF10B981).withOpacity(0.12),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(() => const ExamScreen(), arguments: {'level': levelCodeUpper});
+                          },
+                          borderRadius: BorderRadius.circular(14),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                            child: Row(
+                              children: [
+                                Icon(Icons.assignment_turned_in, color: const Color(0xFF10B981)),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    'Take Exam for $levelCodeUpper',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xFF10B981),
+                                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                                    ),
+                                  ),
+                                ),
+                                Icon(Icons.chevron_right, color: const Color(0xFF10B981)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               const SliverToBoxAdapter(child: SizedBox(height: 40)),

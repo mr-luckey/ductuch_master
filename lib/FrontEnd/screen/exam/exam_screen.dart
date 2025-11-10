@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
+import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 
 /// Question model for exam
 class ExamQuestion {
@@ -40,6 +41,7 @@ class _ExamScreenState extends State<ExamScreen> {
   Timer? countdownTimer;
   int remainingSeconds = 3600; // 1 hour default
   int score = 0;
+  late final LessonController _lessonController;
 
   @override
   void dispose() {
@@ -131,6 +133,15 @@ class _ExamScreenState extends State<ExamScreen> {
       isExamCompleted = true;
       isExamStarted = false;
     });
+
+    // Mark level as passed if >= 80%
+    final totalQuestions = currentQuestions.length;
+    if (selectedLevel != null && totalQuestions > 0) {
+      final percentage = (score / totalQuestions * 100).round();
+      if (percentage >= 80) {
+        _lessonController.markLevelPassed(selectedLevel!);
+      }
+    }
   }
 
   String _formatTime(int seconds) {
@@ -142,11 +153,25 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Map<String, List<ExamQuestion>> _examQuestions = {};
   bool _isLoadingQuestions = false;
+  String? _pendingAutoStartLevel;
 
   @override
   void initState() {
     super.initState();
+    _lessonController = Get.find<LessonController>();
     _loadExamQuestions();
+
+    // Auto-start exam if level is provided via arguments
+    final args = Get.arguments;
+    final levelArg = (args is Map) ? (args['level']?.toString()) : null;
+    if (levelArg != null && levelArg.isNotEmpty) {
+      final level = levelArg.toUpperCase();
+      if (_examQuestions.isNotEmpty) {
+        _startExam(level);
+      } else {
+        _pendingAutoStartLevel = level;
+      }
+    }
   }
 
   Future<void> _loadExamQuestions() async {
@@ -158,6 +183,12 @@ class _ExamScreenState extends State<ExamScreen> {
       _examQuestions = loadedQuestions;
       _isLoadingQuestions = false;
     });
+
+    // If an auto-start was pending, start now
+    if (_pendingAutoStartLevel != null) {
+      _startExam(_pendingAutoStartLevel!);
+      _pendingAutoStartLevel = null;
+    }
   }
 
   List<ExamQuestion> _getQuestionsForLevel(String level) {
@@ -608,7 +639,7 @@ class _ExamScreenState extends State<ExamScreen> {
                           color: const Color(0xFF0B0F14),
                         )
                       : null,
-                ),
+                  ),
                 SizedBox(width: isSmallScreen ? 12 : 16),
                 Expanded(
                   child: Text(

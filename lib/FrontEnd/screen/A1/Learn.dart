@@ -1,4 +1,5 @@
 import 'package:ductuch_master/Data/lesson_content_data.dart';
+import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
@@ -62,6 +63,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
   bool _isPlaying = false;
   late FlutterTts _flutterTts;
   late List<PhraseData> _phrases;
+  String _topicId = 'A1-M1-T1';
+  late final LessonController _lessonController;
 
   @override
   void initState() {
@@ -71,6 +74,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
         widget.topicId ??
         (Get.arguments is Map ? Get.arguments['topicId'] : null) ??
         'A1-M1-T1';
+    _topicId = topicId;
 
     // Load phrases from JSON repository (fallback to in-code data)
     _phrases = LessonContentData.getByTopicId(topicId) ??
@@ -85,6 +89,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
           ),
         ];
 
+    _lessonController = Get.find<LessonController>();
     _initTTS();
   }
 
@@ -112,6 +117,19 @@ class _PhraseScreenState extends State<PhraseScreen> {
         Future.delayed(const Duration(milliseconds: 500), () {
           _playCurrentPhrase();
         });
+        return;
+      }
+
+      // Mark phrase as listened in controller and auto-advance if possible
+      _lessonController.markPhraseListened(
+        topicId: _topicId,
+        phraseIndex: _currentPhraseIndex,
+        totalPhrases: _phrases.length,
+      );
+
+      // Auto-advance to next phrase if any
+      if (_currentPhraseIndex < _phrases.length - 1) {
+        _nextPhrase();
       }
     });
 
@@ -390,6 +408,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
   }
 
   Widget _buildMainCard(PhraseData phrase, bool isSmallScreen, Color textColor, Color secondaryTextColor, bool isDark, dynamic scheme) {
+    final listenedCount = _lessonController.listenedCountForTopic(_topicId);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
@@ -607,7 +626,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
-              widthFactor: (_currentPhraseIndex + 1) / _phrases.length,
+              widthFactor: _phrases.isEmpty
+                  ? 0.0
+                  : (listenedCount / _phrases.length).clamp(0.0, 1.0) as double,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
@@ -635,6 +656,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
   }
 
   Widget _buildExternalNavigationControls(bool isSmallScreen, Color textColor) {
+    final isCurrentListened = _lessonController.isPhraseListened(_topicId, _currentPhraseIndex);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
       child: Row(
@@ -705,14 +727,14 @@ class _PhraseScreenState extends State<PhraseScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
               border: Border.all(color: textColor.withOpacity(0.1)),
-              color: textColor.withOpacity(0.08),
+              color: textColor.withOpacity(isCurrentListened ? 0.08 : 0.04),
             ),
             child: IconButton(
-              onPressed: _nextPhrase,
+              onPressed: isCurrentListened ? _nextPhrase : null,
               icon: Icon(
                 Icons.chevron_right,
                 size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
+                color: isCurrentListened ? textColor.withOpacity(0.9) : textColor.withOpacity(0.3),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
             ),

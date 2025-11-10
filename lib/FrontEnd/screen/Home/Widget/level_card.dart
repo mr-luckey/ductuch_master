@@ -1,6 +1,8 @@
 import 'package:ductuch_master/Utilities/Models/level_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 
 class LevelCard extends StatelessWidget {
   final LevelModel level;
@@ -9,6 +11,7 @@ class LevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lessonController = Get.find<LessonController>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
     final cardHeight = isTablet ? 200.0 : 180.0;
@@ -49,34 +52,73 @@ class LevelCard extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.all(padding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildHeader(
-                      context,
-                      isDark,
-                      textColor,
-                      secondaryTextColor,
-                      primaryColor,
-                      badgeColor,
-                      badgeBorderColor,
-                      badgeSize,
-                      titleSize,
-                      subtitleSize,
-                    ),
-                    const Spacer(),
-                    _buildFooter(
-                      context,
-                      isDark,
-                      textColor,
-                      secondaryTextColor,
-                      primaryColor,
-                      subtitleSize,
-                    ),
-                  ],
-                ),
+                child: Obx(() {
+                  final progress = lessonController.levelProgressPercent(level.level);
+                  final isPassed = lessonController.isLevelPassed(level.level);
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildHeader(
+                        context,
+                        isDark,
+                        textColor,
+                        secondaryTextColor,
+                        primaryColor,
+                        badgeColor,
+                        badgeBorderColor,
+                        badgeSize,
+                        titleSize,
+                        subtitleSize,
+                      ),
+                      const Spacer(),
+                      _buildFooter(
+                        context,
+                        isDark,
+                        textColor,
+                        secondaryTextColor,
+                        primaryColor,
+                        subtitleSize,
+                        progress,
+                      ),
+                      if (isPassed) const SizedBox(height: 0),
+                    ],
+                  );
+                }),
               ),
               if (level.isLocked) _buildLockedOverlay(context, isDark),
+              // PASS Tag
+              Obx(() {
+                final isPassed = Get.find<LessonController>().isLevelPassed(level.level);
+                if (!isPassed) return const SizedBox.shrink();
+                return Positioned(
+                  top: 8,
+                  right: 8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: primaryColor.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: primaryColor.withOpacity(0.4)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.local_offer, size: 14, color: primaryColor),
+                        const SizedBox(width: 4),
+                        Text(
+                          'PASSED',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: primaryColor,
+                            fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
             ],
           ),
         ),
@@ -156,6 +198,7 @@ class LevelCard extends StatelessWidget {
     Color secondaryTextColor,
     Color primaryColor,
     double fontSize,
+    int dynamicProgress,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
     return Column(
@@ -173,7 +216,7 @@ class LevelCard extends StatelessWidget {
                 ),
               ),
               Text(
-                '${level.progress}%',
+                '${dynamicProgress}%',
                 style: TextStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
@@ -192,7 +235,7 @@ class LevelCard extends StatelessWidget {
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
-              widthFactor: level.progress / 100,
+              widthFactor: dynamicProgress / 100,
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
@@ -202,7 +245,7 @@ class LevelCard extends StatelessWidget {
             ),
           ),
         ],
-        if (level.progress == 100) ...[
+        if (dynamicProgress == 100) ...[
           const SizedBox(height: 12),
           Row(
             children: [
