@@ -3,9 +3,7 @@ import 'package:ductuch_master/FrontEnd/screen/nouns/nouns_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/verbs/verbs_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/sentences/sentences_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/more/more_screen.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -16,7 +14,6 @@ class MainNavigation extends StatefulWidget {
 }
 
 class _MainNavigationState extends State<MainNavigation> {
-  final ThemeService themeService = Get.put(ThemeService());
   late PersistentTabController _controller;
 
   @override
@@ -33,46 +30,38 @@ class _MainNavigationState extends State<MainNavigation> {
     final iconSize = isTablet ? 28.0 : 24.0;
     final fontSize = isTablet ? 13.0 : 11.0;
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
+    final colorScheme = Theme.of(context).colorScheme;
+    final selectedColor = colorScheme.primary;
+    final unselectedColor = Colors.white70;
+    final navBarColor = colorScheme.surface.withOpacity(0.95);
 
-      final selectedColor = isDark ? scheme.primaryDark : scheme.primary;
-      final unselectedColor = isDark
-          ? scheme.textSecondaryDark
-          : scheme.textSecondary;
-      final navBarColor = isDark
-          ? scheme.surfaceDark.withOpacity(0.95)
-          : scheme.surface.withOpacity(0.95);
-
-      return PersistentTabView(
-        context,
-        controller: _controller,
-        screens: _buildScreens(),
-        items: _buildNavBarItems(
-          selectedColor: selectedColor,
-          unselectedColor: unselectedColor,
-          iconSize: iconSize,
-          fontSize: fontSize,
+    return PersistentTabView(
+      context,
+      controller: _controller,
+      screens: _buildScreens(),
+      items: _buildNavBarItems(
+        selectedColor: selectedColor,
+        unselectedColor: unselectedColor,
+        iconSize: iconSize,
+        fontSize: fontSize,
+      ),
+      backgroundColor: navBarColor,
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(isTablet ? 20 : 16),
+          topRight: Radius.circular(isTablet ? 20 : 16),
         ),
-        backgroundColor: navBarColor,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(isTablet ? 20 : 16),
-            topRight: Radius.circular(isTablet ? 20 : 16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, -5),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -5),
-            ),
-          ],
-        ),
-        navBarStyle: NavBarStyle.style1,
-        navBarHeight: navBarHeight,
-      );
-    });
+        ],
+      ),
+      navBarStyle: NavBarStyle.style1,
+      navBarHeight: navBarHeight,
+    );
   }
 
   List<Widget> _buildScreens() {

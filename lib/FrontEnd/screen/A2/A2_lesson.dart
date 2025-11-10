@@ -2,7 +2,6 @@ import 'package:ductuch_master/Data/learning_path_data.dart';
 import 'package:ductuch_master/FrontEnd/screen/A1/Learn.dart';
 import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 import 'package:ductuch_master/Utilities/Models/model.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,28 +71,14 @@ class A2LessonScreen extends StatelessWidget {
     final String moduleTitle = moduleData?['title'] ?? 'Module Not Found';
     final List<dynamic> topics = moduleData?['topics'] ?? [];
 
-    final themeService = Get.find<ThemeService>();
-    
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
-      final backgroundColor = isDark
-          ? scheme.backgroundDark
-          : scheme.background;
-      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-      final secondaryTextColor = isDark
-          ? scheme.textSecondaryDark
-          : scheme.textSecondary;
-      final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-      final surfaceColor = isDark
-          ? scheme.surfaceDark.withOpacity(0.5)
-          : scheme.surface.withOpacity(0.5);
-      final borderColor = isDark
-          ? scheme.primaryDark.withOpacity(0.2)
-          : scheme.primary.withOpacity(0.2);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final primaryColor = colorScheme.primary;
+    final secondaryTextColor = textTheme.bodyMedium?.color?.withOpacity(0.7) ?? Colors.white70;
+    final borderColor = primaryColor.withOpacity(0.2);
+    final surfaceColor = colorScheme.surface.withOpacity(0.5);
 
     return Scaffold(
-      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -111,7 +96,7 @@ class A2LessonScreen extends StatelessWidget {
                       onPressed: () => Get.back(),
                       icon: Icon(
                         Icons.chevron_left,
-                        color: textColor,
+                        color: textTheme.titleLarge?.color ?? Colors.white,
                         size: 22,
                       ),
                       padding: const EdgeInsets.all(6),
@@ -124,7 +109,7 @@ class A2LessonScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: textColor,
+                        color: textTheme.titleLarge?.color ?? Colors.white,
                         fontFamily: GoogleFonts.patrickHand().fontFamily,
                       ),
                     ),
@@ -163,12 +148,12 @@ class A2LessonScreen extends StatelessWidget {
                           horizontal: 16,
                           vertical: 12,
                         ),
-                        leading: _getTopicLeading(topic, isCompleted, primaryColor),
+                        leading: _getTopicLeading(context, topic, isCompleted, primaryColor),
                         title: Text(
                           topic['title'],
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            color: textColor,
+                            color: textTheme.titleLarge?.color ?? Colors.white,
                             fontFamily: GoogleFonts.patrickHand().fontFamily,
                             decoration: isCompleted
                                 ? TextDecoration.lineThrough
@@ -198,22 +183,18 @@ class A2LessonScreen extends StatelessWidget {
                                           vertical: 4,
                                         ),
                                         decoration: BoxDecoration(
-                                          color: _getTypeColor(
-                                            topic['type'],
-                                          ).withOpacity(0.2),
+                                          color: primaryColor.withOpacity(0.2),
                                           borderRadius: BorderRadius.circular(
                                             8,
                                           ),
                                           border: Border.all(
-                                            color: _getTypeColor(
-                                              topic['type'],
-                                            ).withOpacity(0.4),
+                                            color: primaryColor.withOpacity(0.4),
                                           ),
                                         ),
                                         child: Text(
                                           topic['type'],
                                           style: TextStyle(
-                                            color: _getTypeColor(topic['type']),
+                                            color: primaryColor,
                                             fontSize: 11,
                                             fontWeight: FontWeight.w500,
                                             fontFamily:
@@ -265,10 +246,9 @@ class A2LessonScreen extends StatelessWidget {
         ),
       ),
     );
-    });
   }
 
-  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted, Color primaryColor) {
+  Widget _getTopicLeading(BuildContext context, Map<String, dynamic> topic, bool isCompleted, Color primaryColor) {
     if (isCompleted) {
       return Container(
         width: 40,
@@ -281,20 +261,19 @@ class A2LessonScreen extends StatelessWidget {
         child: Icon(Icons.check, color: primaryColor),
       );
     }
-    return _getTopicIcon(topic['type']);
+    return _getTopicIcon(context, topic['type']);
   }
 
-  Widget _getTopicIcon(String type) {
-    final color = _getTypeColor(type);
+  Widget _getTopicIcon(BuildContext context, String type) {
     return Container(
       width: 40,
       height: 40,
       decoration: BoxDecoration(
-        color: color.withOpacity(0.2),
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: color.withOpacity(0.3)),
+        border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
       ),
-      child: Icon(_getIconForType(type), color: color, size: 20),
+      child: Icon(_getIconForType(type), color: Theme.of(context).colorScheme.primary, size: 20),
     );
   }
 
@@ -317,22 +296,5 @@ class A2LessonScreen extends StatelessWidget {
     }
   }
 
-  Color _getTypeColor(String type) {
-    switch (type) {
-      case 'vocabulary':
-        return Colors.blue;
-      case 'grammar':
-        return Colors.green;
-      case 'conversation':
-        return Colors.orange;
-      case 'practice':
-        return Colors.purple;
-      case 'quiz':
-        return Colors.red;
-      case 'writing':
-        return Colors.teal;
-      default:
-        return Colors.grey;
-    }
-  }
+  // Topic color now unified to theme primary, handled inline above.
 }

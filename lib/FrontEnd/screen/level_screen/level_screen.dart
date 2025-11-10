@@ -1,9 +1,8 @@
 import 'package:ductuch_master/Data/learning_path_data.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/widget/module_card.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class LevelScreen extends StatelessWidget {
   final String level;
@@ -12,7 +11,6 @@ class LevelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeService = Get.find<ThemeService>();
     // Get level from constructor or route arguments
     String currentLevelKey = level;
     if (currentLevelKey.isEmpty) {
@@ -36,19 +34,9 @@ class LevelScreen extends StatelessWidget {
       'LevelScreen: Displaying level "$currentLevelKey" with ${currentLevel.modules.length} modules',
     );
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
-      final backgroundColor = isDark
-          ? scheme.backgroundDark
-          : scheme.background;
-      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-      final secondaryTextColor = isDark
-          ? scheme.textSecondaryDark
-          : scheme.textSecondary;
+    final textTheme = Theme.of(context).textTheme;
 
-      return Scaffold(
-        backgroundColor: backgroundColor,
+    return Scaffold(
         body: SafeArea(
           child: CustomScrollView(
             slivers: <Widget>[
@@ -73,7 +61,7 @@ class LevelScreen extends StatelessWidget {
                               onPressed: () => Get.back(),
                               icon: Icon(
                                 Icons.chevron_left,
-                                color: textColor,
+                                color: textTheme.titleLarge?.color ?? Colors.white,
                                 size: 22,
                               ),
                               padding: const EdgeInsets.all(6),
@@ -89,7 +77,7 @@ class LevelScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
-                                    color: textColor,
+                                    color: textTheme.titleLarge?.color ?? Colors.white,
                                     fontFamily:
                                         GoogleFonts.patrickHand().fontFamily,
                                   ),
@@ -100,7 +88,7 @@ class LevelScreen extends StatelessWidget {
                                     currentLevel.description,
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: secondaryTextColor,
+                                      color: textTheme.bodyMedium?.color?.withOpacity(0.8),
                                       fontFamily:
                                           GoogleFonts.patrickHand().fontFamily,
                                     ),
@@ -126,7 +114,7 @@ class LevelScreen extends StatelessWidget {
                         Icon(
                           Icons.construction,
                           size: 64,
-                          color: secondaryTextColor,
+                          color: textTheme.bodyMedium?.color?.withOpacity(0.7),
                         ),
                         const SizedBox(height: 16),
                         Text(
@@ -134,7 +122,7 @@ class LevelScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: textColor,
+                            color: textTheme.titleLarge?.color ?? Colors.white,
                             fontFamily: GoogleFonts.patrickHand().fontFamily,
                           ),
                         ),
@@ -143,7 +131,7 @@ class LevelScreen extends StatelessWidget {
                           'This level is under development',
                           style: TextStyle(
                             fontSize: 14,
-                            color: secondaryTextColor,
+                            color: textTheme.bodyMedium?.color?.withOpacity(0.8),
                             fontFamily: GoogleFonts.patrickHand().fontFamily,
                           ),
                         ),
@@ -218,6 +206,5 @@ class LevelScreen extends StatelessWidget {
           ),
         ),
       );
-    });
   }
 }

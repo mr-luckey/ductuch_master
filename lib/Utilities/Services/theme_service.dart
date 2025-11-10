@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ColorSchemeData {
   final String name;
@@ -42,6 +43,9 @@ class ThemeService extends GetxController {
 
   final RxInt selectedSchemeIndex = 0.obs;
   final RxBool isDarkMode = true.obs;
+  static const Color _nounsBackground = Color(0xFF0B0F14);
+  static const Color _nounsSurface = Color(0xFF11161C);
+  static const Color _accentTeal = Color(0xFF10B981);
 
   static final List<ColorSchemeData> colorSchemes = [
     // 1. Ocean Breeze (Blue-Cyan)
@@ -206,6 +210,72 @@ class ThemeService extends GetxController {
   ];
 
   ColorSchemeData get currentScheme => colorSchemes[selectedSchemeIndex.value];
+
+  // Unified app theme (matches Nouns screen aesthetics)
+  ThemeData get appTheme {
+    final baseDark = ThemeData(brightness: Brightness.dark);
+    final text = baseDark.textTheme;
+    return ThemeData(
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: _nounsBackground,
+      primaryColor: _accentTeal,
+      colorScheme: const ColorScheme.dark(
+        primary: _accentTeal,
+        secondary: _accentTeal,
+        surface: _nounsSurface,
+        background: _nounsBackground,
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: _nounsBackground,
+        elevation: 0,
+        foregroundColor: Colors.white,
+      ),
+      iconTheme: const IconThemeData(color: Colors.white),
+      dividerColor: Colors.white54,
+      cardTheme: CardThemeData(
+        color: Colors.white.withOpacity(0.03),
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.white.withOpacity(0.06),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white.withOpacity(0.05),
+          foregroundColor: Colors.white,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: Colors.white.withOpacity(0.1)),
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: Colors.white),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: Colors.white.withOpacity(0.03),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: _accentTeal),
+        ),
+        labelStyle: const TextStyle(color: Colors.white70),
+        hintStyle: const TextStyle(color: Colors.white54),
+      ),
+      textTheme: GoogleFonts.patrickHandTextTheme(text).apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+      ),
+    );
+  }
 
   ThemeData get lightTheme {
     final scheme = currentScheme;

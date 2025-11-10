@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 
 class PhraseData {
   final String phrase;
@@ -207,8 +208,17 @@ class _PhraseScreenState extends State<PhraseScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0F14),
+    final themeService = Get.find<ThemeService>();
+    return Obx(() {
+      final scheme = themeService.currentScheme;
+      final isDark = themeService.isDarkMode.value;
+      final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+      final secondaryTextColor =
+          isDark ? scheme.textSecondaryDark : scheme.textSecondary;
+
+      return Scaffold(
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -229,12 +239,12 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   SizedBox(height: isSmallScreen ? 4 : 6),
 
                   // Top bar
-                  _buildTopBar(isSmallScreen),
+                  _buildTopBar(isSmallScreen, textColor, secondaryTextColor),
 
                   SizedBox(height: isSmallScreen ? 12 : 16),
 
                   // Lesson header
-                  _buildLessonHeader(isSmallScreen),
+                  _buildLessonHeader(isSmallScreen, textColor, secondaryTextColor),
 
                   SizedBox(height: isSmallScreen ? 12 : 16),
 
@@ -243,11 +253,11 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          _buildMainCard(currentPhrase, isSmallScreen),
+                          _buildMainCard(currentPhrase, isSmallScreen, textColor, secondaryTextColor, isDark, scheme),
                           SizedBox(height: isSmallScreen ? 20 : 24),
 
                           // External Navigation Controls
-                          _buildExternalNavigationControls(isSmallScreen),
+                          _buildExternalNavigationControls(isSmallScreen, textColor),
 
                           SizedBox(height: isSmallScreen ? 16 : 20),
                         ],
@@ -264,22 +274,23 @@ class _PhraseScreenState extends State<PhraseScreen> {
       // Bottom navigation
       // bottomNavigationBar: _buildBottomNav(isSmallScreen),
     );
+    });
   }
 
-  Widget _buildTopBar(bool isSmallScreen) {
+  Widget _buildTopBar(bool isSmallScreen, Color textColor, Color secondaryTextColor) {
     return Row(
       children: [
         // Back button
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.white.withOpacity(0.1)),
+            border: Border.all(color: textColor.withOpacity(0.1)),
           ),
           child: IconButton(
             onPressed: () => Get.back(),
             icon: Icon(
               Icons.chevron_left,
-              color: Colors.white70,
+              color: secondaryTextColor,
               size: isSmallScreen ? 20 : 22,
             ),
             tooltip: 'Back',
@@ -292,7 +303,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     );
   }
 
-  Widget _buildLessonHeader(bool isSmallScreen) {
+  Widget _buildLessonHeader(bool isSmallScreen, Color textColor, Color secondaryTextColor) {
     return Row(
       children: [
         // Lesson info
@@ -305,7 +316,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   _topicTitle,
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
-                    color: Colors.white.withOpacity(0.5),
+                    color: secondaryTextColor.withOpacity(0.8),
                     letterSpacing: 1.0,
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
@@ -316,7 +327,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
               Text(
                 '•',
                 style: TextStyle(
-                  color: Colors.white.withOpacity(0.2),
+                  color: secondaryTextColor.withOpacity(0.3),
                   fontFamily: GoogleFonts.patrickHand().fontFamily,
                 ),
               ),
@@ -344,7 +355,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
               '${_currentPhraseIndex + 1}/${_phrases.length}',
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
-                color: Colors.white.withOpacity(0.6),
+                color: secondaryTextColor,
                 fontFamily: GoogleFonts.patrickHand().fontFamily,
               ),
             ),
@@ -364,10 +375,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: index == 0
-                        ? Colors.white.withOpacity(0.7)
+                        ? textColor.withOpacity(0.7)
                         : index < 2
-                        ? Colors.white.withOpacity(0.3)
-                        : Colors.white.withOpacity(0.15),
+                        ? textColor.withOpacity(0.3)
+                        : textColor.withOpacity(0.15),
                   ),
                 );
               }),
@@ -378,12 +389,12 @@ class _PhraseScreenState extends State<PhraseScreen> {
     );
   }
 
-  Widget _buildMainCard(PhraseData phrase, bool isSmallScreen) {
+  Widget _buildMainCard(PhraseData phrase, bool isSmallScreen, Color textColor, Color secondaryTextColor, bool isDark, dynamic scheme) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-        color: Colors.white.withOpacity(0.02),
+        border: Border.all(color: textColor.withOpacity(0.1)),
+        color: isDark ? Colors.white.withOpacity(0.02) : Colors.black.withOpacity(0.02),
       ),
       padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
       child: Column(
@@ -406,9 +417,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.1),
+                          color: textColor.withOpacity(0.1),
                         ),
-                        color: Colors.white.withOpacity(0.05),
+                        color: isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -426,7 +437,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                             'Daily Phrase',
                             style: TextStyle(
                               fontSize: isSmallScreen ? 10 : 11,
-                              color: Colors.white.withOpacity(0.7),
+                              color: secondaryTextColor,
                               fontFamily: GoogleFonts.patrickHand().fontFamily,
                             ),
                           ),
@@ -440,7 +451,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                       style: TextStyle(
                         fontSize: isSmallScreen ? 20 : 24,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: textColor,
                         height: 1.2,
                         fontFamily: GoogleFonts.patrickHand().fontFamily,
                       ),
@@ -453,7 +464,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
                 ),
                 child: IconButton(
                   onPressed: _toggleFavorite,
@@ -461,7 +472,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     phrase.isFavorite ? Icons.favorite : Icons.favorite_border,
                     color: phrase.isFavorite
                         ? const Color(0xFFF43F5E)
-                        : Colors.white70,
+                        : secondaryTextColor,
                     size: isSmallScreen ? 20 : 22,
                   ),
                   padding: isSmallScreen ? const EdgeInsets.all(6) : null,
@@ -484,14 +495,14 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
-                  color: Colors.white.withOpacity(0.05),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
+                  color: isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05),
                 ),
                 child: Text(
                   'DE',
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
-                    color: Colors.white.withOpacity(0.7),
+                    color: secondaryTextColor,
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
@@ -503,14 +514,14 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
-                  color: Colors.white.withOpacity(0.05),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
+                  color: isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05),
                 ),
                 child: Text(
                   phrase.level,
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
-                    color: Colors.white.withOpacity(0.7),
+                    color: secondaryTextColor,
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
@@ -525,8 +536,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
-              color: Colors.white.withOpacity(0.03),
+              border: Border.all(color: textColor.withOpacity(0.1)),
+              color: isDark ? Colors.white.withOpacity(0.03) : Colors.black.withOpacity(0.03),
             ),
             padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
             child: Column(
@@ -539,7 +550,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         phrase.translation,
                         style: TextStyle(
                           fontSize: isSmallScreen ? 14 : 15,
-                          color: Colors.white.withOpacity(0.9),
+                          color: textColor.withOpacity(0.9),
                           fontFamily: GoogleFonts.patrickHand().fontFamily,
                         ),
                       ),
@@ -550,7 +561,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                           isSmallScreen ? 6 : 8,
                         ),
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.1),
+                          color: textColor.withOpacity(0.1),
                         ),
                       ),
                       child: IconButton(
@@ -559,7 +570,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         icon: Icon(
                           Icons.volume_up,
                           size: isSmallScreen ? 16 : 18,
-                          color: Colors.white.withOpacity(0.8),
+                          color: secondaryTextColor.withOpacity(0.8),
                         ),
                         padding: isSmallScreen ? const EdgeInsets.all(4) : null,
                       ),
@@ -571,7 +582,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   phrase.meaning,
                   style: TextStyle(
                     fontSize: isSmallScreen ? 12 : 13,
-                    color: Colors.white.withOpacity(0.6),
+                    color: secondaryTextColor.withOpacity(0.8),
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
@@ -582,7 +593,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
           SizedBox(height: isSmallScreen ? 12 : 16),
 
           // Play controls (only rate controls and repeat, no navigation)
-          _buildRateControls(isSmallScreen),
+          _buildRateControls(isSmallScreen, textColor, secondaryTextColor),
 
           SizedBox(height: isSmallScreen ? 12 : 16),
 
@@ -592,7 +603,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3),
-              color: Colors.white.withOpacity(0.05),
+              color: textColor.withOpacity(0.1),
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
@@ -600,7 +611,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
-                  color: Colors.white.withOpacity(0.7),
+                  color: textColor.withOpacity(0.7),
                 ),
               ),
             ),
@@ -610,20 +621,20 @@ class _PhraseScreenState extends State<PhraseScreen> {
     );
   }
 
-  Widget _buildRateControls(bool isSmallScreen) {
+  Widget _buildRateControls(bool isSmallScreen, Color textColor, Color secondaryTextColor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildRateButton(0.8, isSmallScreen),
+        _buildRateButton(0.8, isSmallScreen, textColor, secondaryTextColor),
         SizedBox(width: isSmallScreen ? 8 : 12),
-        _buildRateButton(1.0, isSmallScreen),
+        _buildRateButton(1.0, isSmallScreen, textColor, secondaryTextColor),
         SizedBox(width: isSmallScreen ? 8 : 12),
-        _buildRepeatButton(isSmallScreen),
+        _buildRepeatButton(isSmallScreen, textColor, secondaryTextColor),
       ],
     );
   }
 
-  Widget _buildExternalNavigationControls(bool isSmallScreen) {
+  Widget _buildExternalNavigationControls(bool isSmallScreen, Color textColor) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
       child: Row(
@@ -633,15 +644,15 @@ class _PhraseScreenState extends State<PhraseScreen> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
-              color: Colors.white.withOpacity(0.05),
+              border: Border.all(color: textColor.withOpacity(0.1)),
+              color: textColor.withOpacity(0.08),
             ),
             child: IconButton(
               onPressed: _previousPhrase,
               icon: Icon(
                 Icons.chevron_left,
                 size: isSmallScreen ? 28 : 32,
-                color: Colors.white.withOpacity(0.9),
+                color: textColor.withOpacity(0.9),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
             ),
@@ -668,7 +679,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   icon: Icon(
                     _isPlaying ? Icons.stop : Icons.volume_up,
                     size: isSmallScreen ? 36 : 42,
-                    color: Colors.white,
+                color: textColor,
                   ),
                   padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
                 ),
@@ -693,15 +704,15 @@ class _PhraseScreenState extends State<PhraseScreen> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
-              color: Colors.white.withOpacity(0.05),
+              border: Border.all(color: textColor.withOpacity(0.1)),
+              color: textColor.withOpacity(0.08),
             ),
             child: IconButton(
               onPressed: _nextPhrase,
               icon: Icon(
                 Icons.chevron_right,
                 size: isSmallScreen ? 28 : 32,
-                color: Colors.white.withOpacity(0.9),
+                color: textColor.withOpacity(0.9),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
             ),
@@ -711,15 +722,15 @@ class _PhraseScreenState extends State<PhraseScreen> {
     );
   }
 
-  Widget _buildRateButton(double rate, bool isSmallScreen) {
+  Widget _buildRateButton(double rate, bool isSmallScreen, Color textColor, Color secondaryTextColor) {
     final isSelected = _currentRate == rate;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: textColor.withOpacity(0.1)),
         color: isSelected
-            ? Colors.white.withOpacity(0.1)
-            : Colors.white.withOpacity(0.03),
+            ? textColor.withOpacity(0.12)
+            : textColor.withOpacity(0.06),
       ),
       child: Material(
         color: Colors.transparent,
@@ -737,8 +748,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 fontSize: isSmallScreen ? 14 : 16,
                 fontWeight: FontWeight.w500,
                 color: isSelected
-                    ? Colors.white
-                    : Colors.white.withOpacity(0.7),
+                    ? textColor
+                    : secondaryTextColor,
                 fontFamily: GoogleFonts.patrickHand().fontFamily,
               ),
             ),
@@ -748,14 +759,14 @@ class _PhraseScreenState extends State<PhraseScreen> {
     );
   }
 
-  Widget _buildRepeatButton(bool isSmallScreen) {
+  Widget _buildRepeatButton(bool isSmallScreen, Color textColor, Color secondaryTextColor) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
+        border: Border.all(color: textColor.withOpacity(0.1)),
         color: _repeatOn
-            ? Colors.white.withOpacity(0.1)
-            : Colors.white.withOpacity(0.03),
+            ? textColor.withOpacity(0.12)
+            : textColor.withOpacity(0.06),
       ),
       child: Material(
         color: Colors.transparent,
@@ -774,8 +785,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   Icons.repeat,
                   size: isSmallScreen ? 16 : 18,
                   color: _repeatOn
-                      ? Colors.white
-                      : Colors.white.withOpacity(0.8),
+                      ? textColor
+                      : secondaryTextColor,
                 ),
                 SizedBox(width: isSmallScreen ? 4 : 6),
                 Text(
@@ -784,8 +795,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     fontSize: isSmallScreen ? 14 : 16,
                     fontWeight: FontWeight.w500,
                     color: _repeatOn
-                        ? Colors.white
-                        : Colors.white.withOpacity(0.7),
+                        ? textColor
+                        : secondaryTextColor,
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),

@@ -1,7 +1,5 @@
 import 'package:ductuch_master/Utilities/Models/level_model.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LevelCard extends StatelessWidget {
@@ -19,82 +17,75 @@ class LevelCard extends StatelessWidget {
     final titleSize = isTablet ? 24.0 : 20.0;
     final subtitleSize = isTablet ? 14.0 : 12.0;
 
-    final themeService = Get.find<ThemeService>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDark = theme.brightness == Brightness.dark;
 
-    return Obx(() {
-      final scheme = themeService.currentScheme;
-      final isDark = themeService.isDarkMode.value;
+    final backgroundColor = theme.cardColor;
+    final borderColor = theme.dividerColor.withOpacity(0.3);
+    final textColor = theme.textTheme.titleMedium?.color ?? colorScheme.onSurface;
+    final secondaryTextColor =
+        theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? colorScheme.onSurfaceVariant;
+    final primaryColor = colorScheme.primary;
+    final badgeColor = primaryColor.withOpacity(0.12);
+    final badgeBorderColor = primaryColor.withOpacity(0.28);
 
-      final backgroundColor = isDark
-          ? scheme.surfaceDark.withOpacity(0.6)
-          : scheme.surface.withOpacity(0.6);
-      final borderColor = isDark
-          ? scheme.primaryDark.withOpacity(0.3)
-          : scheme.primary.withOpacity(0.3);
-      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-      final secondaryTextColor = isDark
-          ? scheme.textSecondaryDark
-          : scheme.textSecondary;
-      final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-      final badgeColor = primaryColor.withOpacity(0.2);
-      final badgeBorderColor = primaryColor.withOpacity(0.4);
-
-      return Container(
-        height: cardHeight,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: borderColor),
-          color: backgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.3 : 0.1),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(padding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(
-                    context,
-                    scheme,
-                    isDark,
-                    textColor,
-                    secondaryTextColor,
-                    primaryColor,
-                    badgeColor,
-                    badgeBorderColor,
-                    badgeSize,
-                    titleSize,
-                    subtitleSize,
-                  ),
-                  const Spacer(),
-                  _buildFooter(
-                    scheme,
-                    isDark,
-                    textColor,
-                    secondaryTextColor,
-                    primaryColor,
-                    subtitleSize,
-                  ),
-                ],
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      elevation: theme.cardTheme.elevation ?? (isDark ? 0 : 1.5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: borderColor),
+      ),
+      color: backgroundColor,
+      child: InkWell(
+        onTap: level.ontap,
+        borderRadius: BorderRadius.circular(16),
+        splashColor: primaryColor.withOpacity(0.08),
+        highlightColor: primaryColor.withOpacity(0.04),
+        child: SizedBox(
+          height: cardHeight,
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(padding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(
+                      context,
+                      isDark,
+                      textColor,
+                      secondaryTextColor,
+                      primaryColor,
+                      badgeColor,
+                      badgeBorderColor,
+                      badgeSize,
+                      titleSize,
+                      subtitleSize,
+                    ),
+                    const Spacer(),
+                    _buildFooter(
+                      context,
+                      isDark,
+                      textColor,
+                      secondaryTextColor,
+                      primaryColor,
+                      subtitleSize,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            if (level.isLocked) _buildLockedOverlay(scheme, isDark),
-          ],
+              if (level.isLocked) _buildLockedOverlay(context, isDark),
+            ],
+          ),
         ),
-      );
-    });
+      ),
+    );
   }
 
   Widget _buildHeader(
     BuildContext context,
-    scheme,
     bool isDark,
     Color textColor,
     Color secondaryTextColor,
@@ -159,13 +150,14 @@ class LevelCard extends StatelessWidget {
   }
 
   Widget _buildFooter(
-    scheme,
+    BuildContext context,
     bool isDark,
     Color textColor,
     Color secondaryTextColor,
     Color primaryColor,
     double fontSize,
   ) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         if (!level.isLocked) ...[
@@ -196,9 +188,7 @@ class LevelCard extends StatelessWidget {
             height: 6,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3),
-              color: isDark
-                  ? scheme.backgroundDark.withOpacity(0.3)
-                  : scheme.background.withOpacity(0.3),
+              color: colorScheme.surfaceVariant.withOpacity(0.35),
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
@@ -238,18 +228,18 @@ class LevelCard extends StatelessWidget {
     );
   }
 
-  Widget _buildLockedOverlay(scheme, bool isDark) {
+  Widget _buildLockedOverlay(BuildContext context, bool isDark) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final onSurface = Theme.of(context).textTheme.titleMedium?.color ?? colorScheme.onSurface;
     return Container(
       decoration: BoxDecoration(
-        color: isDark
-            ? scheme.backgroundDark.withOpacity(0.7)
-            : scheme.background.withOpacity(0.7),
+        color: colorScheme.surface.withOpacity(isDark ? 0.7 : 0.7),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
         child: Icon(
           Icons.lock,
-          color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
+          color: onSurface,
           size: 32,
         ),
       ),
