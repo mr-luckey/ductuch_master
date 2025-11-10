@@ -24,6 +24,7 @@ flutter:
   uses-material-design: true
   assets:
     - lib/Data/json/
+    - assets/learn_module/
 # assets:
 #     - Assets/Images/
 #     - Assets/Icons/

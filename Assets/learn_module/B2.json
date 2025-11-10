@@ -1,0 +1,312 @@
+{
+  "id": "B2",
+  "title": "B2 - Upper Intermediate",
+  "description": "Master precision, specialized language, fluent conversation, and advanced expression.",
+  "progress": 0,
+  "modules": [
+    {
+      "id": "B2-M13",
+      "title": "🎯 Module 13: Precision and Style",
+      "icon": "precision_manufacturing",
+      "topics": [
+        "Synonyms & Stylistic Devices",
+        "Formal vs. Informal Register",
+        "Nominalization (Turning verbs into nouns)",
+        "Participle Attributes"
+      ]
+    },
+    {
+      "id": "B2-M14",
+      "title": "🔬 Module 14: Specialized Language",
+      "icon": "science",
+      "topics": [
+        "Discussing Complex Topics (Politics, Science)",
+        "Academic Vocabulary",
+        "Genitive Case in Depth",
+        "Figurative Language"
+      ]
+    },
+    {
+      "id": "B2-M15",
+      "title": "💬 Module 15: Fluent Conversation",
+      "icon": "chat_bubble_outline",
+      "topics": [
+        "Understanding Nuances & Humor",
+        "Idioms & Proverbs",
+        "Spontaneous Speech Practice",
+        "Regional Dialects"
+      ]
+    },
+    {
+      "id": "B2-M16",
+      "title": "✍️ Module 16: Expression and Analysis",
+      "icon": "edit_note",
+      "topics": [
+        "Writing Coherent Texts (Reports, Stories)",
+        "Analyzing Literary Excerpts",
+        "All Tenses (Active & Passive)",
+        "Final Mastery & Review"
+      ]
+    }
+  ]
+  ,
+  "content": {
+    "B2-M13-T1": [
+      {
+        "phrase": "Das ist sehr wichtig.",
+        "translation": "That is very important.",
+        "meaning": "Basic expression.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist von großer Bedeutung.",
+        "translation": "That is of great importance.",
+        "meaning": "More sophisticated synonym.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M13-T2": [
+      {
+        "phrase": "Kannst du mir helfen?",
+        "translation": "Can you help me?",
+        "meaning": "Informal register.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Könnten Sie mir bitte helfen?",
+        "translation": "Could you please help me?",
+        "meaning": "Formal register.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M13-T3": [
+      {
+        "phrase": "Ich lerne.",
+        "translation": "I learn.",
+        "meaning": "Verb form.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das Lernen ist wichtig.",
+        "translation": "Learning is important.",
+        "meaning": "Nominalized form (verb to noun).",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M13-T4": [
+      {
+        "phrase": "das gelesene Buch",
+        "translation": "the read book",
+        "meaning": "Past participle as attribute.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "die laufende Maschine",
+        "translation": "the running machine",
+        "meaning": "Present participle as attribute.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M14-T1": [
+      {
+        "phrase": "Die Klimapolitik ist ein komplexes Thema.",
+        "translation": "Climate policy is a complex topic.",
+        "meaning": "Discussing political topics.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Forschung zeigt interessante Ergebnisse.",
+        "translation": "Research shows interesting results.",
+        "meaning": "Academic language.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M14-T2": [
+      {
+        "phrase": "Die Hypothese wurde bestätigt.",
+        "translation": "The hypothesis was confirmed.",
+        "meaning": "Academic terminology.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Studie analysiert verschiedene Faktoren.",
+        "translation": "The study analyzes various factors.",
+        "meaning": "Research vocabulary.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M14-T3": [
+      {
+        "phrase": "Das Auto meines Vaters",
+        "translation": "My father's car",
+        "meaning": "Genitive case showing possession.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Während des Gesprächs",
+        "translation": "During the conversation",
+        "meaning": "Genitive with preposition.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M14-T4": [
+      {
+        "phrase": "Er ist ein Fels in der Brandung.",
+        "translation": "He is a rock in the surf.",
+        "meaning": "Metaphor meaning someone is reliable.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist ein Tropfen auf den heißen Stein.",
+        "translation": "That is a drop on the hot stone.",
+        "meaning": "Idiom meaning insufficient help.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M15-T1": [
+      {
+        "phrase": "Das ist interessant.",
+        "translation": "That is interesting.",
+        "meaning": "Can be genuine or sarcastic depending on context.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Na ja, das ist so eine Sache.",
+        "translation": "Well, that's a thing.",
+        "meaning": "Expressing uncertainty or reservation.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M15-T2": [
+      {
+        "phrase": "Alles hat ein Ende, nur die Wurst hat zwei.",
+        "translation": "Everything has an end, only the sausage has two.",
+        "meaning": "German proverb meaning everything comes to an end.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Da liegt der Hund begraben.",
+        "translation": "That's where the dog is buried.",
+        "meaning": "Idiom meaning 'that's the real problem'.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M15-T3": [
+      {
+        "phrase": "Moment, lass mich kurz überlegen.",
+        "translation": "Wait, let me think for a moment.",
+        "meaning": "Filler phrase for spontaneous speech.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Wie soll ich das ausdrücken?",
+        "translation": "How should I express that?",
+        "meaning": "Hesitation phrase in conversation.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M15-T4": [
+      {
+        "phrase": "Grüß Gott!",
+        "translation": "Hello!",
+        "meaning": "Bavarian/Austrian greeting.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Moin!",
+        "translation": "Hello!",
+        "meaning": "Northern German greeting.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M16-T1": [
+      {
+        "phrase": "Im Folgenden werde ich die wichtigsten Punkte erläutern.",
+        "translation": "In the following, I will explain the most important points.",
+        "meaning": "Structuring a written text.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Zusammenfassend lässt sich feststellen, dass...",
+        "translation": "In summary, it can be stated that...",
+        "meaning": "Conclusion phrase in essays.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M16-T2": [
+      {
+        "phrase": "Der Autor verwendet Metaphern, um...",
+        "translation": "The author uses metaphors to...",
+        "meaning": "Literary analysis language.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Symbolik in diesem Text deutet auf...",
+        "translation": "The symbolism in this text suggests...",
+        "meaning": "Analyzing literary devices.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M16-T3": [
+      {
+        "phrase": "Ich werde lernen.",
+        "translation": "I will learn.",
+        "meaning": "Future tense.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich hatte gelernt.",
+        "translation": "I had learned.",
+        "meaning": "Past perfect tense.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ],
+    "B2-M16-T4": [
+      {
+        "phrase": "Ich beherrsche die deutsche Sprache.",
+        "translation": "I master the German language.",
+        "meaning": "Expressing language mastery.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich kann mich in allen Situationen ausdrücken.",
+        "translation": "I can express myself in all situations.",
+        "meaning": "Advanced language proficiency.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      }
+    ]
+  }
+}
+

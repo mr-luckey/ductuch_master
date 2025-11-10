@@ -1,0 +1,312 @@
+{
+  "id": "A2",
+  "title": "A2 - Elementary",
+  "description": "Build on your foundation with daily routines, shopping, health topics, and travel stories.",
+  "progress": 0,
+  "modules": [
+    {
+      "id": "A2-M5",
+      "title": "🗓️ Module 5: My Routine",
+      "icon": "schedule",
+      "topics": [
+        "Daily Schedule",
+        "Separable Verbs",
+        "Accusative & Dative Cases",
+        "Prepositions (in, on, at, to...)"
+      ]
+    },
+    {
+      "id": "A2-M6",
+      "title": "🛍️ Module 6: Shopping and More",
+      "icon": "shopping_bag",
+      "topics": [
+        "Clothing & Shopping",
+        "Comparative & Superlative",
+        "Money & Prices",
+        "Past Tense (Perfekt)"
+      ]
+    },
+    {
+      "id": "A2-M7",
+      "title": "❤️ Module 7: Health and Feelings",
+      "icon": "favorite",
+      "topics": [
+        "Body Parts & Health",
+        "Emotions & Adjectives",
+        "At the Doctor's",
+        "Two-Way Prepositions"
+      ]
+    },
+    {
+      "id": "A2-M8",
+      "title": "✈️ Module 8: Travel and Stories",
+      "icon": "flight",
+      "topics": [
+        "Travel & Holidays",
+        "Narrating the Past",
+        "Simple Past (Präteritum) of `to be` & `to have`",
+        "Weather & Seasons"
+      ]
+    }
+  ]
+  ,
+  "content": {
+    "A2-M5-T1": [
+      {
+        "phrase": "Ich stehe um sieben Uhr auf.",
+        "translation": "I get up at seven o'clock.",
+        "meaning": "Describing daily routine.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich frühstücke um acht Uhr.",
+        "translation": "I have breakfast at eight o'clock.",
+        "meaning": "Describing morning routine.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M5-T2": [
+      {
+        "phrase": "Ich stehe auf.",
+        "translation": "I get up.",
+        "meaning": "Separable verb 'aufstehen' (to get up).",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich räume auf.",
+        "translation": "I clean up.",
+        "meaning": "Separable verb 'aufräumen' (to clean up).",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M5-T3": [
+      {
+        "phrase": "Ich sehe den Mann.",
+        "translation": "I see the man.",
+        "meaning": "Accusative case with masculine article.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich gebe dem Kind ein Buch.",
+        "translation": "I give the child a book.",
+        "meaning": "Dative case with neuter article.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M5-T4": [
+      {
+        "phrase": "Ich gehe in die Schule.",
+        "translation": "I go to school.",
+        "meaning": "Preposition 'in' with accusative.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich bin zu Hause.",
+        "translation": "I am at home.",
+        "meaning": "Preposition 'zu' with dative.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M6-T1": [
+      {
+        "phrase": "Ich kaufe ein Hemd.",
+        "translation": "I buy a shirt.",
+        "meaning": "Shopping for clothing.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Wie viel kostet das?",
+        "translation": "How much does that cost?",
+        "meaning": "Asking about price.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M6-T2": [
+      {
+        "phrase": "Dieses Auto ist schneller.",
+        "translation": "This car is faster.",
+        "meaning": "Comparative form of 'schnell'.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Das ist das schnellste Auto.",
+        "translation": "This is the fastest car.",
+        "meaning": "Superlative form of 'schnell'.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M6-T3": [
+      {
+        "phrase": "Das kostet zwanzig Euro.",
+        "translation": "That costs twenty euros.",
+        "meaning": "Stating a price.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich zahle mit Karte.",
+        "translation": "I pay with card.",
+        "meaning": "Payment method.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M6-T4": [
+      {
+        "phrase": "Ich habe gelernt.",
+        "translation": "I have learned.",
+        "meaning": "Perfect tense with 'haben'.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich bin gegangen.",
+        "translation": "I have gone.",
+        "meaning": "Perfect tense with 'sein'.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M7-T1": [
+      {
+        "phrase": "Mein Kopf tut weh.",
+        "translation": "My head hurts.",
+        "meaning": "Describing pain.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich bin krank.",
+        "translation": "I am sick.",
+        "meaning": "Stating health condition.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M7-T2": [
+      {
+        "phrase": "Ich bin glücklich.",
+        "translation": "I am happy.",
+        "meaning": "Expressing emotion.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich fühle mich traurig.",
+        "translation": "I feel sad.",
+        "meaning": "Describing feelings.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M7-T3": [
+      {
+        "phrase": "Ich habe Fieber.",
+        "translation": "I have a fever.",
+        "meaning": "Describing symptoms.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Was fehlt Ihnen?",
+        "translation": "What's wrong with you?",
+        "meaning": "Doctor asking about symptoms.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M7-T4": [
+      {
+        "phrase": "Das Buch liegt auf dem Tisch.",
+        "translation": "The book is on the table.",
+        "meaning": "Two-way preposition 'auf' with dative.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich lege das Buch auf den Tisch.",
+        "translation": "I put the book on the table.",
+        "meaning": "Two-way preposition 'auf' with accusative.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M8-T1": [
+      {
+        "phrase": "Ich fahre in den Urlaub.",
+        "translation": "I am going on vacation.",
+        "meaning": "Talking about travel plans.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Wo warst du?",
+        "translation": "Where were you?",
+        "meaning": "Asking about past travel.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M8-T2": [
+      {
+        "phrase": "Gestern bin ich ins Kino gegangen.",
+        "translation": "Yesterday I went to the cinema.",
+        "meaning": "Narrating past events.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Dann habe ich gegessen.",
+        "translation": "Then I ate.",
+        "meaning": "Continuing a story in the past.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M8-T3": [
+      {
+        "phrase": "Ich war zu Hause.",
+        "translation": "I was at home.",
+        "meaning": "Simple past of 'sein' (to be).",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich hatte Zeit.",
+        "translation": "I had time.",
+        "meaning": "Simple past of 'haben' (to have).",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M8-T4": [
+      {
+        "phrase": "Es regnet.",
+        "translation": "It is raining.",
+        "meaning": "Describing weather.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Der Frühling ist schön.",
+        "translation": "Spring is beautiful.",
+        "meaning": "Talking about seasons.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ]
+  }
+}
+

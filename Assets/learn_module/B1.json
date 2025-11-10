@@ -1,0 +1,312 @@
+{
+  "id": "B1",
+  "title": "B1 - Intermediate",
+  "description": "Advance your skills with working life, media, culture, and abstract thinking.",
+  "progress": 0,
+  "modules": [
+    {
+      "id": "B1-M9",
+      "title": "💼 Module 9: Working Life",
+      "icon": "business_center",
+      "topics": [
+        "Writing Formal Emails",
+        "Job Applications",
+        "Subordinate Clauses (because, that, if)",
+        "Reflexive Verbs"
+      ]
+    },
+    {
+      "id": "B1-M10",
+      "title": "📰 Module 10: Media and Opinions",
+      "icon": "newspaper",
+      "topics": [
+        "Understanding News Headlines",
+        "Expressing Opinions & Debating",
+        "Passive Voice",
+        "Prepositions with Genitive"
+      ]
+    },
+    {
+      "id": "B1-M11",
+      "title": "🎭 Module 11: Culture and Society",
+      "icon": "theater_comedy",
+      "topics": [
+        "German Customs & Culture",
+        "Film & Book Reviews",
+        "Adjective Endings",
+        "Relative Clauses"
+      ]
+    },
+    {
+      "id": "B1-M12",
+      "title": "💭 Module 12: Abstract Thinking",
+      "icon": "psychology",
+      "topics": [
+        "Discussing Dreams & Hopes (Subjunctive Mood - Konjunktiv II)",
+        "Complex Connectors (therefore, despite, although)",
+        "Indirect Questions",
+        "Writing a Short Essay"
+      ]
+    }
+  ]
+  ,
+  "content": {
+    "B1-M9-T1": [
+      {
+        "phrase": "Sehr geehrte Damen und Herren,",
+        "translation": "Dear Sir or Madam,",
+        "meaning": "Formal email greeting.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Mit freundlichen Grüßen",
+        "translation": "Best regards",
+        "meaning": "Formal email closing.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M9-T2": [
+      {
+        "phrase": "Ich bewerbe mich um die Stelle.",
+        "translation": "I am applying for the position.",
+        "meaning": "Job application phrase.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich habe Erfahrung in diesem Bereich.",
+        "translation": "I have experience in this field.",
+        "meaning": "Stating qualifications.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M9-T3": [
+      {
+        "phrase": "Ich komme, weil ich Zeit habe.",
+        "translation": "I am coming because I have time.",
+        "meaning": "Subordinate clause with 'weil' (because).",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich weiß, dass du recht hast.",
+        "translation": "I know that you are right.",
+        "meaning": "Subordinate clause with 'dass' (that).",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M9-T4": [
+      {
+        "phrase": "Ich wasche mich.",
+        "translation": "I wash myself.",
+        "meaning": "Reflexive verb 'sich waschen'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Du interessierst dich für Musik.",
+        "translation": "You are interested in music.",
+        "meaning": "Reflexive verb 'sich interessieren'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M10-T1": [
+      {
+        "phrase": "Die Regierung beschließt neue Maßnahmen.",
+        "translation": "The government decides on new measures.",
+        "meaning": "News headline vocabulary.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Wahlen finden nächste Woche statt.",
+        "translation": "Elections take place next week.",
+        "meaning": "News headline structure.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M10-T2": [
+      {
+        "phrase": "Meiner Meinung nach ist das richtig.",
+        "translation": "In my opinion, that is correct.",
+        "meaning": "Expressing personal opinion.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich bin der Ansicht, dass...",
+        "translation": "I am of the opinion that...",
+        "meaning": "Formal way to express opinion.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M10-T3": [
+      {
+        "phrase": "Das Buch wird gelesen.",
+        "translation": "The book is being read.",
+        "meaning": "Passive voice in present tense.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Das Haus wurde gebaut.",
+        "translation": "The house was built.",
+        "meaning": "Passive voice in past tense.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M10-T4": [
+      {
+        "phrase": "Wegen des Wetters bleibe ich zu Hause.",
+        "translation": "Because of the weather, I stay at home.",
+        "meaning": "Preposition 'wegen' with genitive.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Trotz des Regens gehe ich raus.",
+        "translation": "Despite the rain, I go outside.",
+        "meaning": "Preposition 'trotz' with genitive.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M11-T1": [
+      {
+        "phrase": "Das Oktoberfest ist ein wichtiges Fest.",
+        "translation": "Oktoberfest is an important festival.",
+        "meaning": "Talking about German culture.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "In Deutschland isst man viel Brot.",
+        "translation": "In Germany, people eat a lot of bread.",
+        "meaning": "Describing cultural habits.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M11-T2": [
+      {
+        "phrase": "Der Film war spannend.",
+        "translation": "The film was exciting.",
+        "meaning": "Giving a film review.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich empfehle dieses Buch.",
+        "translation": "I recommend this book.",
+        "meaning": "Making a recommendation.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M11-T3": [
+      {
+        "phrase": "der gute Freund",
+        "translation": "the good friend",
+        "meaning": "Adjective ending with masculine article.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "eine schöne Blume",
+        "translation": "a beautiful flower",
+        "meaning": "Adjective ending with feminine article.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M11-T4": [
+      {
+        "phrase": "Der Mann, den ich gesehen habe, ist mein Lehrer.",
+        "translation": "The man whom I saw is my teacher.",
+        "meaning": "Relative clause with accusative relative pronoun.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Das Buch, das ich lese, ist interessant.",
+        "translation": "The book that I am reading is interesting.",
+        "meaning": "Relative clause with neuter relative pronoun.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M12-T1": [
+      {
+        "phrase": "Wenn ich Zeit hätte, würde ich reisen.",
+        "translation": "If I had time, I would travel.",
+        "meaning": "Konjunktiv II expressing wishes.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich wünschte, ich könnte fliegen.",
+        "translation": "I wish I could fly.",
+        "meaning": "Expressing wishes with Konjunktiv II.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M12-T2": [
+      {
+        "phrase": "Trotzdem gehe ich zur Arbeit.",
+        "translation": "Nevertheless, I go to work.",
+        "meaning": "Connector expressing contrast.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Obwohl es regnet, gehe ich raus.",
+        "translation": "Although it is raining, I go outside.",
+        "meaning": "Connector expressing concession.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M12-T3": [
+      {
+        "phrase": "Ich frage, ob du kommst.",
+        "translation": "I ask whether you are coming.",
+        "meaning": "Indirect question with 'ob'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich weiß nicht, wann er kommt.",
+        "translation": "I don't know when he is coming.",
+        "meaning": "Indirect question with 'wann'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ],
+    "B1-M12-T4": [
+      {
+        "phrase": "Zunächst möchte ich darauf hinweisen, dass...",
+        "translation": "First, I would like to point out that...",
+        "meaning": "Essay introduction phrase.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Zusammenfassend kann man sagen, dass...",
+        "translation": "In summary, one can say that...",
+        "meaning": "Essay conclusion phrase.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      }
+    ]
+  }
+}
+

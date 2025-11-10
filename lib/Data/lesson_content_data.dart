@@ -1,6 +1,25 @@
 import '../FrontEnd/screen/A1/Learn.dart';
+import 'package:ductuch_master/learn_module/learn_repository.dart';
 
 class LessonContentData {
+  static List<PhraseData>? getByTopicId(String topicId) {
+    final raw = LearnRepository.getPhrasesRaw(topicId);
+    if (raw != null) {
+      return raw
+          .map(
+            (e) => PhraseData(
+              phrase: (e['phrase'] ?? '').toString(),
+              translation: (e['translation'] ?? '').toString(),
+              meaning: (e['meaning'] ?? '').toString(),
+              languageCode: (e['languageCode'] ?? 'de-DE').toString(),
+              level: (e['level'] ?? '').toString(),
+            ),
+          )
+          .toList();
+    }
+    return null;
+  }
+
   // Map of topic ID to list of phrases
   static Map<String, List<PhraseData>> get topicContent => {
     // A1 Module 1: Hello!

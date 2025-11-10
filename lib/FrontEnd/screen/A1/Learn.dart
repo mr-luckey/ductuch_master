@@ -71,8 +71,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
         (Get.arguments is Map ? Get.arguments['topicId'] : null) ??
         'A1-M1-T1';
 
-    // Load phrases from lesson content data
-    _phrases =
+    // Load phrases from JSON repository (fallback to in-code data)
+    _phrases = LessonContentData.getByTopicId(topicId) ??
         LessonContentData.topicContent[topicId] ??
         [
           PhraseData(
