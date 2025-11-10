@@ -5,7 +5,6 @@ import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// More Screen - displays Exam, Practice, and Categories options
 /// Uses the same card design as learn.dart
@@ -23,15 +22,20 @@ class MoreScreen extends StatelessWidget {
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
 
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+
       return Scaffold(
-        backgroundColor: const Color(0xFF0B0F14),
+        backgroundColor: backgroundColor,
         appBar: AppBar(
-          backgroundColor: const Color(0xFF0B0F14),
+          backgroundColor: backgroundColor,
           title: Text(
             'More',
             style: TextStyle(
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
-              color: Colors.white,
+              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
+              color: textColor,
               fontWeight: FontWeight.bold,
               fontSize: isTablet ? 24 : 20,
             ),
@@ -61,8 +65,8 @@ class MoreScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: isSmallScreen ? 20 : 24,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        color: textColor,
+                        fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
                       ),
                     ),
                     SizedBox(height: isSmallScreen ? 8 : 12),
@@ -70,8 +74,8 @@ class MoreScreen extends StatelessWidget {
                       'Explore additional learning features',
                       style: TextStyle(
                         fontSize: isSmallScreen ? 12 : 14,
-                        color: Colors.white.withOpacity(0.6),
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        color: textColor.withOpacity(0.6),
+                        fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
                       ),
                     ),
                     SizedBox(height: isSmallScreen ? 20 : 24),
@@ -79,27 +83,36 @@ class MoreScreen extends StatelessWidget {
                       child: ListView(
                         children: [
                           _buildOptionCard(
+                            context,
                             'Exam',
                             'Test your knowledge with timed exams',
                             Icons.quiz,
                             () => Get.to(() => const ExamScreen()),
                             isSmallScreen,
+                            scheme,
+                            isDark,
                           ),
                           SizedBox(height: isSmallScreen ? 12 : 16),
                           _buildOptionCard(
+                            context,
                             'Practice',
                             'Practice without time limits',
                             Icons.park_rounded,
                             () => Get.to(() => const PracticeScreen()),
                             isSmallScreen,
+                            scheme,
+                            isDark,
                           ),
                           SizedBox(height: isSmallScreen ? 12 : 16),
                           _buildOptionCard(
+                            context,
                             'Categories',
                             'Learn words by category',
                             Icons.category,
                             () => Get.to(() => const CategoriesListScreen()),
                             isSmallScreen,
+                            scheme,
+                            isDark,
                           ),
                         ],
                       ),
@@ -115,17 +128,24 @@ class MoreScreen extends StatelessWidget {
   }
 
   Widget _buildOptionCard(
+    BuildContext context,
     String title,
     String subtitle,
     IconData icon,
     VoidCallback onTap,
     bool isSmallScreen,
+    scheme,
+    bool isDark,
   ) {
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-        color: Colors.white.withOpacity(0.02),
+        border: Border.all(color: textColor.withOpacity(0.1)),
+        color: surfaceColor.withOpacity(0.02),
       ),
       child: Material(
         color: Colors.transparent,
@@ -141,12 +161,12 @@ class MoreScreen extends StatelessWidget {
                   height: isSmallScreen ? 50 : 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white.withOpacity(0.1)),
-                    color: Colors.white.withOpacity(0.05),
+                    border: Border.all(color: textColor.withOpacity(0.1)),
+                    color: primaryColor.withOpacity(0.2),
                   ),
                   child: Icon(
                     icon,
-                    color: Colors.white.withOpacity(0.9),
+                    color: primaryColor,
                     size: isSmallScreen ? 24 : 28,
                   ),
                 ),
@@ -160,8 +180,8 @@ class MoreScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: isSmallScreen ? 16 : 18,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          color: textColor,
+                          fontFamily: Theme.of(context).textTheme.titleMedium?.fontFamily,
                         ),
                       ),
                       SizedBox(height: 4),
@@ -169,8 +189,8 @@ class MoreScreen extends StatelessWidget {
                         subtitle,
                         style: TextStyle(
                           fontSize: isSmallScreen ? 12 : 13,
-                          color: Colors.white.withOpacity(0.6),
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          color: textColor.withOpacity(0.6),
+                          fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
                         ),
                       ),
                     ],
@@ -178,7 +198,7 @@ class MoreScreen extends StatelessWidget {
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.white.withOpacity(0.5),
+                  color: textColor.withOpacity(0.5),
                   size: isSmallScreen ? 16 : 18,
                 ),
               ],

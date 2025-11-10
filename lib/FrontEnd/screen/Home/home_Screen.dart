@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
             style: TextStyle(
               fontSize: titleSize,
               color: textColor,
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
+              fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
               fontWeight: FontWeight.bold,
             ),
           ),

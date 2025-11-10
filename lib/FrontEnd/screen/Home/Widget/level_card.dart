@@ -1,9 +1,9 @@
 import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LevelCard extends StatelessWidget {
   final LevelModel level;
@@ -135,7 +135,9 @@ class LevelCard extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: primaryColor,
-                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                              fontFamily: Theme.of(
+                                context,
+                              ).textTheme.headlineSmall?.fontFamily,
                             ),
                           ),
                         ],

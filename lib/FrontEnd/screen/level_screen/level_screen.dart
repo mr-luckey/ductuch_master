@@ -1,7 +1,7 @@
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/widget/module_card.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
@@ -13,6 +13,7 @@ class LevelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeService = Get.find<ThemeService>();
     final lessonController = Get.find<LessonController>();
     // Get level from constructor or route arguments
     String currentLevelKey = level;
@@ -37,12 +38,20 @@ class LevelScreen extends StatelessWidget {
       'LevelScreen: Displaying level "$currentLevelKey" with ${currentLevel.modules.length} modules',
     );
 
-    final textTheme = Theme.of(context).textTheme;
     final levelCodeUpper = currentLevelKey.toUpperCase();
     final progressPercent = lessonController.levelProgressPercent(levelCodeUpper);
     final allDone = progressPercent >= 100;
 
-    return Scaffold(
+    return Obx(() {
+      final scheme = themeService.currentScheme;
+      final isDark = themeService.isDarkMode.value;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+      final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+      final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+      final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+
+      return Scaffold(
+        backgroundColor: backgroundColor,
         body: SafeArea(
           child: CustomScrollView(
             slivers: <Widget>[
@@ -60,14 +69,14 @@ class LevelScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
-                                color: Colors.white.withOpacity(0.1),
+                                color: textColor.withOpacity(0.1),
                               ),
                             ),
                             child: IconButton(
                               onPressed: () => Get.back(),
                               icon: Icon(
                                 Icons.chevron_left,
-                                color: textTheme.titleLarge?.color ?? Colors.white,
+                                color: textColor,
                                 size: 22,
                               ),
                               padding: const EdgeInsets.all(6),
@@ -83,9 +92,8 @@ class LevelScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
-                                    color: textTheme.titleLarge?.color ?? Colors.white,
-                                    fontFamily:
-                                        GoogleFonts.patrickHand().fontFamily,
+                                    color: textColor,
+                                    fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
                                   ),
                                 ),
                                 const SizedBox(height: 6),
@@ -96,7 +104,7 @@ class LevelScreen extends StatelessWidget {
                                         height: 6,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(3),
-                                          color: Colors.white.withOpacity(0.08),
+                                          color: surfaceColor.withOpacity(0.08),
                                         ),
                                         child: FractionallySizedBox(
                                           alignment: Alignment.centerLeft,
@@ -104,7 +112,7 @@ class LevelScreen extends StatelessWidget {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(3),
-                                              color: Colors.white.withOpacity(0.7),
+                                              color: primaryColor.withOpacity(0.7),
                                             ),
                                           ),
                                         ),
@@ -115,9 +123,8 @@ class LevelScreen extends StatelessWidget {
                                       '$progressPercent%',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: textTheme.bodyMedium?.color?.withOpacity(0.8),
-                                        fontFamily:
-                                            GoogleFonts.patrickHand().fontFamily,
+                                        color: textColor.withOpacity(0.8),
+                                        fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
                                       ),
                                     ),
                                   ],
@@ -128,9 +135,8 @@ class LevelScreen extends StatelessWidget {
                                     currentLevel.description,
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: textTheme.bodyMedium?.color?.withOpacity(0.8),
-                                      fontFamily:
-                                          GoogleFonts.patrickHand().fontFamily,
+                                      color: textColor.withOpacity(0.8),
+                                      fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
                                     ),
                                   ),
                                 ],
@@ -154,7 +160,7 @@ class LevelScreen extends StatelessWidget {
                         Icon(
                           Icons.construction,
                           size: 64,
-                          color: textTheme.bodyMedium?.color?.withOpacity(0.7),
+                          color: textColor.withOpacity(0.7),
                         ),
                         const SizedBox(height: 16),
                         Text(
@@ -162,8 +168,8 @@ class LevelScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: textTheme.titleLarge?.color ?? Colors.white,
-                            fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            color: textColor,
+                            fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -171,8 +177,8 @@ class LevelScreen extends StatelessWidget {
                           'This level is under development',
                           style: TextStyle(
                             fontSize: 14,
-                            color: textTheme.bodyMedium?.color?.withOpacity(0.8),
-                            fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            color: textColor.withOpacity(0.8),
+                            fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
                           ),
                         ),
                       ],
@@ -248,8 +254,8 @@ class LevelScreen extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.white.withOpacity(0.1)),
-                        color: const Color(0xFF10B981).withOpacity(0.12),
+                        border: Border.all(color: textColor.withOpacity(0.1)),
+                        color: primaryColor.withOpacity(0.12),
                       ),
                       child: Material(
                         color: Colors.transparent,
@@ -262,7 +268,7 @@ class LevelScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                             child: Row(
                               children: [
-                                Icon(Icons.assignment_turned_in, color: const Color(0xFF10B981)),
+                                Icon(Icons.assignment_turned_in, color: primaryColor),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Text(
@@ -270,12 +276,12 @@ class LevelScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
-                                      color: const Color(0xFF10B981),
-                                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                                      color: primaryColor,
+                                      fontFamily: Theme.of(context).textTheme.titleMedium?.fontFamily,
                                     ),
                                   ),
                                 ),
-                                Icon(Icons.chevron_right, color: const Color(0xFF10B981)),
+                                Icon(Icons.chevron_right, color: primaryColor),
                               ],
                             ),
                           ),
@@ -289,5 +295,6 @@ class LevelScreen extends StatelessWidget {
           ),
         ),
       );
+    });
   }
 }

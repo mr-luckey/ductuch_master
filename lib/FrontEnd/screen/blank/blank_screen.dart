@@ -1,7 +1,6 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BlankScreen extends StatelessWidget {
   const BlankScreen({super.key});
@@ -27,7 +26,7 @@ class BlankScreen extends StatelessWidget {
           title: Text(
             'Blank',
             style: TextStyle(
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
+              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
               color: textColor,
               fontWeight: FontWeight.bold,
               fontSize: isTablet ? 24 : 20,
@@ -40,7 +39,7 @@ class BlankScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: isTablet ? 24 : 20,
               color: textColor,
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
+              fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
             ),
           ),
         ),

@@ -1,10 +1,10 @@
 import 'package:ductuch_master/FrontEnd/screen/categories/category_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/categories/category_data.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Categories List Screen - displays all category cards
 /// Uses the same card design as learn.dart
@@ -35,25 +35,34 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeService = Get.find<ThemeService>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
     final isTablet = screenWidth > 600;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0F14),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF0B0F14),
-        title: Text(
-          'Categories',
-          style: TextStyle(
-            fontFamily: GoogleFonts.patrickHand().fontFamily,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: isTablet ? 24 : 20,
+    return Obx(() {
+      final scheme = themeService.currentScheme;
+      final isDark = themeService.isDarkMode.value;
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+
+      return Scaffold(
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          title: Text(
+            'Categories',
+            style: TextStyle(
+              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
+              color: textColor,
+              fontWeight: FontWeight.bold,
+              fontSize: isTablet ? 24 : 20,
+            ),
           ),
+          actions: [TtsSpeedDropdown()],
         ),
-        actions: [TtsSpeedDropdown()],
-      ),
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -77,8 +86,8 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                     style: TextStyle(
                       fontSize: isSmallScreen ? 20 : 24,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                      color: textColor,
+                      fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
                     ),
                   ),
                   SizedBox(height: isSmallScreen ? 8 : 12),
@@ -86,16 +95,16 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                     'Explore words by category',
                     style: TextStyle(
                       fontSize: isSmallScreen ? 12 : 14,
-                      color: Colors.white.withOpacity(0.6),
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                      color: textColor.withOpacity(0.6),
+                      fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
                     ),
                   ),
                   SizedBox(height: isSmallScreen ? 20 : 24),
                   Expanded(
                     child: isLoading
-                        ? const Center(
+                        ? Center(
                             child: CircularProgressIndicator(
-                              color: Colors.white,
+                              color: textColor,
                             ),
                           )
                         : ListView.builder(
@@ -107,10 +116,13 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                                   bottom: isSmallScreen ? 12 : 16,
                                 ),
                                 child: _buildCategoryCard(
+                                  context,
                                   category.name,
                                   category.icon,
                                   category.words,
                                   isSmallScreen,
+                                  scheme,
+                                  isDark,
                                 ),
                               );
                             },
@@ -123,19 +135,27 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
         ),
       ),
     );
+    });
   }
 
   Widget _buildCategoryCard(
+    BuildContext context,
     String categoryName,
     IconData icon,
     List<CategoryWord> words,
     bool isSmallScreen,
+    scheme,
+    bool isDark,
   ) {
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-        color: Colors.white.withOpacity(0.02),
+        border: Border.all(color: textColor.withOpacity(0.1)),
+        color: surfaceColor.withOpacity(0.02),
       ),
       child: Material(
         color: Colors.transparent,
@@ -155,12 +175,12 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                   height: isSmallScreen ? 50 : 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white.withOpacity(0.1)),
-                    color: Colors.white.withOpacity(0.05),
+                    border: Border.all(color: textColor.withOpacity(0.1)),
+                    color: primaryColor.withOpacity(0.2),
                   ),
                   child: Icon(
                     icon,
-                    color: Colors.white.withOpacity(0.9),
+                    color: primaryColor,
                     size: isSmallScreen ? 24 : 28,
                   ),
                 ),
@@ -174,8 +194,8 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                         style: TextStyle(
                           fontSize: isSmallScreen ? 16 : 18,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          color: textColor,
+                          fontFamily: Theme.of(context).textTheme.titleMedium?.fontFamily,
                         ),
                       ),
                       SizedBox(height: 4),
@@ -183,8 +203,8 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                         '${words.length} words',
                         style: TextStyle(
                           fontSize: isSmallScreen ? 12 : 13,
-                          color: Colors.white.withOpacity(0.6),
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          color: textColor.withOpacity(0.6),
+                          fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
                         ),
                       ),
                     ],
@@ -192,7 +212,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.white.withOpacity(0.5),
+                  color: textColor.withOpacity(0.5),
                   size: isSmallScreen ? 16 : 18,
                 ),
               ],

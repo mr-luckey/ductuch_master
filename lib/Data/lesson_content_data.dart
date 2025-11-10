@@ -1,5 +1,5 @@
 import '../FrontEnd/screen/A1/Learn.dart';
-import 'package:ductuch_master/learn_module/learn_repository.dart';
+import 'package:ductuch_master/backend/repository/learn_repository.dart';
 
 class LessonContentData {
   static List<PhraseData>? getByTopicId(String topicId) {

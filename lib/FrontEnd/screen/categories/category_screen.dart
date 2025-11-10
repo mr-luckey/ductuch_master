@@ -11,11 +11,7 @@ class CategoryWord {
   final String english;
   final String? meaning;
 
-  CategoryWord({
-    required this.german,
-    required this.english,
-    this.meaning,
-  });
+  CategoryWord({required this.german, required this.english, this.meaning});
 }
 
 /// Category Screen - displays words from a specific category
@@ -74,22 +70,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
 
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+
       return Scaffold(
-        backgroundColor: const Color(0xFF0B0F14),
+        backgroundColor: backgroundColor,
         appBar: AppBar(
-          backgroundColor: const Color(0xFF0B0F14),
+          backgroundColor: backgroundColor,
           title: Text(
             widget.categoryName,
             style: TextStyle(
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
-              color: Colors.white,
+              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
+              color: textColor,
               fontWeight: FontWeight.bold,
               fontSize: screenWidth > 600 ? 24 : 20,
             ),
           ),
-          actions: [
-            TtsSpeedDropdown(),
-          ],
+          actions: [TtsSpeedDropdown()],
         ),
         body: SafeArea(
           child: LayoutBuilder(
@@ -108,17 +107,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 child: Column(
                   children: [
                     SizedBox(height: isSmallScreen ? 4 : 6),
-                    _buildTopBar(isSmallScreen),
+                    _buildTopBar(context, isSmallScreen, scheme, isDark),
                     SizedBox(height: isSmallScreen ? 12 : 16),
-                    _buildCategoryHeader(isSmallScreen),
+                    _buildCategoryHeader(
+                      context,
+                      isSmallScreen,
+                      scheme,
+                      isDark,
+                    ),
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            _buildMainCard(isSmallScreen),
+                            _buildMainCard(
+                              context,
+                              isSmallScreen,
+                              scheme,
+                              isDark,
+                            ),
                             SizedBox(height: isSmallScreen ? 20 : 24),
-                            _buildExternalNavigationControls(isSmallScreen),
+                            _buildExternalNavigationControls(
+                              context,
+                              isSmallScreen,
+                              scheme,
+                              isDark,
+                            ),
                             SizedBox(height: isSmallScreen ? 16 : 20),
                           ],
                         ),
@@ -134,19 +148,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
     });
   }
 
-  Widget _buildTopBar(bool isSmallScreen) {
+  Widget _buildTopBar(
+    BuildContext context,
+    bool isSmallScreen,
+    scheme,
+    bool isDark,
+  ) {
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+    final borderColor = isDark
+        ? scheme.textPrimaryDark.withOpacity(0.1)
+        : scheme.textPrimary.withOpacity(0.1);
+
     return Row(
       children: [
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.white.withOpacity(0.1)),
+            border: Border.all(color: borderColor),
           ),
           child: IconButton(
             onPressed: () => Get.back(),
             icon: Icon(
               Icons.chevron_left,
-              color: Colors.white70,
+              color: textColor.withOpacity(0.7),
               size: isSmallScreen ? 20 : 22,
             ),
             tooltip: 'Back',
@@ -157,7 +181,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Widget _buildCategoryHeader(bool isSmallScreen) {
+  Widget _buildCategoryHeader(
+    BuildContext context,
+    bool isSmallScreen,
+    scheme,
+    bool isDark,
+  ) {
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+
     return Row(
       children: [
         Flexible(
@@ -169,9 +200,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   widget.categoryName,
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
-                    color: Colors.white.withOpacity(0.5),
+                    color: textColor.withOpacity(0.5),
                     letterSpacing: 1.0,
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    fontFamily: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.fontFamily,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -186,8 +219,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
               '${_currentWordIndex + 1}/${widget.words.length}',
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
-                color: Colors.white.withOpacity(0.6),
-                fontFamily: GoogleFonts.patrickHand().fontFamily,
+                color: textColor.withOpacity(0.6),
+                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -204,10 +237,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
                     color: index == 0
-                        ? Colors.white.withOpacity(0.7)
+                        ? textColor.withOpacity(0.7)
                         : index < 2
-                            ? Colors.white.withOpacity(0.3)
-                            : Colors.white.withOpacity(0.15),
+                        ? textColor.withOpacity(0.3)
+                        : textColor.withOpacity(0.15),
                   ),
                 );
               }),
@@ -218,14 +251,22 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Widget _buildMainCard(bool isSmallScreen) {
+  Widget _buildMainCard(
+    BuildContext context,
+    bool isSmallScreen,
+    scheme,
+    bool isDark,
+  ) {
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
     final currentWord = widget.words[_currentWordIndex];
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: Colors.white.withOpacity(0.1)),
-        color: Colors.white.withOpacity(0.02),
+        border: Border.all(color: textColor.withOpacity(0.1)),
+        color: surfaceColor.withOpacity(0.02),
       ),
       padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
       child: Column(
@@ -246,10 +287,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.1),
-                        ),
-                        color: Colors.white.withOpacity(0.05),
+                        border: Border.all(color: textColor.withOpacity(0.1)),
+                        color: surfaceColor.withOpacity(0.05),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -257,9 +296,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           Container(
                             width: isSmallScreen ? 5 : 6,
                             height: isSmallScreen ? 5 : 6,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color(0xFF10B981),
+                              color: primaryColor,
                             ),
                           ),
                           SizedBox(width: isSmallScreen ? 3 : 4),
@@ -267,8 +306,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             widget.categoryName.toUpperCase(),
                             style: TextStyle(
                               fontSize: isSmallScreen ? 10 : 11,
-                              color: Colors.white.withOpacity(0.7),
-                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                              color: textColor.withOpacity(0.7),
+                              fontFamily: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.fontFamily,
                             ),
                           ),
                         ],
@@ -280,7 +321,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       style: TextStyle(
                         fontSize: isSmallScreen ? 20 : 24,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: textColor,
                         height: 1.2,
                         fontFamily: GoogleFonts.patrickHand().fontFamily,
                       ),
@@ -303,7 +344,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   border: Border.all(color: Colors.white.withOpacity(0.1)),
-                  color: Colors.white.withOpacity(0.05),
+                  color: surfaceColor.withOpacity(0.05),
                 ),
                 child: Text(
                   'DE',
@@ -322,7 +363,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
               border: Border.all(color: Colors.white.withOpacity(0.1)),
-              color: Colors.white.withOpacity(0.03),
+              color: surfaceColor.withOpacity(0.03),
             ),
             padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
             child: Column(
@@ -335,7 +376,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         currentWord.english,
                         style: TextStyle(
                           fontSize: isSmallScreen ? 14 : 15,
-                          color: Colors.white.withOpacity(0.9),
+                          color: textColor.withOpacity(0.9),
                           fontFamily: GoogleFonts.patrickHand().fontFamily,
                         ),
                       ),
@@ -345,9 +386,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         borderRadius: BorderRadius.circular(
                           isSmallScreen ? 6 : 8,
                         ),
-                        border: Border.all(
-                          color: Colors.white.withOpacity(0.1),
-                        ),
+                        border: Border.all(color: textColor.withOpacity(0.1)),
                       ),
                       child: IconButton(
                         onPressed: _playCurrentWord,
@@ -357,8 +396,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               : Icons.volume_up_outlined,
                           size: isSmallScreen ? 16 : 18,
                           color: ttsService.isTextPlaying(currentWord.german)
-                              ? const Color(0xFF10B981)
-                              : Colors.white.withOpacity(0.8),
+                              ? primaryColor
+                              : textColor.withOpacity(0.8),
                         ),
                         padding: isSmallScreen ? const EdgeInsets.all(4) : null,
                       ),
@@ -371,7 +410,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     currentWord.meaning!,
                     style: TextStyle(
                       fontSize: isSmallScreen ? 12 : 13,
-                      color: Colors.white.withOpacity(0.6),
+                      color: textColor.withOpacity(0.6),
                       fontFamily: GoogleFonts.patrickHand().fontFamily,
                     ),
                   ),
@@ -385,7 +424,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3),
-              color: Colors.white.withOpacity(0.05),
+              color: surfaceColor.withOpacity(0.05),
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
@@ -403,7 +442,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 
-  Widget _buildExternalNavigationControls(bool isSmallScreen) {
+  Widget _buildExternalNavigationControls(
+    BuildContext context,
+    bool isSmallScreen,
+    scheme,
+    bool isDark,
+  ) {
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
     final currentWord = widget.words[_currentWordIndex];
 
     return Container(
@@ -415,14 +462,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
               border: Border.all(color: Colors.white.withOpacity(0.1)),
-              color: Colors.white.withOpacity(0.05),
+              color: surfaceColor.withOpacity(0.05),
             ),
             child: IconButton(
               onPressed: _previousWord,
               icon: Icon(
                 Icons.chevron_left,
                 size: isSmallScreen ? 28 : 32,
-                color: Colors.white.withOpacity(0.9),
+                color: textColor.withOpacity(0.9),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
             ),
@@ -433,10 +480,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
                   border: Border.all(color: Colors.white.withOpacity(0.1)),
-                  color: Colors.white.withOpacity(0.05),
+                  color: surfaceColor.withOpacity(0.05),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.white.withOpacity(0.1),
+                      color: textColor.withOpacity(0.1),
                       blurRadius: 10,
                       spreadRadius: 1,
                     ),
@@ -449,7 +496,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ? Icons.stop
                         : Icons.volume_up,
                     size: isSmallScreen ? 36 : 42,
-                    color: Colors.white,
+                    color: textColor,
                   ),
                   padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
                 ),
@@ -473,14 +520,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
               border: Border.all(color: Colors.white.withOpacity(0.1)),
-              color: Colors.white.withOpacity(0.05),
+              color: surfaceColor.withOpacity(0.05),
             ),
             child: IconButton(
               onPressed: _nextWord,
               icon: Icon(
                 Icons.chevron_right,
                 size: isSmallScreen ? 28 : 32,
-                color: Colors.white.withOpacity(0.9),
+                color: textColor.withOpacity(0.9),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
             ),
@@ -490,4 +537,3 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 }
-
