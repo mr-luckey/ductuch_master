@@ -1,9 +1,9 @@
-import 'package:ductuch_master/Data/learning_path_data.dart';
+import 'package:ductuch_master/backend/data/learning_path_data.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/widget/module_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 
 class LevelScreen extends StatelessWidget {

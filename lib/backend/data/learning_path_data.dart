@@ -1,5 +1,5 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
-import 'package:ductuch_master/learn_module/learn_repository.dart';
+import 'package:ductuch_master/backend/repository/learn_repository.dart';
 
 class LearningPathData {
   static Map<String, LevelInfo> get levelInfo => LearnRepository.levelInfo;
@@ -8,3 +8,5 @@ class LearningPathData {
   static Map<String, List<String>> get moduleTopics =>
       LearnRepository.moduleTopics;
 }
+
+

@@ -1,4 +1,4 @@
-import 'package:ductuch_master/Utilities/Services/tts_service.dart';
+import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';
@@ -92,17 +92,16 @@ class _SentencesScreenState extends State<SentencesScreen> {
         backgroundColor: const Color(0xFF0B0F14),
         appBar: AppBar(
           backgroundColor: const Color(0xFF0B0F14),
-          title: Text(
+          centerTitle: false,
+          title: const Text(
             'Sentences',
             style: TextStyle(
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
-              color: Colors.white,
+              overflow: TextOverflow.ellipsis,
               fontWeight: FontWeight.bold,
-              fontSize: screenWidth > 600 ? 24 : 20,
             ),
           ),
           actions: [
-            TtsSpeedDropdown(),
+            const TtsSpeedDropdown(),
           ],
         ),
         body: SafeArea(

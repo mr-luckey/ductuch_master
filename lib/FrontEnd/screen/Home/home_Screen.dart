@@ -1,6 +1,6 @@
 import 'package:ductuch_master/FrontEnd/screen/Home/Widget/level_card.dart';
-import 'package:ductuch_master/Utilities/Models/level_model.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
+import 'package:ductuch_master/backend/models/level_model.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

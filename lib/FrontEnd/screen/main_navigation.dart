@@ -1,4 +1,4 @@
-import 'package:ductuch_master/FrontEnd/screen/learn/learn_screen.dart';
+import 'package:ductuch_master/frontend/screens/learn/learn_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/nouns/nouns_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/verbs/verbs_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/sentences/sentences_screen.dart';

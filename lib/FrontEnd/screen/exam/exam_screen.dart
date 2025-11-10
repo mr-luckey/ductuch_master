@@ -1,10 +1,11 @@
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
+import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
-import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+// import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
 
 /// Question model for exam
 class ExamQuestion {
@@ -119,7 +120,7 @@ class _ExamScreenState extends State<ExamScreen> {
 
   void _submitExam() {
     countdownTimer?.cancel();
-    
+
     // Calculate score
     int correctCount = 0;
     for (int i = 0; i < currentQuestions.length; i++) {
@@ -127,7 +128,7 @@ class _ExamScreenState extends State<ExamScreen> {
         correctCount++;
       }
     }
-    
+
     setState(() {
       score = correctCount;
       isExamCompleted = true;
@@ -194,25 +195,28 @@ class _ExamScreenState extends State<ExamScreen> {
   List<ExamQuestion> _getQuestionsForLevel(String level) {
     // Get questions from loaded JSON data
     final questions = _examQuestions[level] ?? [];
-    
+
     // If we have questions, return them. Otherwise, generate sample questions
     if (questions.isNotEmpty) {
       // For now, return the loaded questions. In production, you might want to
       // expand this to 150+ questions by duplicating or loading more from JSON
       return questions;
     }
-    
+
     // Fallback: Generate sample questions if JSON doesn't have enough
     List<ExamQuestion> fallbackQuestions = [];
     for (int i = 0; i < 150; i++) {
-      fallbackQuestions.add(ExamQuestion(
-        question: 'Question ${i + 1} for level $level: What is the correct answer?',
-        options: ['Option A', 'Option B', 'Option C', 'Option D'],
-        correctAnswerIndex: i % 4,
-        explanation: 'This is the explanation for question ${i + 1}',
-      ));
+      fallbackQuestions.add(
+        ExamQuestion(
+          question:
+              'Question ${i + 1} for level $level: What is the correct answer?',
+          options: ['Option A', 'Option B', 'Option C', 'Option D'],
+          correctAnswerIndex: i % 4,
+          explanation: 'This is the explanation for question ${i + 1}',
+        ),
+      );
     }
-    
+
     return fallbackQuestions;
   }
 
@@ -238,57 +242,57 @@ class _ExamScreenState extends State<ExamScreen> {
     final isTablet = screenWidth > 600;
 
     return Scaffold(
+      backgroundColor: const Color(0xFF0B0F14),
+      appBar: AppBar(
         backgroundColor: const Color(0xFF0B0F14),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF0B0F14),
-          title: Text(
-            'Exam',
-            style: TextStyle(
-              fontFamily: GoogleFonts.patrickHand().fontFamily,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: isTablet ? 24 : 20,
-            ),
+        title: Text(
+          'Exam',
+          style: TextStyle(
+            fontFamily: GoogleFonts.patrickHand().fontFamily,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: isTablet ? 24 : 20,
           ),
-          actions: [
-            if (isExamStarted)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Center(
-                  child: Text(
-                    _formatTime(remainingSeconds),
-                    style: TextStyle(
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
-                      color: remainingSeconds < 300 ? Colors.red : Colors.white,
-                      fontSize: isTablet ? 18 : 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+        ),
+        actions: [
+          if (isExamStarted)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Center(
+                child: Text(
+                  _formatTime(remainingSeconds),
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    color: remainingSeconds < 300 ? Colors.red : Colors.white,
+                    fontSize: isTablet ? 18 : 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            TtsSpeedDropdown(),
-          ],
+            ),
+          TtsSpeedDropdown(),
+        ],
+      ),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              width: double.infinity,
+              constraints: BoxConstraints(
+                maxWidth: constraints.maxWidth > 500
+                    ? 500
+                    : constraints.maxWidth,
+              ),
+              margin: EdgeInsets.symmetric(
+                horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                vertical: constraints.maxWidth > 500 ? 30 : 20,
+              ),
+              child: _buildContent(isSmallScreen),
+            );
+          },
         ),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth > 500
-                      ? 500
-                      : constraints.maxWidth,
-                ),
-                margin: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                  vertical: constraints.maxWidth > 500 ? 30 : 20,
-                ),
-                child: _buildContent(isSmallScreen),
-              );
-            },
-          ),
-        ),
-      );
+      ),
+    );
   }
 
   Widget _buildContent(bool isSmallScreen) {
@@ -445,7 +449,7 @@ class _ExamScreenState extends State<ExamScreen> {
           ),
         ),
         SizedBox(height: isSmallScreen ? 12 : 16),
-        
+
         // Question counter
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -469,7 +473,7 @@ class _ExamScreenState extends State<ExamScreen> {
           ],
         ),
         SizedBox(height: isSmallScreen ? 16 : 20),
-        
+
         // Question card
         Expanded(
           child: SingleChildScrollView(
@@ -497,7 +501,7 @@ class _ExamScreenState extends State<ExamScreen> {
                     final index = entry.key;
                     final option = entry.value;
                     final isSelected = selectedAnswerIndex == index;
-                    
+
                     return Padding(
                       padding: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
                       child: _buildOptionCard(
@@ -513,9 +517,9 @@ class _ExamScreenState extends State<ExamScreen> {
             ),
           ),
         ),
-        
+
         SizedBox(height: isSmallScreen ? 16 : 20),
-        
+
         // Navigation buttons
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -538,7 +542,7 @@ class _ExamScreenState extends State<ExamScreen> {
                 padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
               ),
             ),
-            
+
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
@@ -568,7 +572,7 @@ class _ExamScreenState extends State<ExamScreen> {
                 ),
               ),
             ),
-            
+
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
@@ -595,7 +599,12 @@ class _ExamScreenState extends State<ExamScreen> {
     );
   }
 
-  Widget _buildOptionCard(String option, int index, bool isSelected, bool isSmallScreen) {
+  Widget _buildOptionCard(
+    String option,
+    int index,
+    bool isSelected,
+    bool isSmallScreen,
+  ) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
@@ -628,9 +637,7 @@ class _ExamScreenState extends State<ExamScreen> {
                           : Colors.white.withOpacity(0.3),
                       width: 2,
                     ),
-                    color: isSelected
-                        ? Colors.white
-                        : Colors.transparent,
+                    color: isSelected ? Colors.white : Colors.transparent,
                   ),
                   child: isSelected
                       ? Icon(
@@ -639,7 +646,7 @@ class _ExamScreenState extends State<ExamScreen> {
                           color: const Color(0xFF0B0F14),
                         )
                       : null,
-                  ),
+                ),
                 SizedBox(width: isSmallScreen ? 12 : 16),
                 Expanded(
                   child: Text(
@@ -740,7 +747,7 @@ class _ExamScreenState extends State<ExamScreen> {
                   final question = entry.value;
                   final userAnswer = userAnswers[index];
                   final isCorrect = userAnswer == question.correctAnswerIndex;
-                  
+
                   return Padding(
                     padding: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
                     child: _buildAnswerCard(
@@ -867,4 +874,3 @@ class _ExamScreenState extends State<ExamScreen> {
     );
   }
 }
-

@@ -1,4 +1,4 @@
-import 'package:ductuch_master/Utilities/Services/tts_service.dart';
+import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:flutter/material.dart';

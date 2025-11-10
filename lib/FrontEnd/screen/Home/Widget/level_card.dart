@@ -1,8 +1,8 @@
-import 'package:ductuch_master/Utilities/Models/level_model.dart';
+import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 
 class LevelCard extends StatelessWidget {
@@ -27,9 +27,11 @@ class LevelCard extends StatelessWidget {
 
     final backgroundColor = theme.cardColor;
     final borderColor = theme.dividerColor.withOpacity(0.3);
-    final textColor = theme.textTheme.titleMedium?.color ?? colorScheme.onSurface;
+    final textColor =
+        theme.textTheme.titleMedium?.color ?? colorScheme.onSurface;
     final secondaryTextColor =
-        theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ?? colorScheme.onSurfaceVariant;
+        theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ??
+        colorScheme.onSurfaceVariant;
     final primaryColor = colorScheme.primary;
     final badgeColor = primaryColor.withOpacity(0.12);
     final badgeBorderColor = primaryColor.withOpacity(0.28);
@@ -50,7 +52,9 @@ class LevelCard extends StatelessWidget {
         child: Obx(() {
           final progress = lessonController.levelProgressPercent(level.level);
           final isPassed = lessonController.isLevelPassed(level.level);
-          final dynamicHeight = (progress == 100 && !isPassed) ? cardHeight + 28.0 : cardHeight;
+          final dynamicHeight = (progress == 100 && !isPassed)
+              ? cardHeight + 28.0
+              : cardHeight;
           return SizedBox(
             height: dynamicHeight,
             child: Stack(
@@ -58,8 +62,12 @@ class LevelCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(padding),
                   child: Obx(() {
-                    final innerProgress = lessonController.levelProgressPercent(level.level);
-                    final innerIsPassed = lessonController.isLevelPassed(level.level);
+                    final innerProgress = lessonController.levelProgressPercent(
+                      level.level,
+                    );
+                    final innerIsPassed = lessonController.isLevelPassed(
+                      level.level,
+                    );
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -93,22 +101,33 @@ class LevelCard extends StatelessWidget {
                 if (level.isLocked) _buildLockedOverlay(context, isDark),
                 // PASS Tag
                 Obx(() {
-                  final passed = Get.find<LessonController>().isLevelPassed(level.level);
+                  final passed = Get.find<LessonController>().isLevelPassed(
+                    level.level,
+                  );
                   if (!passed) return const SizedBox.shrink();
                   return Positioned(
                     top: 8,
                     right: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: primaryColor.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: primaryColor.withOpacity(0.4)),
+                        border: Border.all(
+                          color: primaryColor.withOpacity(0.4),
+                        ),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.local_offer, size: 14, color: primaryColor),
+                          Icon(
+                            Icons.local_offer,
+                            size: 14,
+                            color: primaryColor,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             'PASSED',
@@ -266,14 +285,24 @@ class LevelCard extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () {
-                  Get.to(() => const ExamScreen(), arguments: {'level': level.level});
+                  Get.to(
+                    () => const ExamScreen(),
+                    arguments: {'level': level.level},
+                  );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.assignment_turned_in, color: primaryColor, size: 18),
+                      Icon(
+                        Icons.assignment_turned_in,
+                        color: primaryColor,
+                        size: 18,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         'Take Exam',
@@ -289,7 +318,7 @@ class LevelCard extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ],
     );
@@ -297,19 +326,14 @@ class LevelCard extends StatelessWidget {
 
   Widget _buildLockedOverlay(BuildContext context, bool isDark) {
     final colorScheme = Theme.of(context).colorScheme;
-    final onSurface = Theme.of(context).textTheme.titleMedium?.color ?? colorScheme.onSurface;
+    final onSurface =
+        Theme.of(context).textTheme.titleMedium?.color ?? colorScheme.onSurface;
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface.withOpacity(isDark ? 0.7 : 0.7),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Center(
-        child: Icon(
-          Icons.lock,
-          color: onSurface,
-          size: 32,
-        ),
-      ),
+      child: Center(child: Icon(Icons.lock, color: onSurface, size: 32)),
     );
   }
 }

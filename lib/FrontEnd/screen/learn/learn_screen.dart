@@ -1,5 +1,5 @@
 import 'package:ductuch_master/FrontEnd/screen/Home/Widget/level_card.dart';
-import 'package:ductuch_master/Utilities/Models/level_model.dart';
+import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:flutter/material.dart';
 
 class LearnScreen extends StatelessWidget {
@@ -32,7 +32,7 @@ class LearnScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   'Choose a level to start learning',
                   style: textTheme.bodyLarge?.copyWith(
@@ -59,7 +59,7 @@ class LearnScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         return LevelCard(level: levels[index]);
       },
-      separatorBuilder: (context, _) => SizedBox(height: 16),
+      separatorBuilder: (context, _) => const SizedBox(height: 16),
     );
   }
 }

@@ -1,6 +1,5 @@
-// controllers/lesson_controller.dart
 import 'package:get/get.dart';
-import 'package:ductuch_master/Data/learning_path_data.dart';
+import 'package:ductuch_master/backend/data/learning_path_data.dart';
 
 class LessonController extends GetxController {
   /// Topic IDs that are fully completed (e.g., 'A1-M1-T1')
@@ -85,3 +84,5 @@ class LessonController extends GetxController {
     return _passedLevels.contains(level.toUpperCase());
   }
 }
+
+

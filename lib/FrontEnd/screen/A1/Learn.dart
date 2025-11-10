@@ -1,10 +1,10 @@
 import 'package:ductuch_master/Data/lesson_content_data.dart';
-import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ductuch_master/Utilities/Services/theme_service.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 
 class PhraseData {
   final String phrase;
