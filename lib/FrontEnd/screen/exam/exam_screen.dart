@@ -134,11 +134,11 @@ class _ExamScreenState extends State<ExamScreen> {
       isExamStarted = false;
     });
 
-    // Mark level as passed if >= 80%
+    // Mark level as passed if >= 70%
     final totalQuestions = currentQuestions.length;
     if (selectedLevel != null && totalQuestions > 0) {
       final percentage = (score / totalQuestions * 100).round();
-      if (percentage >= 80) {
+      if (percentage >= 70) {
         _lessonController.markLevelPassed(selectedLevel!);
       }
     }

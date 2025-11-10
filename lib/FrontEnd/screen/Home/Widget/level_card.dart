@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/FrontEnd/screen/controller/lesson_controller.dart';
+import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 
 class LevelCard extends StatelessWidget {
   final LevelModel level;
@@ -46,82 +47,87 @@ class LevelCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         splashColor: primaryColor.withOpacity(0.08),
         highlightColor: primaryColor.withOpacity(0.04),
-        child: SizedBox(
-          height: cardHeight,
-          child: Stack(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(padding),
-                child: Obx(() {
-                  final progress = lessonController.levelProgressPercent(level.level);
-                  final isPassed = lessonController.isLevelPassed(level.level);
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildHeader(
-                        context,
-                        isDark,
-                        textColor,
-                        secondaryTextColor,
-                        primaryColor,
-                        badgeColor,
-                        badgeBorderColor,
-                        badgeSize,
-                        titleSize,
-                        subtitleSize,
+        child: Obx(() {
+          final progress = lessonController.levelProgressPercent(level.level);
+          final isPassed = lessonController.isLevelPassed(level.level);
+          final dynamicHeight = (progress == 100 && !isPassed) ? cardHeight + 28.0 : cardHeight;
+          return SizedBox(
+            height: dynamicHeight,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(padding),
+                  child: Obx(() {
+                    final innerProgress = lessonController.levelProgressPercent(level.level);
+                    final innerIsPassed = lessonController.isLevelPassed(level.level);
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildHeader(
+                          context,
+                          isDark,
+                          textColor,
+                          secondaryTextColor,
+                          primaryColor,
+                          badgeColor,
+                          badgeBorderColor,
+                          badgeSize,
+                          titleSize,
+                          subtitleSize,
+                        ),
+                        const Spacer(),
+                        _buildFooter(
+                          context,
+                          isDark,
+                          textColor,
+                          secondaryTextColor,
+                          primaryColor,
+                          subtitleSize,
+                          innerProgress,
+                        ),
+                        if (innerIsPassed) const SizedBox(height: 0),
+                      ],
+                    );
+                  }),
+                ),
+                if (level.isLocked) _buildLockedOverlay(context, isDark),
+                // PASS Tag
+                Obx(() {
+                  final passed = Get.find<LessonController>().isLevelPassed(level.level);
+                  if (!passed) return const SizedBox.shrink();
+                  return Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: primaryColor.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: primaryColor.withOpacity(0.4)),
                       ),
-                      const Spacer(),
-                      _buildFooter(
-                        context,
-                        isDark,
-                        textColor,
-                        secondaryTextColor,
-                        primaryColor,
-                        subtitleSize,
-                        progress,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.local_offer, size: 14, color: primaryColor),
+                          const SizedBox(width: 4),
+                          Text(
+                            'PASSED',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: primaryColor,
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                            ),
+                          ),
+                        ],
                       ),
-                      if (isPassed) const SizedBox(height: 0),
-                    ],
+                    ),
                   );
                 }),
-              ),
-              if (level.isLocked) _buildLockedOverlay(context, isDark),
-              // PASS Tag
-              Obx(() {
-                final isPassed = Get.find<LessonController>().isLevelPassed(level.level);
-                if (!isPassed) return const SizedBox.shrink();
-                return Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: primaryColor.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: primaryColor.withOpacity(0.4)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.local_offer, size: 14, color: primaryColor),
-                        const SizedBox(width: 4),
-                        Text(
-                          'PASSED',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: primaryColor,
-                            fontFamily: GoogleFonts.patrickHand().fontFamily,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
@@ -201,6 +207,8 @@ class LevelCard extends StatelessWidget {
     int dynamicProgress,
   ) {
     final colorScheme = Theme.of(context).colorScheme;
+    final lessonController = Get.find<LessonController>();
+    final isPassed = lessonController.isLevelPassed(level.level);
     return Column(
       children: [
         if (!level.isLocked) ...[
@@ -245,27 +253,43 @@ class LevelCard extends StatelessWidget {
             ),
           ),
         ],
-        if (dynamicProgress == 100) ...[
+        if (dynamicProgress == 100 && !isPassed) ...[
           const SizedBox(height: 12),
-          Row(
-            children: [
-              Icon(
-                Icons.emoji_events,
-                color: primaryColor,
-                size: 18,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                'Completed!',
-                style: TextStyle(
-                  fontSize: fontSize,
-                  fontWeight: FontWeight.w600,
-                  color: primaryColor,
-                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: primaryColor.withOpacity(0.35)),
+              color: primaryColor.withOpacity(0.10),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: () {
+                  Get.to(() => const ExamScreen(), arguments: {'level': level.level});
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.assignment_turned_in, color: primaryColor, size: 18),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Take Exam',
+                        style: TextStyle(
+                          fontSize: fontSize,
+                          fontWeight: FontWeight.w700,
+                          color: primaryColor,
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          )
         ],
       ],
     );
