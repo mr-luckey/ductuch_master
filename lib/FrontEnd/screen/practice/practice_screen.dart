@@ -2,9 +2,9 @@ import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
+import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Practice item model
 class PracticeItem {
@@ -24,7 +24,6 @@ class PracticeItem {
 }
 
 /// Practice Screen - allows users to practice questions without time limits
-/// Uses the same card design as learn.dart
 class PracticeScreen extends StatefulWidget {
   const PracticeScreen({super.key});
 
@@ -32,17 +31,37 @@ class PracticeScreen extends StatefulWidget {
   State<PracticeScreen> createState() => _PracticeScreenState();
 }
 
-class _PracticeScreenState extends State<PracticeScreen> {
+class _PracticeScreenState extends State<PracticeScreen>
+    with SingleTickerProviderStateMixin {
   final TtsService ttsService = Get.find<TtsService>();
-  int _currentItemIndex = 0;
+  final ThemeService themeService = Get.find<ThemeService>();
+  final LessonController lessonController = Get.find<LessonController>();
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
   Map<int, bool> _expandedExamples = {};
   List<PracticeItem> _practiceItems = [];
   bool _isLoading = true;
 
+  int get _currentItemIndex => lessonController.practiceIndex.value;
+
   @override
   void initState() {
     super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: ThemeService.slowAnimationDuration,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeIn,
+    );
     _loadPracticeItems();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadPracticeItems() async {
@@ -51,6 +70,11 @@ class _PracticeScreenState extends State<PracticeScreen> {
       _practiceItems = loadedItems;
       _isLoading = false;
     });
+    // Ensure saved index is within bounds
+    if (_practiceItems.isNotEmpty && _currentItemIndex >= _practiceItems.length) {
+      lessonController.updatePracticeIndex(0);
+    }
+    _fadeController.forward();
   }
 
   void _toggleExamples(int index) {
@@ -60,24 +84,25 @@ class _PracticeScreenState extends State<PracticeScreen> {
   }
 
   void _nextItem() {
+    if (_practiceItems.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
-    setState(() {
-      _currentItemIndex = (_currentItemIndex + 1) % _practiceItems.length;
-    });
+    final newIndex = (_currentItemIndex + 1) % _practiceItems.length;
+    lessonController.updatePracticeIndex(newIndex);
+    setState(() {});
   }
 
   void _previousItem() {
+    if (_practiceItems.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
-    setState(() {
-      _currentItemIndex = (_currentItemIndex - 1) % _practiceItems.length;
-      if (_currentItemIndex < 0) {
-        _currentItemIndex = _practiceItems.length - 1;
-      }
-    });
+    final newIndex = _currentItemIndex - 1;
+    lessonController.updatePracticeIndex(
+      newIndex < 0 ? _practiceItems.length - 1 : newIndex,
+    );
+    setState(() {});
   }
 
   Future<void> _playCurrentItem() async {
@@ -87,7 +112,6 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeService = Get.find<ThemeService>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
 
@@ -102,7 +126,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
         return Scaffold(
           backgroundColor: backgroundColor,
-          body: Center(child: CircularProgressIndicator(color: textColor)),
+          body: Center(
+            child: CircularProgressIndicator(color: textColor),
+          ),
         );
       });
     }
@@ -126,69 +152,77 @@ class _PracticeScreenState extends State<PracticeScreen> {
           backgroundColor: backgroundColor,
           appBar: AppBar(
             backgroundColor: backgroundColor,
-            title: Text(
-              'Practice',
-              style: TextStyle(
-                fontFamily: themeService.fontFamily,
-                color: textColor,
-                fontWeight: FontWeight.bold,
-                fontSize: screenWidth > 600 ? 24 : 20,
+            elevation: 0,
+            title: Hero(
+              tag: 'practice_title',
+              child: Material(
+                color: Colors.transparent,
+                child: Text(
+                  'Practice',
+                  style: themeService.getTitleLargeStyle(color: textColor)
+                      .copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
-            actions: [TtsSpeedDropdown()],
+            actions: [const TtsSpeedDropdown()],
           ),
           body: SafeArea(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Container(
-                  width: double.infinity,
-                  constraints: BoxConstraints(
-                    maxWidth: constraints.maxWidth > 500
-                        ? 500
-                        : constraints.maxWidth,
-                  ),
-                  margin: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                    vertical: constraints.maxWidth > 500 ? 30 : 20,
-                  ),
-                  child: Column(
-                    children: [
-                      SizedBox(height: isSmallScreen ? 4 : 6),
-                      _buildTopBar(context, isSmallScreen, scheme, isDark),
-                      SizedBox(height: isSmallScreen ? 12 : 16),
-                      _buildPracticeHeader(
-                        context,
-                        isSmallScreen,
-                        scheme,
-                        isDark,
-                      ),
-                      SizedBox(height: isSmallScreen ? 12 : 16),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              _buildMainCard(
-                                context,
-                                isSmallScreen,
-                                scheme,
-                                isDark,
-                              ),
-                              SizedBox(height: isSmallScreen ? 20 : 24),
-                              _buildExternalNavigationControls(
-                                context,
-                                isSmallScreen,
-                                scheme,
-                                isDark,
-                              ),
-                              SizedBox(height: isSmallScreen ? 16 : 20),
-                            ],
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Container(
+                    width: double.infinity,
+                    constraints: BoxConstraints(
+                      maxWidth: constraints.maxWidth > 500
+                          ? 500
+                          : constraints.maxWidth,
+                    ),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                      vertical: constraints.maxWidth > 500 ? 30 : 20,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: isSmallScreen ? 4 : 6),
+                        _buildTopBar(context, isSmallScreen, scheme, isDark),
+                        SizedBox(height: isSmallScreen ? 12 : 16),
+                        _buildPracticeHeader(
+                          context,
+                          isSmallScreen,
+                          scheme,
+                          isDark,
+                        ),
+                        SizedBox(height: isSmallScreen ? 12 : 16),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                _buildMainCard(
+                                  context,
+                                  isSmallScreen,
+                                  scheme,
+                                  isDark,
+                                ),
+                                SizedBox(height: isSmallScreen ? 20 : 24),
+                                _buildExternalNavigationControls(
+                                  context,
+                                  isSmallScreen,
+                                  scheme,
+                                  isDark,
+                                ),
+                                SizedBox(height: isSmallScreen ? 16 : 20),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -209,20 +243,27 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
     return Row(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: borderColor),
-          ),
-          child: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.chevron_left,
-              color: textColor.withOpacity(0.7),
-              size: isSmallScreen ? 20 : 22,
+        Hero(
+          tag: 'practice_back_button',
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                gradient: themeService.getCardGradient(isDark),
+                border: Border.all(color: borderColor),
+                boxShadow: ThemeService.getCardShadow(isDark),
+              ),
+              child: IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(
+                  Icons.chevron_left,
+                  color: textColor,
+                  size: isSmallScreen ? 20 : 24,
+                ),
+                padding: isSmallScreen ? const EdgeInsets.all(8) : null,
+              ),
             ),
-            tooltip: 'Back',
-            padding: isSmallScreen ? const EdgeInsets.all(6) : null,
           ),
         ),
       ],
@@ -240,24 +281,14 @@ class _PracticeScreenState extends State<PracticeScreen> {
     return Row(
       children: [
         Flexible(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  'Practice Mode',
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 10 : 11,
-                    color: textColor.withOpacity(0.5),
-                    letterSpacing: 1.0,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+          child: Text(
+            'Practice Mode',
+            style: themeService.getLabelSmallStyle(
+              color: textColor.withOpacity(0.5),
+            ).copyWith(
+              letterSpacing: 1.0,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         const Spacer(),
@@ -265,10 +296,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
           children: [
             Text(
               '${_currentItemIndex + 1}/${_practiceItems.length}',
-              style: TextStyle(
-                fontSize: isSmallScreen ? 10 : 11,
+              style: themeService.getLabelSmallStyle(
                 color: textColor.withOpacity(0.6),
-                fontFamily: ThemeService.to.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -287,8 +316,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
-                        ? textColor.withOpacity(0.3)
-                        : textColor.withOpacity(0.15),
+                            ? textColor.withOpacity(0.3)
+                            : textColor.withOpacity(0.15),
                   ),
                 );
               }),
@@ -307,277 +336,438 @@ class _PracticeScreenState extends State<PracticeScreen> {
   ) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
     final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
     final currentItem = _practiceItems[_currentItemIndex];
     final isVerb = currentItem.type == 'verb';
     final isExamplesExpanded = _expandedExamples[_currentItemIndex] ?? false;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: textColor.withOpacity(0.1)),
-        color: surfaceColor.withOpacity(0.02),
-      ),
-      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header with tag
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: isSmallScreen ? 6 : 8,
-                        vertical: isSmallScreen ? 3 : 4,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: textColor.withOpacity(0.1)),
-                        color: surfaceColor.withOpacity(0.05),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: isSmallScreen ? 5 : 6,
-                            height: isSmallScreen ? 5 : 6,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: primaryColor,
-                            ),
-                          ),
-                          SizedBox(width: isSmallScreen ? 3 : 4),
-                          Text(
-                            currentItem.type.toUpperCase(),
-                            style: TextStyle(
-                              fontSize: isSmallScreen ? 10 : 11,
-                              color: textColor.withOpacity(0.7),
-                              fontFamily: Theme.of(
-                                context,
-                              ).textTheme.bodySmall?.fontFamily,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: isSmallScreen ? 6 : 8),
-                    Text(
-                      currentItem.german,
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 20 : 24,
-                        fontWeight: FontWeight.w600,
-                        color: textColor,
-                        height: 1.2,
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.fontFamily,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: isSmallScreen ? 6 : 8),
-          Wrap(
-            spacing: isSmallScreen ? 6 : 8,
-            runSpacing: isSmallScreen ? 4 : 6,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 4 : 6,
-                  vertical: isSmallScreen ? 1 : 2,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                  color: surfaceColor.withOpacity(0.05),
-                ),
-                child: Text(
-                  'DE',
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 10 : 11,
-                    color: textColor.withOpacity(0.7),
-                    fontFamily: ThemeService.to.fontFamily,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: isSmallScreen ? 10 : 12),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: surfaceColor.withOpacity(0.03),
-            ),
-            padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        currentItem.english,
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 14 : 15,
-                          color: textColor.withOpacity(0.9),
-                          fontFamily: Theme.of(
-                            context,
-                          ).textTheme.bodySmall?.fontFamily,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          isSmallScreen ? 6 : 8,
-                        ),
-                        border: Border.all(color: textColor.withOpacity(0.1)),
-                      ),
-                      child: Obx(
-                        () => IconButton(
-                          onPressed: _playCurrentItem,
-                          icon: Icon(
-                            ttsService.isTextPlaying(currentItem.german)
-                                ? Icons.volume_up
-                                : Icons.volume_up_outlined,
-                            size: isSmallScreen ? 16 : 18,
-                            color: ttsService.isTextPlaying(currentItem.german)
-                                ? primaryColor
-                                : textColor.withOpacity(0.8),
-                          ),
-                          padding: isSmallScreen
-                              ? const EdgeInsets.all(4)
-                              : null,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                if (currentItem.meaning != null) ...[
-                  SizedBox(height: isSmallScreen ? 2 : 4),
-                  Text(
-                    currentItem.meaning!,
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 12 : 13,
-                      color: textColor.withOpacity(0.6),
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.fontFamily,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          if (isVerb && currentItem.examples != null) ...[
-            SizedBox(height: isSmallScreen ? 12 : 16),
-            Container(
-              width: double.infinity,
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: ThemeService.defaultAnimationDuration,
+      curve: ThemeService.springCurve,
+      builder: (context, value, child) {
+        return Transform.scale(
+          scale: value,
+          child: Opacity(
+            opacity: value.clamp(0.0, 1.0),
+            child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-                border: Border.all(color: textColor.withOpacity(0.1)),
-                color: surfaceColor.withOpacity(0.03),
+                borderRadius: BorderRadius.circular(20),
+                gradient: themeService.getCardGradient(isDark),
+                border: Border.all(
+                  color: primaryColor.withOpacity(0.3),
+                  width: 2,
+                ),
+                boxShadow: ThemeService.getCardShadow(isDark),
               ),
+              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () => _toggleExamples(_currentItemIndex),
-                      borderRadius: BorderRadius.circular(
-                        isSmallScreen ? 10 : 12,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // Header with animated tag
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Examples',
-                              style: TextStyle(
-                                fontSize: isSmallScreen ? 14 : 16,
-                                fontWeight: FontWeight.w600,
-                                color: textColor,
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
-                              ),
+                            TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              duration: ThemeService.defaultAnimationDuration,
+                              curve: ThemeService.bounceCurve,
+                              builder: (context, tagValue, child) {
+                                return Transform.scale(
+                                  scale: tagValue,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: isSmallScreen ? 8 : 10,
+                                      vertical: isSmallScreen ? 5 : 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          primaryColor.withOpacity(0.2),
+                                          secondaryColor.withOpacity(0.15),
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: primaryColor.withOpacity(0.4),
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          width: isSmallScreen ? 6 : 8,
+                                          height: isSmallScreen ? 6 : 8,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: LinearGradient(
+                                              colors: [primaryColor, secondaryColor],
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: isSmallScreen ? 4 : 6),
+                                        Text(
+                                          currentItem.type.toUpperCase(),
+                                          style: themeService
+                                              .getLabelSmallStyle(color: primaryColor)
+                                              .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                            Icon(
-                              isExamplesExpanded
-                                  ? Icons.expand_less
-                                  : Icons.expand_more,
-                              color: textColor.withOpacity(0.7),
-                              size: isSmallScreen ? 20 : 24,
+                            SizedBox(height: isSmallScreen ? 8 : 12),
+                            // Main text with Hero animation
+                            Hero(
+                              tag: 'practice_text_${currentItem.german}',
+                              child: Material(
+                                color: Colors.transparent,
+                                child: ShaderMask(
+                                  shaderCallback: (bounds) => LinearGradient(
+                                    colors: [textColor, primaryColor],
+                                  ).createShader(bounds),
+                                  child: Text(
+                                    currentItem.german,
+                                    style: themeService
+                                        .getTitleLargeStyle(color: Colors.white)
+                                        .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: isSmallScreen ? 22 : 28,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  if (isExamplesExpanded)
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        isSmallScreen ? 12 : 16,
-                        0,
-                        isSmallScreen ? 12 : 16,
-                        isSmallScreen ? 12 : 16,
+                  SizedBox(height: isSmallScreen ? 8 : 12),
+                  // Language tag
+                  Wrap(
+                    spacing: isSmallScreen ? 6 : 8,
+                    runSpacing: isSmallScreen ? 4 : 6,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isSmallScreen ? 6 : 8,
+                          vertical: isSmallScreen ? 3 : 4,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          gradient: LinearGradient(
+                            colors: [
+                              primaryColor.withOpacity(0.15),
+                              secondaryColor.withOpacity(0.1),
+                            ],
+                          ),
+                          border: Border.all(
+                            color: primaryColor.withOpacity(0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          'DE',
+                          style: themeService.getLabelSmallStyle(
+                            color: primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: isSmallScreen ? 12 : 16),
+                  // Translation card with animation
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    duration: Duration(milliseconds: 400),
+                    curve: ThemeService.springCurve,
+                    builder: (context, transValue, child) {
+                      return Transform.translate(
+                        offset: Offset(0, 20 * (1 - transValue)),
+                        child: Opacity(
+                          opacity: transValue.clamp(0.0, 1.0),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: LinearGradient(
+                                colors: [
+                                  primaryColor.withOpacity(0.08),
+                                  secondaryColor.withOpacity(0.05),
+                                ],
+                              ),
+                              border: Border.all(
+                                color: primaryColor.withOpacity(0.2),
+                                width: 1.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.1),
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        currentItem.english,
+                                        style: themeService.getBodyLargeStyle(
+                                          color: textColor.withOpacity(0.9),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            primaryColor.withOpacity(0.2),
+                                            secondaryColor.withOpacity(0.15),
+                                          ],
+                                        ),
+                                        border: Border.all(
+                                          color: primaryColor.withOpacity(0.3),
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Obx(
+                                        () => IconButton(
+                                          onPressed: _playCurrentItem,
+                                          icon: Icon(
+                                            ttsService.isTextPlaying(currentItem.german)
+                                                ? Icons.volume_up
+                                                : Icons.volume_up_outlined,
+                                            size: isSmallScreen ? 18 : 20,
+                                            color: ttsService.isTextPlaying(currentItem.german)
+                                                ? primaryColor
+                                                : textColor.withOpacity(0.8),
+                                          ),
+                                          padding: isSmallScreen
+                                              ? const EdgeInsets.all(6)
+                                              : null,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                if (currentItem.meaning != null) ...[
+                                  SizedBox(height: isSmallScreen ? 6 : 8),
+                                  Text(
+                                    currentItem.meaning!,
+                                    style: themeService.getBodyMediumStyle(
+                                      color: textColor.withOpacity(0.6),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  // Examples section for verbs
+                  if (isVerb && currentItem.examples != null) ...[
+                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          colors: [
+                            surfaceColor.withOpacity(0.05),
+                            surfaceColor.withOpacity(0.02),
+                          ],
+                        ),
+                        border: Border.all(
+                          color: primaryColor.withOpacity(0.2),
+                          width: 1.5,
+                        ),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: currentItem.examples!.map((example) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                              bottom: isSmallScreen ? 8 : 12,
-                            ),
-                            child: Text(
-                              example,
-                              style: TextStyle(
-                                fontSize: isSmallScreen ? 13 : 14,
-                                color: textColor.withOpacity(0.8),
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                        children: [
+                          Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () => _toggleExamples(_currentItemIndex),
+                              borderRadius: BorderRadius.circular(16),
+                              splashColor: primaryColor.withOpacity(0.2),
+                              highlightColor: primaryColor.withOpacity(0.1),
+                              child: Padding(
+                                padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Examples',
+                                      style: themeService
+                                          .getTitleSmallStyle(color: textColor)
+                                          .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    TweenAnimationBuilder<double>(
+                                      tween: Tween(
+                                        begin: 0.0,
+                                        end: isExamplesExpanded ? 1.0 : 0.0,
+                                      ),
+                                      duration: ThemeService.defaultAnimationDuration,
+                                      curve: ThemeService.springCurve,
+                                      builder: (context, rotateValue, child) {
+                                        return Transform.rotate(
+                                          angle: rotateValue * 3.14159,
+                                          child: Icon(
+                                            Icons.expand_more,
+                                            color: primaryColor,
+                                            size: isSmallScreen ? 24 : 28,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          );
-                        }).toList(),
+                          ),
+                          if (isExamplesExpanded)
+                            TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              duration: ThemeService.defaultAnimationDuration,
+                              curve: ThemeService.springCurve,
+                              builder: (context, expandValue, child) {
+                                return Opacity(
+                                  opacity: expandValue.clamp(0.0, 1.0),
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                      isSmallScreen ? 14 : 16,
+                                      0,
+                                      isSmallScreen ? 14 : 16,
+                                      isSmallScreen ? 14 : 16,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: currentItem.examples!.asMap().entries.map((entry) {
+                                        final index = entry.key;
+                                        final example = entry.value;
+                                        return TweenAnimationBuilder<double>(
+                                          tween: Tween(begin: 0.0, end: 1.0),
+                                          duration: Duration(
+                                            milliseconds: 200 + (index * 50),
+                                          ),
+                                          builder: (context, itemValue, child) {
+                                            return Transform.translate(
+                                              offset: Offset(10 * (1 - itemValue), 0),
+                                              child: Opacity(
+                                                opacity: itemValue.clamp(0.0, 1.0),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                    bottom: isSmallScreen ? 10 : 12,
+                                                  ),
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 6,
+                                                        height: 6,
+                                                        margin: EdgeInsets.only(
+                                                          top: 6,
+                                                          right: 12,
+                                                        ),
+                                                        decoration: BoxDecoration(
+                                                          shape: BoxShape.circle,
+                                                          gradient: LinearGradient(
+                                                            colors: [primaryColor, secondaryColor],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          example,
+                                                          style: themeService.getBodyMediumStyle(
+                                                            color: textColor.withOpacity(0.8),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                        ],
                       ),
                     ),
+                  ],
+                  SizedBox(height: isSmallScreen ? 12 : 16),
+                  // Animated Progress bar
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(
+                      begin: 0.0,
+                      end: _practiceItems.isEmpty ? 0.0 : ((_currentItemIndex + 1) / _practiceItems.length).clamp(0.0, 1.0),
+                    ),
+                    duration: ThemeService.slowAnimationDuration,
+                    curve: Curves.easeOutCubic,
+                    builder: (context, progressValue, child) {
+                      return Container(
+                        height: isSmallScreen ? 6 : 8,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: textColor.withOpacity(0.1),
+                        ),
+                        child: FractionallySizedBox(
+                          alignment: Alignment.centerLeft,
+                          widthFactor: progressValue.clamp(0.0, 1.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [primaryColor, scheme.accentTeal],
+                              ),
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.5),
+                                  blurRadius: 4,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
-          ],
-          SizedBox(height: isSmallScreen ? 12 : 16),
-          Container(
-            height: isSmallScreen ? 4 : 6,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(3),
-              color: surfaceColor.withOpacity(0.05),
-            ),
-            child: FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: (_currentItemIndex + 1) / _practiceItems.length,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  color: textColor.withOpacity(0.7),
-                ),
-              ),
-            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -589,95 +779,171 @@ class _PracticeScreenState extends State<PracticeScreen> {
   ) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
+    final currentItem = _practiceItems[_currentItemIndex];
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: surfaceColor.withOpacity(0.05),
-            ),
-            child: IconButton(
-              onPressed: _previousItem,
-              icon: Icon(
-                Icons.chevron_left,
-                size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
-              ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-            ),
-          ),
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                  color: surfaceColor.withOpacity(0.05),
-                  boxShadow: [
-                    BoxShadow(
-                      color: textColor.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 1,
+          // Previous button
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    gradient: themeService.getCardGradient(isDark),
+                    border: Border.all(
+                      color: primaryColor.withOpacity(0.3),
+                      width: 1.5,
                     ),
-                  ],
-                ),
-                child: Obx(
-                  () => IconButton(
-                    onPressed: _playCurrentItem,
+                    boxShadow: ThemeService.getCardShadow(isDark),
+                  ),
+                  child: IconButton(
+                    onPressed: _previousItem,
                     icon: Icon(
-                      ttsService.isTextPlaying(
-                            _practiceItems[_currentItemIndex].german,
-                          )
-                          ? Icons.stop
-                          : Icons.volume_up,
-                      size: isSmallScreen ? 36 : 42,
+                      Icons.chevron_left,
+                      size: isSmallScreen ? 22 : 26,
                       color: textColor,
                     ),
-                    padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
+                    padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
                   ),
                 ),
-              ),
-              Obx(
-                () =>
-                    ttsService.isTextPlaying(
-                      _practiceItems[_currentItemIndex].german,
-                    )
-                    ? Positioned(
-                        top: 8,
-                        right: 8,
-                        child: Container(
-                          width: isSmallScreen ? 10 : 12,
-                          height: isSmallScreen ? 10 : 12,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: primaryColor,
-                          ),
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-              ),
-            ],
+              );
+            },
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: surfaceColor.withOpacity(0.05),
-            ),
-            child: IconButton(
-              onPressed: _nextItem,
-              icon: Icon(
-                Icons.chevron_right,
-                size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
-              ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-            ),
+          // Main play button with pulse animation
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Obx(
+                  () {
+                    final isPlaying = ttsService.isTextPlaying(currentItem.german);
+                    return TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
+                      duration: Duration(milliseconds: 600),
+                      curve: Curves.easeOutCubic,
+                      builder: (context, pulseValue, child) {
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            // Pulsing ring
+                            if (isPlaying)
+                              Container(
+                                width: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                                height: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: RadialGradient(
+                                    colors: [
+                                      primaryColor.withOpacity(0.3 * (1 - pulseValue)),
+                                      primaryColor.withOpacity(0.0),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    primaryColor.withOpacity(0.2),
+                                    secondaryColor.withOpacity(0.15),
+                                  ],
+                                ),
+                                border: Border.all(
+                                  color: primaryColor.withOpacity(0.4),
+                                  width: 2,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primaryColor.withOpacity(0.3),
+                                    blurRadius: 12,
+                                    spreadRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: IconButton(
+                                onPressed: _playCurrentItem,
+                                icon: Icon(
+                                  isPlaying ? Icons.stop : Icons.volume_up,
+                                  size: isSmallScreen ? 28 : 32,
+                                  color: primaryColor,
+                                ),
+                                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                              ),
+                            ),
+                            if (isPlaying)
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: Container(
+                                  width: isSmallScreen ? 12 : 14,
+                                  height: isSmallScreen ? 12 : 14,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: LinearGradient(
+                                      colors: [primaryColor, scheme.accentTeal],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: primaryColor.withOpacity(0.8),
+                                        blurRadius: 8,
+                                        spreadRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+          // Next button
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    gradient: themeService.getCardGradient(isDark),
+                    border: Border.all(
+                      color: primaryColor.withOpacity(0.3),
+                      width: 1.5,
+                    ),
+                    boxShadow: ThemeService.getCardShadow(isDark),
+                  ),
+                  child: IconButton(
+                    onPressed: _nextItem,
+                    icon: Icon(
+                      Icons.chevron_right,
+                      size: isSmallScreen ? 22 : 26,
+                      color: textColor,
+                    ),
+                    padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

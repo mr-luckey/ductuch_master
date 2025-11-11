@@ -27,8 +27,8 @@ class FontScheme {
   final TextStyle button;
 
   FontScheme({
-    this.primaryFont = 'Patrick Hand',
-    this.secondaryFont = 'Patrick Hand',
+    this.primaryFont = 'Comfortaa', // Kid-friendly, rounded, playful font
+    this.secondaryFont = 'Comfortaa',
     this.headline = const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
     this.headlineLarge = const TextStyle(
       fontSize: 28,
@@ -204,138 +204,35 @@ class ThemeService extends GetxController {
   // Centralized font scheme
   late FontScheme fontScheme = FontScheme();
 
-  // High contrast color schemes optimized for readability and focus
+  // Kid-friendly color schemes based on learning psychology
+  // Research shows: bright, warm colors (orange, yellow, green) promote engagement
+  // Cool colors (blue, purple) promote focus and calm
+  // High contrast improves readability for young learners
   static final List<ColorSchemeData> colorSchemes = [
-    // 1. Classic High Contrast - Maximum readability
-    // ColorSchemeData(
-    //   name: 'Classic High Contrast',
-    //   primary: const Color(0xFF000000),
-    //   secondary: const Color(0xFF333333),
-    //   surface: const Color(0xFFFFFFFF),
-    //   background: const Color(0xFFFFFFFF),
-    //   textPrimary: const Color(0xFF000000),
-    //   textSecondary: const Color(0xFF444444),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFF000000), Color(0xFF333333)],
-    //   ),
-    //   primaryDark: const Color(0xFFFFFFFF),
-    //   secondaryDark: const Color(0xFFE0E0E0),
-    //   surfaceDark: const Color(0xFF121212),
-    //   backgroundDark: const Color(0xFF000000),
-    //   textPrimaryDark: const Color(0xFFFFFFFF),
-    //   textSecondaryDark: const Color(0xFFCCCCCC),
-    //   nounsSurface: const Color(0xFF1A1A1A),
-    //   accentTeal: const Color(0xFF00B894), // High contrast teal
-    // ),
-
-    // 2. Blue Contrast - Calm yet highly readable
-    // ColorSchemeData(
-    //   name: 'Blue Contrast',
-    //   primary: const Color(0xFF0D47A1),
-    //   secondary: const Color(0xFF1976D2),
-    //   surface: const Color(0xFFFFFFFF),
-    //   background: const Color(0xFFF5F9FF),
-    //   textPrimary: const Color(0xFF0D47A1),
-    //   textSecondary: const Color(0xFF424242),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFF0D47A1), Color(0xFF1976D2)],
-    //   ),
-    //   primaryDark: const Color(0xFF90CAF9),
-    //   secondaryDark: const Color(0xFF64B5F6),
-    //   surfaceDark: const Color(0xFF0D1B36),
-    //   backgroundDark: const Color(0xFF051428),
-    //   textPrimaryDark: const Color(0xFFFFFFFF),
-    //   textSecondaryDark: const Color(0xFFE3F2FD),
-    //   nounsSurface: const Color(0xFF0A1429),
-    //   accentTeal: const Color(0xFF00E5FF), // Bright cyan for contrast
-    // ),
-
-    // 3. Green Contrast - Soothing for eyes
-    // ColorSchemeData(
-    //   name: 'Green Contrast',
-    //   primary: const Color(0xFF1B5E20),
-    //   secondary: const Color(0xFF2E7D32),
-    //   surface: const Color(0xFFFFFFFF),
-    //   background: const Color(0xFFF1F8E9),
-    //   textPrimary: const Color(0xFF1B5E20),
-    //   textSecondary: const Color(0xFF37474F),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFF1B5E20), Color(0xFF388E3C)],
-    //   ),
-    //   primaryDark: const Color(0xFF69F0AE),
-    //   secondaryDark: const Color(0xFF4CAF50),
-    //   surfaceDark: const Color(0xFF0D1F0E),
-    //   backgroundDark: const Color(0xFF051405),
-    //   textPrimaryDark: const Color(0xFFFFFFFF),
-    //   textSecondaryDark: const Color(0xFFC8E6C9),
-    //   nounsSurface: const Color(0xFF091309),
-    //   accentTeal: const Color(0xFF00C853), // Bright green
-    // ),
-
-    // 4. Purple Contrast - Modern and accessible
-    // ColorSchemeData(
-    //   name: 'Purple Contrast',
-    //   primary: const Color(0xFF4A148C),
-    //   secondary: const Color(0xFF6A1B9A),
-    //   surface: const Color(0xFFFFFFFF),
-    //   background: const Color(0xFFF3E5F5),
-    //   textPrimary: const Color(0xFF4A148C),
-    //   textSecondary: const Color(0xFF4A4A4A),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFF4A148C), Color(0xFF6A1B9A)],
-    //   ),
-    //   primaryDark: const Color(0xFFE040FB),
-    //   secondaryDark: const Color(0xFFAB47BC),
-    //   surfaceDark: const Color(0xFF1A0D2A),
-    //   backgroundDark: const Color(0xFF0F0619),
-    //   textPrimaryDark: const Color(0xFFFFFFFF),
-    //   textSecondaryDark: const Color(0xFFE1BEE7),
-    //   nounsSurface: const Color(0xFF140A21),
-    //   accentTeal: const Color(0xFFAA00FF), // Bright purple
-    // ),
-
-    // 5. Warm Contrast - Easy on the eyes
-    // ColorSchemeData(
-    //   name: 'Warm Contrast',
-    //   primary: const Color(0xFFBF360C),
-    //   secondary: const Color(0xFFE64A19),
-    //   surface: const Color(0xFFFFFFFF),
-    //   background: const Color(0xFFFFF3E0),
-    //   textPrimary: const Color(0xFFBF360C),
-    //   textSecondary: const Color(0xFF5D4037),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFFBF360C), Color(0xFFE64A19)],
-    //   ),
-    //   primaryDark: const Color(0xFFFF8A65),
-    //   secondaryDark: const Color(0xFFFF7043),
-    //   surfaceDark: const Color(0xFF261914),
-    //   backgroundDark: const Color(0xFF1A100B),
-    //   textPrimaryDark: const Color(0xFFFFFFFF),
-    //   textSecondaryDark: const Color(0xFFFFCCBC),
-    //   nounsSurface: const Color(0xFF21120C),
-    //   accentTeal: const Color(0xFFFF5722), // Bright orange
-    // ),
-
-    // 6. Professional Dark - High contrast dark mode
+    // 1. Playful Learning - Bright, engaging colors for active learning
     ColorSchemeData(
-      name: 'Professional Dark',
-      primary: const Color(0xFF1565C0),
-      secondary: const Color(0xFF42A5F5),
-      surface: const Color(0xFFFAFAFA),
-      background: const Color(0xFFFFFFFF),
-      textPrimary: const Color(0xFF212121),
-      textSecondary: const Color(0xFF757575),
+      name: 'Playful Learning',
+      primary: const Color(0xFFFF6B35), // Vibrant orange - promotes energy
+      secondary: const Color(0xFFFFB627), // Sunny yellow - promotes happiness
+      surface: const Color(0xFFFFF9F0), // Warm cream - soft on eyes
+      background: const Color(0xFFFFFDF7), // Almost white with warmth
+      textPrimary: const Color(
+        0xFF2C3E50,
+      ), // Dark blue-gray - excellent readability
+      textSecondary: const Color(0xFF7F8C8D), // Medium gray
       gradient: const LinearGradient(
-        colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Color(0xFFFF6B35), Color(0xFFFFB627), Color(0xFF4ECDC4)],
       ),
-      primaryDark: const Color(0xFF82B1FF),
-      secondaryDark: const Color(0xFF448AFF),
-      surfaceDark: const Color(0xFF121212),
-      backgroundDark: const Color(0xFF000000),
-      textPrimaryDark: const Color(0xFFFFFFFF),
-      textSecondaryDark: const Color(0xFFE0E0E0),
-      nounsSurface: const Color(0xFF1E1E1E),
-      accentTeal: const Color(0xFF00B0FF), // Bright blue
+      primaryDark: const Color(0xFFFF8C65), // Lighter orange for dark mode
+      secondaryDark: const Color(0xFFFFD54F), // Brighter yellow
+      surfaceDark: const Color(0xFF1A1A1A), // Dark surface
+      backgroundDark: const Color(0xFF121212), // Very dark background
+      textPrimaryDark: const Color(0xFFFFFFFF), // White text
+      textSecondaryDark: const Color(0xFFB0B0B0), // Light gray
+      nounsSurface: const Color(0xFF2A2A2A), // Slightly lighter dark surface
+      accentTeal: const Color(0xFF4ECDC4), // Turquoise - calming yet engaging
     ),
   ];
 
@@ -454,7 +351,7 @@ class ThemeService extends GetxController {
               : currentScheme.textSecondary.withOpacity(0.7),
         ),
       ),
-      textTheme: GoogleFonts.patrickHandTextTheme(text).copyWith(
+      textTheme: GoogleFonts.comfortaaTextTheme(text).copyWith(
         bodyLarge: TextStyle(
           color: isDark
               ? currentScheme.textPrimaryDark
@@ -568,4 +465,80 @@ class ThemeService extends GetxController {
     height: height,
     letterSpacing: letterSpacing,
   );
+
+  // Animation utilities for smooth, engaging interactions
+  static const Duration defaultAnimationDuration = Duration(milliseconds: 300);
+  static const Duration fastAnimationDuration = Duration(milliseconds: 200);
+  static const Duration slowAnimationDuration = Duration(milliseconds: 500);
+
+  static const Curve defaultCurve = Curves.easeOutCubic;
+  static const Curve bounceCurve = Curves.elasticOut;
+  static const Curve springCurve = Curves.easeInOutBack;
+
+  // Card elevation and shadow helpers
+  static List<BoxShadow> getCardShadow(bool isDark) {
+    if (isDark) {
+      return [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          blurRadius: 8,
+          offset: const Offset(0, 2),
+        ),
+      ];
+    }
+    return [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.08),
+        blurRadius: 12,
+        offset: const Offset(0, 4),
+        spreadRadius: 0,
+      ),
+      BoxShadow(
+        color: Colors.black.withOpacity(0.04),
+        blurRadius: 6,
+        offset: const Offset(0, 2),
+        spreadRadius: 0,
+      ),
+    ];
+  }
+
+  // Gradient helpers for beautiful cards
+  LinearGradient getCardGradient(bool isDark) {
+    final scheme = currentScheme;
+    if (isDark) {
+      return LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          scheme.primaryDark.withOpacity(0.15),
+          scheme.secondaryDark.withOpacity(0.1),
+        ],
+      );
+    }
+    return LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        scheme.primary.withOpacity(0.08),
+        scheme.secondary.withOpacity(0.05),
+      ],
+    );
+  }
+
+  // Success/Error/Info color helpers
+  Color getSuccessColor(bool isDark) {
+    return isDark ? const Color(0xFF4CAF50) : const Color(0xFF66BB6A);
+  }
+
+  Color getErrorColor(bool isDark) {
+    return isDark ? const Color(0xFFEF5350) : const Color(0xFFE57373);
+  }
+
+  Color getInfoColor(bool isDark) {
+    return isDark ? const Color(0xFF42A5F5) : const Color(0xFF64B5F6);
+  }
+
+  Color getWarningColor(bool isDark) {
+    return isDark ? const Color(0xFFFFB74D) : const Color(0xFFFFA726);
+  }
 }

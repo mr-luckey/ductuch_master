@@ -457,256 +457,385 @@ class _PhraseScreenState extends State<PhraseScreen> {
     dynamic scheme,
     ThemeService themeService,
   ) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: textColor.withOpacity(0.1)),
-        color: isDark
-            ? scheme.surfaceDark.withOpacity(0.02)
-            : scheme.surface.withOpacity(0.02),
-      ),
-      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header with tag and favorite
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Daily phrase tag
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: isSmallScreen ? 6 : 8,
-                        vertical: isSmallScreen ? 3 : 4,
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
+
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: ThemeService.defaultAnimationDuration,
+      curve: ThemeService.springCurve,
+      builder: (context, value, child) {
+        return Transform.scale(
+          scale: 0.95 + (value * 0.05),
+          child: Opacity(
+            opacity: value.clamp(0.0, 1.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
+                gradient: themeService.getCardGradient(isDark),
+                border: Border.all(
+                  color: primaryColor.withOpacity(0.3),
+                  width: 2,
+                ),
+                boxShadow: ThemeService.getCardShadow(isDark),
+              ),
+              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Header with tag and favorite
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Daily phrase tag with animation
+                            TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              duration: ThemeService.defaultAnimationDuration,
+                              curve: ThemeService.springCurve,
+                              builder: (context, tagValue, child) {
+                                return Transform.scale(
+                                  scale: tagValue,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: isSmallScreen ? 8 : 10,
+                                      vertical: isSmallScreen ? 5 : 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          primaryColor.withOpacity(0.2),
+                                          secondaryColor.withOpacity(0.15),
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: primaryColor.withOpacity(0.4),
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          width: isSmallScreen ? 6 : 8,
+                                          height: isSmallScreen ? 6 : 8,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                primaryColor,
+                                                secondaryColor,
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: isSmallScreen ? 4 : 6),
+                                        Text(
+                                          'Daily Phrase',
+                                          style: themeService
+                                              .getLabelSmallStyle(
+                                                color: primaryColor,
+                                              )
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            SizedBox(height: isSmallScreen ? 6 : 8),
+                            // Main phrase with Hero animation
+                            Hero(
+                              tag: 'phrase_${phrase.phrase}',
+                              child: Material(
+                                color: Colors.transparent,
+                                child: ShaderMask(
+                                  shaderCallback: (bounds) => LinearGradient(
+                                    colors: [textColor, primaryColor],
+                                  ).createShader(bounds),
+                                  child: Text(
+                                    phrase.phrase,
+                                    style: themeService
+                                        .getTitleLargeStyle(color: Colors.white)
+                                        .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: isSmallScreen ? 22 : 28,
+                                          height: 1.2,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        border: Border.all(color: textColor.withOpacity(0.1)),
-                        color: isDark
-                            ? scheme.surfaceDark.withOpacity(0.05)
-                            : scheme.surface.withOpacity(0.05),
+
+                      // Favorite button with animation
+                      TweenAnimationBuilder<double>(
+                        tween: Tween(
+                          begin: 0.0,
+                          end: phrase.isFavorite ? 1.0 : 0.0,
+                        ),
+                        duration: ThemeService.defaultAnimationDuration,
+                        curve: ThemeService.bounceCurve,
+                        builder: (context, favValue, child) {
+                          return Transform.scale(
+                            scale: 1.0 + (favValue * 0.2),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.red.withOpacity(0.2 * favValue),
+                                    Colors.pink.withOpacity(0.15 * favValue),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  isSmallScreen ? 12 : 14,
+                                ),
+                                border: Border.all(
+                                  color: Colors.red.withOpacity(0.4 * favValue),
+                                  width: 2,
+                                ),
+                              ),
+                              child: IconButton(
+                                onPressed: _toggleFavorite,
+                                icon: Icon(
+                                  phrase.isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: phrase.isFavorite
+                                      ? Colors.red
+                                      : secondaryTextColor,
+                                  size: isSmallScreen ? 22 : 24,
+                                ),
+                                padding: isSmallScreen
+                                    ? const EdgeInsets.all(8)
+                                    : null,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: isSmallScreen ? 5 : 6,
-                            height: isSmallScreen ? 5 : 6,
+                    ],
+                  ),
+
+                  SizedBox(height: isSmallScreen ? 6 : 8),
+
+                  // IPA and language tags
+                  Wrap(
+                    spacing: isSmallScreen ? 6 : 8,
+                    runSpacing: isSmallScreen ? 4 : 6,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isSmallScreen ? 4 : 6,
+                          vertical: isSmallScreen ? 1 : 2,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: textColor.withOpacity(0.1)),
+                          color: isDark
+                              ? scheme.surfaceDark.withOpacity(0.05)
+                              : scheme.surface.withOpacity(0.05),
+                        ),
+                        child: Text(
+                          'DE',
+                          style: TextStyle(
+                            fontSize: isSmallScreen ? 10 : 11,
+                            color: secondaryTextColor,
+                            fontFamily: themeService.fontFamily,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isSmallScreen ? 4 : 6,
+                          vertical: isSmallScreen ? 1 : 2,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(color: textColor.withOpacity(0.1)),
+                          color: isDark
+                              ? scheme.surfaceDark.withOpacity(0.05)
+                              : scheme.surface.withOpacity(0.05),
+                        ),
+                        child: Text(
+                          phrase.level,
+                          style: TextStyle(
+                            fontSize: isSmallScreen ? 10 : 11,
+                            color: secondaryTextColor,
+                            fontFamily: themeService.fontFamily,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: isSmallScreen ? 10 : 12),
+
+                  // Translation card with animation
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    duration: Duration(milliseconds: 400),
+                    curve: ThemeService.springCurve,
+                    builder: (context, transValue, child) {
+                      return Transform.translate(
+                        offset: Offset(0, 20 * (1 - transValue)),
+                        child: Opacity(
+                          opacity: transValue.clamp(0.0, 1.0),
+                          child: Container(
+                            width: double.infinity,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: isDark
-                                  ? scheme.primaryDark
-                                  : scheme.primary,
+                              borderRadius: BorderRadius.circular(
+                                isSmallScreen ? 14 : 16,
+                              ),
+                              gradient: LinearGradient(
+                                colors: [
+                                  primaryColor.withOpacity(0.08),
+                                  secondaryColor.withOpacity(0.05),
+                                ],
+                              ),
+                              border: Border.all(
+                                color: primaryColor.withOpacity(0.2),
+                                width: 1.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.1),
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        phrase.translation,
+                                        style: TextStyle(
+                                          fontSize: isSmallScreen ? 14 : 15,
+                                          color: textColor.withOpacity(0.9),
+                                          fontFamily: Theme.of(
+                                            context,
+                                          ).textTheme.bodySmall?.fontFamily,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          isSmallScreen ? 6 : 8,
+                                        ),
+                                        border: Border.all(
+                                          color: textColor.withOpacity(0.1),
+                                        ),
+                                      ),
+                                      child: IconButton(
+                                        onPressed: () => _playPhrase(
+                                          phrase.translation,
+                                          'en-US',
+                                        ),
+                                        icon: Icon(
+                                          Icons.volume_up,
+                                          size: isSmallScreen ? 16 : 18,
+                                          color: secondaryTextColor.withOpacity(
+                                            0.8,
+                                          ),
+                                        ),
+                                        padding: isSmallScreen
+                                            ? const EdgeInsets.all(4)
+                                            : null,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: isSmallScreen ? 2 : 4),
+                                Text(
+                                  phrase.meaning,
+                                  style: TextStyle(
+                                    fontSize: isSmallScreen ? 12 : 13,
+                                    color: secondaryTextColor.withOpacity(0.8),
+                                    fontFamily: themeService.fontFamily,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(width: isSmallScreen ? 3 : 4),
-                          Text(
-                            'Daily Phrase',
-                            style: TextStyle(
-                              fontSize: isSmallScreen ? 10 : 11,
-                              color: secondaryTextColor,
-                              fontFamily: Theme.of(
-                                context,
-                              ).textTheme.bodySmall?.fontFamily,
+                        ),
+                      );
+                    },
+                  ),
+
+                  SizedBox(height: isSmallScreen ? 12 : 16),
+
+                  // Play controls (only rate controls and repeat, no navigation)
+                  _buildRateControls(
+                    isSmallScreen,
+                    textColor,
+                    secondaryTextColor,
+                    themeService,
+                  ),
+
+                  SizedBox(height: isSmallScreen ? 12 : 16),
+
+                  // Animated Progress bar
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(
+                      begin: 0.0,
+                      end: _phrases.isEmpty
+                          ? 0.0
+                          : ((_highestReachedIndex + 1) / _phrases.length)
+                                .clamp(0.0, 1.0),
+                    ),
+                    duration: ThemeService.slowAnimationDuration,
+                    curve: Curves.easeOutCubic,
+                    builder: (context, progressValue, child) {
+                      return Container(
+                        height: isSmallScreen ? 6 : 8,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: textColor.withOpacity(0.1),
+                        ),
+                        child: FractionallySizedBox(
+                          alignment: Alignment.centerLeft,
+                          widthFactor: progressValue,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [primaryColor, scheme.accentTeal],
+                              ),
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.5),
+                                  blurRadius: 4,
+                                  spreadRadius: 1,
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: isSmallScreen ? 6 : 8),
-                    // Main phrase
-                    Text(
-                      phrase.phrase,
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 20 : 24,
-                        fontWeight: FontWeight.w600,
-                        color: textColor,
-                        height: 1.2,
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.fontFamily,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Favorite button
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                ),
-                child: IconButton(
-                  onPressed: _toggleFavorite,
-                  icon: Icon(
-                    phrase.isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: phrase.isFavorite ? Colors.red : secondaryTextColor,
-                    size: isSmallScreen ? 20 : 22,
-                  ),
-                  padding: isSmallScreen ? const EdgeInsets.all(6) : null,
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: isSmallScreen ? 6 : 8),
-
-          // IPA and language tags
-          Wrap(
-            spacing: isSmallScreen ? 6 : 8,
-            runSpacing: isSmallScreen ? 4 : 6,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 4 : 6,
-                  vertical: isSmallScreen ? 1 : 2,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                  color: isDark
-                      ? scheme.surfaceDark.withOpacity(0.05)
-                      : scheme.surface.withOpacity(0.05),
-                ),
-                child: Text(
-                  'DE',
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 10 : 11,
-                    color: secondaryTextColor,
-                    fontFamily: themeService.fontFamily,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isSmallScreen ? 4 : 6,
-                  vertical: isSmallScreen ? 1 : 2,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                  color: isDark
-                      ? scheme.surfaceDark.withOpacity(0.05)
-                      : scheme.surface.withOpacity(0.05),
-                ),
-                child: Text(
-                  phrase.level,
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 10 : 11,
-                    color: secondaryTextColor,
-                    fontFamily: themeService.fontFamily,
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: isSmallScreen ? 10 : 12),
-
-          // Translation card
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: isDark
-                  ? scheme.surfaceDark.withOpacity(0.03)
-                  : scheme.surface.withOpacity(0.03),
-            ),
-            padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        phrase.translation,
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 14 : 15,
-                          color: textColor.withOpacity(0.9),
-                          fontFamily: Theme.of(
-                            context,
-                          ).textTheme.bodySmall?.fontFamily,
                         ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          isSmallScreen ? 6 : 8,
-                        ),
-                        border: Border.all(color: textColor.withOpacity(0.1)),
-                      ),
-                      child: IconButton(
-                        onPressed: () =>
-                            _playPhrase(phrase.translation, 'en-US'),
-                        icon: Icon(
-                          Icons.volume_up,
-                          size: isSmallScreen ? 16 : 18,
-                          color: secondaryTextColor.withOpacity(0.8),
-                        ),
-                        padding: isSmallScreen ? const EdgeInsets.all(4) : null,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: isSmallScreen ? 2 : 4),
-                Text(
-                  phrase.meaning,
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 12 : 13,
-                    color: secondaryTextColor.withOpacity(0.8),
-                    fontFamily: themeService.fontFamily,
+                      );
+                    },
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: isSmallScreen ? 12 : 16),
-
-          // Play controls (only rate controls and repeat, no navigation)
-          _buildRateControls(
-            isSmallScreen,
-            textColor,
-            secondaryTextColor,
-            themeService,
-          ),
-
-          SizedBox(height: isSmallScreen ? 12 : 16),
-
-          // Progress bar (based on highest reached index, not listened count)
-          Container(
-            height: isSmallScreen ? 4 : 6,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(3),
-              color: textColor.withOpacity(0.1),
-            ),
-            child: FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: _phrases.isEmpty
-                  ? 0.0
-                  : ((_highestReachedIndex + 1) / _phrases.length).clamp(
-                      0.0,
-                      1.0,
-                    ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  color: textColor.withOpacity(0.7),
-                ),
+                ],
               ),
             ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -752,87 +881,160 @@ class _PhraseScreenState extends State<PhraseScreen> {
     dynamic scheme,
   ) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
+      padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 18 : 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Previous button
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: textColor.withOpacity(0.08),
-            ),
-            child: IconButton(
-              onPressed: _previousPhrase,
-              icon: Icon(
-                Icons.chevron_left,
-                size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
+          Flexible(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+                border: Border.all(color: textColor.withOpacity(0.1)),
+                color: textColor.withOpacity(0.08),
               ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+              child: IconButton(
+                onPressed: _previousPhrase,
+                icon: Icon(
+                  Icons.chevron_left,
+                  size: isSmallScreen ? 22 : 26,
+                  color: textColor.withOpacity(0.9),
+                ),
+                padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+              ),
             ),
           ),
 
-          // Main play button
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                  color: isDark
-                      ? scheme.surfaceDark.withOpacity(0.05)
-                      : scheme.surface.withOpacity(0.05),
-                  boxShadow: [
-                    BoxShadow(
-                      color: textColor.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-                child: IconButton(
-                  onPressed: _playCurrentPhrase,
-                  icon: Icon(
-                    _isPlaying ? Icons.stop : Icons.volume_up,
-                    size: isSmallScreen ? 36 : 42,
-                    color: textColor,
-                  ),
-                  padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
-                ),
-              ),
-              if (_isPlaying)
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    width: isSmallScreen ? 10 : 12,
-                    height: isSmallScreen ? 10 : 12,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isDark ? scheme.primaryDark : scheme.primary,
-                    ),
-                  ),
-                ),
-            ],
+          SizedBox(width: isSmallScreen ? 8 : 12),
+
+          // Main play button with pulse animation
+          Flexible(
+            child: Builder(
+              builder: (context) {
+                final primaryColor = isDark
+                    ? scheme.primaryDark
+                    : scheme.primary;
+                return TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0.0, end: _isPlaying ? 1.0 : 0.0),
+                  duration: Duration(milliseconds: 1000),
+                  builder: (context, pulseValue, child) {
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Pulsing ring
+                        if (_isPlaying)
+                          Container(
+                            width:
+                                (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                            height:
+                                (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: RadialGradient(
+                                colors: [
+                                  primaryColor.withOpacity(
+                                    0.3 * (1 - pulseValue),
+                                  ),
+                                  primaryColor.withOpacity(0.0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              isSmallScreen ? 16 : 20,
+                            ),
+                            gradient: LinearGradient(
+                              colors: [
+                                primaryColor.withOpacity(0.2),
+                                scheme.accentTeal.withOpacity(0.15),
+                              ],
+                            ),
+                            border: Border.all(
+                              color: primaryColor.withOpacity(0.4),
+                              width: 2,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primaryColor.withOpacity(0.3),
+                                blurRadius: 12,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: IconButton(
+                            onPressed: _playCurrentPhrase,
+                            icon: Icon(
+                              _isPlaying ? Icons.stop : Icons.volume_up,
+                              size: isSmallScreen ? 28 : 32,
+                              color: primaryColor,
+                            ),
+                            padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                          ),
+                        ),
+                        if (_isPlaying)
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              duration: Duration(milliseconds: 500),
+                              curve: ThemeService.bounceCurve,
+                              builder: (context, dotValue, child) {
+                                return Transform.scale(
+                                  scale: dotValue,
+                                  child: Container(
+                                    width: isSmallScreen ? 12 : 14,
+                                    height: isSmallScreen ? 12 : 14,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          primaryColor,
+                                          scheme.accentTeal,
+                                        ],
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: primaryColor.withOpacity(0.8),
+                                          blurRadius: 8,
+                                          spreadRadius: 2,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
           ),
+
+          SizedBox(width: isSmallScreen ? 8 : 12),
 
           // Next button
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: textColor.withOpacity(0.08),
-            ),
-            child: IconButton(
-              onPressed: _nextPhrase,
-              icon: Icon(
-                Icons.chevron_right,
-                size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
+          Flexible(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+                border: Border.all(color: textColor.withOpacity(0.1)),
+                color: textColor.withOpacity(0.08),
               ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+              child: IconButton(
+                onPressed: _nextPhrase,
+                icon: Icon(
+                  Icons.chevron_right,
+                  size: isSmallScreen ? 22 : 26,
+                  color: textColor.withOpacity(0.9),
+                ),
+                padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+              ),
             ),
           ),
         ],

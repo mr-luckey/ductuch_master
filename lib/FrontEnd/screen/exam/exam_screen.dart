@@ -30,7 +30,8 @@ class ExamScreen extends StatefulWidget {
   State<ExamScreen> createState() => _ExamScreenState();
 }
 
-class _ExamScreenState extends State<ExamScreen> {
+class _ExamScreenState extends State<ExamScreen>
+    with SingleTickerProviderStateMixin {
   String? selectedLevel;
   List<ExamQuestion> currentQuestions = [];
   int currentQuestionIndex = 0;
@@ -42,10 +43,41 @@ class _ExamScreenState extends State<ExamScreen> {
   int remainingSeconds = 3600; // 1 hour default
   int score = 0;
   late final LessonController _lessonController;
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _lessonController = Get.find<LessonController>();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: ThemeService.slowAnimationDuration,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeIn,
+    );
+    _loadExamQuestions();
+
+    // Auto-start exam if level is provided via arguments
+    final args = Get.arguments;
+    final levelArg = (args is Map) ? (args['level']?.toString()) : null;
+    if (levelArg != null && levelArg.isNotEmpty) {
+      final level = levelArg.toUpperCase();
+      if (_examQuestions.isNotEmpty) {
+        _startExam(level);
+      } else {
+        _pendingAutoStartLevel = level;
+      }
+    }
+    _animationController.forward();
+  }
 
   @override
   void dispose() {
     countdownTimer?.cancel();
+    _animationController.dispose();
     super.dispose();
   }
 
@@ -152,36 +184,12 @@ class _ExamScreenState extends State<ExamScreen> {
   }
 
   Map<String, List<ExamQuestion>> _examQuestions = {};
-  bool _isLoadingQuestions = false;
   String? _pendingAutoStartLevel;
 
-  @override
-  void initState() {
-    super.initState();
-    _lessonController = Get.find<LessonController>();
-    _loadExamQuestions();
-
-    // Auto-start exam if level is provided via arguments
-    final args = Get.arguments;
-    final levelArg = (args is Map) ? (args['level']?.toString()) : null;
-    if (levelArg != null && levelArg.isNotEmpty) {
-      final level = levelArg.toUpperCase();
-      if (_examQuestions.isNotEmpty) {
-        _startExam(level);
-      } else {
-        _pendingAutoStartLevel = level;
-      }
-    }
-  }
-
   Future<void> _loadExamQuestions() async {
-    setState(() {
-      _isLoadingQuestions = true;
-    });
     final loadedQuestions = await DataLoader.loadExamQuestions();
     setState(() {
       _examQuestions = loadedQuestions;
-      _isLoadingQuestions = false;
     });
 
     // If an auto-start was pending, start now
@@ -239,7 +247,6 @@ class _ExamScreenState extends State<ExamScreen> {
     final themeService = Get.find<ThemeService>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
-    final isTablet = screenWidth > 600;
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -254,13 +261,19 @@ class _ExamScreenState extends State<ExamScreen> {
         backgroundColor: backgroundColor,
         appBar: AppBar(
           backgroundColor: backgroundColor,
-          title: Text(
-            'Exam',
-            style: TextStyle(
-              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
-              color: textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: isTablet ? 24 : 20,
+          elevation: 0,
+          title: Hero(
+            tag: 'exam_title',
+            child: Material(
+              color: Colors.transparent,
+              child: Text(
+                'Exam',
+                style: themeService.getTitleLargeStyle(color: textColor)
+                    .copyWith(
+                  fontWeight: FontWeight.bold,
+                  shadows: null,
+                ),
+              ),
             ),
           ),
           actions: [
@@ -268,39 +281,70 @@ class _ExamScreenState extends State<ExamScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Center(
-                  child: Text(
-                    _formatTime(remainingSeconds),
-                    style: TextStyle(
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.bodyLarge?.fontFamily,
-                      color: remainingSeconds < 300 ? Colors.red : textColor,
-                      fontSize: isTablet ? 18 : 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: 1.0),
+                    duration: Duration(milliseconds: 500),
+                    curve: ThemeService.springCurve,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: value,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: LinearGradient(
+                              colors: remainingSeconds < 300
+                                  ? [Colors.red.withOpacity(0.2), Colors.red.withOpacity(0.1)]
+                                  : [primaryColor.withOpacity(0.2), primaryColor.withOpacity(0.1)],
+                            ),
+                            border: Border.all(
+                              color: remainingSeconds < 300
+                                  ? Colors.red.withOpacity(0.5)
+                                  : primaryColor.withOpacity(0.3),
+                              width: 1.5,
+                            ),
+                          ),
+                          child: Text(
+                            _formatTime(remainingSeconds),
+                            style: themeService.getBodyLargeStyle(
+                              color: remainingSeconds < 300 ? Colors.red : primaryColor,
+                            ).copyWith(
+                              fontWeight: FontWeight.bold,
+                              shadows: null,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
-            TtsSpeedDropdown(),
+            const TtsSpeedDropdown(),
           ],
         ),
         body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth > 500
-                      ? 500
-                      : constraints.maxWidth,
-                ),
-                margin: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                  vertical: constraints.maxWidth > 500 ? 30 : 20,
-                ),
-                child: _buildContent(context, isSmallScreen, scheme, isDark),
-              );
-            },
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth > 500
+                        ? 500
+                        : constraints.maxWidth,
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                    vertical: constraints.maxWidth > 500 ? 30 : 20,
+                  ),
+                  child: _buildContent(context, isSmallScreen, scheme, isDark),
+                );
+              },
+            ),
           ),
         ),
       );
@@ -330,46 +374,86 @@ class _ExamScreenState extends State<ExamScreen> {
     scheme,
     bool isDark,
   ) {
+    final themeService = Get.find<ThemeService>();
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
     final levels = ['A1', 'A2', 'B1', 'B2'];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: isSmallScreen ? 4 : 6),
-        Text(
-          'Select Exam Level',
-          style: TextStyle(
-            fontSize: isSmallScreen ? 20 : 24,
-            fontWeight: FontWeight.w600,
-            color: textColor,
-            fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
-          ),
+        TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0.0, end: 1.0),
+          duration: ThemeService.defaultAnimationDuration,
+          curve: ThemeService.springCurve,
+          builder: (context, value, child) {
+            return Transform.translate(
+              offset: Offset(0, 20 * (1 - value)),
+              child: Opacity(
+                opacity: value.clamp(0.0, 1.0),
+                child: ShaderMask(
+                  shaderCallback: (bounds) => LinearGradient(
+                    colors: [textColor, primaryColor],
+                  ).createShader(bounds),
+                  child: Text(
+                    'Select Exam Level',
+                    style: themeService
+                        .getHeadlineSmallStyle(color: Colors.white)
+                        .copyWith(
+                      fontWeight: FontWeight.bold,
+                      shadows: null,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
         SizedBox(height: isSmallScreen ? 8 : 12),
-        Text(
-          'Choose a level to start your exam',
-          style: TextStyle(
-            fontSize: isSmallScreen ? 12 : 14,
-            color: textColor.withOpacity(0.6),
-            fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
-          ),
+        TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0.0, end: 1.0),
+          duration: Duration(milliseconds: 400),
+          curve: ThemeService.springCurve,
+          builder: (context, value, child) {
+            return Opacity(
+              opacity: value.clamp(0.0, 1.0),
+              child: Text(
+                'Choose a level to start your exam',
+                style: themeService.getBodyMediumStyle(
+                  color: textColor.withOpacity(0.6),
+                ),
+              ),
+            );
+          },
         ),
         SizedBox(height: isSmallScreen ? 20 : 24),
         Expanded(
           child: ListView.builder(
             itemCount: levels.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
-                child: _buildLevelCard(
-                  context,
-                  levels[index],
-                  isSmallScreen,
-                  scheme,
-                  isDark,
-                ),
+              return TweenAnimationBuilder<double>(
+                tween: Tween(begin: 0.0, end: 1.0),
+                duration: Duration(milliseconds: 300 + (index * 100)),
+                curve: ThemeService.springCurve,
+                builder: (context, value, child) {
+                  return Transform.translate(
+                    offset: Offset(30 * (1 - value), 0),
+                    child: Opacity(
+                      opacity: value.clamp(0.0, 1.0),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
+                        child: _buildLevelCard(
+                          context,
+                          levels[index],
+                          isSmallScreen,
+                          scheme,
+                          isDark,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               );
             },
           ),
@@ -385,83 +469,96 @@ class _ExamScreenState extends State<ExamScreen> {
     scheme,
     bool isDark,
   ) {
+    final themeService = Get.find<ThemeService>();
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-        border: Border.all(color: textColor.withOpacity(0.1)),
-        color: surfaceColor.withOpacity(0.02),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => _startExam(level),
-          borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-          child: Padding(
-            padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-            child: Row(
-              children: [
-                Container(
-                  width: isSmallScreen ? 50 : 60,
-                  height: isSmallScreen ? 50 : 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: textColor.withOpacity(0.1)),
-                    color: primaryColor.withOpacity(0.2),
-                  ),
-                  child: Center(
-                    child: Text(
-                      level,
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 20 : 24,
-                        fontWeight: FontWeight.bold,
-                        color: primaryColor,
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.headlineSmall?.fontFamily,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => _startExam(level),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: themeService.getCardGradient(isDark),
+            border: Border.all(
+              color: primaryColor.withOpacity(0.3),
+              width: 2,
+            ),
+            boxShadow: ThemeService.getCardShadow(isDark),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => _startExam(level),
+              borderRadius: BorderRadius.circular(20),
+              splashColor: primaryColor.withOpacity(0.2),
+              highlightColor: primaryColor.withOpacity(0.1),
+              child: Padding(
+                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                child: Row(
+                  children: [
+                    Container(
+                      width: isSmallScreen ? 60 : 70,
+                      height: isSmallScreen ? 60 : 70,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          colors: [primaryColor, secondaryColor],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryColor.withOpacity(0.4),
+                            blurRadius: 8,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          level,
+                          style: themeService
+                              .getHeadlineSmallStyle(color: Colors.white)
+                              .copyWith(
+                            fontWeight: FontWeight.bold,
+                            shadows: null,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(width: isSmallScreen ? 16 : 20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Level $level Exam',
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 16 : 18,
-                          fontWeight: FontWeight.w600,
-                          color: textColor,
-                          fontFamily: Theme.of(
-                            context,
-                          ).textTheme.titleMedium?.fontFamily,
-                        ),
+                    SizedBox(width: isSmallScreen ? 16 : 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Level $level Exam',
+                            style: themeService
+                                .getTitleMediumStyle(color: textColor)
+                                .copyWith(
+                              fontWeight: FontWeight.bold,
+                              shadows: null,
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            '150+ questions • ${_getTimeForLevel(level) ~/ 60} minutes',
+                            style: themeService.getBodySmallStyle(
+                              color: textColor.withOpacity(0.6),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        '150+ questions • ${_getTimeForLevel(level) ~/ 60} minutes',
-                        style: TextStyle(
-                          fontSize: isSmallScreen ? 12 : 13,
-                          color: textColor.withOpacity(0.6),
-                          fontFamily: Theme.of(
-                            context,
-                          ).textTheme.bodySmall?.fontFamily,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: primaryColor,
+                      size: isSmallScreen ? 18 : 20,
+                    ),
+                  ],
                 ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: textColor.withOpacity(0.5),
-                  size: isSmallScreen ? 16 : 18,
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -475,32 +572,49 @@ class _ExamScreenState extends State<ExamScreen> {
     scheme,
     bool isDark,
   ) {
+    final themeService = Get.find<ThemeService>();
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
     final currentQuestion = currentQuestions[currentQuestionIndex];
     final progress = (currentQuestionIndex + 1) / currentQuestions.length;
 
     return Column(
       children: [
-        // Progress bar
-        Container(
-          height: isSmallScreen ? 4 : 6,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3),
-            color: surfaceColor.withOpacity(0.05),
-          ),
-          child: FractionallySizedBox(
-            alignment: Alignment.centerLeft,
-            widthFactor: progress,
-            child: Container(
+        // Animated Progress bar
+        TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0.0, end: progress),
+          duration: ThemeService.slowAnimationDuration,
+          curve: Curves.easeOutCubic,
+          builder: (context, progressValue, child) {
+            return Container(
+              height: isSmallScreen ? 6 : 8,
+              width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: primaryColor.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(4),
+                color: textColor.withOpacity(0.1),
               ),
-            ),
-          ),
+              child: FractionallySizedBox(
+                alignment: Alignment.centerLeft,
+                widthFactor: progressValue,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [primaryColor, secondaryColor],
+                    ),
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: [
+                      BoxShadow(
+                        color: primaryColor.withOpacity(0.5),
+                        blurRadius: 4,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
         ),
         SizedBox(height: isSmallScreen ? 12 : 16),
 
@@ -510,149 +624,228 @@ class _ExamScreenState extends State<ExamScreen> {
           children: [
             Text(
               'Question ${currentQuestionIndex + 1}/${currentQuestions.length}',
-              style: TextStyle(
-                fontSize: isSmallScreen ? 12 : 14,
+              style: themeService.getLabelSmallStyle(
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
               ),
             ),
             Text(
               '${((progress * 100).round())}%',
-              style: TextStyle(
-                fontSize: isSmallScreen ? 12 : 14,
+              style: themeService.getLabelSmallStyle(
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
               ),
             ),
           ],
         ),
         SizedBox(height: isSmallScreen ? 16 : 20),
 
-        // Question card
+        // Question card with animation
         Expanded(
           child: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-                border: Border.all(color: textColor.withOpacity(0.1)),
-                color: surfaceColor.withOpacity(0.02),
-              ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    currentQuestion.question,
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 18 : 20,
-                      fontWeight: FontWeight.w600,
-                      color: textColor,
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.titleLarge?.fontFamily,
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: ThemeService.defaultAnimationDuration,
+              curve: ThemeService.springCurve,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: Opacity(
+                    opacity: value.clamp(0.0, 1.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: themeService.getCardGradient(isDark),
+                        border: Border.all(
+                          color: primaryColor.withOpacity(0.3),
+                          width: 2,
+                        ),
+                        boxShadow: ThemeService.getCardShadow(isDark),
+                      ),
+                      padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            currentQuestion.question,
+                            style: themeService
+                                .getTitleLargeStyle(color: textColor)
+                                .copyWith(
+                              fontWeight: FontWeight.bold,
+                              shadows: null,
+                            ),
+                          ),
+                          SizedBox(height: isSmallScreen ? 20 : 24),
+                          ...currentQuestion.options.asMap().entries.map((entry) {
+                            final index = entry.key;
+                            final option = entry.value;
+                            final isSelected = selectedAnswerIndex == index;
+
+                            return TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              duration: Duration(milliseconds: 200 + (index * 50)),
+                              curve: ThemeService.springCurve,
+                              builder: (context, optionValue, child) {
+                                return Transform.translate(
+                                  offset: Offset(20 * (1 - optionValue), 0),
+                                  child: Opacity(
+                                    opacity: optionValue.clamp(0.0, 1.0),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: isSmallScreen ? 12 : 16,
+                                      ),
+                                      child: _buildOptionCard(
+                                        context,
+                                        option,
+                                        index,
+                                        isSelected,
+                                        isSmallScreen,
+                                        scheme,
+                                        isDark,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: isSmallScreen ? 20 : 24),
-                  ...currentQuestion.options.asMap().entries.map((entry) {
-                    final index = entry.key;
-                    final option = entry.value;
-                    final isSelected = selectedAnswerIndex == index;
-
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
-                      child: _buildOptionCard(
-                        context,
-                        option,
-                        index,
-                        isSelected,
-                        isSmallScreen,
-                        scheme,
-                        isDark,
-                      ),
-                    );
-                  }),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ),
 
         SizedBox(height: isSmallScreen ? 16 : 20),
 
-        // Navigation buttons
+        // Navigation buttons with animations
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-                border: Border.all(color: textColor.withOpacity(0.1)),
-                color: surfaceColor.withOpacity(0.05),
-              ),
-              child: IconButton(
-                onPressed: currentQuestionIndex > 0 ? _previousQuestion : null,
-                icon: Icon(
-                  Icons.chevron_left,
-                  color: currentQuestionIndex > 0
-                      ? textColor.withOpacity(0.9)
-                      : textColor.withOpacity(0.3),
-                  size: isSmallScreen ? 28 : 32,
-                ),
-                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-              ),
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      gradient: themeService.getCardGradient(isDark),
+                      border: Border.all(
+                        color: primaryColor.withOpacity(0.3),
+                        width: 1.5,
+                      ),
+                      boxShadow: ThemeService.getCardShadow(isDark),
+                    ),
+                    child: IconButton(
+                      onPressed: currentQuestionIndex > 0 ? _previousQuestion : null,
+                      icon: Icon(
+                        Icons.chevron_left,
+                        color: currentQuestionIndex > 0
+                            ? textColor
+                            : textColor.withOpacity(0.3),
+                        size: isSmallScreen ? 22 : 26,
+                      ),
+                      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+                    ),
+                  ),
+                );
+              },
             ),
 
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-                border: Border.all(color: textColor.withOpacity(0.1)),
-                color: primaryColor.withOpacity(0.2),
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: _submitExam,
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isSmallScreen ? 20 : 24,
-                      vertical: isSmallScreen ? 12 : 16,
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      gradient: LinearGradient(
+                        colors: [
+                          primaryColor.withOpacity(0.2),
+                          secondaryColor.withOpacity(0.15),
+                        ],
+                      ),
+                      border: Border.all(
+                        color: primaryColor.withOpacity(0.4),
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primaryColor.withOpacity(0.3),
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                        ),
+                      ],
                     ),
-                    child: Text(
-                      'Submit Exam',
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 14 : 16,
-                        fontWeight: FontWeight.w600,
-                        color: primaryColor,
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.fontFamily,
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: _submitExam,
+                        borderRadius: BorderRadius.circular(16),
+                        splashColor: primaryColor.withOpacity(0.3),
+                        highlightColor: primaryColor.withOpacity(0.2),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isSmallScreen ? 20 : 24,
+                            vertical: isSmallScreen ? 12 : 16,
+                          ),
+                          child: Text(
+                            'Submit Exam',
+                            style: themeService
+                                .getTitleSmallStyle(color: primaryColor)
+                                .copyWith(
+                              fontWeight: FontWeight.bold,
+                              shadows: null,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
 
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-                border: Border.all(color: textColor.withOpacity(0.1)),
-                color: surfaceColor.withOpacity(0.05),
-              ),
-              child: IconButton(
-                onPressed: currentQuestionIndex < currentQuestions.length - 1
-                    ? _nextQuestion
-                    : null,
-                icon: Icon(
-                  Icons.chevron_right,
-                  color: currentQuestionIndex < currentQuestions.length - 1
-                      ? textColor.withOpacity(0.9)
-                      : textColor.withOpacity(0.3),
-                  size: isSmallScreen ? 28 : 32,
-                ),
-                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-              ),
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: Duration(milliseconds: 200),
+              curve: Curves.easeOutCubic,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      gradient: themeService.getCardGradient(isDark),
+                      border: Border.all(
+                        color: primaryColor.withOpacity(0.3),
+                        width: 1.5,
+                      ),
+                      boxShadow: ThemeService.getCardShadow(isDark),
+                    ),
+                    child: IconButton(
+                      onPressed: currentQuestionIndex < currentQuestions.length - 1
+                          ? _nextQuestion
+                          : null,
+                      icon: Icon(
+                        Icons.chevron_right,
+                        color: currentQuestionIndex < currentQuestions.length - 1
+                            ? textColor
+                            : textColor.withOpacity(0.3),
+                        size: isSmallScreen ? 22 : 26,
+                      ),
+                      padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),
@@ -669,67 +862,107 @@ class _ExamScreenState extends State<ExamScreen> {
     scheme,
     bool isDark,
   ) {
+    final themeService = Get.find<ThemeService>();
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
-    final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-        border: Border.all(
-          color: isSelected
-              ? primaryColor.withOpacity(0.5)
-              : textColor.withOpacity(0.1),
-        ),
-        color: isSelected
-            ? primaryColor.withOpacity(0.1)
-            : surfaceColor.withOpacity(0.03),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: () => _selectAnswer(index),
-          borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-          child: Padding(
-            padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
-            child: Row(
-              children: [
-                Container(
-                  width: isSmallScreen ? 24 : 28,
-                  height: isSmallScreen ? 24 : 28,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isSelected
-                          ? primaryColor
-                          : textColor.withOpacity(0.3),
-                      width: 2,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => _selectAnswer(index),
+        child: AnimatedContainer(
+          duration: ThemeService.defaultAnimationDuration,
+          curve: ThemeService.springCurve,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: isSelected
+                ? LinearGradient(
+                    colors: [
+                      primaryColor.withOpacity(0.2),
+                      secondaryColor.withOpacity(0.15),
+                    ],
+                  )
+                : themeService.getCardGradient(isDark),
+            border: Border.all(
+              color: isSelected
+                  ? primaryColor.withOpacity(0.5)
+                  : textColor.withOpacity(0.1),
+              width: isSelected ? 2 : 1.5,
+            ),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(0.3),
+                      blurRadius: 8,
+                      spreadRadius: 2,
                     ),
-                    color: isSelected ? primaryColor : Colors.transparent,
-                  ),
-                  child: isSelected
-                      ? Icon(
-                          Icons.check,
-                          size: isSmallScreen ? 16 : 18,
-                          color: backgroundColor,
-                        )
-                      : null,
-                ),
-                SizedBox(width: isSmallScreen ? 12 : 16),
-                Expanded(
-                  child: Text(
-                    '${String.fromCharCode(65 + index)}. $option',
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 14 : 16,
-                      color: textColor,
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
+                  ]
+                : ThemeService.getCardShadow(isDark),
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () => _selectAnswer(index),
+              borderRadius: BorderRadius.circular(16),
+              splashColor: primaryColor.withOpacity(0.2),
+              highlightColor: primaryColor.withOpacity(0.1),
+              child: Padding(
+                padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                child: Row(
+                  children: [
+                    AnimatedContainer(
+                      duration: ThemeService.defaultAnimationDuration,
+                      curve: ThemeService.springCurve,
+                      width: isSmallScreen ? 28 : 32,
+                      height: isSmallScreen ? 28 : 32,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: isSelected
+                            ? LinearGradient(
+                                colors: [primaryColor, secondaryColor],
+                              )
+                            : null,
+                        border: Border.all(
+                          color: isSelected
+                              ? primaryColor
+                              : textColor.withOpacity(0.3),
+                          width: 2,
+                        ),
+                        color: isSelected ? null : Colors.transparent,
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.5),
+                                  blurRadius: 4,
+                                  spreadRadius: 1,
+                                ),
+                              ]
+                            : null,
+                      ),
+                      child: isSelected
+                          ? Icon(
+                              Icons.check,
+                              size: isSmallScreen ? 18 : 20,
+                              color: Colors.white,
+                            )
+                          : null,
                     ),
-                  ),
+                    SizedBox(width: isSmallScreen ? 12 : 16),
+                    Expanded(
+                      child: Text(
+                        '${String.fromCharCode(65 + index)}. $option',
+                        style: themeService.getBodyLargeStyle(
+                          color: isSelected ? primaryColor : textColor,
+                        ).copyWith(
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                          shadows: null,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

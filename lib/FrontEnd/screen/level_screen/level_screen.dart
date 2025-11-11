@@ -6,17 +6,46 @@ import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 
-class LevelScreen extends StatelessWidget {
+class LevelScreen extends StatefulWidget {
   final String level;
 
   const LevelScreen({super.key, this.level = ''});
+
+  @override
+  State<LevelScreen> createState() => _LevelScreenState();
+}
+
+class _LevelScreenState extends State<LevelScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: ThemeService.slowAnimationDuration,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeIn,
+    );
+    _fadeController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
     final lessonController = Get.find<LessonController>();
     // Get level from constructor or route arguments
-    String currentLevelKey = level;
+    String currentLevelKey = widget.level;
     if (currentLevelKey.isEmpty) {
       final args = Get.arguments;
       if (args is String) {
@@ -34,10 +63,6 @@ class LevelScreen extends StatelessWidget {
         LearningPathData.levelInfo[currentLevelKey] ??
         LearningPathData.levelInfo['a1']!;
 
-    print(
-      'LevelScreen: Displaying level "$currentLevelKey" with ${currentLevel.modules.length} modules',
-    );
-
     final levelCodeUpper = currentLevelKey.toUpperCase();
     final progressPercent = lessonController.levelProgressPercent(
       levelCodeUpper,
@@ -49,6 +74,7 @@ class LevelScreen extends StatelessWidget {
       final isDark = themeService.isDarkMode.value;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
       final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+      final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
       final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
       final backgroundColor = isDark
           ? scheme.backgroundDark
@@ -57,272 +83,390 @@ class LevelScreen extends StatelessWidget {
       return Scaffold(
         backgroundColor: backgroundColor,
         body: SafeArea(
-          child: CustomScrollView(
-            slivers: <Widget>[
-              // Header
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Back button and title row
-                      Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: textColor.withOpacity(0.1),
-                              ),
-                            ),
-                            child: IconButton(
-                              onPressed: () => Get.back(),
-                              icon: Icon(
-                                Icons.chevron_left,
-                                color: textColor,
-                                size: 22,
-                              ),
-                              padding: const EdgeInsets.all(6),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: CustomScrollView(
+              slivers: <Widget>[
+                // Animated Header
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      duration: ThemeService.defaultAnimationDuration,
+                      curve: ThemeService.springCurve,
+                      builder: (context, value, child) {
+                        return Transform.translate(
+                          offset: Offset(0, 20 * (1 - value)),
+                          child: Opacity(
+                            opacity: value.clamp(0.0, 1.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  currentLevel.title,
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: textColor,
-                                    fontFamily: Theme.of(
-                                      context,
-                                    ).textTheme.headlineMedium?.fontFamily,
-                                  ),
-                                ),
-                                const SizedBox(height: 6),
+                                // Back button and title row
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Container(
-                                        height: 6,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            3,
-                                          ),
-                                          color: surfaceColor.withOpacity(0.08),
-                                        ),
-                                        child: FractionallySizedBox(
-                                          alignment: Alignment.centerLeft,
-                                          widthFactor: (progressPercent / 100)
-                                              .clamp(0.0, 1.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(3),
-                                              color: primaryColor.withOpacity(
-                                                0.7,
-                                              ),
+                                    Hero(
+                                      tag: 'back_button_$currentLevelKey',
+                                      child: Material(
+                                        color: Colors.transparent,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                            gradient: themeService.getCardGradient(isDark),
+                                            border: Border.all(
+                                              color: primaryColor.withOpacity(0.3),
                                             ),
+                                            boxShadow: ThemeService.getCardShadow(isDark),
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () => Get.back(),
+                                            icon: Icon(
+                                              Icons.chevron_left,
+                                              color: textColor,
+                                              size: 24,
+                                            ),
+                                            padding: const EdgeInsets.all(8),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      '$progressPercent%',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: textColor.withOpacity(0.8),
-                                        fontFamily: Theme.of(
-                                          context,
-                                        ).textTheme.bodySmall?.fontFamily,
+                                    const SizedBox(width: 12),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Hero(
+                                            tag: 'level_title_$currentLevelKey',
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              child: ShaderMask(
+                                                shaderCallback: (bounds) => LinearGradient(
+                                                  colors: [textColor, primaryColor],
+                                                ).createShader(bounds),
+                                                child: Text(
+                                                  currentLevel.title,
+                                                  style: themeService
+                                                      .getHeadlineSmallStyle(color: Colors.white)
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 12),
+                                          // Animated Progress Bar
+                                          TweenAnimationBuilder<double>(
+                                            tween: Tween(
+                                              begin: 0.0,
+                                              end: (progressPercent / 100).clamp(0.0, 1.0),
+                                            ),
+                                            duration: ThemeService.slowAnimationDuration,
+                                            curve: Curves.easeOutCubic,
+                                            builder: (context, progressValue, child) {
+                                              return Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                      height: 8,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(4),
+                                                        color: surfaceColor.withOpacity(0.1),
+                                                      ),
+                                                      child: FractionallySizedBox(
+                                                        alignment: Alignment.centerLeft,
+                                                        widthFactor: progressValue,
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            gradient: LinearGradient(
+                                                              colors: [primaryColor, secondaryColor],
+                                                            ),
+                                                            borderRadius: BorderRadius.circular(4),
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: primaryColor.withOpacity(0.5),
+                                                                blurRadius: 4,
+                                                                spreadRadius: 1,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 12),
+                                                  Text(
+                                                    '$progressPercent%',
+                                                    style: themeService.getLabelSmallStyle(
+                                                      color: textColor.withOpacity(0.8),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                          if (currentLevel.description.isNotEmpty) ...[
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              currentLevel.description,
+                                              style: themeService.getBodyMediumStyle(
+                                                color: textColor.withOpacity(0.7),
+                                              ),
+                                            ),
+                                          ],
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
-                                if (currentLevel.description.isNotEmpty) ...[
-                                  const SizedBox(height: 4),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                // Modules list or empty state
+                if (currentLevel.modules.isEmpty)
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        duration: ThemeService.defaultAnimationDuration,
+                        curve: ThemeService.bounceCurve,
+                        builder: (context, value, child) {
+                          return Transform.scale(
+                            scale: value,
+                            child: Opacity(
+                              opacity: value.clamp(0.0, 1.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          primaryColor.withOpacity(0.3),
+                                          secondaryColor.withOpacity(0.2),
+                                        ],
+                                      ),
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: primaryColor.withOpacity(0.4),
+                                        width: 3,
+                                      ),
+                                    ),
+                                    child: Icon(
+                                      Icons.construction,
+                                      size: 50,
+                                      color: primaryColor,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
                                   Text(
-                                    currentLevel.description,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: textColor.withOpacity(0.8),
-                                      fontFamily: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium?.fontFamily,
+                                    'Coming Soon',
+                                    style: themeService
+                                        .getHeadlineSmallStyle(color: textColor)
+                                        .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'This level is under development',
+                                    style: themeService.getBodyMediumStyle(
+                                      color: textColor.withOpacity(0.7),
                                     ),
                                   ),
                                 ],
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              // Modules list or empty state
-              if (currentLevel.modules.isEmpty)
-                SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.construction,
-                          size: 64,
-                          color: textColor.withOpacity(0.7),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'Coming Soon',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: textColor,
-                            fontFamily: Theme.of(
-                              context,
-                            ).textTheme.headlineMedium?.fontFamily,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'This level is under development',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: textColor.withOpacity(0.8),
-                            fontFamily: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
-                          ),
-                        ),
-                      ],
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final module = currentLevel.modules[index];
+                        return TweenAnimationBuilder<double>(
+                          tween: Tween(begin: 0.0, end: 1.0),
+                          duration: Duration(milliseconds: 300 + (index * 100)),
+                          curve: ThemeService.springCurve,
+                          builder: (context, value, child) {
+                            return Transform.translate(
+                              offset: Offset(30 * (1 - value), 0),
+                              child: Opacity(
+                                opacity: value.clamp(0.0, 1.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: ModuleCard(
+                                    moduleInfo: module,
+                                    onTap: () {
+                                      // Determine the route based on the module's level prefix
+                                      String route = '/lesson/a1';
+                                      final moduleLevel = module.ID
+                                          .split('-')
+                                          .first
+                                          .toUpperCase();
+
+                                      switch (moduleLevel) {
+                                        case 'A1':
+                                          route = '/lesson/a1';
+                                          break;
+                                        case 'A2':
+                                          route = '/lesson/a2';
+                                          break;
+                                        case 'B1':
+                                          route = '/lesson/b1';
+                                          break;
+                                        case 'B2':
+                                          route = '/lesson/b2';
+                                          break;
+                                        case 'C1':
+                                          route = '/lesson/c1';
+                                          break;
+                                        case 'C2':
+                                          route = '/lesson/c2';
+                                          break;
+                                        default:
+                                          route = '/lesson/a1';
+                                      }
+
+                                      Get.toNamed(
+                                        route,
+                                        arguments: {'moduleId': module.ID},
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }, childCount: currentLevel.modules.length),
                     ),
                   ),
-                )
-              else
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate((context, index) {
-                      final module = currentLevel.modules[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: ModuleCard(
-                          moduleInfo: module,
-                          onTap: () {
-                            print('Tapping module: ${module.ID}');
-
-                            // Determine the route based on the module's level prefix
-                            String route = '/lesson/a1'; // default fallback
-
-                            // Extract level from module ID (e.g., "A1-M1" -> "A1")
-                            final moduleLevel = module.ID
-                                .split('-')
-                                .first
-                                .toUpperCase();
-
-                            switch (moduleLevel) {
-                              case 'A1':
-                                route = '/lesson/a1';
-                                break;
-                              case 'A2':
-                                route = '/lesson/a2';
-                                break;
-                              case 'B1':
-                                route = '/lesson/b1';
-                                break;
-                              case 'B2':
-                                route = '/lesson/b2';
-                                break;
-                              case 'C1':
-                                route = '/lesson/c1';
-                                break;
-                              case 'C2':
-                                route = '/lesson/c2';
-                                break;
-                              default:
-                                print(
-                                  'Warning: Unknown module level "$moduleLevel", defaulting to A1',
-                                );
-                                route = '/lesson/a1';
-                            }
-
-                            print(
-                              'Navigating to route: $route with moduleId: ${module.ID}',
-                            );
-
-                            Get.toNamed(
-                              route,
-                              arguments: {'moduleId': module.ID},
-                            );
-                          },
-                        ),
-                      );
-                    }, childCount: currentLevel.modules.length),
-                  ),
-                ),
-              if (allDone)
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: textColor.withOpacity(0.1)),
-                        color: primaryColor.withOpacity(0.12),
-                      ),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(
-                              () => const ExamScreen(),
-                              arguments: {'level': levelCodeUpper},
-                            );
-                          },
-                          borderRadius: BorderRadius.circular(14),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 16,
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.assignment_turned_in,
-                                  color: primaryColor,
+                // Exam button if all done
+                if (allDone)
+                  SliverToBoxAdapter(
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      duration: ThemeService.defaultAnimationDuration,
+                      curve: ThemeService.bounceCurve,
+                      builder: (context, value, child) {
+                        return Transform.scale(
+                          scale: value,
+                          child: Opacity(
+                            opacity: value.clamp(0.0, 1.0),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      primaryColor.withOpacity(0.2),
+                                      secondaryColor.withOpacity(0.15),
+                                    ],
+                                  ),
+                                  border: Border.all(
+                                    color: primaryColor.withOpacity(0.4),
+                                    width: 2,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: primaryColor.withOpacity(0.3),
+                                      blurRadius: 12,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    'Take Exam for $levelCodeUpper',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                      color: primaryColor,
-                                      fontFamily: Theme.of(
-                                        context,
-                                      ).textTheme.titleMedium?.fontFamily,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.to(
+                                        () => const ExamScreen(),
+                                        arguments: {'level': levelCodeUpper},
+                                      );
+                                    },
+                                    borderRadius: BorderRadius.circular(20),
+                                    splashColor: primaryColor.withOpacity(0.2),
+                                    highlightColor: primaryColor.withOpacity(0.1),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 16,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [primaryColor, secondaryColor],
+                                              ),
+                                              borderRadius: BorderRadius.circular(12),
+                                            ),
+                                            child: Icon(
+                                              Icons.assignment_turned_in,
+                                              color: Colors.white,
+                                              size: 24,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Take Exam',
+                                                  style: themeService
+                                                      .getTitleMediumStyle(color: textColor)
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  'Test your knowledge for $levelCodeUpper',
+                                                  style: themeService.getBodySmallStyle(
+                                                    color: textColor.withOpacity(0.7),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: primaryColor,
+                                            size: 20,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Icon(Icons.chevron_right, color: primaryColor),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ),
-                ),
-              const SliverToBoxAdapter(child: SizedBox(height: 40)),
-            ],
+                const SliverToBoxAdapter(child: SizedBox(height: 40)),
+              ],
+            ),
           ),
         ),
       );

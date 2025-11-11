@@ -4,24 +4,54 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
-// import '../models/level_model.dart';
 
-class ModuleCard extends StatelessWidget {
+class ModuleCard extends StatefulWidget {
   final ModuleInfo moduleInfo;
   final VoidCallback? onTap;
 
   const ModuleCard({super.key, required this.moduleInfo, this.onTap});
 
   @override
+  State<ModuleCard> createState() => _ModuleCardState();
+}
+
+class _ModuleCardState extends State<ModuleCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+  bool _isHovered = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: ThemeService.defaultAnimationDuration,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: ThemeService.springCurve,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final lessonController = Get.find<LessonController>();
     final themeService = Get.find<ThemeService>();
-    final moduleId = moduleInfo.ID.toString();
+    final moduleId = widget.moduleInfo.ID.toString();
 
     return Obx(() {
       final totalTopics =
           LearningPathData.moduleTopics[moduleId]?.length ??
-          moduleInfo.lessonCount;
+          widget.moduleInfo.lessonCount;
       final completedTopics = lessonController.completedLessons
           .where((t) => t.startsWith('$moduleId-'))
           .length;
@@ -34,231 +64,326 @@ class ModuleCard extends StatelessWidget {
       final isDark = themeService.isDarkMode.value;
       final scheme = themeService.currentScheme;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-      final borderColor = isDark
-          ? scheme.textPrimaryDark.withOpacity(0.1)
-          : scheme.textPrimary.withOpacity(0.1);
-      final containerColor = isDark
-          ? scheme.textPrimaryDark.withOpacity(0.02)
-          : scheme.textPrimary.withOpacity(0.02);
+      final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+      final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
+      final successColor = scheme.accentTeal;
 
       return MouseRegion(
-        cursor: moduleInfo.isLocked
+        cursor: widget.moduleInfo.isLocked
             ? SystemMouseCursors.basic
             : SystemMouseCursors.click,
+        onEnter: (_) {
+          if (!widget.moduleInfo.isLocked) {
+            setState(() => _isHovered = true);
+            _animationController.forward();
+          }
+        },
+        onExit: (_) {
+          setState(() => _isHovered = false);
+          _animationController.reverse();
+        },
         child: GestureDetector(
-          onTap: moduleInfo.isLocked ? null : onTap,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-            transform: Matrix4.identity()
-              ..translate(0.0, moduleInfo.isLocked ? 0.0 : -2.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: moduleInfo.isLocked
-                      ? borderColor.withOpacity(0.5)
-                      : borderColor,
-                ),
-                color: moduleInfo.isLocked
-                    ? containerColor.withOpacity(0.5)
-                    : containerColor,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Icon and Status
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: moduleInfo.isLocked
-                                ? Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface.withOpacity(0.2)
-                                : (isCompleted
-                                      ? Colors.green.withOpacity(0.2)
-                                      : Theme.of(
-                                          context,
-                                        ).colorScheme.primary.withOpacity(0.2)),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Icon(
-                            moduleInfo.isLocked
-                                ? Icons.lock
-                                : (isCompleted ? Icons.check : moduleInfo.icon),
-                            color: _getIconColor(
-                              isCompleted,
-                              moduleInfo.isLocked,
-                              textColor,
-                            ),
-                            size: 24,
+          onTap: widget.moduleInfo.isLocked ? null : widget.onTap,
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0.0, end: 1.0),
+              duration: ThemeService.defaultAnimationDuration,
+              curve: ThemeService.springCurve,
+              builder: (context, value, child) {
+                return Transform.scale(
+                  scale: value,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: themeService.getCardGradient(isDark),
+                      boxShadow: ThemeService.getCardShadow(isDark),
+                      border: Border.all(
+                        color: widget.moduleInfo.isLocked
+                            ? textColor.withOpacity(0.2)
+                            : isCompleted
+                                ? successColor.withOpacity(0.4)
+                                : primaryColor.withOpacity(0.3),
+                        width: 2,
+                      ),
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: widget.moduleInfo.isLocked ? null : widget.onTap,
+                        borderRadius: BorderRadius.circular(20),
+                        splashColor: primaryColor.withOpacity(0.2),
+                        highlightColor: primaryColor.withOpacity(0.1),
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Icon and Status
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // Animated Icon Container
+                                  TweenAnimationBuilder<double>(
+                                    tween: Tween(
+                                      begin: 0.0,
+                                      end: _isHovered ? 1.0 : 0.0,
+                                    ),
+                                    duration: ThemeService.defaultAnimationDuration,
+                                    curve: ThemeService.bounceCurve,
+                                    builder: (context, value, child) {
+                                      return Transform.rotate(
+                                        angle: value * 0.1,
+                                        child: Transform.scale(
+                                          scale: 1.0 + (value * 0.1),
+                                          child: Container(
+                                            width: 56,
+                                            height: 56,
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  widget.moduleInfo.isLocked
+                                                      ? textColor
+                                                          .withOpacity(0.2)
+                                                      : isCompleted
+                                                          ? successColor
+                                                              .withOpacity(0.3)
+                                                          : primaryColor
+                                                              .withOpacity(0.3),
+                                                  widget.moduleInfo.isLocked
+                                                      ? textColor
+                                                          .withOpacity(0.1)
+                                                      : isCompleted
+                                                          ? successColor
+                                                              .withOpacity(0.2)
+                                                          : secondaryColor
+                                                              .withOpacity(0.2),
+                                                ],
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              border: Border.all(
+                                                color: widget.moduleInfo.isLocked
+                                                    ? textColor.withOpacity(0.3)
+                                                    : isCompleted
+                                                        ? successColor
+                                                            .withOpacity(0.5)
+                                                        : primaryColor
+                                                            .withOpacity(0.4),
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: Icon(
+                                              widget.moduleInfo.isLocked
+                                                  ? Icons.lock
+                                                  : (isCompleted
+                                                      ? Icons.check_circle
+                                                      : widget.moduleInfo.icon),
+                                              color: widget.moduleInfo.isLocked
+                                                  ? textColor.withOpacity(0.7)
+                                                  : isCompleted
+                                                      ? successColor
+                                                      : primaryColor,
+                                              size: 28,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  // Status indicator
+                                  if (isCompleted)
+                                    TweenAnimationBuilder<double>(
+                                      tween: Tween(begin: 0.0, end: 1.0),
+                                      duration: ThemeService.defaultAnimationDuration,
+                                      curve: ThemeService.bounceCurve,
+                                      builder: (context, value, child) {
+                                        return Transform.scale(
+                                          scale: value,
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 12,
+                                              vertical: 6,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  successColor.withOpacity(0.2),
+                                                  successColor.withOpacity(0.1),
+                                                ],
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              border: Border.all(
+                                                color: successColor,
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  Icons.check,
+                                                  size: 16,
+                                                  color: successColor,
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Text(
+                                                  'Completed',
+                                                  style: TextStyle(
+                                                    color: successColor,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontFamily:
+                                                        themeService.fontFamily,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  else if (widget.moduleInfo.isLocked)
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 6,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: textColor.withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(16),
+                                        border: Border.all(
+                                          color: textColor.withOpacity(0.3),
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.lock,
+                                            size: 16,
+                                            color: textColor.withOpacity(0.7),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            'Locked',
+                                            style: TextStyle(
+                                              color: textColor.withOpacity(0.7),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              fontFamily: themeService.fontFamily,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              // Title with Hero animation
+                              Hero(
+                                tag: 'module_title_${widget.moduleInfo.ID}',
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Text(
+                                    widget.moduleInfo.title,
+                                    style: themeService
+                                        .getTitleLargeStyle(color: textColor)
+                                        .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              // Progress Text
+                              Text(
+                                '$completedTopics/$totalTopics topics completed',
+                                style: themeService
+                                    .getBodyMediumStyle(
+                                      color: textColor.withOpacity(0.6),
+                                    ),
+                              ),
+                              const SizedBox(height: 16),
+                              // Animated Progress Bar
+                              if (!widget.moduleInfo.isLocked)
+                                Column(
+                                  children: [
+                                    TweenAnimationBuilder<double>(
+                                      tween: Tween(begin: 0.0, end: progress),
+                                      duration: ThemeService.slowAnimationDuration,
+                                      curve: Curves.easeOutCubic,
+                                      builder: (context, progressValue, child) {
+                                        return Container(
+                                          height: 8,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            color: textColor.withOpacity(0.1),
+                                          ),
+                                          child: FractionallySizedBox(
+                                            alignment: Alignment.centerLeft,
+                                            widthFactor: progressValue,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    isCompleted
+                                                        ? successColor
+                                                        : primaryColor,
+                                                    isCompleted
+                                                        ? successColor
+                                                            .withOpacity(0.8)
+                                                        : secondaryColor,
+                                                  ],
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: (isCompleted
+                                                            ? successColor
+                                                            : primaryColor)
+                                                        .withOpacity(0.5),
+                                                    blurRadius: 4,
+                                                    spreadRadius: 1,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '${(progress * 100).round()}%',
+                                        style: themeService.getLabelSmallStyle(
+                                          color: textColor.withOpacity(0.6),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                            ],
                           ),
                         ),
-                        // Status indicator
-                        if (isCompleted)
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: scheme.accentTeal.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: scheme.accentTeal,
-                                width: 1,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.check,
-                                  size: 16,
-                                  color: scheme.accentTeal,
-                                ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  'Completed',
-                                  style: TextStyle(
-                                    color: scheme.accentTeal,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: themeService.fontFamily,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        else if (moduleInfo.isLocked)
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: textColor.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: textColor, width: 1),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(Icons.lock, size: 16, color: textColor),
-                                const SizedBox(width: 4),
-                                Text(
-                                  'Locked',
-                                  style: TextStyle(
-                                    color: textColor,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: themeService.fontFamily,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    // Title
-                    Text(
-                      moduleInfo.title,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: textColor,
-                        fontFamily: themeService.fontFamily,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 8),
-                    // Progress Text
-                    Text(
-                      '$completedTopics/$totalTopics topics completed',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: textColor.withOpacity(0.6),
-                        fontFamily: themeService.fontFamily,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    // Progress Bar
-                    if (!moduleInfo.isLocked)
-                      Column(
-                        children: [
-                          Container(
-                            height: 6,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              color: textColor.withOpacity(0.05),
-                            ),
-                            child: FractionallySizedBox(
-                              alignment: Alignment.centerLeft,
-                              widthFactor: progress,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(3),
-                                  color: _getProgressColor(isCompleted),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              '${(progress * 100).round()}%',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: textColor.withOpacity(0.6),
-                                fontFamily: themeService.fontFamily,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ),
         ),
       );
     });
-  }
-
-  Color _getProgressColor(bool isCompleted) {
-    final themeService = Get.find<ThemeService>();
-    if (isCompleted) {
-      return themeService.currentScheme.accentTeal;
-    } else {
-      return themeService.currentScheme.accentTeal.withOpacity(0.6);
-    }
-  }
-
-  Color _getIconColor(bool isCompleted, bool isLocked, Color textColor) {
-    final themeService = Get.find<ThemeService>();
-
-    // Determine the background color for the icon container
-    final bgColor = isLocked
-        ? Theme.of(Get.context!).colorScheme.onSurface.withOpacity(0.2)
-        : (isCompleted
-              ? themeService.currentScheme.accentTeal.withOpacity(0.2)
-              : Theme.of(Get.context!).colorScheme.primary.withOpacity(0.2));
-
-    // Use high contrast color based on luminance - lighter backgrounds get dark text, darker get light text
-    if (bgColor.computeLuminance() > 0.5) {
-      // Light background - use dark text color
-      return Colors.black;
-    } else {
-      // Dark background - use light text color (textColor works well here)
-      return textColor;
-    }
   }
 }

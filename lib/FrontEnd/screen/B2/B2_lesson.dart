@@ -6,38 +6,59 @@ import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-// import 'package:ductuch_master/services/theme_service.dart'; // Import the theme service
 
-class B2LessonScreen extends StatelessWidget {
+class B2LessonScreen extends StatefulWidget {
   final String moduleId;
 
   B2LessonScreen({super.key, required this.moduleId});
 
-  final LessonController lessonController = Get.find<LessonController>();
-  final ThemeService themeService =
-      Get.find<ThemeService>(); // Get theme service
+  @override
+  State<B2LessonScreen> createState() => _B2LessonScreenState();
+}
+
+class _B2LessonScreenState extends State<B2LessonScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: ThemeService.defaultAnimationDuration,
+    );
+    _fadeAnimation = CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeIn,
+    );
+    _fadeController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
 
   Map<String, dynamic> get lessonData {
-    // Get topics for this module (Level → Module → Topic)
-    final topics = LearningPathData.moduleTopics[moduleId] ?? [];
+    final topics = LearningPathData.moduleTopics[widget.moduleId] ?? [];
     ModuleInfo? module;
     try {
       module = LearningPathData.levelInfo.values
           .expand((level) => level.modules)
-          .firstWhere((m) => m.ID == moduleId);
+          .firstWhere((m) => m.ID == widget.moduleId);
     } catch (e) {
-      // Module not found, use default
       module = null;
     }
 
     return {
-      moduleId: {
+      widget.moduleId: {
         'title': module?.title ?? 'Module',
         'topics': topics.map((topicTitle) {
           final index = topics.indexOf(topicTitle);
           return {
-            'id': '$moduleId-T${index + 1}',
+            'id': '${widget.moduleId}-T${index + 1}',
             'title': topicTitle,
             'content': 'Learn about $topicTitle',
             'type': _getTopicType(topicTitle),
@@ -72,21 +93,19 @@ class B2LessonScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = lessonData;
-    final moduleData = data[moduleId];
+    final moduleData = data[widget.moduleId];
     final String moduleTitle = moduleData?['title'] ?? 'Module Not Found';
     final List<dynamic> topics = moduleData?['topics'] ?? [];
 
     return Obx(() {
-      // Use Obx to react to theme changes
+      final themeService = Get.find<ThemeService>();
       final isDark = themeService.isDarkMode.value;
       final scheme = themeService.currentScheme;
 
-      // Get colors based on current theme mode
       final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
       final backgroundColor = isDark
           ? scheme.backgroundDark
           : scheme.background;
-      final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
       final textPrimaryColor = isDark
           ? scheme.textPrimaryDark
           : scheme.textPrimary;
@@ -96,219 +115,323 @@ class B2LessonScreen extends StatelessWidget {
 
       final secondaryTextColor = textSecondaryColor.withOpacity(0.7);
       final borderColor = primaryColor.withOpacity(0.2);
-      final surfaceColorWithOpacity = surfaceColor.withOpacity(0.5);
 
       return Scaffold(
         backgroundColor: backgroundColor,
         body: SafeArea(
-          child: Column(
-            children: [
-              // Top bar
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: borderColor),
-                        color: surfaceColor,
-                      ),
-                      child: IconButton(
-                        onPressed: () => Get.back(),
-                        icon: Icon(
-                          Icons.chevron_left,
-                          color: textPrimaryColor,
-                          size: 22,
-                        ),
-                        padding: const EdgeInsets.all(6),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        moduleTitle,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: textPrimaryColor,
-                          fontFamily: themeService.fontFamily,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // Topics list
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: topics.length,
-                  itemBuilder: (context, index) {
-                    final topic = topics[index];
-
-                    // Use Obx only for the specific widget that needs to react to changes
-                    return Obx(() {
-                      final isCompleted = lessonController.isLessonCompleted(
-                        topic['id'],
-                      );
-
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 12),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(
-                            color: isCompleted
-                                ? primaryColor.withOpacity(0.3)
-                                : borderColor,
-                            width: isCompleted ? 2 : 1,
-                          ),
-                          color: surfaceColorWithOpacity,
-                        ),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 12,
-                          ),
-                          leading: _getTopicLeading(
-                            topic,
-                            isCompleted,
-                            primaryColor,
-                            surfaceColor,
-                          ),
-                          title: Text(
-                            topic['title'],
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: textPrimaryColor,
-                              fontFamily: themeService.fontFamily,
-                              decoration: isCompleted
-                                  ? TextDecoration.lineThrough
-                                  : TextDecoration.none,
+          child: FadeTransition(
+            opacity: _fadeAnimation,
+            child: Column(
+              children: [
+                // Top bar with Hero animation
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Hero(
+                        tag: 'back_button_${widget.moduleId}',
+                        child: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              gradient: themeService.getCardGradient(isDark),
+                              border: Border.all(color: borderColor),
+                              boxShadow: ThemeService.getCardShadow(isDark),
+                            ),
+                            child: IconButton(
+                              onPressed: () => Get.back(),
+                              icon: Icon(
+                                Icons.chevron_left,
+                                color: textPrimaryColor,
+                                size: 24,
+                              ),
+                              padding: const EdgeInsets.all(8),
                             ),
                           ),
-                          subtitle: isCompleted
-                              ? null
-                              : Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      topic['content'],
-                                      style: TextStyle(
-                                        color: secondaryTextColor,
-                                        fontFamily: themeService.fontFamily,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 8,
-                                            vertical: 4,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: primaryColor.withOpacity(
-                                              0.2,
-                                            ),
-                                            borderRadius: BorderRadius.circular(
-                                              8,
-                                            ),
-                                            border: Border.all(
-                                              color: primaryColor.withOpacity(
-                                                0.4,
-                                              ),
-                                            ),
-                                          ),
-                                          child: Text(
-                                            topic['type'],
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: themeService.fontFamily,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          topic['duration'],
-                                          style: TextStyle(
-                                            color: secondaryTextColor,
-                                            fontSize: 12,
-                                            fontFamily: themeService.fontFamily,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                          trailing: isCompleted
-                              ? Icon(
-                                  Icons.check_circle,
-                                  color: primaryColor,
-                                  size: 24,
-                                )
-                              : Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 16,
-                                  color: secondaryTextColor,
-                                ),
-                          onTap: () {
-                            NavigationHelper.pushWithBottomNav(
-                              context,
-                              PhraseScreen(
-                                topicId: topic['id'],
-                                topicTitle: topic['title'],
-                              ),
-                            );
-                          },
                         ),
-                      );
-                    });
-                  },
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Hero(
+                          tag: 'module_title_${widget.moduleId}',
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              moduleTitle,
+                              style: themeService.getTitleLargeStyle(
+                                color: textPrimaryColor,
+                              ).copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                // Topics list with staggered animations
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: topics.length,
+                    itemBuilder: (context, index) {
+                      final topic = topics[index];
+                      return TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0.0, end: 1.0),
+                        duration: Duration(
+                          milliseconds: 300 + (index * 100),
+                        ),
+                        curve: ThemeService.springCurve,
+                        builder: (context, value, child) {
+                          return Transform.translate(
+                            offset: Offset(30 * (1 - value), 0),
+                            child: Opacity(
+                              opacity: value.clamp(0.0, 1.0),
+                              child: _buildTopicCard(
+                                topic,
+                                index,
+                                isDark,
+                                scheme,
+                                primaryColor,
+                                textPrimaryColor,
+                                secondaryTextColor,
+                                borderColor,
+                                themeService,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
     });
   }
 
-  Widget _getTopicLeading(
+  Widget _buildTopicCard(
     Map<String, dynamic> topic,
-    bool isCompleted,
+    int index,
+    bool isDark,
+    dynamic scheme,
     Color primaryColor,
-    Color surfaceColor,
+    Color textPrimaryColor,
+    Color secondaryTextColor,
+    Color borderColor,
+    ThemeService themeService,
   ) {
-    if (isCompleted) {
-      return Container(
-        width: 40,
-        height: 40,
-        decoration: BoxDecoration(
-          color: primaryColor.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: primaryColor.withOpacity(0.4)),
-        ),
-        child: Icon(Icons.check, color: primaryColor),
-      );
-    }
-    return _getTopicIcon(topic['type'], primaryColor, surfaceColor);
-  }
+    final lessonController = Get.find<LessonController>();
+    
+    return Obx(() {
+      final isCompleted = lessonController.isLessonCompleted(topic['id']);
 
-  Widget _getTopicIcon(String type, Color primaryColor, Color surfaceColor) {
-    return Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        color: primaryColor.withOpacity(0.2),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: primaryColor.withOpacity(0.3)),
-      ),
-      child: Icon(_getIconForType(type), color: primaryColor, size: 20),
-    );
+      return Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: themeService.getCardGradient(isDark),
+          border: Border.all(
+            color: isCompleted
+                ? primaryColor.withOpacity(0.6)
+                : borderColor,
+            width: isCompleted ? 2.5 : 1.5,
+          ),
+          boxShadow: ThemeService.getCardShadow(isDark),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              NavigationHelper.pushWithBottomNav(
+                context,
+                PhraseScreen(
+                  topicId: topic['id'],
+                  topicTitle: topic['title'],
+                ),
+              );
+            },
+            borderRadius: BorderRadius.circular(20),
+            splashColor: primaryColor.withOpacity(0.2),
+            highlightColor: primaryColor.withOpacity(0.1),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  // Animated Icon
+                  Hero(
+                    tag: 'topic_icon_${topic['id']}',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween(begin: 0.0, end: isCompleted ? 1.0 : 0.0),
+                        duration: ThemeService.defaultAnimationDuration,
+                        curve: ThemeService.bounceCurve,
+                        builder: (context, value, child) {
+                          return Transform.scale(
+                            scale: 1.0 + (value * 0.2),
+                            child: Container(
+                              width: 56,
+                              height: 56,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    primaryColor.withOpacity(0.25),
+                                    scheme.accentTeal.withOpacity(0.2),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: primaryColor.withOpacity(0.4),
+                                  width: 2,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primaryColor.withOpacity(0.3 * value),
+                                    blurRadius: 8,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                isCompleted
+                                    ? Icons.check_circle
+                                    : _getIconForType(topic['type']),
+                                color: primaryColor,
+                                size: 28,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Hero(
+                          tag: 'topic_title_${topic['id']}',
+                          child: Material(
+                            color: Colors.transparent,
+                            child: Text(
+                              topic['title'],
+                              style: themeService.getTitleMediumStyle(
+                                color: textPrimaryColor,
+                              ).copyWith(
+                                fontWeight: FontWeight.bold,
+                                decoration: isCompleted
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (!isCompleted) ...[
+                          const SizedBox(height: 6),
+                          Text(
+                            topic['content'],
+                            style: themeService.getBodySmallStyle(
+                              color: secondaryTextColor,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      primaryColor.withOpacity(0.2),
+                                      scheme.accentTeal.withOpacity(0.15),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: primaryColor.withOpacity(0.4),
+                                  ),
+                                ),
+                                child: Text(
+                                  topic['type'],
+                                  style: themeService.getLabelSmallStyle(
+                                    color: primaryColor,
+                                  ).copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Icon(
+                                Icons.access_time,
+                                size: 14,
+                                color: secondaryTextColor,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                topic['duration'],
+                                style: themeService.getBodySmallStyle(
+                                  color: secondaryTextColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  // Checkbox with animation
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: isCompleted ? 1.0 : 0.0),
+                    duration: ThemeService.defaultAnimationDuration,
+                    curve: ThemeService.bounceCurve,
+                    builder: (context, value, child) {
+                      return Transform.scale(
+                        scale: value,
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: LinearGradient(
+                              colors: [
+                                primaryColor,
+                                scheme.accentTeal,
+                              ],
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primaryColor.withOpacity(0.5 * value),
+                                blurRadius: 8,
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.check,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   IconData _getIconForType(String type) {
@@ -320,11 +443,7 @@ class B2LessonScreen extends StatelessWidget {
       case 'conversation':
         return Icons.chat;
       case 'practice':
-        return Icons.private_connectivity_rounded;
-      case 'quiz':
         return Icons.quiz;
-      case 'writing':
-        return Icons.edit;
       default:
         return Icons.article;
     }

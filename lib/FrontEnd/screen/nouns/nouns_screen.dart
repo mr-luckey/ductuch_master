@@ -22,7 +22,6 @@ class NounData {
 }
 
 /// Nouns Screen - displays German nouns with singular and plural forms
-/// Uses the same card design as learn.dart
 class NounsScreen extends StatefulWidget {
   const NounsScreen({super.key});
 
@@ -34,6 +33,7 @@ class _NounsScreenState extends State<NounsScreen>
     with SingleTickerProviderStateMixin {
   final TtsService ttsService = Get.find<TtsService>();
   final LessonController lessonController = Get.find<LessonController>();
+  final ThemeService themeService = Get.find<ThemeService>();
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   List<NounData> _nouns = [];
@@ -46,7 +46,7 @@ class _NounsScreenState extends State<NounsScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: ThemeService.defaultAnimationDuration,
     );
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
@@ -66,6 +66,10 @@ class _NounsScreenState extends State<NounsScreen>
       _nouns = loadedNouns;
       _isLoading = false;
     });
+    // Ensure saved index is within bounds
+    if (_nouns.isNotEmpty && _currentNounIndex >= _nouns.length) {
+      lessonController.updateNounsIndex(0);
+    }
     if (_nouns.isNotEmpty && _currentNounIndex < _nouns.length) {
       _animationController.forward();
     }
@@ -109,7 +113,6 @@ class _NounsScreenState extends State<NounsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final themeService = Get.find<ThemeService>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isSmallScreen = screenWidth < 360;
 
@@ -124,7 +127,9 @@ class _NounsScreenState extends State<NounsScreen>
 
         return Scaffold(
           backgroundColor: backgroundColor,
-          body: Center(child: CircularProgressIndicator(color: textColor)),
+          body: Center(
+            child: CircularProgressIndicator(color: textColor),
+          ),
         );
       });
     }
@@ -135,16 +140,24 @@ class _NounsScreenState extends State<NounsScreen>
       final backgroundColor = isDark
           ? scheme.backgroundDark
           : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
 
       return Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
           backgroundColor: backgroundColor,
-          centerTitle: false,
-          title: Text(
-            'Nouns',
-            style: themeService.getTitleMediumStyle(
-              color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
+          elevation: 0,
+          title: Hero(
+            tag: 'nouns_title',
+            child: Material(
+              color: Colors.transparent,
+              child: Text(
+                'Nouns',
+                style: themeService.getTitleLargeStyle(color: textColor)
+                    .copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           actions: [const TtsSpeedDropdown()],
@@ -170,7 +183,6 @@ class _NounsScreenState extends State<NounsScreen>
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     _buildNounHeader(
                       context,
-                      themeService,
                       isSmallScreen,
                       scheme,
                       isDark,
@@ -182,7 +194,6 @@ class _NounsScreenState extends State<NounsScreen>
                           children: [
                             _buildMainCard(
                               context,
-                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -190,7 +201,6 @@ class _NounsScreenState extends State<NounsScreen>
                             SizedBox(height: isSmallScreen ? 20 : 24),
                             _buildExternalNavigationControls(
                               context,
-                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -217,26 +227,33 @@ class _NounsScreenState extends State<NounsScreen>
     bool isDark,
   ) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-    final borderColor = isDark
-        ? scheme.textPrimaryDark.withOpacity(0.1)
-        : scheme.textPrimary.withOpacity(0.1);
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
 
     return Row(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: borderColor),
-          ),
-          child: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(
-              Icons.chevron_left,
-              color: textColor.withOpacity(0.7),
-              size: isSmallScreen ? 20 : 22,
+        Hero(
+          tag: 'nouns_back_button',
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                gradient: themeService.getCardGradient(isDark),
+                border: Border.all(
+                  color: primaryColor.withOpacity(0.3),
+                ),
+                boxShadow: ThemeService.getCardShadow(isDark),
+              ),
+              child: IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(
+                  Icons.chevron_left,
+                  color: textColor,
+                  size: isSmallScreen ? 20 : 24,
+                ),
+                padding: isSmallScreen ? const EdgeInsets.all(8) : null,
+              ),
             ),
-            tooltip: 'Back',
-            padding: isSmallScreen ? const EdgeInsets.all(6) : null,
           ),
         ),
       ],
@@ -245,7 +262,6 @@ class _NounsScreenState extends State<NounsScreen>
 
   Widget _buildNounHeader(
     BuildContext context,
-    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -255,22 +271,14 @@ class _NounsScreenState extends State<NounsScreen>
     return Row(
       children: [
         Flexible(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  'German Nouns',
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 10 : 11,
-                    color: textColor.withOpacity(0.5),
-                    letterSpacing: 1.0,
-                    fontFamily: themeService.fontFamily,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
+          child: Text(
+            'German Nouns',
+            style: themeService.getLabelSmallStyle(
+              color: textColor.withOpacity(0.5),
+            ).copyWith(
+              letterSpacing: 1.0,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         const Spacer(),
@@ -278,10 +286,8 @@ class _NounsScreenState extends State<NounsScreen>
           children: [
             Text(
               '${_currentNounIndex + 1}/${_nouns.length}',
-              style: TextStyle(
-                fontSize: isSmallScreen ? 10 : 11,
+              style: themeService.getLabelSmallStyle(
                 color: textColor.withOpacity(0.6),
-                fontFamily: themeService.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -300,8 +306,8 @@ class _NounsScreenState extends State<NounsScreen>
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
-                        ? textColor.withOpacity(0.3)
-                        : textColor.withOpacity(0.15),
+                            ? textColor.withOpacity(0.3)
+                            : textColor.withOpacity(0.15),
                   ),
                 );
               }),
@@ -314,259 +320,367 @@ class _NounsScreenState extends State<NounsScreen>
 
   Widget _buildMainCard(
     BuildContext context,
-    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
   ) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
     final currentNoun = _nouns[_currentNounIndex];
 
     return FadeTransition(
       opacity: _fadeAnimation,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-          border: Border.all(color: textColor.withOpacity(0.1)),
-          color: surfaceColor.withOpacity(0.02),
-        ),
-        padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header with tag
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: isSmallScreen ? 6 : 8,
-                          vertical: isSmallScreen ? 3 : 4,
+      child: TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0.0, end: 1.0),
+        duration: ThemeService.defaultAnimationDuration,
+        curve: ThemeService.springCurve,
+        builder: (context, value, child) {
+          return Transform.scale(
+            scale: value,
+            child: Opacity(
+              opacity: value.clamp(0.0, 1.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: themeService.getCardGradient(isDark),
+                  border: Border.all(
+                    color: primaryColor.withOpacity(0.3),
+                    width: 2,
+                  ),
+                  boxShadow: ThemeService.getCardShadow(isDark),
+                ),
+                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Header with animated tag
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TweenAnimationBuilder<double>(
+                                tween: Tween(begin: 0.0, end: 1.0),
+                                duration: ThemeService.defaultAnimationDuration,
+                                curve: ThemeService.bounceCurve,
+                                builder: (context, tagValue, child) {
+                                  return Transform.scale(
+                                    scale: tagValue,
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: isSmallScreen ? 8 : 10,
+                                        vertical: isSmallScreen ? 5 : 6,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            primaryColor.withOpacity(0.2),
+                                            secondaryColor.withOpacity(0.15),
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.circular(10),
+                                        border: Border.all(
+                                          color: primaryColor.withOpacity(0.4),
+                                          width: 1.5,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            width: isSmallScreen ? 6 : 8,
+                                            height: isSmallScreen ? 6 : 8,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              gradient: LinearGradient(
+                                                colors: [primaryColor, secondaryColor],
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: isSmallScreen ? 4 : 6),
+                                          Text(
+                                            'NOUN',
+                                            style: themeService
+                                                .getLabelSmallStyle(color: primaryColor)
+                                                .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: isSmallScreen ? 8 : 12),
+                              // Singular form with Hero animation
+                              Hero(
+                                tag: 'noun_singular_${currentNoun.singular}',
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: ShaderMask(
+                                    shaderCallback: (bounds) => LinearGradient(
+                                      colors: [textColor, primaryColor],
+                                    ).createShader(bounds),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            currentNoun.singular,
+                                            style: themeService
+                                                .getTitleLargeStyle(color: Colors.white)
+                                                .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: isSmallScreen ? 22 : 28,
+                                              height: 1.2,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                primaryColor.withOpacity(0.2),
+                                                secondaryColor.withOpacity(0.15),
+                                              ],
+                                            ),
+                                            border: Border.all(
+                                              color: primaryColor.withOpacity(0.3),
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: Obx(
+                                            () => IconButton(
+                                              onPressed: _playSingular,
+                                              icon: Icon(
+                                                ttsService.isTextPlaying(currentNoun.singular)
+                                                    ? Icons.volume_up
+                                                    : Icons.volume_up_outlined,
+                                                size: isSmallScreen ? 18 : 20,
+                                                color: ttsService.isTextPlaying(currentNoun.singular)
+                                                    ? primaryColor
+                                                    : textColor.withOpacity(0.8),
+                                              ),
+                                              padding: isSmallScreen
+                                                  ? const EdgeInsets.all(6)
+                                                  : null,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: isSmallScreen ? 8 : 12),
+                              // Plural form
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      currentNoun.plural,
+                                      style: themeService.getTitleMediumStyle(
+                                        color: textColor.withOpacity(0.9),
+                                      ).copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: isSmallScreen ? 18 : 22,
+                                        height: 1.2,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          primaryColor.withOpacity(0.2),
+                                          secondaryColor.withOpacity(0.15),
+                                        ],
+                                      ),
+                                      border: Border.all(
+                                        color: primaryColor.withOpacity(0.3),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Obx(
+                                      () => IconButton(
+                                        onPressed: _playPlural,
+                                        icon: Icon(
+                                          ttsService.isTextPlaying(currentNoun.plural)
+                                              ? Icons.volume_up
+                                              : Icons.volume_up_outlined,
+                                          size: isSmallScreen ? 18 : 20,
+                                          color: ttsService.isTextPlaying(currentNoun.plural)
+                                              ? primaryColor
+                                              : textColor.withOpacity(0.8),
+                                        ),
+                                        padding: isSmallScreen
+                                            ? const EdgeInsets.all(6)
+                                            : null,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: textColor.withOpacity(0.1)),
-                          color: surfaceColor.withOpacity(0.05),
+                      ],
+                    ),
+                    SizedBox(height: isSmallScreen ? 8 : 12),
+                    // Language tag
+                    Wrap(
+                      spacing: isSmallScreen ? 6 : 8,
+                      runSpacing: isSmallScreen ? 4 : 6,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isSmallScreen ? 6 : 8,
+                            vertical: isSmallScreen ? 3 : 4,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: LinearGradient(
+                              colors: [
+                                primaryColor.withOpacity(0.15),
+                                secondaryColor.withOpacity(0.1),
+                              ],
+                            ),
+                            border: Border.all(
+                              color: primaryColor.withOpacity(0.3),
+                              width: 1,
+                            ),
+                          ),
+                          child: Text(
+                            'DE',
+                            style: themeService.getLabelSmallStyle(
+                              color: primaryColor,
+                            ),
+                          ),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: isSmallScreen ? 5 : 6,
-                              height: isSmallScreen ? 5 : 6,
+                      ],
+                    ),
+                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    // Translation card with animation
+                    TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      duration: Duration(milliseconds: 400),
+                      curve: ThemeService.springCurve,
+                      builder: (context, transValue, child) {
+                        return Transform.translate(
+                          offset: Offset(0, 20 * (1 - transValue)),
+                          child: Opacity(
+                            opacity: transValue.clamp(0.0, 1.0),
+                            child: Container(
+                              width: double.infinity,
                               decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    primaryColor.withOpacity(0.08),
+                                    secondaryColor.withOpacity(0.05),
+                                  ],
+                                ),
+                                border: Border.all(
+                                  color: primaryColor.withOpacity(0.2),
+                                  width: 1.5,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primaryColor.withOpacity(0.1),
+                                    blurRadius: 8,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
                               ),
-                            ),
-                            SizedBox(width: isSmallScreen ? 3 : 4),
-                            Text(
-                              'NOUN',
-                              style: TextStyle(
-                                fontSize: isSmallScreen ? 10 : 11,
-                                color: textColor.withOpacity(0.7),
-                                fontFamily: themeService.fontFamily,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: isSmallScreen ? 6 : 8),
-                      // Singular form
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              currentNoun.singular,
-                              style: TextStyle(
-                                fontSize: isSmallScreen ? 20 : 24,
-                                fontWeight: FontWeight.w600,
-                                color: textColor,
-                                height: 1.2,
-                                fontFamily: themeService.fontFamily,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                isSmallScreen ? 6 : 8,
-                              ),
-                              border: Border.all(
-                                color: textColor.withOpacity(0.1),
-                              ),
-                            ),
-                            child: IconButton(
-                              onPressed: _playSingular,
-                              icon: Icon(
-                                ttsService.isTextPlaying(currentNoun.singular)
-                                    ? Icons.volume_up
-                                    : Icons.volume_up_outlined,
-                                size: isSmallScreen ? 16 : 18,
-                                color:
-                                    ttsService.isTextPlaying(
-                                      currentNoun.singular,
-                                    )
-                                    ? primaryColor
-                                    : textColor.withOpacity(0.8),
-                              ),
-                              padding: isSmallScreen
-                                  ? const EdgeInsets.all(4)
-                                  : null,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: isSmallScreen ? 8 : 12),
-                      // Plural form
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              currentNoun.plural,
-                              style: TextStyle(
-                                fontSize: isSmallScreen ? 18 : 22,
-                                fontWeight: FontWeight.w500,
-                                color: textColor.withOpacity(0.9),
-                                height: 1.2,
-                                fontFamily: themeService.fontFamily,
+                              padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    currentNoun.english,
+                                    style: themeService.getBodyLargeStyle(
+                                      color: textColor.withOpacity(0.9),
+                                    ),
+                                  ),
+                                  if (currentNoun.meaning != null) ...[
+                                    SizedBox(height: isSmallScreen ? 6 : 8),
+                                    Text(
+                                      currentNoun.meaning!,
+                                      style: themeService.getBodyMediumStyle(
+                                        color: textColor.withOpacity(0.6),
+                                      ),
+                                    ),
+                                  ],
+                                ],
                               ),
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                isSmallScreen ? 6 : 8,
-                              ),
-                              border: Border.all(
-                                color: textColor.withOpacity(0.1),
-                              ),
-                            ),
-                            child: IconButton(
-                              onPressed: _playPlural,
-                              icon: Icon(
-                                ttsService.isTextPlaying(currentNoun.plural)
-                                    ? Icons.volume_up
-                                    : Icons.volume_up_outlined,
-                                size: isSmallScreen ? 16 : 18,
-                                color:
-                                    ttsService.isTextPlaying(currentNoun.plural)
-                                    ? primaryColor
-                                    : textColor.withOpacity(0.8),
-                              ),
-                              padding: isSmallScreen
-                                  ? const EdgeInsets.all(4)
-                                  : null,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: isSmallScreen ? 6 : 8),
-            Wrap(
-              spacing: isSmallScreen ? 6 : 8,
-              runSpacing: isSmallScreen ? 4 : 6,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isSmallScreen ? 4 : 6,
-                    vertical: isSmallScreen ? 1 : 2,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: textColor.withOpacity(0.1)),
-                    color: surfaceColor.withOpacity(0.05),
-                  ),
-                  child: Text(
-                    'DE',
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 10 : 11,
-                      color: textColor.withOpacity(0.7),
-                      fontFamily: themeService.fontFamily,
+                        );
+                      },
                     ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: isSmallScreen ? 10 : 12),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-                border: Border.all(color: textColor.withOpacity(0.1)),
-                color: surfaceColor.withOpacity(0.03),
-              ),
-              padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    currentNoun.english,
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 14 : 15,
-                      color: textColor.withOpacity(0.9),
-                  fontFamily: themeService.fontFamily,
-                    ),
-                  ),
-                  if (currentNoun.meaning != null) ...[
-                    SizedBox(height: isSmallScreen ? 2 : 4),
-                    Text(
-                      currentNoun.meaning!,
-                      style: TextStyle(
-                        fontSize: isSmallScreen ? 12 : 13,
-                        color: textColor.withOpacity(0.6),
-                    fontFamily: themeService.fontFamily,
+                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    // Animated Progress bar
+                    TweenAnimationBuilder<double>(
+                      tween: Tween(
+                        begin: 0.0,
+                        end: _nouns.isEmpty ? 0.0 : ((_currentNounIndex + 1) / _nouns.length).clamp(0.0, 1.0),
                       ),
+                      duration: ThemeService.slowAnimationDuration,
+                      curve: Curves.easeOutCubic,
+                      builder: (context, progressValue, child) {
+                        return Container(
+                          height: isSmallScreen ? 6 : 8,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: textColor.withOpacity(0.1),
+                          ),
+                          child: FractionallySizedBox(
+                            alignment: Alignment.centerLeft,
+                            widthFactor: progressValue.clamp(0.0, 1.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [primaryColor, scheme.accentTeal],
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primaryColor.withOpacity(0.5),
+                                    blurRadius: 4,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ],
-                ],
-              ),
-            ),
-            SizedBox(height: isSmallScreen ? 12 : 16),
-            Container(
-              height: isSmallScreen ? 4 : 6,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: surfaceColor.withOpacity(0.05),
-              ),
-              child: FractionallySizedBox(
-                alignment: Alignment.centerLeft,
-                widthFactor: (_currentNounIndex + 1) / _nouns.length,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    color: textColor.withOpacity(0.7),
-                  ),
                 ),
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
   Widget _buildExternalNavigationControls(
     BuildContext context,
-    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
   ) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
     final currentNoun = _nouns[_currentNounIndex];
 
     return Container(
@@ -574,79 +688,163 @@ class _NounsScreenState extends State<NounsScreen>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: surfaceColor.withOpacity(0.05),
-            ),
-            child: IconButton(
-              onPressed: _previousNoun,
-              icon: Icon(
-                Icons.chevron_left,
-                size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
-              ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-            ),
-          ),
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
-                  border: Border.all(color: textColor.withOpacity(0.1)),
-                  color: surfaceColor.withOpacity(0.05),
-                  boxShadow: [
-                    BoxShadow(
-                      color: textColor.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 1,
+          // Previous button
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    gradient: themeService.getCardGradient(isDark),
+                    border: Border.all(
+                      color: primaryColor.withOpacity(0.3),
+                      width: 1.5,
                     ),
-                  ],
-                ),
-                child: IconButton(
-                  onPressed: _playSingular,
-                  icon: Icon(
-                    ttsService.isTextPlaying(currentNoun.singular)
-                        ? Icons.stop
-                        : Icons.volume_up,
-                    size: isSmallScreen ? 36 : 42,
-                    color: textColor,
+                    boxShadow: ThemeService.getCardShadow(isDark),
                   ),
-                  padding: EdgeInsets.all(isSmallScreen ? 20 : 24),
-                ),
-              ),
-              if (ttsService.isTextPlaying(currentNoun.singular))
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    width: isSmallScreen ? 10 : 12,
-                    height: isSmallScreen ? 10 : 12,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: primaryColor,
+                  child: IconButton(
+                    onPressed: _previousNoun,
+                    icon: Icon(
+                      Icons.chevron_left,
+                      size: isSmallScreen ? 22 : 26,
+                      color: textColor,
                     ),
+                    padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
                   ),
                 ),
-            ],
+              );
+            },
           ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: textColor.withOpacity(0.1)),
-              color: surfaceColor.withOpacity(0.05),
-            ),
-            child: IconButton(
-              onPressed: _nextNoun,
-              icon: Icon(
-                Icons.chevron_right,
-                size: isSmallScreen ? 28 : 32,
-                color: textColor.withOpacity(0.9),
-              ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
-            ),
+          // Main play button with pulse animation
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Obx(
+                  () {
+                    final isPlaying = ttsService.isTextPlaying(currentNoun.singular);
+                    return TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
+                      duration: Duration(milliseconds: 600),
+                      curve: Curves.easeOutCubic,
+                      builder: (context, pulseValue, child) {
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            // Pulsing ring
+                            if (isPlaying)
+                              Container(
+                                width: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                                height: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: RadialGradient(
+                                    colors: [
+                                      primaryColor.withOpacity(0.3 * (1 - pulseValue)),
+                                      primaryColor.withOpacity(0.0),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    primaryColor.withOpacity(0.2),
+                                    secondaryColor.withOpacity(0.15),
+                                  ],
+                                ),
+                                border: Border.all(
+                                  color: primaryColor.withOpacity(0.4),
+                                  width: 2,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primaryColor.withOpacity(0.3),
+                                    blurRadius: 12,
+                                    spreadRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: IconButton(
+                                onPressed: _playSingular,
+                                icon: Icon(
+                                  isPlaying ? Icons.stop : Icons.volume_up,
+                                  size: isSmallScreen ? 28 : 32,
+                                  color: primaryColor,
+                                ),
+                                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                              ),
+                            ),
+                            if (isPlaying)
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: Container(
+                                  width: isSmallScreen ? 12 : 14,
+                                  height: isSmallScreen ? 12 : 14,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: LinearGradient(
+                                      colors: [primaryColor, scheme.accentTeal],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: primaryColor.withOpacity(0.8),
+                                        blurRadius: 8,
+                                        spreadRadius: 2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+          // Next button
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0.0, end: 1.0),
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeOutCubic,
+            builder: (context, value, child) {
+              return Transform.scale(
+                scale: value,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    gradient: themeService.getCardGradient(isDark),
+                    border: Border.all(
+                      color: primaryColor.withOpacity(0.3),
+                      width: 1.5,
+                    ),
+                    boxShadow: ThemeService.getCardShadow(isDark),
+                  ),
+                  child: IconButton(
+                    onPressed: _nextNoun,
+                    icon: Icon(
+                      Icons.chevron_right,
+                      size: isSmallScreen ? 22 : 26,
+                      color: textColor,
+                    ),
+                    padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

@@ -101,16 +101,8 @@ class AppRoutes {
     GetPage(
       name: lessonC1,
       page: () {
-        final args = Get.arguments;
-        String moduleId = '';
-        if (args is Map) {
-          moduleId = args['moduleId']?.toString() ?? '';
-        } else if (args is String) {
-          moduleId = args;
-        }
-        return C1LessonScreen(
-          // moduleId: moduleId.isNotEmpty ? moduleId : 'C1-M1',
-        );
+        // C1LessonScreen doesn't require moduleId currently
+        return const C1LessonScreen();
       },
     ),
     GetPage(
