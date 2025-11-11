@@ -1,4 +1,5 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class ModuleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lessonController = Get.find<LessonController>();
+    final themeService = Get.find<ThemeService>();
     final moduleId = moduleInfo.ID.toString();
 
     return Obx(() {
@@ -26,6 +28,12 @@ class ModuleCard extends StatelessWidget {
       final double progress =
           totalTopics == 0 ? 0 : (completedTopics / totalTopics).clamp(0.0, 1.0);
       final bool isCompleted = totalTopics > 0 && completedTopics >= totalTopics;
+      
+      final isDark = themeService.isDarkMode.value;
+      final scheme = themeService.currentScheme;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+      final borderColor = isDark ? scheme.textPrimaryDark.withOpacity(0.1) : scheme.textPrimary.withOpacity(0.1);
+      final containerColor = isDark ? scheme.textPrimaryDark.withOpacity(0.02) : scheme.textPrimary.withOpacity(0.02);
 
       return MouseRegion(
       cursor: moduleInfo.isLocked
@@ -43,12 +51,12 @@ class ModuleCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
                 color: moduleInfo.isLocked
-                    ? Colors.white.withOpacity(0.05)
-                    : Colors.white.withOpacity(0.1),
+                    ? borderColor.withOpacity(0.5)
+                    : borderColor,
               ),
               color: moduleInfo.isLocked
-                  ? Colors.white.withOpacity(0.01)
-                  : Colors.white.withOpacity(0.02),
+                  ? containerColor.withOpacity(0.5)
+                  : containerColor,
             ),
             child: Padding(
               padding: const EdgeInsets.all(24),
@@ -80,21 +88,7 @@ class ModuleCard extends StatelessWidget {
                           moduleInfo.isLocked
                               ? Icons.lock
                               : (isCompleted ? Icons.check : moduleInfo.icon),
-                          color: (moduleInfo.isLocked
-                                      ? Theme.of(context)
-                                          .colorScheme
-                                          .onSurface
-                                          .withOpacity(0.2)
-                                      : (isCompleted
-                                          ? Colors.green.withOpacity(0.2)
-                                          : Theme.of(context)
-                                              .colorScheme
-                                              .primary
-                                              .withOpacity(0.2)))
-                                  .computeLuminance() >
-                                  0.5
-                              ? Colors.black
-                              : Colors.white,
+                          color: _getIconColor(isCompleted, moduleInfo.isLocked, textColor),
                           size: 24,
                         ),
                       ),
@@ -106,18 +100,18 @@ class ModuleCard extends StatelessWidget {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.green.withOpacity(0.1),
+                            color: scheme.accentTeal.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.green, width: 1),
+                            border: Border.all(color: scheme.accentTeal, width: 1),
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.check, size: 16, color: Colors.green),
+                              Icon(Icons.check, size: 16, color: scheme.accentTeal),
                               const SizedBox(width: 4),
                               Text(
                                 'Completed',
                                 style: TextStyle(
-                                  color: Colors.green,
+                                  color: scheme.accentTeal,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   fontFamily:
@@ -134,18 +128,18 @@ class ModuleCard extends StatelessWidget {
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: textColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: textColor, width: 1),
                           ),
                           child: Row(
                             children: [
-                              Icon(Icons.lock, size: 16, color: Colors.grey),
+                              Icon(Icons.lock, size: 16, color: textColor),
                               const SizedBox(width: 4),
                               Text(
                                 'Locked',
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: textColor,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   fontFamily:
@@ -164,7 +158,7 @@ class ModuleCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: textColor,
                       fontFamily: GoogleFonts.patrickHand().fontFamily,
                     ),
                     maxLines: 2,
@@ -176,7 +170,7 @@ class ModuleCard extends StatelessWidget {
                     '$completedTopics/$totalTopics topics completed',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.white.withOpacity(0.6),
+                      color: textColor.withOpacity(0.6),
                       fontFamily: GoogleFonts.patrickHand().fontFamily,
                     ),
                   ),
@@ -189,7 +183,7 @@ class ModuleCard extends StatelessWidget {
                           height: 6,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(3),
-                            color: Colors.white.withOpacity(0.05),
+                            color: textColor.withOpacity(0.05),
                           ),
                           child: FractionallySizedBox(
                             alignment: Alignment.centerLeft,
@@ -197,9 +191,7 @@ class ModuleCard extends StatelessWidget {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(3),
-                                color: isCompleted
-                                    ? Colors.green
-                                    : const Color(0xFF10B981),
+                                color: _getProgressColor(isCompleted),
                               ),
                             ),
                           ),
@@ -211,7 +203,7 @@ class ModuleCard extends StatelessWidget {
                             '${(progress * 100).round()}%',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.white.withOpacity(0.6),
+                              color: textColor.withOpacity(0.6),
                               fontFamily: GoogleFonts.patrickHand().fontFamily,
                             ),
                           ),
@@ -228,23 +220,38 @@ class ModuleCard extends StatelessWidget {
     });
   }
 
-  Color _getIconColor(BuildContext context) {
-    if (moduleInfo.isLocked) {
-      return Theme.of(context).colorScheme.onSurface.withOpacity(0.2);
-    } else if (moduleInfo.completedLessons == moduleInfo.lessonCount) {
-      return Colors.green.withOpacity(0.2);
+  Color _getProgressColor(bool isCompleted) {
+    final themeService = Get.find<ThemeService>();
+    if (isCompleted) {
+      return themeService.currentScheme.accentTeal;
     } else {
-      return Theme.of(context).colorScheme.primary.withOpacity(0.2);
+      return themeService.currentScheme.accentTeal.withOpacity(0.6);
     }
   }
 
-  IconData _getIcon() {
-    if (moduleInfo.isLocked) {
-      return Icons.lock;
-    } else if (moduleInfo.completedLessons == moduleInfo.lessonCount) {
-      return Icons.check;
+  Color _getIconColor(bool isCompleted, bool isLocked, Color textColor) {
+    final themeService = Get.find<ThemeService>();
+    
+    // Determine the background color for the icon container
+    final bgColor = isLocked
+        ? Theme.of(Get.context!)
+            .colorScheme
+            .onSurface
+            .withOpacity(0.2)
+        : (isCompleted
+            ? themeService.currentScheme.accentTeal.withOpacity(0.2)
+            : Theme.of(Get.context!)
+                .colorScheme
+                .primary
+                .withOpacity(0.2));
+    
+    // Use high contrast color based on luminance - lighter backgrounds get dark text, darker get light text
+    if (bgColor.computeLuminance() > 0.5) {
+      // Light background - use dark text color
+      return Colors.black;
     } else {
-      return moduleInfo.icon;
+      // Dark background - use light text color (textColor works well here)
+      return textColor;
     }
   }
 }

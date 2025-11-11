@@ -393,14 +393,14 @@ class _SentencesScreenState extends State<SentencesScreen>
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
-                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                    border: Border.all(color: textColor.withOpacity(0.1)),
                     color: surfaceColor.withOpacity(0.05),
                   ),
                   child: Text(
                     'DE',
                     style: TextStyle(
                       fontSize: isSmallScreen ? 10 : 11,
-                      color: Colors.white.withOpacity(0.7),
+                      color: textColor.withOpacity(0.7),
                       fontFamily: GoogleFonts.patrickHand().fontFamily,
                     ),
                   ),
@@ -412,7 +412,7 @@ class _SentencesScreenState extends State<SentencesScreen>
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-                border: Border.all(color: Colors.white.withOpacity(0.1)),
+                border: Border.all(color: textColor.withOpacity(0.1)),
                 color: surfaceColor.withOpacity(0.03),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
@@ -489,7 +489,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
-                    color: Colors.white.withOpacity(0.7),
+                    color: textColor.withOpacity(0.7),
                   ),
                 ),
               ),
@@ -518,7 +518,7 @@ class _SentencesScreenState extends State<SentencesScreen>
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: textColor.withOpacity(0.1)),
               color: surfaceColor.withOpacity(0.05),
             ),
             child: IconButton(
@@ -536,7 +536,7 @@ class _SentencesScreenState extends State<SentencesScreen>
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
                   color: surfaceColor.withOpacity(0.05),
                   boxShadow: [
                     BoxShadow(
@@ -565,9 +565,9 @@ class _SentencesScreenState extends State<SentencesScreen>
                   child: Container(
                     width: isSmallScreen ? 10 : 12,
                     height: isSmallScreen ? 10 : 12,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xFF10B981),
+                      color: _getSuccessColor(),
                     ),
                   ),
                 ),
@@ -576,7 +576,7 @@ class _SentencesScreenState extends State<SentencesScreen>
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: textColor.withOpacity(0.1)),
               color: surfaceColor.withOpacity(0.05),
             ),
             child: IconButton(
@@ -592,5 +592,10 @@ class _SentencesScreenState extends State<SentencesScreen>
         ],
       ),
     );
+  }
+
+  Color _getSuccessColor() {
+    final themeService = Get.find<ThemeService>();
+    return themeService.currentScheme.accentTeal;
   }
 }

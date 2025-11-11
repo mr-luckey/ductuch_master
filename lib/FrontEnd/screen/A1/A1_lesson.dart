@@ -260,7 +260,7 @@ class A1LessonScreen extends StatelessWidget {
                               side: BorderSide(
                                 color: secondaryTextColor.withOpacity(0.4),
                               ),
-                              checkColor: Colors.white,
+                              checkColor: textPrimaryColor,
                               fillColor: WidgetStateProperty.resolveWith((
                                 states,
                               ) {

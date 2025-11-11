@@ -1,5 +1,6 @@
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
 import 'package:ductuch_master/FrontEnd/screen/A1/Learn.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:flutter/material.dart';
@@ -70,198 +71,213 @@ class C1LessonScreen extends StatelessWidget {
     final moduleData = data[moduleId];
     final String moduleTitle = moduleData?['title'] ?? 'Module Not Found';
     final List<dynamic> topics = moduleData?['topics'] ?? [];
+    final themeService = Get.find<ThemeService>();
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0F14),
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Top bar
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.white.withOpacity(0.1)),
-                    ),
-                    child: IconButton(
-                      onPressed: () => Get.back(),
-                      icon: const Icon(
-                        Icons.chevron_left,
-                        color: Colors.white70,
-                        size: 22,
-                      ),
-                      padding: const EdgeInsets.all(6),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      moduleTitle,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Topics list
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: topics.length,
-                itemBuilder: (context, index) {
-                  final topic = topics[index];
+    return Obx(() {
+      final isDark = themeService.isDarkMode.value;
+      final scheme = themeService.currentScheme;
+      final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+      final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+      final successColor = scheme.accentTeal;
+      final borderColor = textColor.withOpacity(0.1);
 
-                  // Use Obx only for the specific widget that needs to react to changes
-                  return Obx(() {
-                    final isCompleted = lessonController.isLessonCompleted(
-                      topic['id'],
-                    );
-
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 12),
+      return Scaffold(
+        backgroundColor: backgroundColor,
+        body: SafeArea(
+          child: Column(
+            children: [
+              // Top bar
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: isCompleted
-                              ? const Color(0xFF10B981).withOpacity(0.3)
-                              : Colors.white.withOpacity(0.1),
-                          width: isCompleted ? 2 : 1,
-                        ),
-                        color: Colors.white.withOpacity(0.02),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: borderColor),
                       ),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
+                      child: IconButton(
+                        onPressed: () => Get.back(),
+                        icon: Icon(
+                          Icons.chevron_left,
+                          color: textColor.withOpacity(0.7),
+                          size: 22,
                         ),
-                        leading: _getTopicLeading(topic, isCompleted),
-                        title: Text(
-                          topic['title'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontFamily: GoogleFonts.patrickHand().fontFamily,
-                            decoration: isCompleted
-                                ? TextDecoration.lineThrough
-                                : TextDecoration.none,
+                        padding: const EdgeInsets.all(6),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        moduleTitle,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: textColor,
+                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Topics list
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: topics.length,
+                  itemBuilder: (context, index) {
+                    final topic = topics[index];
+
+                    // Use Obx only for the specific widget that needs to react to changes
+                    return Obx(() {
+                      final isCompleted = lessonController.isLessonCompleted(
+                        topic['id'],
+                      );
+
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: isCompleted
+                                ? successColor.withOpacity(0.3)
+                                : borderColor,
+                            width: isCompleted ? 2 : 1,
                           ),
+                          color: textColor.withOpacity(0.02),
                         ),
-                        subtitle: isCompleted
-                            ? null
-                            : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    topic['content'],
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontFamily:
-                                          GoogleFonts.patrickHand().fontFamily,
+                        child: ListTile(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          leading: _getTopicLeading(topic, isCompleted, successColor, themeService),
+                          title: Text(
+                            topic['title'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: textColor,
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                              decoration: isCompleted
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none,
+                            ),
+                          ),
+                          subtitle: isCompleted
+                              ? null
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      topic['content'],
+                                      style: TextStyle(
+                                        color: textColor.withOpacity(0.7),
+                                        fontFamily:
+                                            GoogleFonts.patrickHand().fontFamily,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 8,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: _getTypeColor(
-                                            topic['type'],
-                                          ).withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(
-                                            8,
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 8,
+                                            vertical: 4,
                                           ),
-                                          border: Border.all(
+                                          decoration: BoxDecoration(
                                             color: _getTypeColor(
                                               topic['type'],
-                                            ).withOpacity(0.4),
+                                              themeService,
+                                            ).withOpacity(0.2),
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            border: Border.all(
+                                              color: _getTypeColor(
+                                                topic['type'],
+                                                themeService,
+                                              ).withOpacity(0.4),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            topic['type'],
+                                            style: TextStyle(
+                                              color: _getTypeColor(
+                                                topic['type'],
+                                                themeService,
+                                              ),
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily:
+                                                  GoogleFonts.patrickHand()
+                                                      .fontFamily,
+                                            ),
                                           ),
                                         ),
-                                        child: Text(
-                                          topic['type'],
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          topic['duration'],
                                           style: TextStyle(
-                                            color: _getTypeColor(topic['type']),
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily:
-                                                GoogleFonts.patrickHand()
-                                                    .fontFamily,
+                                            color: textColor.withOpacity(0.6),
+                                            fontSize: 12,
+                                            fontFamily: GoogleFonts.patrickHand()
+                                                .fontFamily,
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        topic['duration'],
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.6),
-                                          fontSize: 12,
-                                          fontFamily: GoogleFonts.patrickHand()
-                                              .fontFamily,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                        trailing: isCompleted
-                            ? const Icon(
-                                Icons.check_circle,
-                                color: Color(0xFF10B981),
-                                size: 24,
-                              )
-                            : Icon(
-                                Icons.arrow_forward_ios,
-                                size: 16,
-                                color: Colors.white.withOpacity(0.5),
-                              ),
-                        onTap: () {
-                          Get.to(
-                            () => PhraseScreen(),
-                            // TopicDetailScreen(topic: topic, moduleId: moduleId),
-                          );
-                        },
-                      ),
-                    );
-                  });
-                },
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                          trailing: isCompleted
+                              ? Icon(
+                                  Icons.check_circle,
+                                  color: successColor,
+                                  size: 24,
+                                )
+                              : Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 16,
+                                  color: textColor.withOpacity(0.5),
+                                ),
+                          onTap: () {
+                            Get.to(
+                              () => PhraseScreen(),
+                              // TopicDetailScreen(topic: topic, moduleId: moduleId),
+                            );
+                          },
+                        ),
+                      );
+                    });
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted) {
+  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted, Color successColor, ThemeService themeService) {
     if (isCompleted) {
       return Container(
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: const Color(0xFF10B981).withOpacity(0.2),
+          color: successColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFF10B981).withOpacity(0.4)),
+          border: Border.all(color: successColor.withOpacity(0.4)),
         ),
-        child: const Icon(Icons.check, color: Color(0xFF10B981)),
+        child: Icon(Icons.check, color: successColor),
       );
     }
-    return _getTopicIcon(topic['type']);
+    return _getTopicIcon(topic['type'], themeService);
   }
 
-  Widget _getTopicIcon(String type) {
-    final color = _getTypeColor(type);
+  Widget _getTopicIcon(String type, ThemeService themeService) {
+    final color = _getTypeColor(type, themeService);
     return Container(
       width: 40,
       height: 40,
@@ -293,12 +309,17 @@ class C1LessonScreen extends StatelessWidget {
     }
   }
 
-  Color _getTypeColor(String type) {
+  Color _getTypeColor(String type, ThemeService themeService) {
+    final isDark = themeService.isDarkMode.value;
+    final scheme = themeService.currentScheme;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final secondaryColor = isDark ? scheme.textSecondaryDark : scheme.textSecondary;
+    
     switch (type) {
       case 'vocabulary':
-        return Colors.blue;
+        return primaryColor;
       case 'grammar':
-        return Colors.green;
+        return scheme.accentTeal;
       case 'conversation':
         return Colors.orange;
       case 'practice':
@@ -308,7 +329,7 @@ class C1LessonScreen extends StatelessWidget {
       case 'writing':
         return Colors.teal;
       default:
-        return Colors.grey;
+        return secondaryColor;
     }
   }
 }

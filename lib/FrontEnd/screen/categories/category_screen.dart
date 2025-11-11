@@ -343,14 +343,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
                   color: surfaceColor.withOpacity(0.05),
                 ),
                 child: Text(
                   'DE',
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
-                    color: Colors.white.withOpacity(0.7),
+                    color: textColor.withOpacity(0.7),
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
@@ -362,7 +362,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: textColor.withOpacity(0.1)),
               color: surfaceColor.withOpacity(0.03),
             ),
             padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
@@ -432,7 +432,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
-                  color: Colors.white.withOpacity(0.7),
+                  color: primaryColor,
                 ),
               ),
             ),
@@ -451,6 +451,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
     final surfaceColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final successColor = scheme.accentTeal;
     final currentWord = widget.words[_currentWordIndex];
 
     return Container(
@@ -461,7 +462,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: textColor.withOpacity(0.1)),
               color: surfaceColor.withOpacity(0.05),
             ),
             child: IconButton(
@@ -479,7 +480,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
                   color: surfaceColor.withOpacity(0.05),
                   boxShadow: [
                     BoxShadow(
@@ -508,9 +509,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: Container(
                     width: isSmallScreen ? 10 : 12,
                     height: isSmallScreen ? 10 : 12,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(0xFF10B981),
+                      color: successColor,
                     ),
                   ),
                 ),
@@ -519,7 +520,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: textColor.withOpacity(0.1)),
               color: surfaceColor.withOpacity(0.05),
             ),
             child: IconButton(

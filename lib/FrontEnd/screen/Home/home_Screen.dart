@@ -19,13 +19,12 @@ class HomePage extends StatelessWidget {
     return Obx(() {
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
-      // final backgroundColor = scheme.background;
+      final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
       final surfaceColor = scheme.surface;
 
       return Scaffold(
-        backgroundColor: Colors.white,
-        // backgroundColor: backgroundColor,
+        backgroundColor: backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(

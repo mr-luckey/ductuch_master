@@ -37,6 +37,7 @@ class WelcomeCard extends StatelessWidget {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final secondaryTextColor = isDark ? scheme.textSecondaryDark : scheme.textSecondary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
+    final buttonTextColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     
     return Row(
       children: [
@@ -69,7 +70,7 @@ class WelcomeCard extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: primaryColor,
-                  foregroundColor: isDark ? scheme.textPrimaryDark : Colors.white,
+                  foregroundColor: buttonTextColor,
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,
                     vertical: 12,

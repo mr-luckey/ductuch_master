@@ -1,156 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:google_fonts/google_fonts.dart';
-
-// class ColorSchemeData {
-//   final String name;
-//   final Color primary;
-//   final Color secondary;
-//   final Color surface;
-//   final Color background;
-//   final Color textPrimary;
-//   final Color textSecondary;
-//   final LinearGradient gradient;
-
-//   // Dark mode colors
-//   final Color primaryDark;
-//   final Color secondaryDark;
-//   final Color surfaceDark;
-//   final Color backgroundDark;
-//   final Color textPrimaryDark;
-//   final Color textSecondaryDark;
-
-//   // Nouns theme colors
-//   // final Color nounsBackground;
-//   final Color nounsSurface;
-//   final Color accentTeal;
-
-//   ColorSchemeData({
-//     required this.name,
-//     required this.primary,
-//     required this.secondary,
-//     required this.surface,
-//     required this.background,
-//     required this.textPrimary,
-//     required this.textSecondary,
-//     required this.gradient,
-//     required this.primaryDark,
-//     required this.secondaryDark,
-//     required this.surfaceDark,
-//     required this.backgroundDark,
-//     required this.textPrimaryDark,
-//     required this.textSecondaryDark,
-//     // required this.nounsBackground,
-//     required this.nounsSurface,
-//     required this.accentTeal,
-//   });
-// }
-
-// class ThemeService extends GetxController {
-//   static ThemeService get to => Get.find();
-
-//   final RxInt selectedSchemeIndex = 0.obs;
-//   final RxBool isDarkMode = true.obs;
-
-//   static final List<ColorSchemeData> colorSchemes = [
-//     ColorSchemeData(
-//       name: 'Indigo Night',
-//       primary: const Color(0xFF6366F1),
-//       secondary: const Color(0xFF818CF8),
-//       surface: const Color(0xFFE0E7FF),
-//       background: const Color(0xFFEEF2FF),
-//       textPrimary: const Color(0xFF4338CA),
-//       textSecondary: const Color(0xFF4B5563),
-//       gradient: const LinearGradient(
-//         colors: [Color(0xFF6366F1), Color(0xFF818CF8)],
-//       ),
-//       primaryDark: const Color(0xFF818CF8),
-//       secondaryDark: const Color(0xFFA5B4FC),
-//       surfaceDark: const Color(0xFF312E81),
-//       backgroundDark: const Color(0xFF1E1B4B),
-//       textPrimaryDark: Colors.white,
-//       textSecondaryDark: const Color(0xFFC7D2FE),
-//       // nounsBackground: const Color(0xFF1E1B4B),
-//       nounsSurface: const Color(0xFF11161C),
-//       accentTeal: const Color(0xFF10B981),
-//     ),
-//   ];
-
-//   ColorSchemeData get currentScheme => colorSchemes[selectedSchemeIndex.value];
-
-//   // Unified app theme (matches Nouns screen aesthetics)
-//   ThemeData get appTheme {
-//     final baseDark = ThemeData(brightness: Brightness.light);
-//     final text = baseDark.textTheme;
-//     return ThemeData(
-//       brightness: Brightness.dark,
-//       scaffoldBackgroundColor: currentScheme.backgroundDark,
-//       primaryColor: currentScheme.accentTeal,
-//       colorScheme: ColorScheme.dark(
-//         primary: currentScheme.accentTeal,
-//         secondary: currentScheme.accentTeal,
-//         surface: currentScheme.nounsSurface,
-//         background: currentScheme.backgroundDark,
-//       ),
-//       appBarTheme: AppBarTheme(
-//         backgroundColor: currentScheme.backgroundDark,
-//         elevation: 0,
-//         foregroundColor: Colors.white,
-//       ),
-//       iconTheme: const IconThemeData(color: Colors.white),
-//       dividerColor: Colors.white54,
-//       cardTheme: CardThemeData(
-//         color: Colors.white.withOpacity(0.03),
-//         surfaceTintColor: Colors.transparent,
-//         shadowColor: Colors.white.withOpacity(0.06),
-//         elevation: 0,
-//         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(16),
-//           side: BorderSide(color: Colors.white.withOpacity(0.1)),
-//         ),
-//       ),
-//       elevatedButtonTheme: ElevatedButtonThemeData(
-//         style: ElevatedButton.styleFrom(
-//           backgroundColor: Colors.white.withOpacity(0.05),
-//           foregroundColor: Colors.white,
-//           elevation: 0,
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(16),
-//             side: BorderSide(color: Colors.white.withOpacity(0.1)),
-//           ),
-//         ),
-//       ),
-//       textButtonTheme: TextButtonThemeData(
-//         style: TextButton.styleFrom(foregroundColor: Colors.white),
-//       ),
-//       inputDecorationTheme: InputDecorationTheme(
-//         filled: true,
-//         fillColor: Colors.white.withOpacity(0.03),
-//         enabledBorder: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(12),
-//           borderSide: BorderSide(color: Colors.white.withOpacity(0.1)),
-//         ),
-//         focusedBorder: OutlineInputBorder(
-//           borderRadius: BorderRadius.circular(12),
-//           borderSide: BorderSide(color: currentScheme.accentTeal),
-//         ),
-//         labelStyle: const TextStyle(color: Colors.white70),
-//         hintStyle: const TextStyle(color: Colors.white54),
-//       ),
-//       textTheme: GoogleFonts.patrickHandTextTheme(
-//         text,
-//       ).apply(bodyColor: Colors.white, displayColor: Colors.white),
-//     );
-//   }
-
-//   void changeScheme(int index) {
-//     selectedSchemeIndex.value = index;
-//   }
-
-//   void toggleDarkMode() {
-//     isDarkMode.value = !isDarkMode.value;
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -201,147 +48,146 @@ class ThemeService extends GetxController {
   static ThemeService get to => Get.find();
 
   final RxInt selectedSchemeIndex = 0.obs;
-  final RxBool isDarkMode =
-      false.obs; // default to light mode to show light palettes
+  final RxBool isDarkMode = false.obs;
 
-  // Curated color schemes aimed to improve focus, calmness and playfulness for language learners.
-  // Each scheme contains a light and a dark variant and an action/accent color.
+  // High contrast color schemes optimized for readability and focus
   static final List<ColorSchemeData> colorSchemes = [
+    // 1. Classic High Contrast - Maximum readability
+    // ColorSchemeData(
+    //   name: 'Classic High Contrast',
+    //   primary: const Color(0xFF000000),
+    //   secondary: const Color(0xFF333333),
+    //   surface: const Color(0xFFFFFFFF),
+    //   background: const Color(0xFFFFFFFF),
+    //   textPrimary: const Color(0xFF000000),
+    //   textSecondary: const Color(0xFF444444),
+    //   gradient: const LinearGradient(
+    //     colors: [Color(0xFF000000), Color(0xFF333333)],
+    //   ),
+    //   primaryDark: const Color(0xFFFFFFFF),
+    //   secondaryDark: const Color(0xFFE0E0E0),
+    //   surfaceDark: const Color(0xFF121212),
+    //   backgroundDark: const Color(0xFF000000),
+    //   textPrimaryDark: const Color(0xFFFFFFFF),
+    //   textSecondaryDark: const Color(0xFFCCCCCC),
+    //   nounsSurface: const Color(0xFF1A1A1A),
+    //   accentTeal: const Color(0xFF00B894), // High contrast teal
+    // ),
+
+    // 2. Blue Contrast - Calm yet highly readable
     ColorSchemeData(
-      name: 'Twilight Violet',
-      primary: const Color(0xFF8E7FF5), // medium purple
-      secondary: const Color(0xFFD8C8FF), // light lavender
-      surface: const Color(0xFFFBFAFF),
-      background: const Color(0xFFF9F8FF),
-      textPrimary: const Color(0xFF2B1F4C),
-      textSecondary: const Color(0xFF4A3D6B),
+      name: 'Blue Contrast',
+      primary: const Color(0xFF0D47A1),
+      secondary: const Color(0xFF1976D2),
+      surface: const Color(0xFFFFFFFF),
+      background: const Color(0xFFF5F9FF),
+      textPrimary: const Color(0xFF0D47A1),
+      textSecondary: const Color(0xFF424242),
       gradient: const LinearGradient(
-        colors: [Color(0xFF8E7FF5), Color(0xFFD8C8FF)],
+        colors: [Color(0xFF0D47A1), Color(0xFF1976D2)],
       ),
-      primaryDark: const Color(0xFF6A5CE9),
-      secondaryDark: const Color(0xFFB8A1FF),
-      surfaceDark: const Color(0xFF140F20),
-      backgroundDark: const Color(0xFF0A0512),
-      textPrimaryDark: Colors.white,
-      textSecondaryDark: const Color(0xFFC8B8FF),
-      nounsSurface: const Color(0xFF090514),
-      accentTeal: const Color(0xFF1DE9B6), // vibrant teal accent
+      primaryDark: const Color(0xFF90CAF9),
+      secondaryDark: const Color(0xFF64B5F6),
+      surfaceDark: const Color(0xFF0D1B36),
+      backgroundDark: const Color(0xFF051428),
+      textPrimaryDark: const Color(0xFFFFFFFF),
+      textSecondaryDark: const Color(0xFFE3F2FD),
+      nounsSurface: const Color(0xFF0A1429),
+      accentTeal: const Color(0xFF00E5FF), // Bright cyan for contrast
     ),
 
-    // // 1. Sunny Pastel: warm, friendly, encourages action and reduces anxiety.
-    // ColorSchemeData(
-    //   name: 'Sunny Pastel',
-    //   primary: const Color(0xFFFFB86B), // soft orange
-    //   secondary: const Color(0xFFFFD6A5),
-    //   surface: const Color(0xFFFFFFFF),
-    //   background: const Color(0xFFFFF7ED),
-    //   textPrimary: const Color(0xFF5B3A29),
-    //   textSecondary: const Color(0xFF6B6B6B),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFFFFB86B), Color(0xFFFFD6A5)],
-    //   ),
-    //   primaryDark: const Color(0xFFFF8A50),
-    //   secondaryDark: const Color(0xFFFFB86B),
-    //   surfaceDark: const Color(0xFF252525),
-    //   backgroundDark: const Color(0xFF0F1720),
-    //   textPrimaryDark: Colors.white,
-    //   textSecondaryDark: const Color(0xFFFFD6A5),
-    //   nounsSurface: const Color(0xFF141414),
-    //   accentTeal: const Color(0xFF06B6D4), // calm action color
-    // ),
+    // 3. Green Contrast - Soothing for eyes
+    ColorSchemeData(
+      name: 'Green Contrast',
+      primary: const Color(0xFF1B5E20),
+      secondary: const Color(0xFF2E7D32),
+      surface: const Color(0xFFFFFFFF),
+      background: const Color(0xFFF1F8E9),
+      textPrimary: const Color(0xFF1B5E20),
+      textSecondary: const Color(0xFF37474F),
+      gradient: const LinearGradient(
+        colors: [Color(0xFF1B5E20), Color(0xFF388E3C)],
+      ),
+      primaryDark: const Color(0xFF69F0AE),
+      secondaryDark: const Color(0xFF4CAF50),
+      surfaceDark: const Color(0xFF0D1F0E),
+      backgroundDark: const Color(0xFF051405),
+      textPrimaryDark: const Color(0xFFFFFFFF),
+      textSecondaryDark: const Color(0xFFC8E6C9),
+      nounsSurface: const Color(0xFF091309),
+      accentTeal: const Color(0xFF00C853), // Bright green
+    ),
 
-    // // 2. Mint Focus: cool greens to support concentration and reduce eye strain.
-    // ColorSchemeData(
-    //   name: 'Mint Focus',
-    //   primary: const Color(0xFF34D399), // mint
-    //   secondary: const Color(0xFFA7F3D0),
-    //   surface: const Color(0xFFF6FFFB),
-    //   background: const Color(0xFFF0FFF6),
-    //   textPrimary: const Color(0xFF064E3B),
-    //   textSecondary: const Color(0xFF065F46),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFF34D399), Color(0xFFA7F3D0)],
-    //   ),
-    //   primaryDark: const Color(0xFF10B981),
-    //   secondaryDark: const Color(0xFF34D399),
-    //   surfaceDark: const Color(0xFF0E1F1A),
-    //   backgroundDark: const Color(0xFF04140E),
-    //   textPrimaryDark: Colors.white,
-    //   textSecondaryDark: const Color(0xFFA7F3D0),
-    //   nounsSurface: const Color(0xFF071611),
-    //   accentTeal: const Color(0xFF06B6D4),
-    // ),
+    // 4. Purple Contrast - Modern and accessible
+    ColorSchemeData(
+      name: 'Purple Contrast',
+      primary: const Color(0xFF4A148C),
+      secondary: const Color(0xFF6A1B9A),
+      surface: const Color(0xFFFFFFFF),
+      background: const Color(0xFFF3E5F5),
+      textPrimary: const Color(0xFF4A148C),
+      textSecondary: const Color(0xFF4A4A4A),
+      gradient: const LinearGradient(
+        colors: [Color(0xFF4A148C), Color(0xFF6A1B9A)],
+      ),
+      primaryDark: const Color(0xFFE040FB),
+      secondaryDark: const Color(0xFFAB47BC),
+      surfaceDark: const Color(0xFF1A0D2A),
+      backgroundDark: const Color(0xFF0F0619),
+      textPrimaryDark: const Color(0xFFFFFFFF),
+      textSecondaryDark: const Color(0xFFE1BEE7),
+      nounsSurface: const Color(0xFF140A21),
+      accentTeal: const Color(0xFFAA00FF), // Bright purple
+    ),
 
-    // // 3. Sky Coral: friendly blues + coral accent for approachability and clarity.
-    // ColorSchemeData(
-    //   name: 'Sky & Coral',
-    //   primary: const Color(0xFF60A5FA), // sky blue
-    //   secondary: const Color(0xFFFDA4AF), // soft coral/pink
-    //   surface: const Color(0xFFF8FAFF),
-    //   background: const Color(0xFFF7FBFF),
-    //   textPrimary: const Color(0xFF0F172A),
-    //   textSecondary: const Color(0xFF334155),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFF60A5FA), Color(0xFFFDA4AF)],
-    //   ),
-    //   primaryDark: const Color(0xFF3B82F6),
-    //   secondaryDark: const Color(0xFFF973A6),
-    //   surfaceDark: const Color(0xFF0B1220),
-    //   backgroundDark: const Color(0xFF071029),
-    //   textPrimaryDark: Colors.white,
-    //   textSecondaryDark: const Color(0xFF93C5FD),
-    //   nounsSurface: const Color(0xFF071227),
-    //   accentTeal: const Color(0xFF06B6D4),
-    // ),
+    // 5. Warm Contrast - Easy on the eyes
+    ColorSchemeData(
+      name: 'Warm Contrast',
+      primary: const Color(0xFFBF360C),
+      secondary: const Color(0xFFE64A19),
+      surface: const Color(0xFFFFFFFF),
+      background: const Color(0xFFFFF3E0),
+      textPrimary: const Color(0xFFBF360C),
+      textSecondary: const Color(0xFF5D4037),
+      gradient: const LinearGradient(
+        colors: [Color(0xFFBF360C), Color(0xFFE64A19)],
+      ),
+      primaryDark: const Color(0xFFFF8A65),
+      secondaryDark: const Color(0xFFFF7043),
+      surfaceDark: const Color(0xFF261914),
+      backgroundDark: const Color(0xFF1A100B),
+      textPrimaryDark: const Color(0xFFFFFFFF),
+      textSecondaryDark: const Color(0xFFFFCCBC),
+      nounsSurface: const Color(0xFF21120C),
+      accentTeal: const Color(0xFFFF5722), // Bright orange
+    ),
 
-    // // 4. Lavender Calm: soft purples to lower stress and encourage longer sessions.
-    // ColorSchemeData(
-    //   name: 'Lavender Calm',
-    //   primary: const Color(0xFFC7B3FF),
-    //   secondary: const Color(0xFFE9D5FF),
-    //   surface: const Color(0xFFFBF8FF),
-    //   background: const Color(0xFFFCFBFF),
-    //   textPrimary: const Color(0xFF2A2340),
-    //   textSecondary: const Color(0xFF5B4B7A),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFFC7B3FF), Color(0xFFE9D5FF)],
-    //   ),
-    //   primaryDark: const Color(0xFF8B5CF6),
-    //   secondaryDark: const Color(0xFF7C3AED),
-    //   surfaceDark: const Color(0xFF14121B),
-    //   backgroundDark: const Color(0xFF09060D),
-    //   textPrimaryDark: Colors.white,
-    //   textSecondaryDark: const Color(0xFFDCCBFF),
-    //   nounsSurface: const Color(0xFF0F0C13),
-    //   accentTeal: const Color(0xFF7C3AED),
-    // ),
-
-    // // 5. Playful Citrus: upbeat, high-contrast accents for motivation and gamification.
-    // ColorSchemeData(
-    //   name: 'Playful Citrus',
-    //   primary: const Color(0xFFFDE68A), // soft lemon
-    //   secondary: const Color(0xFFFECACA),
-    //   surface: const Color(0xFFFFFDF0),
-    //   background: const Color(0xFFFFFBEB),
-    //   textPrimary: const Color(0xFF92400E),
-    //   textSecondary: const Color(0xFF6B4A14),
-    //   gradient: const LinearGradient(
-    //     colors: [Color(0xFFFDE68A), Color(0xFFFECACA)],
-    //   ),
-    //   primaryDark: const Color(0xFFF59E0B),
-    //   secondaryDark: const Color(0xFFFB7185),
-    //   surfaceDark: const Color(0xFF231908),
-    //   backgroundDark: const Color(0xFF0B0704),
-    //   textPrimaryDark: Colors.white,
-    //   textSecondaryDark: const Color(0xFFFFE8A8),
-    //   nounsSurface: const Color(0xFF1A120D),
-    //   accentTeal: const Color(0xFFF97316),
-    // ),
+    // 6. Professional Dark - High contrast dark mode
+    ColorSchemeData(
+      name: 'Professional Dark',
+      primary: const Color(0xFF1565C0),
+      secondary: const Color(0xFF42A5F5),
+      surface: const Color(0xFFFAFAFA),
+      background: const Color(0xFFFFFFFF),
+      textPrimary: const Color(0xFF212121),
+      textSecondary: const Color(0xFF757575),
+      gradient: const LinearGradient(
+        colors: [Color(0xFF1565C0), Color(0xFF42A5F5)],
+      ),
+      primaryDark: const Color(0xFF82B1FF),
+      secondaryDark: const Color(0xFF448AFF),
+      surfaceDark: const Color(0xFF121212),
+      backgroundDark: const Color(0xFF000000),
+      textPrimaryDark: const Color(0xFFFFFFFF),
+      textSecondaryDark: const Color(0xFFE0E0E0),
+      nounsSurface: const Color(0xFF1E1E1E),
+      accentTeal: const Color(0xFF00B0FF), // Bright blue
+    ),
   ];
 
   ColorSchemeData get currentScheme => colorSchemes[selectedSchemeIndex.value];
 
-  // Unified app theme that switches between light & dark using isDarkMode.
+  // Unified app theme that switches between light & dark using isDarkMode
   ThemeData get appTheme {
     final isDark = isDarkMode.value;
     final base = isDark
@@ -361,35 +207,52 @@ class ThemeService extends GetxController {
               secondary: currentScheme.accentTeal,
               surface: currentScheme.nounsSurface,
               background: currentScheme.backgroundDark,
+              onBackground: currentScheme.textPrimaryDark,
+              onSurface: currentScheme.textPrimaryDark,
             )
           : ColorScheme.light(
               primary: currentScheme.accentTeal,
               secondary: currentScheme.accentTeal,
               surface: currentScheme.surface,
               background: currentScheme.background,
+              onBackground: currentScheme.textPrimary,
+              onSurface: currentScheme.textPrimary,
             ),
       appBarTheme: AppBarTheme(
         backgroundColor: isDark
             ? currentScheme.backgroundDark
             : currentScheme.background,
-        elevation: 0,
-        foregroundColor: isDark ? Colors.white : currentScheme.textPrimary,
+        elevation: 2,
+        foregroundColor: isDark
+            ? currentScheme.textPrimaryDark
+            : currentScheme.textPrimary,
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: isDark
+              ? currentScheme.textPrimaryDark
+              : currentScheme.textPrimary,
+        ),
       ),
       iconTheme: IconThemeData(
-        color: isDark ? Colors.white : currentScheme.textPrimary,
+        color: isDark
+            ? currentScheme.textPrimaryDark
+            : currentScheme.textPrimary,
       ),
-      dividerColor: (isDark ? Colors.white54 : Colors.black12),
+      dividerColor: isDark
+          ? currentScheme.textSecondaryDark.withOpacity(0.3)
+          : currentScheme.textSecondary.withOpacity(0.3),
       cardTheme: CardThemeData(
-        color: (isDark ? Colors.white.withOpacity(0.03) : Colors.white),
+        color: isDark ? currentScheme.surfaceDark : currentScheme.surface,
         surfaceTintColor: Colors.transparent,
-        shadowColor: (isDark ? Colors.black : Colors.black12),
-        elevation: 0,
+        shadowColor: isDark ? Colors.black : Colors.black26,
+        elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
           side: BorderSide(
-            color: (isDark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.black.withOpacity(0.06)),
+            color: isDark
+                ? currentScheme.textSecondaryDark.withOpacity(0.2)
+                : currentScheme.textSecondary.withOpacity(0.2),
           ),
         ),
       ),
@@ -397,42 +260,79 @@ class ThemeService extends GetxController {
         style: ElevatedButton.styleFrom(
           backgroundColor: currentScheme.accentTeal,
           foregroundColor: isDark ? Colors.black : Colors.white,
-          elevation: 0,
+          elevation: 2,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(12),
           ),
+          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(foregroundColor: currentScheme.accentTeal),
+        style: TextButton.styleFrom(
+          foregroundColor: currentScheme.accentTeal,
+          textStyle: const TextStyle(fontWeight: FontWeight.w600),
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: isDark
-            ? Colors.white.withOpacity(0.03)
-            : currentScheme.surface,
+        fillColor: isDark ? currentScheme.surfaceDark : currentScheme.surface,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
             color: isDark
-                ? Colors.white.withOpacity(0.06)
-                : Colors.black.withOpacity(0.06),
+                ? currentScheme.textSecondaryDark.withOpacity(0.3)
+                : currentScheme.textSecondary.withOpacity(0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: currentScheme.accentTeal),
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: currentScheme.accentTeal, width: 2),
         ),
         labelStyle: TextStyle(
-          color: isDark ? Colors.white70 : currentScheme.textPrimary,
+          color: isDark
+              ? currentScheme.textSecondaryDark
+              : currentScheme.textSecondary,
+          fontWeight: FontWeight.w500,
         ),
         hintStyle: TextStyle(
-          color: isDark ? Colors.white54 : currentScheme.textSecondary,
+          color: isDark
+              ? currentScheme.textSecondaryDark.withOpacity(0.7)
+              : currentScheme.textSecondary.withOpacity(0.7),
         ),
       ),
-      textTheme: GoogleFonts.patrickHandTextTheme(text).apply(
-        bodyColor: isDark ? Colors.white : currentScheme.textPrimary,
-        displayColor: isDark ? Colors.white : currentScheme.textPrimary,
+      textTheme: GoogleFonts.patrickHandTextTheme(text).copyWith(
+        bodyLarge: TextStyle(
+          color: isDark
+              ? currentScheme.textPrimaryDark
+              : currentScheme.textPrimary,
+          fontSize: 16,
+        ),
+        bodyMedium: TextStyle(
+          color: isDark
+              ? currentScheme.textPrimaryDark
+              : currentScheme.textPrimary,
+          fontSize: 14,
+        ),
+        titleLarge: TextStyle(
+          color: isDark
+              ? currentScheme.textPrimaryDark
+              : currentScheme.textPrimary,
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+        titleMedium: TextStyle(
+          color: isDark
+              ? currentScheme.textPrimaryDark
+              : currentScheme.textPrimary,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+        ),
+        labelLarge: TextStyle(
+          color: isDark
+              ? currentScheme.textPrimaryDark
+              : currentScheme.textPrimary,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

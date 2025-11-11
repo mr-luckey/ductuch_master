@@ -363,7 +363,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
                       style: TextStyle(
                         fontSize: isSmallScreen ? 20 : 24,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: textColor,
                         height: 1.2,
                         fontFamily: Theme.of(
                           context,
@@ -387,14 +387,14 @@ class _PracticeScreenState extends State<PracticeScreen> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  border: Border.all(color: textColor.withOpacity(0.1)),
                   color: surfaceColor.withOpacity(0.05),
                 ),
                 child: Text(
                   'DE',
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
-                    color: Colors.white.withOpacity(0.7),
+                    color: textColor.withOpacity(0.7),
                     fontFamily: GoogleFonts.patrickHand().fontFamily,
                   ),
                 ),
@@ -406,7 +406,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 10 : 12),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: textColor.withOpacity(0.1)),
               color: surfaceColor.withOpacity(0.03),
             ),
             padding: EdgeInsets.all(isSmallScreen ? 10 : 12),
