@@ -19,7 +19,9 @@ class HomePage extends StatelessWidget {
     return Obx(() {
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
-      final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
       final surfaceColor = scheme.surface;
 

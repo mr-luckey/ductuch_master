@@ -76,7 +76,9 @@ class C1LessonScreen extends StatelessWidget {
     return Obx(() {
       final isDark = themeService.isDarkMode.value;
       final scheme = themeService.currentScheme;
-      final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+      final backgroundColor = isDark
+          ? scheme.backgroundDark
+          : scheme.background;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
       final successColor = scheme.accentTeal;
       final borderColor = textColor.withOpacity(0.1);
@@ -152,7 +154,12 @@ class C1LessonScreen extends StatelessWidget {
                             horizontal: 16,
                             vertical: 12,
                           ),
-                          leading: _getTopicLeading(topic, isCompleted, successColor, themeService),
+                          leading: _getTopicLeading(
+                            topic,
+                            isCompleted,
+                            successColor,
+                            themeService,
+                          ),
                           title: Text(
                             topic['title'],
                             style: TextStyle(
@@ -174,8 +181,8 @@ class C1LessonScreen extends StatelessWidget {
                                       topic['content'],
                                       style: TextStyle(
                                         color: textColor.withOpacity(0.7),
-                                        fontFamily:
-                                            GoogleFonts.patrickHand().fontFamily,
+                                        fontFamily: GoogleFonts.patrickHand()
+                                            .fontFamily,
                                       ),
                                     ),
                                     const SizedBox(height: 8),
@@ -222,8 +229,9 @@ class C1LessonScreen extends StatelessWidget {
                                           style: TextStyle(
                                             color: textColor.withOpacity(0.6),
                                             fontSize: 12,
-                                            fontFamily: GoogleFonts.patrickHand()
-                                                .fontFamily,
+                                            fontFamily:
+                                                GoogleFonts.patrickHand()
+                                                    .fontFamily,
                                           ),
                                         ),
                                       ],
@@ -260,7 +268,12 @@ class C1LessonScreen extends StatelessWidget {
     });
   }
 
-  Widget _getTopicLeading(Map<String, dynamic> topic, bool isCompleted, Color successColor, ThemeService themeService) {
+  Widget _getTopicLeading(
+    Map<String, dynamic> topic,
+    bool isCompleted,
+    Color successColor,
+    ThemeService themeService,
+  ) {
     if (isCompleted) {
       return Container(
         width: 40,
@@ -313,8 +326,10 @@ class C1LessonScreen extends StatelessWidget {
     final isDark = themeService.isDarkMode.value;
     final scheme = themeService.currentScheme;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final secondaryColor = isDark ? scheme.textSecondaryDark : scheme.textSecondary;
-    
+    final secondaryColor = isDark
+        ? scheme.textSecondaryDark
+        : scheme.textSecondary;
+
     switch (type) {
       case 'vocabulary':
         return primaryColor;

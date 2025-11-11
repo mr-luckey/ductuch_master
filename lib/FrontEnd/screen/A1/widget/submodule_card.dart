@@ -68,8 +68,6 @@ class SubmoduleCard extends StatelessWidget {
   Color _getIconColor(BuildContext context) {
     final bgColor = Theme.of(context).colorScheme.primary.withOpacity(0.2);
     // Light background gets dark text for contrast, dark background gets light text
-    return bgColor.computeLuminance() > 0.5
-        ? Colors.black
-        : Colors.white;
+    return bgColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
   }
 }

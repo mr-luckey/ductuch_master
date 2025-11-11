@@ -22,15 +22,27 @@ class TtsSpeedDropdown extends StatelessWidget {
       final scheme = themeService.currentScheme;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
       final accentColor = scheme.accentTeal;
-      
+
       return PopupMenuButton<double>(
         tooltip: 'Voice Speed',
         onSelected: (speed) {
           ttsService.setGlobalSpeed(speed);
         },
         itemBuilder: (context) => [
-          _buildSpeedMenuItem(0.5, currentSpeed, '0.5x', textColor, accentColor),
-          _buildSpeedMenuItem(0.8, currentSpeed, '0.8x', textColor, accentColor),
+          _buildSpeedMenuItem(
+            0.5,
+            currentSpeed,
+            '0.5x',
+            textColor,
+            accentColor,
+          ),
+          _buildSpeedMenuItem(
+            0.8,
+            currentSpeed,
+            '0.8x',
+            textColor,
+            accentColor,
+          ),
           _buildSpeedMenuItem(1.0, currentSpeed, '1x', textColor, accentColor),
         ],
         child: Padding(
@@ -67,17 +79,13 @@ class TtsSpeedDropdown extends StatelessWidget {
     Color accentColor,
   ) {
     final isSelected = speed == currentSpeed;
-    
+
     return PopupMenuItem<double>(
       value: speed,
       child: Row(
         children: [
           if (isSelected)
-            Icon(
-              Icons.check,
-              size: 18,
-              color: accentColor,
-            )
+            Icon(Icons.check, size: 18, color: accentColor)
           else
             SizedBox(width: 18),
           SizedBox(width: 12),
@@ -93,4 +101,3 @@ class TtsSpeedDropdown extends StatelessWidget {
     );
   }
 }
-

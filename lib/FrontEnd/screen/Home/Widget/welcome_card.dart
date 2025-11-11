@@ -12,7 +12,7 @@ class WelcomeCard extends StatelessWidget {
     final themeService = Get.find<ThemeService>();
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
-    
+
     return Obx(() {
       return Card(
         elevation: 2,
@@ -35,10 +35,14 @@ class WelcomeCard extends StatelessWidget {
 
   Widget _buildWelcomeSection(BuildContext context, scheme, bool isDark) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-    final secondaryTextColor = isDark ? scheme.textSecondaryDark : scheme.textSecondary;
+    final secondaryTextColor = isDark
+        ? scheme.textSecondaryDark
+        : scheme.textSecondary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-    final buttonTextColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-    
+    final buttonTextColor = isDark
+        ? scheme.textPrimaryDark
+        : scheme.textPrimary;
+
     return Row(
       children: [
         Expanded(
@@ -51,7 +55,9 @@ class WelcomeCard extends StatelessWidget {
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: textColor,
-                  fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
+                  fontFamily: Theme.of(
+                    context,
+                  ).textTheme.headlineMedium?.fontFamily,
                 ),
               ),
               const SizedBox(height: 8),
@@ -60,7 +66,9 @@ class WelcomeCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14,
                   color: secondaryTextColor,
-                  fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
+                  fontFamily: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.fontFamily,
                 ),
               ),
               const SizedBox(height: 16),
@@ -96,8 +104,10 @@ class WelcomeCard extends StatelessWidget {
   }
 
   Widget _buildProgressSection(BuildContext context, scheme, bool isDark) {
-    final secondaryTextColor = isDark ? scheme.textSecondaryDark : scheme.textSecondary;
-    
+    final secondaryTextColor = isDark
+        ? scheme.textSecondaryDark
+        : scheme.textSecondary;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
