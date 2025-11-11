@@ -48,7 +48,28 @@ class ThemeService extends GetxController {
   static const Color _accentTeal = Color(0xFF10B981);
 
   static final List<ColorSchemeData> colorSchemes = [
-    // 1. Ocean Breeze (Blue-Cyan)
+    // 1. German Flag (Black-Red-Gold)
+    ColorSchemeData(
+      name: 'German Flag',
+      primary: const Color(0xFF000000), // Black
+      secondary: const Color(0xFFDD0000), // Red
+      surface: const Color(0xFFFFF8E1), // Light gold tint
+      background: const Color(0xFFFFFDE7), // Very light gold
+      textPrimary: const Color(0xFF000000), // Black
+      textSecondary: const Color(0xFF5D4037), // Dark brown
+      gradient: const LinearGradient(
+        colors: [Color(0xFF000000), Color(0xFFDD0000), Color(0xFFFFCE00)],
+        stops: [0.0, 0.5, 1.0],
+      ),
+      primaryDark: const Color(0xFFFFCE00), // Gold becomes primary in dark
+      secondaryDark: const Color(0xFFDD0000), // Red
+      surfaceDark: const Color(0xFF1A1A1A), // Dark surface
+      backgroundDark: const Color(0xFF000000), // Black background
+      textPrimaryDark: Colors.white,
+      textSecondaryDark: const Color(0xFFFFCE00), // Gold text
+    ),
+
+    // 2. Ocean Breeze (Blue-Cyan)
     ColorSchemeData(
       name: 'Ocean Breeze',
       primary: const Color(0xFF2196F3),
@@ -68,7 +89,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFB0BEC5),
     ),
 
-    // 2. Forest Green (Green-Emerald)
+    // 3. Forest Green (Green-Emerald)
     ColorSchemeData(
       name: 'Forest Green',
       primary: const Color(0xFF10B981),
@@ -88,7 +109,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFD1D5DB),
     ),
 
-    // 3. Sunset Orange (Orange-Pink)
+    // 4. Sunset Orange (Orange-Pink)
     ColorSchemeData(
       name: 'Sunset Orange',
       primary: const Color(0xFFF59E0B),
@@ -108,7 +129,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFFCD34D),
     ),
 
-    // 4. Purple Dream (Purple-Violet)
+    // 5. Purple Dream (Purple-Violet)
     ColorSchemeData(
       name: 'Purple Dream',
       primary: const Color(0xFF8B5CF6),
@@ -128,7 +149,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFDDD6FE),
     ),
 
-    // 5. Rose Gold (Rose-Pink)
+    // 6. Rose Gold (Rose-Pink)
     ColorSchemeData(
       name: 'Rose Gold',
       primary: const Color(0xFFEC4899),
@@ -148,7 +169,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFFBCFE8),
     ),
 
-    // 6. Teal Serenity (Teal-Cyan)
+    // 7. Teal Serenity (Teal-Cyan)
     ColorSchemeData(
       name: 'Teal Serenity',
       primary: const Color(0xFF14B8A6),
@@ -168,7 +189,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFCCFBF1),
     ),
 
-    // 7. Crimson Red (Red-Pink)
+    // 8. Crimson Red (Red-Pink)
     ColorSchemeData(
       name: 'Crimson Red',
       primary: const Color(0xFFEF4444),
@@ -188,7 +209,7 @@ class ThemeService extends GetxController {
       textSecondaryDark: const Color(0xFFFECACA),
     ),
 
-    // 8. Indigo Night (Indigo-Blue)
+    // 9. Indigo Night (Indigo-Blue)
     ColorSchemeData(
       name: 'Indigo Night',
       primary: const Color(0xFF6366F1),
@@ -270,10 +291,9 @@ class ThemeService extends GetxController {
         labelStyle: const TextStyle(color: Colors.white70),
         hintStyle: const TextStyle(color: Colors.white54),
       ),
-      textTheme: GoogleFonts.patrickHandTextTheme(text).apply(
-        bodyColor: Colors.white,
-        displayColor: Colors.white,
-      ),
+      textTheme: GoogleFonts.patrickHandTextTheme(
+        text,
+      ).apply(bodyColor: Colors.white, displayColor: Colors.white),
     );
   }
 
@@ -325,5 +345,3 @@ class ThemeService extends GetxController {
     isDarkMode.value = !isDarkMode.value;
   }
 }
-
-
