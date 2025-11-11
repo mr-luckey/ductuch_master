@@ -80,7 +80,7 @@ class _MainNavigationState extends State<MainNavigation> {
             width: 1,
           ),
         ),
-        navBarStyle: NavBarStyle.style1,
+        navBarStyle: NavBarStyle.style9,
         navBarHeight: navBarHeight,
       );
     });
