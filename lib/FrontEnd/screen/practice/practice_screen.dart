@@ -115,73 +115,81 @@ class _PracticeScreenState extends State<PracticeScreen> {
           : scheme.background;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
 
-      return Scaffold(
-        backgroundColor: backgroundColor,
-        appBar: AppBar(
+      return PopScope(
+        canPop: true,
+        onPopInvoked: (didPop) async {
+          if (didPop && ttsService.isPlaying) {
+            await ttsService.stop();
+          }
+        },
+        child: Scaffold(
           backgroundColor: backgroundColor,
-          title: Text(
-            'Practice',
-            style: TextStyle(
-              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
-              color: textColor,
-              fontWeight: FontWeight.bold,
-              fontSize: screenWidth > 600 ? 24 : 20,
+          appBar: AppBar(
+            backgroundColor: backgroundColor,
+            title: Text(
+              'Practice',
+              style: TextStyle(
+                fontFamily: themeService.fontFamily,
+                color: textColor,
+                fontWeight: FontWeight.bold,
+                fontSize: screenWidth > 600 ? 24 : 20,
+              ),
             ),
+            actions: [TtsSpeedDropdown()],
           ),
-          actions: [TtsSpeedDropdown()],
-        ),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth > 500
-                      ? 500
-                      : constraints.maxWidth,
-                ),
-                margin: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                  vertical: constraints.maxWidth > 500 ? 30 : 20,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(height: isSmallScreen ? 4 : 6),
-                    _buildTopBar(context, isSmallScreen, scheme, isDark),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
-                    _buildPracticeHeader(
-                      context,
-                      isSmallScreen,
-                      scheme,
-                      isDark,
-                    ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            _buildMainCard(
-                              context,
-                              isSmallScreen,
-                              scheme,
-                              isDark,
-                            ),
-                            SizedBox(height: isSmallScreen ? 20 : 24),
-                            _buildExternalNavigationControls(
-                              context,
-                              isSmallScreen,
-                              scheme,
-                              isDark,
-                            ),
-                            SizedBox(height: isSmallScreen ? 16 : 20),
-                          ],
+          body: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth > 500
+                        ? 500
+                        : constraints.maxWidth,
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                    vertical: constraints.maxWidth > 500 ? 30 : 20,
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: isSmallScreen ? 4 : 6),
+                      _buildTopBar(context, isSmallScreen, scheme, isDark),
+                      SizedBox(height: isSmallScreen ? 12 : 16),
+                      _buildPracticeHeader(
+                        context,
+                        isSmallScreen,
+                        scheme,
+                        isDark,
+                      ),
+                      SizedBox(height: isSmallScreen ? 12 : 16),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              _buildMainCard(
+                                context,
+                                isSmallScreen,
+                                scheme,
+                                isDark,
+                              ),
+                              SizedBox(height: isSmallScreen ? 20 : 24),
+                              _buildExternalNavigationControls(
+                                context,
+                                isSmallScreen,
+                                scheme,
+                                isDark,
+                              ),
+                              SizedBox(height: isSmallScreen ? 16 : 20),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       );
@@ -260,7 +268,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
+                fontFamily: ThemeService.to.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -395,7 +403,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: textColor.withOpacity(0.7),
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    fontFamily: ThemeService.to.fontFamily,
                   ),
                 ),
               ),

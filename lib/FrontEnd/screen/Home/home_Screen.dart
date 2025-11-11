@@ -3,7 +3,6 @@ import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,6 +32,7 @@ class HomePage extends StatelessWidget {
               children: [
                 _buildContentSection(
                   context,
+                  themeService,
                   scheme,
                   // isDark,
                   textColor,
@@ -51,6 +51,7 @@ class HomePage extends StatelessWidget {
 
   Widget _buildContentSection(
     BuildContext context,
+    ThemeService themeService,
     ColorSchemeData scheme,
     // bool isDark,
     Color textColor,
@@ -64,13 +65,13 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: isTablet ? 24 : 20),
+          // SizedBox(height: isTablet ? 24 : 20),
           Text(
             'Your Learning Path',
-            style: GoogleFonts.patrickHand(
+            style: themeService.getStyle(
               fontSize: titleSize,
-              color: textColor,
               fontWeight: FontWeight.bold,
+              color: textColor,
             ),
           ),
           SizedBox(height: isTablet ? 20 : 16),

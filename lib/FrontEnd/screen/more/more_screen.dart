@@ -3,6 +3,7 @@ import 'package:ductuch_master/FrontEnd/screen/practice/practice_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/categories/categories_list_screen.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Utilities/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -87,7 +88,10 @@ class MoreScreen extends StatelessWidget {
                             'Exam',
                             'Test your knowledge with timed exams',
                             Icons.quiz,
-                            () => Get.to(() => const ExamScreen()),
+                            () => NavigationHelper.pushWithBottomNav(
+                              context,
+                              const ExamScreen(),
+                            ),
                             isSmallScreen,
                             scheme,
                             isDark,
@@ -98,7 +102,10 @@ class MoreScreen extends StatelessWidget {
                             'Practice',
                             'Practice without time limits',
                             Icons.park_rounded,
-                            () => Get.to(() => const PracticeScreen()),
+                            () => NavigationHelper.pushWithBottomNav(
+                              context,
+                              const PracticeScreen(),
+                            ),
                             isSmallScreen,
                             scheme,
                             isDark,
@@ -109,7 +116,10 @@ class MoreScreen extends StatelessWidget {
                             'Categories',
                             'Learn words by category',
                             Icons.category,
-                            () => Get.to(() => const CategoriesListScreen()),
+                            () => NavigationHelper.pushWithBottomNav(
+                              context,
+                              const CategoriesListScreen(),
+                            ),
                             isSmallScreen,
                             scheme,
                             isDark,

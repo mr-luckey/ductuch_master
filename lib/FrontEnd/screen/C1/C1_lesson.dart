@@ -131,7 +131,7 @@ class C1LessonScreen extends StatelessWidget {
 //                           fontSize: 20,
 //                           fontWeight: FontWeight.w600,
 //                           color: textColor,
-//                           fontFamily: GoogleFonts.patrickHand().fontFamily,
+//                           fontFamily: themeService.fontFamily,
 //                         ),
 //                       ),
 //                     ),
@@ -180,7 +180,7 @@ class C1LessonScreen extends StatelessWidget {
 //                             style: TextStyle(
 //                               fontWeight: FontWeight.w600,
 //                               color: textColor,
-//                               fontFamily: GoogleFonts.patrickHand().fontFamily,
+//                               fontFamily: themeService.fontFamily,
 //                               decoration: isCompleted
 //                                   ? TextDecoration.lineThrough
 //                                   : TextDecoration.none,

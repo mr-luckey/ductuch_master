@@ -75,14 +75,21 @@ class _CategoryScreenState extends State<CategoryScreen> {
           : scheme.background;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
 
-      return Scaffold(
-        backgroundColor: backgroundColor,
-        appBar: AppBar(
+      return PopScope(
+        canPop: true,
+        onPopInvoked: (didPop) async {
+          if (didPop && ttsService.isPlaying) {
+            await ttsService.stop();
+          }
+        },
+        child: Scaffold(
+          backgroundColor: backgroundColor,
+          appBar: AppBar(
           backgroundColor: backgroundColor,
           title: Text(
             widget.categoryName,
             style: TextStyle(
-              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
+              fontFamily: themeService.fontFamily,
               color: textColor,
               fontWeight: FontWeight.bold,
               fontSize: screenWidth > 600 ? 24 : 20,
@@ -143,6 +150,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               );
             },
           ),
+        ),
         ),
       );
     });
@@ -220,7 +228,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
+                fontFamily: themeService.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -323,7 +331,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         fontWeight: FontWeight.w600,
                         color: textColor,
                         height: 1.2,
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        fontFamily: themeService.fontFamily,
                       ),
                     ),
                   ],
@@ -351,7 +359,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: textColor.withOpacity(0.7),
-                    fontFamily: GoogleFonts.patrickHand().fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                 ),
               ),
@@ -377,7 +385,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         style: TextStyle(
                           fontSize: isSmallScreen ? 14 : 15,
                           color: textColor.withOpacity(0.9),
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          fontFamily: themeService.fontFamily,
                         ),
                       ),
                     ),
@@ -411,7 +419,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     style: TextStyle(
                       fontSize: isSmallScreen ? 12 : 13,
                       color: textColor.withOpacity(0.6),
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                      fontFamily: themeService.fontFamily,
                     ),
                   ),
                 ],

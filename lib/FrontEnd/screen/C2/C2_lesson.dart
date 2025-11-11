@@ -3,6 +3,7 @@ import 'package:ductuch_master/FrontEnd/screen/A1/Learn.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/Utilities/Models/model.dart';
+import 'package:ductuch_master/Utilities/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -116,7 +117,7 @@ class C2LessonScreen extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: textColor,
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          fontFamily: themeService.fontFamily,
                         ),
                       ),
                     ),
@@ -165,7 +166,7 @@ class C2LessonScreen extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: textColor,
-                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                              fontFamily: themeService.fontFamily,
                               decoration: isCompleted
                                   ? TextDecoration.lineThrough
                                   : TextDecoration.none,
@@ -181,8 +182,7 @@ class C2LessonScreen extends StatelessWidget {
                                       topic['content'],
                                       style: TextStyle(
                                         color: textColor.withOpacity(0.7),
-                                        fontFamily: GoogleFonts.patrickHand()
-                                            .fontFamily,
+                                        fontFamily: themeService.fontFamily,
                                       ),
                                     ),
                                     const SizedBox(height: 8),
@@ -217,9 +217,7 @@ class C2LessonScreen extends StatelessWidget {
                                               ),
                                               fontSize: 11,
                                               fontWeight: FontWeight.w500,
-                                              fontFamily:
-                                                  GoogleFonts.patrickHand()
-                                                      .fontFamily,
+                                              fontFamily: themeService.fontFamily,
                                             ),
                                           ),
                                         ),
@@ -229,9 +227,7 @@ class C2LessonScreen extends StatelessWidget {
                                           style: TextStyle(
                                             color: textColor.withOpacity(0.6),
                                             fontSize: 12,
-                                            fontFamily:
-                                                GoogleFonts.patrickHand()
-                                                    .fontFamily,
+                                            fontFamily: themeService.fontFamily,
                                           ),
                                         ),
                                       ],
@@ -250,8 +246,9 @@ class C2LessonScreen extends StatelessWidget {
                                   color: textColor.withOpacity(0.5),
                                 ),
                           onTap: () {
-                            Get.to(
-                              () => PhraseScreen(),
+                            NavigationHelper.pushWithBottomNav(
+                              context,
+                              const PhraseScreen(),
                               // TopicDetailScreen(topic: topic, moduleId: moduleId),
                             );
                           },

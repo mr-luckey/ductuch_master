@@ -5,7 +5,6 @@ import 'package:ductuch_master/FrontEnd/screen/verbs/verbs_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/sentences/sentences_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/more/more_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:get/get.dart';
 // import 'package:ductuch_master/services/theme_service.dart'; // Import the theme service
@@ -112,7 +111,7 @@ class _MainNavigationState extends State<MainNavigation> {
         textStyle: TextStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: GoogleFonts.patrickHand().fontFamily,
+          fontFamily: themeService.fontFamily,
         ),
       ),
       PersistentBottomNavBarItem(
@@ -123,7 +122,7 @@ class _MainNavigationState extends State<MainNavigation> {
         textStyle: TextStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: GoogleFonts.patrickHand().fontFamily,
+          fontFamily: themeService.fontFamily,
         ),
       ),
       PersistentBottomNavBarItem(
@@ -134,7 +133,7 @@ class _MainNavigationState extends State<MainNavigation> {
         textStyle: TextStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: GoogleFonts.patrickHand().fontFamily,
+          fontFamily: themeService.fontFamily,
         ),
       ),
       PersistentBottomNavBarItem(
@@ -145,7 +144,7 @@ class _MainNavigationState extends State<MainNavigation> {
         textStyle: TextStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: GoogleFonts.patrickHand().fontFamily,
+          fontFamily: themeService.fontFamily,
         ),
       ),
       PersistentBottomNavBarItem(
@@ -156,7 +155,7 @@ class _MainNavigationState extends State<MainNavigation> {
         textStyle: TextStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: GoogleFonts.patrickHand().fontFamily,
+          fontFamily: themeService.fontFamily,
         ),
       ),
     ];

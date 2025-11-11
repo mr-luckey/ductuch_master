@@ -79,16 +79,19 @@ class _VerbsScreenState extends State<VerbsScreen>
   }
 
   void _nextVerb() {
+    if (_verbs.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
     _animationController.reset();
     final newIndex = (_currentVerbIndex + 1) % _verbs.length;
     lessonController.updateVerbsIndex(newIndex);
+    setState(() {});
     _animationController.forward();
   }
 
   void _previousVerb() {
+    if (_verbs.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
@@ -97,6 +100,7 @@ class _VerbsScreenState extends State<VerbsScreen>
     lessonController.updateVerbsIndex(
       newIndex < 0 ? _verbs.length - 1 : newIndex,
     );
+    setState(() {});
     _animationController.forward();
   }
 
@@ -139,11 +143,10 @@ class _VerbsScreenState extends State<VerbsScreen>
         appBar: AppBar(
           backgroundColor: backgroundColor,
           centerTitle: false,
-          title: const Text(
+          title: Text(
             'Verbs',
-            style: TextStyle(
-              overflow: TextOverflow.ellipsis,
-              fontWeight: FontWeight.bold,
+            style: themeService.getTitleMediumStyle(
+              color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
             ),
           ),
           actions: [const TtsSpeedDropdown()],
@@ -167,7 +170,13 @@ class _VerbsScreenState extends State<VerbsScreen>
                     SizedBox(height: isSmallScreen ? 4 : 6),
                     _buildTopBar(context, isSmallScreen, scheme, isDark),
                     SizedBox(height: isSmallScreen ? 12 : 16),
-                    _buildVerbHeader(context, isSmallScreen, scheme, isDark),
+                    _buildVerbHeader(
+                      context,
+                      themeService,
+                      isSmallScreen,
+                      scheme,
+                      isDark,
+                    ),
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     Expanded(
                       child: SingleChildScrollView(
@@ -175,6 +184,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                           children: [
                             _buildMainCard(
                               context,
+                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -182,6 +192,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                             SizedBox(height: isSmallScreen ? 20 : 24),
                             _buildExternalNavigationControls(
                               context,
+                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -236,6 +247,7 @@ class _VerbsScreenState extends State<VerbsScreen>
 
   Widget _buildVerbHeader(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -255,9 +267,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                     fontSize: isSmallScreen ? 10 : 11,
                     color: textColor.withOpacity(0.5),
                     letterSpacing: 1.0,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -273,7 +283,7 @@ class _VerbsScreenState extends State<VerbsScreen>
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
+                fontFamily: themeService.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -306,6 +316,7 @@ class _VerbsScreenState extends State<VerbsScreen>
 
   Widget _buildMainCard(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -363,9 +374,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                               style: TextStyle(
                                 fontSize: isSmallScreen ? 10 : 11,
                                 color: textColor.withOpacity(0.7),
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ],
@@ -379,9 +388,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                           fontWeight: FontWeight.w600,
                           color: textColor,
                           height: 1.2,
-                          fontFamily: Theme.of(
-                            context,
-                          ).textTheme.bodyLarge?.fontFamily,
+                          fontFamily: themeService.fontFamily,
                         ),
                       ),
                     ],
@@ -409,9 +416,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                     style: TextStyle(
                       fontSize: isSmallScreen ? 10 : 11,
                       color: textColor.withOpacity(0.7),
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.fontFamily,
+                      fontFamily: themeService.fontFamily,
                     ),
                   ),
                 ),
@@ -437,9 +442,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                           style: TextStyle(
                             fontSize: isSmallScreen ? 14 : 15,
                             color: textColor.withOpacity(0.9),
-                            fontFamily: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+                            fontFamily: themeService.fontFamily,
                           ),
                         ),
                       ),
@@ -481,9 +484,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                       style: TextStyle(
                         fontSize: isSmallScreen ? 13 : 14,
                         color: textColor.withOpacity(0.7),
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.fontFamily,
+                      fontFamily: themeService.fontFamily,
                       ),
                     ),
                   ),
@@ -519,9 +520,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                                 fontSize: isSmallScreen ? 14 : 16,
                                 fontWeight: FontWeight.w600,
                                 color: textColor,
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                             Icon(
@@ -556,9 +555,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                               style: TextStyle(
                                 fontSize: isSmallScreen ? 13 : 14,
                                 color: textColor.withOpacity(0.8),
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           );
@@ -595,6 +592,7 @@ class _VerbsScreenState extends State<VerbsScreen>
 
   Widget _buildExternalNavigationControls(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,

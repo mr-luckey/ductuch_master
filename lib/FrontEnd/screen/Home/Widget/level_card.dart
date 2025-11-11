@@ -1,5 +1,6 @@
 import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
@@ -147,7 +148,7 @@ class LevelCard extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: primaryColor,
-                              fontFamily: GoogleFonts.patrickHand().fontFamily,
+                              fontFamily: themeService.fontFamily,
                             ),
                           ),
                         ],
@@ -193,7 +194,7 @@ class LevelCard extends StatelessWidget {
                 fontSize: titleSize * 0.9,
                 fontWeight: FontWeight.bold,
                 color: primaryColor,
-                fontFamily: GoogleFonts.patrickHand().fontFamily,
+                fontFamily: ThemeService.to.fontFamily,
               ),
             ),
           ),
@@ -209,7 +210,7 @@ class LevelCard extends StatelessWidget {
                   fontSize: titleSize,
                   fontWeight: FontWeight.bold,
                   color: textColor,
-                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  fontFamily: ThemeService.to.fontFamily,
                 ),
               ),
               const SizedBox(height: 4),
@@ -218,7 +219,7 @@ class LevelCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: subtitleSize,
                   color: secondaryTextColor,
-                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  fontFamily: ThemeService.to.fontFamily,
                 ),
               ),
             ],
@@ -254,7 +255,7 @@ class LevelCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: fontSize,
                   color: secondaryTextColor,
-                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  fontFamily: themeService.fontFamily,
                 ),
               ),
               Text(
@@ -263,7 +264,7 @@ class LevelCard extends StatelessWidget {
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
                   color: textColor,
-                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  fontFamily: themeService.fontFamily,
                 ),
               ),
             ],
@@ -300,8 +301,9 @@ class LevelCard extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
                 onTap: () {
-                  Get.to(
-                    () => const ExamScreen(),
+                  NavigationHelper.pushWithBottomNav(
+                    context,
+                    const ExamScreen(),
                     arguments: {'level': level.level},
                   );
                 },
@@ -325,7 +327,7 @@ class LevelCard extends StatelessWidget {
                           fontSize: fontSize,
                           fontWeight: FontWeight.w700,
                           color: primaryColor,
-                          fontFamily: GoogleFonts.patrickHand().fontFamily,
+                          fontFamily: themeService.fontFamily,
                         ),
                       ),
                     ],

@@ -72,16 +72,19 @@ class _NounsScreenState extends State<NounsScreen>
   }
 
   void _nextNoun() {
+    if (_nouns.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
     _animationController.reset();
     final newIndex = (_currentNounIndex + 1) % _nouns.length;
     lessonController.updateNounsIndex(newIndex);
+    setState(() {});
     _animationController.forward();
   }
 
   void _previousNoun() {
+    if (_nouns.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
@@ -90,6 +93,7 @@ class _NounsScreenState extends State<NounsScreen>
     lessonController.updateNounsIndex(
       newIndex < 0 ? _nouns.length - 1 : newIndex,
     );
+    setState(() {});
     _animationController.forward();
   }
 
@@ -137,11 +141,10 @@ class _NounsScreenState extends State<NounsScreen>
         appBar: AppBar(
           backgroundColor: backgroundColor,
           centerTitle: false,
-          title: const Text(
+          title: Text(
             'Nouns',
-            style: TextStyle(
-              overflow: TextOverflow.ellipsis,
-              fontWeight: FontWeight.bold,
+            style: themeService.getTitleMediumStyle(
+              color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
             ),
           ),
           actions: [const TtsSpeedDropdown()],
@@ -165,7 +168,13 @@ class _NounsScreenState extends State<NounsScreen>
                     SizedBox(height: isSmallScreen ? 4 : 6),
                     _buildTopBar(context, isSmallScreen, scheme, isDark),
                     SizedBox(height: isSmallScreen ? 12 : 16),
-                    _buildNounHeader(context, isSmallScreen, scheme, isDark),
+                    _buildNounHeader(
+                      context,
+                      themeService,
+                      isSmallScreen,
+                      scheme,
+                      isDark,
+                    ),
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     Expanded(
                       child: SingleChildScrollView(
@@ -173,6 +182,7 @@ class _NounsScreenState extends State<NounsScreen>
                           children: [
                             _buildMainCard(
                               context,
+                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -180,6 +190,7 @@ class _NounsScreenState extends State<NounsScreen>
                             SizedBox(height: isSmallScreen ? 20 : 24),
                             _buildExternalNavigationControls(
                               context,
+                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -234,6 +245,7 @@ class _NounsScreenState extends State<NounsScreen>
 
   Widget _buildNounHeader(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -253,9 +265,7 @@ class _NounsScreenState extends State<NounsScreen>
                     fontSize: isSmallScreen ? 10 : 11,
                     color: textColor.withOpacity(0.5),
                     letterSpacing: 1.0,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -271,7 +281,7 @@ class _NounsScreenState extends State<NounsScreen>
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
+                fontFamily: themeService.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -304,6 +314,7 @@ class _NounsScreenState extends State<NounsScreen>
 
   Widget _buildMainCard(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -360,9 +371,7 @@ class _NounsScreenState extends State<NounsScreen>
                               style: TextStyle(
                                 fontSize: isSmallScreen ? 10 : 11,
                                 color: textColor.withOpacity(0.7),
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ],
@@ -380,9 +389,7 @@ class _NounsScreenState extends State<NounsScreen>
                                 fontWeight: FontWeight.w600,
                                 color: textColor,
                                 height: 1.2,
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ),
@@ -428,9 +435,7 @@ class _NounsScreenState extends State<NounsScreen>
                                 fontWeight: FontWeight.w500,
                                 color: textColor.withOpacity(0.9),
                                 height: 1.2,
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ),
@@ -487,9 +492,7 @@ class _NounsScreenState extends State<NounsScreen>
                     style: TextStyle(
                       fontSize: isSmallScreen ? 10 : 11,
                       color: textColor.withOpacity(0.7),
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.fontFamily,
+                      fontFamily: themeService.fontFamily,
                     ),
                   ),
                 ),
@@ -512,9 +515,7 @@ class _NounsScreenState extends State<NounsScreen>
                     style: TextStyle(
                       fontSize: isSmallScreen ? 14 : 15,
                       color: textColor.withOpacity(0.9),
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.fontFamily,
+                  fontFamily: themeService.fontFamily,
                     ),
                   ),
                   if (currentNoun.meaning != null) ...[
@@ -524,9 +525,7 @@ class _NounsScreenState extends State<NounsScreen>
                       style: TextStyle(
                         fontSize: isSmallScreen ? 12 : 13,
                         color: textColor.withOpacity(0.6),
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                       ),
                     ),
                   ],
@@ -560,6 +559,7 @@ class _NounsScreenState extends State<NounsScreen>
 
   Widget _buildExternalNavigationControls(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,

@@ -8,8 +8,8 @@ class TtsService extends GetxController {
 
   final FlutterTts _flutterTts = FlutterTts();
   
-  // Global voice speed (0.5, 0.8, or 1.0)
-  final RxDouble _globalSpeed = 1.0.obs;
+  // Global voice speed (0.5 or 0.8)
+  final RxDouble _globalSpeed = 0.8.obs;
   
   // Whether TTS is currently playing
   final RxBool _isPlaying = false.obs;
@@ -46,10 +46,10 @@ class TtsService extends GetxController {
     });
   }
 
-  /// Set global voice speed (0.5, 0.8, or 1.0)
+  /// Set global voice speed (0.5 or 0.8)
   Future<void> setGlobalSpeed(double speed) async {
-    if (speed != 0.5 && speed != 0.8 && speed != 1.0) {
-      throw ArgumentError('Speed must be 0.5, 0.8, or 1.0');
+    if (speed != 0.5 && speed != 0.8) {
+      throw ArgumentError('Speed must be 0.5 or 0.8');
     }
     _globalSpeed.value = speed;
     await _flutterTts.setSpeechRate(speed);

@@ -53,7 +53,8 @@ class PhraseScreen extends StatefulWidget {
 
 class _PhraseScreenState extends State<PhraseScreen> {
   int _currentPhraseIndex = 0;
-  double _currentRate = 1.0;
+  int _highestReachedIndex = 0; // Track highest index reached for progress
+  double _currentRate = 0.8;
   bool _repeatOn = false;
   bool _isPlaying = false;
   late FlutterTts _flutterTts;
@@ -116,17 +117,12 @@ class _PhraseScreenState extends State<PhraseScreen> {
         return;
       }
 
-      // Mark phrase as listened in controller and auto-advance if possible
+      // Mark phrase as listened in controller (but don't auto-advance)
       _lessonController.markPhraseListened(
         topicId: _topicId,
         phraseIndex: _currentPhraseIndex,
         totalPhrases: _phrases.length,
       );
-
-      // Auto-advance to next phrase if any
-      if (_currentPhraseIndex < _phrases.length - 1) {
-        _nextPhrase();
-      }
     });
 
     _flutterTts.setErrorHandler((msg) {
@@ -193,6 +189,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
     }
     setState(() {
       _currentPhraseIndex = (_currentPhraseIndex + 1) % _phrases.length;
+      // Update highest reached index (only increases, never decreases)
+      if (_currentPhraseIndex > _highestReachedIndex) {
+        _highestReachedIndex = _currentPhraseIndex;
+      }
       _isPlaying = false;
     });
   }
@@ -234,78 +234,95 @@ class _PhraseScreenState extends State<PhraseScreen> {
           ? scheme.textSecondaryDark
           : scheme.textSecondary;
 
-      return Scaffold(
-        backgroundColor: backgroundColor,
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Container(
-                width: double.infinity,
-                constraints: BoxConstraints(
-                  maxWidth: constraints.maxWidth > 500
-                      ? 500
-                      : constraints.maxWidth,
-                ),
-                margin: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                  vertical: constraints.maxWidth > 500 ? 30 : 20,
-                ),
-                child: Column(
-                  children: [
-                    // Status spacer
-                    SizedBox(height: isSmallScreen ? 4 : 6),
+      return PopScope(
+        canPop: true,
+        onPopInvoked: (didPop) async {
+          if (didPop) {
+            // Stop TTS if playing when back is pressed
+            if (_isPlaying) {
+              await _flutterTts.stop();
+            }
+          }
+        },
+        child: Scaffold(
+          backgroundColor: backgroundColor,
+          body: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                return Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    maxWidth: constraints.maxWidth > 500
+                        ? 500
+                        : constraints.maxWidth,
+                  ),
+                  margin: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth > 500 ? 20 : 16,
+                    vertical: constraints.maxWidth > 500 ? 30 : 20,
+                  ),
+                  child: Column(
+                    children: [
+                      // Status spacer
+                      SizedBox(height: isSmallScreen ? 4 : 6),
 
-                    // Top bar
-                    _buildTopBar(isSmallScreen, textColor, secondaryTextColor),
+                      // Top bar
+                      _buildTopBar(
+                        isSmallScreen,
+                        textColor,
+                        secondaryTextColor,
+                      ),
 
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                      SizedBox(height: isSmallScreen ? 12 : 16),
 
-                    // Lesson header
-                    _buildLessonHeader(
-                      isSmallScreen,
-                      textColor,
-                      secondaryTextColor,
-                    ),
+                      // Lesson header
+                      _buildLessonHeader(
+                        isSmallScreen,
+                        textColor,
+                        secondaryTextColor,
+                        themeService,
+                      ),
 
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                      SizedBox(height: isSmallScreen ? 12 : 16),
 
-                    // Main card
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            _buildMainCard(
-                              currentPhrase,
-                              isSmallScreen,
-                              textColor,
-                              secondaryTextColor,
-                              isDark,
-                              scheme,
-                            ),
-                            SizedBox(height: isSmallScreen ? 20 : 24),
+                      // Main card
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              _buildMainCard(
+                                currentPhrase,
+                                isSmallScreen,
+                                textColor,
+                                secondaryTextColor,
+                                isDark,
+                                scheme,
+                                themeService,
+                              ),
+                              SizedBox(height: isSmallScreen ? 20 : 24),
 
-                            // External Navigation Controls
-                            _buildExternalNavigationControls(
-                              isSmallScreen,
-                              textColor,
-                              isDark,
-                              scheme,
-                            ),
+                              // External Navigation Controls
+                              _buildExternalNavigationControls(
+                                isSmallScreen,
+                                textColor,
+                                isDark,
+                                scheme,
+                              ),
 
-                            SizedBox(height: isSmallScreen ? 16 : 20),
-                          ],
+                              SizedBox(height: isSmallScreen ? 16 : 20),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ),
 
-        // Bottom navigation
-        // bottomNavigationBar: _buildBottomNav(isSmallScreen),
+          // Bottom navigation
+          // bottomNavigationBar: _buildBottomNav(isSmallScreen),
+        ),
       );
     });
   }
@@ -344,6 +361,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     bool isSmallScreen,
     Color textColor,
     Color secondaryTextColor,
+    ThemeService themeService,
   ) {
     return Row(
       children: [
@@ -359,9 +377,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     fontSize: isSmallScreen ? 10 : 11,
                     color: secondaryTextColor.withOpacity(0.8),
                     letterSpacing: 1.0,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -371,7 +387,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 '•',
                 style: TextStyle(
                   color: secondaryTextColor.withOpacity(0.3),
-                  fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
+                  fontFamily: themeService.fontFamily,
                 ),
               ),
               SizedBox(width: isSmallScreen ? 2 : 4),
@@ -399,7 +415,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: secondaryTextColor,
-                fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
+                fontFamily: themeService.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -439,8 +455,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
     Color secondaryTextColor,
     bool isDark,
     dynamic scheme,
+    ThemeService themeService,
   ) {
-    final listenedCount = _lessonController.listenedCountForTopic(_topicId);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
@@ -562,9 +578,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: secondaryTextColor,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                 ),
               ),
@@ -585,9 +599,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: secondaryTextColor,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                 ),
               ),
@@ -650,9 +662,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   style: TextStyle(
                     fontSize: isSmallScreen ? 12 : 13,
                     color: secondaryTextColor.withOpacity(0.8),
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                 ),
               ],
@@ -662,11 +672,16 @@ class _PhraseScreenState extends State<PhraseScreen> {
           SizedBox(height: isSmallScreen ? 12 : 16),
 
           // Play controls (only rate controls and repeat, no navigation)
-          _buildRateControls(isSmallScreen, textColor, secondaryTextColor),
+          _buildRateControls(
+            isSmallScreen,
+            textColor,
+            secondaryTextColor,
+            themeService,
+          ),
 
           SizedBox(height: isSmallScreen ? 12 : 16),
 
-          // Progress bar
+          // Progress bar (based on highest reached index, not listened count)
           Container(
             height: isSmallScreen ? 4 : 6,
             width: double.infinity,
@@ -678,7 +693,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
               alignment: Alignment.centerLeft,
               widthFactor: _phrases.isEmpty
                   ? 0.0
-                  : (listenedCount / _phrases.length).clamp(0.0, 1.0),
+                  : ((_highestReachedIndex + 1) / _phrases.length).clamp(
+                      0.0,
+                      1.0,
+                    ),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(3),
@@ -696,15 +714,33 @@ class _PhraseScreenState extends State<PhraseScreen> {
     bool isSmallScreen,
     Color textColor,
     Color secondaryTextColor,
+    ThemeService themeService,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildRateButton(0.8, isSmallScreen, textColor, secondaryTextColor),
+        _buildRateButton(
+          0.5,
+          isSmallScreen,
+          textColor,
+          secondaryTextColor,
+          themeService,
+        ),
         SizedBox(width: isSmallScreen ? 8 : 12),
-        _buildRateButton(1.0, isSmallScreen, textColor, secondaryTextColor),
+        _buildRateButton(
+          0.8,
+          isSmallScreen,
+          textColor,
+          secondaryTextColor,
+          themeService,
+        ),
         SizedBox(width: isSmallScreen ? 8 : 12),
-        _buildRepeatButton(isSmallScreen, textColor, secondaryTextColor),
+        _buildRepeatButton(
+          isSmallScreen,
+          textColor,
+          secondaryTextColor,
+          themeService,
+        ),
       ],
     );
   }
@@ -715,10 +751,6 @@ class _PhraseScreenState extends State<PhraseScreen> {
     bool isDark,
     dynamic scheme,
   ) {
-    final isCurrentListened = _lessonController.isPhraseListened(
-      _topicId,
-      _currentPhraseIndex,
-    );
     return Container(
       padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 20 : 40),
       child: Row(
@@ -791,16 +823,14 @@ class _PhraseScreenState extends State<PhraseScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
               border: Border.all(color: textColor.withOpacity(0.1)),
-              color: textColor.withOpacity(isCurrentListened ? 0.08 : 0.04),
+              color: textColor.withOpacity(0.08),
             ),
             child: IconButton(
-              onPressed: isCurrentListened ? _nextPhrase : null,
+              onPressed: _nextPhrase,
               icon: Icon(
                 Icons.chevron_right,
                 size: isSmallScreen ? 28 : 32,
-                color: isCurrentListened
-                    ? textColor.withOpacity(0.9)
-                    : textColor.withOpacity(0.3),
+                color: textColor.withOpacity(0.9),
               ),
               padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
             ),
@@ -815,6 +845,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     bool isSmallScreen,
     Color textColor,
     Color secondaryTextColor,
+    ThemeService themeService,
   ) {
     final isSelected = _currentRate == rate;
     return Container(
@@ -841,7 +872,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 fontSize: isSmallScreen ? 14 : 16,
                 fontWeight: FontWeight.w500,
                 color: isSelected ? textColor : secondaryTextColor,
-                fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
+                fontFamily: themeService.fontFamily,
               ),
             ),
           ),
@@ -854,6 +885,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     bool isSmallScreen,
     Color textColor,
     Color secondaryTextColor,
+    ThemeService themeService,
   ) {
     return Container(
       decoration: BoxDecoration(
@@ -888,9 +920,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     fontSize: isSmallScreen ? 14 : 16,
                     fontWeight: FontWeight.w500,
                     color: _repeatOn ? textColor : secondaryTextColor,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                 ),
               ],

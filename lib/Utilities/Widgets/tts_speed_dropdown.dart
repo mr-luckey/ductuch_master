@@ -2,7 +2,6 @@ import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// TTS Speed Dropdown Widget
 /// Displays a dropdown menu in the app bar for controlling global TTS speed
@@ -35,6 +34,7 @@ class TtsSpeedDropdown extends StatelessWidget {
             '0.5x',
             textColor,
             accentColor,
+            themeService.fontFamily,
           ),
           _buildSpeedMenuItem(
             0.8,
@@ -42,8 +42,8 @@ class TtsSpeedDropdown extends StatelessWidget {
             '0.8x',
             textColor,
             accentColor,
+            themeService.fontFamily,
           ),
-          _buildSpeedMenuItem(1.0, currentSpeed, '1x', textColor, accentColor),
         ],
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -57,9 +57,9 @@ class TtsSpeedDropdown extends StatelessWidget {
               ),
               SizedBox(width: 4),
               Text(
-                '${currentSpeed}x',
+                '${currentSpeed.toStringAsFixed(1)}x',
                 style: TextStyle(
-                  fontFamily: GoogleFonts.patrickHand().fontFamily,
+                  fontFamily: themeService.fontFamily,
                   color: textColor.withOpacity(0.9),
                   fontSize: isTablet ? 14 : 12,
                 ),
@@ -77,6 +77,7 @@ class TtsSpeedDropdown extends StatelessWidget {
     String label,
     Color textColor,
     Color accentColor,
+    String fontFamily,
   ) {
     final isSelected = speed == currentSpeed;
 
@@ -94,6 +95,7 @@ class TtsSpeedDropdown extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              fontFamily: fontFamily,
             ),
           ),
         ],

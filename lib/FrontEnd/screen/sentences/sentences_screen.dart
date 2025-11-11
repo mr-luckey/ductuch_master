@@ -5,7 +5,6 @@ import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Sentence model
 class SentenceData {
@@ -67,16 +66,19 @@ class _SentencesScreenState extends State<SentencesScreen>
   }
 
   void _nextSentence() {
+    if (_sentences.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
     _animationController.reset();
     final newIndex = (_currentSentenceIndex + 1) % _sentences.length;
     lessonController.updateSentencesIndex(newIndex);
+    setState(() {});
     _animationController.forward();
   }
 
   void _previousSentence() {
+    if (_sentences.isEmpty) return;
     if (ttsService.isPlaying) {
       ttsService.stop();
     }
@@ -85,6 +87,7 @@ class _SentencesScreenState extends State<SentencesScreen>
     lessonController.updateSentencesIndex(
       newIndex < 0 ? _sentences.length - 1 : newIndex,
     );
+    setState(() {});
     _animationController.forward();
   }
 
@@ -127,11 +130,10 @@ class _SentencesScreenState extends State<SentencesScreen>
         appBar: AppBar(
           backgroundColor: backgroundColor,
           centerTitle: false,
-          title: const Text(
+          title: Text(
             'Sentences',
-            style: TextStyle(
-              overflow: TextOverflow.ellipsis,
-              fontWeight: FontWeight.bold,
+            style: themeService.getTitleMediumStyle(
+              color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
             ),
           ),
           actions: [const TtsSpeedDropdown()],
@@ -157,6 +159,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     _buildSentenceHeader(
                       context,
+                      themeService,
                       isSmallScreen,
                       scheme,
                       isDark,
@@ -168,6 +171,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                           children: [
                             _buildMainCard(
                               context,
+                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -175,6 +179,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                             SizedBox(height: isSmallScreen ? 20 : 24),
                             _buildExternalNavigationControls(
                               context,
+                              themeService,
                               isSmallScreen,
                               scheme,
                               isDark,
@@ -229,6 +234,7 @@ class _SentencesScreenState extends State<SentencesScreen>
 
   Widget _buildSentenceHeader(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -248,9 +254,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                     fontSize: isSmallScreen ? 10 : 11,
                     color: textColor.withOpacity(0.5),
                     letterSpacing: 1.0,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.fontFamily,
+                    fontFamily: themeService.fontFamily,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -266,7 +270,7 @@ class _SentencesScreenState extends State<SentencesScreen>
               style: TextStyle(
                 fontSize: isSmallScreen ? 10 : 11,
                 color: textColor.withOpacity(0.6),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
+                fontFamily: themeService.fontFamily,
               ),
             ),
             SizedBox(width: isSmallScreen ? 6 : 8),
@@ -299,6 +303,7 @@ class _SentencesScreenState extends State<SentencesScreen>
 
   Widget _buildMainCard(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,
@@ -355,9 +360,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                               style: TextStyle(
                                 fontSize: isSmallScreen ? 10 : 11,
                                 color: textColor.withOpacity(0.7),
-                                fontFamily: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ],
@@ -371,9 +374,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                           fontWeight: FontWeight.w600,
                           color: textColor,
                           height: 1.2,
-                          fontFamily: Theme.of(
-                            context,
-                          ).textTheme.bodyMedium?.fontFamily,
+                          fontFamily: themeService.fontFamily,
                         ),
                       ),
                     ],
@@ -401,7 +402,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                     style: TextStyle(
                       fontSize: isSmallScreen ? 10 : 11,
                       color: textColor.withOpacity(0.7),
-                      fontFamily: GoogleFonts.patrickHand().fontFamily,
+                      fontFamily: themeService.fontFamily,
                     ),
                   ),
                 ),
@@ -427,9 +428,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                           style: TextStyle(
                             fontSize: isSmallScreen ? 14 : 15,
                             color: textColor.withOpacity(0.9),
-                            fontFamily: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.fontFamily,
+                            fontFamily: themeService.fontFamily,
                           ),
                         ),
                       ),
@@ -466,9 +465,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                       style: TextStyle(
                         fontSize: isSmallScreen ? 12 : 13,
                         color: textColor.withOpacity(0.6),
-                        fontFamily: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.fontFamily,
+                        fontFamily: themeService.fontFamily,
                       ),
                     ),
                   ],
@@ -502,6 +499,7 @@ class _SentencesScreenState extends State<SentencesScreen>
 
   Widget _buildExternalNavigationControls(
     BuildContext context,
+    ThemeService themeService,
     bool isSmallScreen,
     scheme,
     bool isDark,

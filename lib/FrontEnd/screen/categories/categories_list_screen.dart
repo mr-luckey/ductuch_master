@@ -3,6 +3,7 @@ import 'package:ductuch_master/FrontEnd/screen/categories/category_data.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Utilities/navigation_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -161,8 +162,9 @@ class _CategoriesListScreenState extends State<CategoriesListScreen> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Get.to(
-              () => CategoryScreen(categoryName: categoryName, words: words),
+            NavigationHelper.pushWithBottomNav(
+              context,
+              CategoryScreen(categoryName: categoryName, words: words),
             );
           },
           borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),

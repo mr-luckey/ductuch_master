@@ -1,7 +1,6 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
@@ -130,8 +129,7 @@ class ModuleCard extends StatelessWidget {
                                     color: scheme.accentTeal,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily:
-                                        GoogleFonts.patrickHand().fontFamily,
+                                    fontFamily: themeService.fontFamily,
                                   ),
                                 ),
                               ],
@@ -158,8 +156,7 @@ class ModuleCard extends StatelessWidget {
                                     color: textColor,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    fontFamily:
-                                        GoogleFonts.patrickHand().fontFamily,
+                                    fontFamily: themeService.fontFamily,
                                   ),
                                 ),
                               ],
@@ -175,7 +172,7 @@ class ModuleCard extends StatelessWidget {
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         color: textColor,
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        fontFamily: themeService.fontFamily,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -187,7 +184,7 @@ class ModuleCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         color: textColor.withOpacity(0.6),
-                        fontFamily: GoogleFonts.patrickHand().fontFamily,
+                        fontFamily: themeService.fontFamily,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -220,8 +217,7 @@ class ModuleCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: textColor.withOpacity(0.6),
-                                fontFamily:
-                                    GoogleFonts.patrickHand().fontFamily,
+                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ),
