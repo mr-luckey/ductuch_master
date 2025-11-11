@@ -1,9 +1,11 @@
 import 'package:ductuch_master/backend/models/level_model.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:ductuch_master/services/theme_service.dart'; // Import the theme service
 
 class LevelCard extends StatelessWidget {
   final LevelModel level;
@@ -13,6 +15,7 @@ class LevelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lessonController = Get.find<LessonController>();
+    final themeService = ThemeService.to; // Get theme service instance
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
     final cardHeight = isTablet ? 200.0 : 180.0;
@@ -21,24 +24,27 @@ class LevelCard extends StatelessWidget {
     final titleSize = isTablet ? 24.0 : 20.0;
     final subtitleSize = isTablet ? 14.0 : 12.0;
 
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final isDark = theme.brightness == Brightness.dark;
+    // Use theme service colors instead of Theme.of(context)
+    final isDark = themeService.isDarkMode.value;
+    final scheme = themeService.currentScheme;
 
-    final backgroundColor = theme.cardColor;
-    final borderColor = theme.dividerColor.withOpacity(0.3);
-    final textColor =
-        theme.textTheme.titleMedium?.color ?? colorScheme.onSurface;
-    final secondaryTextColor =
-        theme.textTheme.bodyMedium?.color?.withOpacity(0.7) ??
-        colorScheme.onSurfaceVariant;
-    final primaryColor = colorScheme.primary;
+    // Get colors based on current theme mode
+    final backgroundColor = isDark ? scheme.surfaceDark : scheme.surface;
+    final backgroundDarkColor = isDark
+        ? scheme.backgroundDark
+        : scheme.background;
+    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+    final secondaryTextColor = isDark
+        ? scheme.textSecondaryDark
+        : scheme.textSecondary;
+    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
     final badgeColor = primaryColor.withOpacity(0.12);
     final badgeBorderColor = primaryColor.withOpacity(0.28);
+    final borderColor = primaryColor.withOpacity(0.1);
 
     return Card(
       clipBehavior: Clip.antiAlias,
-      elevation: theme.cardTheme.elevation ?? (isDark ? 0 : 1.5),
+      elevation: isDark ? 0 : 1.5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(color: borderColor),
@@ -98,7 +104,13 @@ class LevelCard extends StatelessWidget {
                     );
                   }),
                 ),
-                if (level.isLocked) _buildLockedOverlay(context, isDark),
+                if (level.isLocked)
+                  _buildLockedOverlay(
+                    context,
+                    isDark,
+                    textColor,
+                    backgroundDarkColor,
+                  ),
                 // PASS Tag
                 Obx(() {
                   final passed = Get.find<LessonController>().isLevelPassed(
@@ -135,9 +147,7 @@ class LevelCard extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                               color: primaryColor,
-                              fontFamily: Theme.of(
-                                context,
-                              ).textTheme.headlineSmall?.fontFamily,
+                              fontFamily: GoogleFonts.patrickHand().fontFamily,
                             ),
                           ),
                         ],
@@ -227,7 +237,10 @@ class LevelCard extends StatelessWidget {
     double fontSize,
     int dynamicProgress,
   ) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final themeService = ThemeService.to;
+    final scheme = themeService.currentScheme;
+    final backgroundColor = isDark ? scheme.backgroundDark : scheme.background;
+
     final lessonController = Get.find<LessonController>();
     final isPassed = lessonController.isLevelPassed(level.level);
     return Column(
@@ -260,7 +273,7 @@ class LevelCard extends StatelessWidget {
             height: 6,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3),
-              color: colorScheme.surfaceVariant.withOpacity(0.35),
+              color: backgroundColor.withOpacity(0.35),
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
@@ -326,16 +339,18 @@ class LevelCard extends StatelessWidget {
     );
   }
 
-  Widget _buildLockedOverlay(BuildContext context, bool isDark) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final onSurface =
-        Theme.of(context).textTheme.titleMedium?.color ?? colorScheme.onSurface;
+  Widget _buildLockedOverlay(
+    BuildContext context,
+    bool isDark,
+    Color textColor,
+    Color backgroundColor,
+  ) {
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surface.withOpacity(isDark ? 0.7 : 0.7),
+        color: backgroundColor.withOpacity(isDark ? 0.7 : 0.7),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Center(child: Icon(Icons.lock, color: onSurface, size: 32)),
+      child: Center(child: Icon(Icons.lock, color: textColor, size: 32)),
     );
   }
 }

@@ -19,23 +19,45 @@ class HomePage extends StatelessWidget {
     return Obx(() {
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
-      final backgroundColor = isDark
-          ? scheme.backgroundDark
-          : scheme.background;
+      // final backgroundColor = scheme.background;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
+      final surfaceColor = scheme.surface;
 
       return Scaffold(
-        backgroundColor: backgroundColor,
+        backgroundColor: Colors.white,
+        // backgroundColor: backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Column(children: [_buildContentSection(context, scheme, isDark, textColor, padding, titleSize, isTablet)]),
+            child: Column(
+              children: [
+                _buildContentSection(
+                  context,
+                  scheme,
+                  // isDark,
+                  textColor,
+                  surfaceColor,
+                  padding,
+                  titleSize,
+                  isTablet,
+                ),
+              ],
+            ),
           ),
         ),
       );
     });
   }
 
-  Widget _buildContentSection(BuildContext context, scheme, bool isDark, Color textColor, double padding, double titleSize, bool isTablet) {
+  Widget _buildContentSection(
+    BuildContext context,
+    ColorSchemeData scheme,
+    // bool isDark,
+    Color textColor,
+    Color surfaceColor,
+    double padding,
+    double titleSize,
+    bool isTablet,
+  ) {
     return Padding(
       padding: EdgeInsets.all(padding),
       child: Column(
@@ -44,10 +66,9 @@ class HomePage extends StatelessWidget {
           SizedBox(height: isTablet ? 24 : 20),
           Text(
             'Your Learning Path',
-            style: TextStyle(
+            style: GoogleFonts.patrickHand(
               fontSize: titleSize,
               color: textColor,
-              fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
               fontWeight: FontWeight.bold,
             ),
           ),
