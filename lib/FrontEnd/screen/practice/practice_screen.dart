@@ -71,7 +71,8 @@ class _PracticeScreenState extends State<PracticeScreen>
       _isLoading = false;
     });
     // Ensure saved index is within bounds
-    if (_practiceItems.isNotEmpty && _currentItemIndex >= _practiceItems.length) {
+    if (_practiceItems.isNotEmpty &&
+        _currentItemIndex >= _practiceItems.length) {
       lessonController.updatePracticeIndex(0);
     }
     _fadeController.forward();
@@ -126,9 +127,7 @@ class _PracticeScreenState extends State<PracticeScreen>
 
         return Scaffold(
           backgroundColor: backgroundColor,
-          body: Center(
-            child: CircularProgressIndicator(color: textColor),
-          ),
+          body: Center(child: CircularProgressIndicator(color: textColor)),
         );
       });
     }
@@ -150,24 +149,25 @@ class _PracticeScreenState extends State<PracticeScreen>
         },
         child: Scaffold(
           backgroundColor: backgroundColor,
-          appBar: AppBar(
-            backgroundColor: backgroundColor,
-            elevation: 0,
-            title: Hero(
-              tag: 'practice_title',
-              child: Material(
-                color: Colors.transparent,
-                child: Text(
-                  'Practice',
-                  style: themeService.getTitleLargeStyle(color: textColor)
-                      .copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            actions: [const TtsSpeedDropdown()],
-          ),
+
+          // appBar: AppBar(
+          //   backgroundColor: backgroundColor,
+          //   elevation: 0,
+          //   title: Hero(
+          //     tag: 'practice_title',
+          //     child: Material(
+          //       color: Colors.transparent,
+          //       child: Text(
+          //         'Practice',
+          //         style: themeService.getTitleLargeStyle(color: textColor)
+          //             .copyWith(
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          //   actions: [const TtsSpeedDropdown()],
+          // ),
           body: SafeArea(
             child: FadeTransition(
               opacity: _fadeAnimation,
@@ -187,7 +187,7 @@ class _PracticeScreenState extends State<PracticeScreen>
                     child: Column(
                       children: [
                         SizedBox(height: isSmallScreen ? 4 : 6),
-                        _buildTopBar(context, isSmallScreen, scheme, isDark),
+                        // _buildTopBar(context, isSmallScreen, scheme, isDark),
                         SizedBox(height: isSmallScreen ? 12 : 16),
                         _buildPracticeHeader(
                           context,
@@ -283,11 +283,9 @@ class _PracticeScreenState extends State<PracticeScreen>
         Flexible(
           child: Text(
             'Practice Mode',
-            style: themeService.getLabelSmallStyle(
-              color: textColor.withOpacity(0.5),
-            ).copyWith(
-              letterSpacing: 1.0,
-            ),
+            style: themeService
+                .getLabelSmallStyle(color: textColor.withOpacity(0.5))
+                .copyWith(letterSpacing: 1.0),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -316,12 +314,13 @@ class _PracticeScreenState extends State<PracticeScreen>
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
-                            ? textColor.withOpacity(0.3)
-                            : textColor.withOpacity(0.15),
+                        ? textColor.withOpacity(0.3)
+                        : textColor.withOpacity(0.15),
                   ),
                 );
               }),
             ),
+            TtsSpeedDropdown(),
           ],
         ),
       ],
@@ -407,7 +406,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             gradient: LinearGradient(
-                                              colors: [primaryColor, secondaryColor],
+                                              colors: [
+                                                primaryColor,
+                                                secondaryColor,
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -415,10 +417,12 @@ class _PracticeScreenState extends State<PracticeScreen>
                                         Text(
                                           currentItem.type.toUpperCase(),
                                           style: themeService
-                                              .getLabelSmallStyle(color: primaryColor)
+                                              .getLabelSmallStyle(
+                                                color: primaryColor,
+                                              )
                                               .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -441,10 +445,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                                     style: themeService
                                         .getTitleLargeStyle(color: Colors.white)
                                         .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: isSmallScreen ? 22 : 28,
-                                      height: 1.2,
-                                    ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: isSmallScreen ? 22 : 28,
+                                          height: 1.2,
+                                        ),
                                   ),
                                 ),
                               ),
@@ -552,11 +556,16 @@ class _PracticeScreenState extends State<PracticeScreen>
                                         () => IconButton(
                                           onPressed: _playCurrentItem,
                                           icon: Icon(
-                                            ttsService.isTextPlaying(currentItem.german)
+                                            ttsService.isTextPlaying(
+                                                  currentItem.german,
+                                                )
                                                 ? Icons.volume_up
                                                 : Icons.volume_up_outlined,
                                             size: isSmallScreen ? 18 : 20,
-                                            color: ttsService.isTextPlaying(currentItem.german)
+                                            color:
+                                                ttsService.isTextPlaying(
+                                                  currentItem.german,
+                                                )
                                                 ? primaryColor
                                                 : textColor.withOpacity(0.8),
                                           ),
@@ -612,24 +621,28 @@ class _PracticeScreenState extends State<PracticeScreen>
                               splashColor: primaryColor.withOpacity(0.2),
                               highlightColor: primaryColor.withOpacity(0.1),
                               child: Padding(
-                                padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                                padding: EdgeInsets.all(
+                                  isSmallScreen ? 14 : 16,
+                                ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Examples',
                                       style: themeService
                                           .getTitleSmallStyle(color: textColor)
                                           .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                     TweenAnimationBuilder<double>(
                                       tween: Tween(
                                         begin: 0.0,
                                         end: isExamplesExpanded ? 1.0 : 0.0,
                                       ),
-                                      duration: ThemeService.defaultAnimationDuration,
+                                      duration:
+                                          ThemeService.defaultAnimationDuration,
                                       curve: ThemeService.springCurve,
                                       builder: (context, rotateValue, child) {
                                         return Transform.rotate(
@@ -663,8 +676,11 @@ class _PracticeScreenState extends State<PracticeScreen>
                                       isSmallScreen ? 14 : 16,
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: currentItem.examples!.asMap().entries.map((entry) {
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: currentItem.examples!.asMap().entries.map((
+                                        entry,
+                                      ) {
                                         final index = entry.key;
                                         final example = entry.value;
                                         return TweenAnimationBuilder<double>(
@@ -674,15 +690,25 @@ class _PracticeScreenState extends State<PracticeScreen>
                                           ),
                                           builder: (context, itemValue, child) {
                                             return Transform.translate(
-                                              offset: Offset(10 * (1 - itemValue), 0),
+                                              offset: Offset(
+                                                10 * (1 - itemValue),
+                                                0,
+                                              ),
                                               child: Opacity(
-                                                opacity: itemValue.clamp(0.0, 1.0),
+                                                opacity: itemValue.clamp(
+                                                  0.0,
+                                                  1.0,
+                                                ),
                                                 child: Padding(
                                                   padding: EdgeInsets.only(
-                                                    bottom: isSmallScreen ? 10 : 12,
+                                                    bottom: isSmallScreen
+                                                        ? 10
+                                                        : 12,
                                                   ),
                                                   child: Row(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Container(
                                                         width: 6,
@@ -692,18 +718,27 @@ class _PracticeScreenState extends State<PracticeScreen>
                                                           right: 12,
                                                         ),
                                                         decoration: BoxDecoration(
-                                                          shape: BoxShape.circle,
-                                                          gradient: LinearGradient(
-                                                            colors: [primaryColor, secondaryColor],
-                                                          ),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          gradient:
+                                                              LinearGradient(
+                                                                colors: [
+                                                                  primaryColor,
+                                                                  secondaryColor,
+                                                                ],
+                                                              ),
                                                         ),
                                                       ),
                                                       Expanded(
                                                         child: Text(
                                                           example,
-                                                          style: themeService.getBodyMediumStyle(
-                                                            color: textColor.withOpacity(0.8),
-                                                          ),
+                                                          style: themeService
+                                                              .getBodyMediumStyle(
+                                                                color: textColor
+                                                                    .withOpacity(
+                                                                      0.8,
+                                                                    ),
+                                                              ),
                                                         ),
                                                       ),
                                                     ],
@@ -728,7 +763,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                   TweenAnimationBuilder<double>(
                     tween: Tween(
                       begin: 0.0,
-                      end: _practiceItems.isEmpty ? 0.0 : ((_currentItemIndex + 1) / _practiceItems.length).clamp(0.0, 1.0),
+                      end: _practiceItems.isEmpty
+                          ? 0.0
+                          : ((_currentItemIndex + 1) / _practiceItems.length)
+                                .clamp(0.0, 1.0),
                     ),
                     duration: ThemeService.slowAnimationDuration,
                     curve: Curves.easeOutCubic,
@@ -826,91 +864,95 @@ class _PracticeScreenState extends State<PracticeScreen>
             builder: (context, value, child) {
               return Transform.scale(
                 scale: value,
-                child: Obx(
-                  () {
-                    final isPlaying = ttsService.isTextPlaying(currentItem.german);
-                    return TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.easeOutCubic,
-                      builder: (context, pulseValue, child) {
-                        return Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            // Pulsing ring
-                            if (isPlaying)
-                              Container(
-                                width: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
-                                height: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      primaryColor.withOpacity(0.3 * (1 - pulseValue)),
-                                      primaryColor.withOpacity(0.0),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                child: Obx(() {
+                  final isPlaying = ttsService.isTextPlaying(
+                    currentItem.german,
+                  );
+                  return TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, pulseValue, child) {
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Pulsing ring
+                          if (isPlaying)
                             Container(
+                              width:
+                                  (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                              height:
+                                  (isSmallScreen ? 64 : 76) + (pulseValue * 16),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: LinearGradient(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
                                   colors: [
-                                    primaryColor.withOpacity(0.2),
-                                    secondaryColor.withOpacity(0.15),
+                                    primaryColor.withOpacity(
+                                      0.3 * (1 - pulseValue),
+                                    ),
+                                    primaryColor.withOpacity(0.0),
                                   ],
                                 ),
-                                border: Border.all(
-                                  color: primaryColor.withOpacity(0.4),
-                                  width: 2,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.3),
-                                    blurRadius: 12,
-                                    spreadRadius: 2,
-                                  ),
-                                ],
-                              ),
-                              child: IconButton(
-                                onPressed: _playCurrentItem,
-                                icon: Icon(
-                                  isPlaying ? Icons.stop : Icons.volume_up,
-                                  size: isSmallScreen ? 28 : 32,
-                                  color: primaryColor,
-                                ),
-                                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
                               ),
                             ),
-                            if (isPlaying)
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  width: isSmallScreen ? 12 : 14,
-                                  height: isSmallScreen ? 12 : 14,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: LinearGradient(
-                                      colors: [primaryColor, scheme.accentTeal],
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: primaryColor.withOpacity(0.8),
-                                        blurRadius: 8,
-                                        spreadRadius: 2,
-                                      ),
-                                    ],
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: LinearGradient(
+                                colors: [
+                                  primaryColor.withOpacity(0.2),
+                                  secondaryColor.withOpacity(0.15),
+                                ],
+                              ),
+                              border: Border.all(
+                                color: primaryColor.withOpacity(0.4),
+                                width: 2,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.3),
+                                  blurRadius: 12,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              onPressed: _playCurrentItem,
+                              icon: Icon(
+                                isPlaying ? Icons.stop : Icons.volume_up,
+                                size: isSmallScreen ? 28 : 32,
+                                color: primaryColor,
+                              ),
+                              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                            ),
+                          ),
+                          if (isPlaying)
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Container(
+                                width: isSmallScreen ? 12 : 14,
+                                height: isSmallScreen ? 12 : 14,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    colors: [primaryColor, scheme.accentTeal],
                                   ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: primaryColor.withOpacity(0.8),
+                                      blurRadius: 8,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
                                 ),
                               ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
+                            ),
+                        ],
+                      );
+                    },
+                  );
+                }),
               );
             },
           ),

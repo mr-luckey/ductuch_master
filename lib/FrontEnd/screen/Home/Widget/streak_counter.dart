@@ -21,15 +21,11 @@ class StreakCounter extends StatelessWidget {
     
     return Obx(() {
       final textStyle = size == StreakSize.large
-          ? TextStyle(
-              fontSize: 20,
+          ? themeService.getHeadlineSmallStyle().copyWith(
               fontWeight: FontWeight.bold,
-              fontFamily: Theme.of(context).textTheme.headlineSmall?.fontFamily,
             )
-          : TextStyle(
-              fontSize: 16,
+          : themeService.getBodyLargeStyle().copyWith(
               fontWeight: FontWeight.bold,
-              fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
             );
 
       return Container(

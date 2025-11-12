@@ -268,11 +268,9 @@ class _ExamScreenState extends State<ExamScreen>
               color: Colors.transparent,
               child: Text(
                 'Exam',
-                style: themeService.getTitleLargeStyle(color: textColor)
-                    .copyWith(
-                  fontWeight: FontWeight.bold,
-                  shadows: null,
-                ),
+                style: themeService
+                    .getTitleLargeStyle(color: textColor)
+                    .copyWith(fontWeight: FontWeight.bold, shadows: null),
               ),
             ),
           ),
@@ -297,8 +295,14 @@ class _ExamScreenState extends State<ExamScreen>
                             borderRadius: BorderRadius.circular(8),
                             gradient: LinearGradient(
                               colors: remainingSeconds < 300
-                                  ? [Colors.red.withOpacity(0.2), Colors.red.withOpacity(0.1)]
-                                  : [primaryColor.withOpacity(0.2), primaryColor.withOpacity(0.1)],
+                                  ? [
+                                      Colors.red.withOpacity(0.2),
+                                      Colors.red.withOpacity(0.1),
+                                    ]
+                                  : [
+                                      primaryColor.withOpacity(0.2),
+                                      primaryColor.withOpacity(0.1),
+                                    ],
                             ),
                             border: Border.all(
                               color: remainingSeconds < 300
@@ -309,12 +313,16 @@ class _ExamScreenState extends State<ExamScreen>
                           ),
                           child: Text(
                             _formatTime(remainingSeconds),
-                            style: themeService.getBodyLargeStyle(
-                              color: remainingSeconds < 300 ? Colors.red : primaryColor,
-                            ).copyWith(
-                              fontWeight: FontWeight.bold,
-                              shadows: null,
-                            ),
+                            style: themeService
+                                .getBodyLargeStyle(
+                                  color: remainingSeconds < 300
+                                      ? Colors.red
+                                      : primaryColor,
+                                )
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  shadows: null,
+                                ),
                           ),
                         ),
                       );
@@ -400,10 +408,7 @@ class _ExamScreenState extends State<ExamScreen>
                     'Select Exam Level',
                     style: themeService
                         .getHeadlineSmallStyle(color: Colors.white)
-                        .copyWith(
-                      fontWeight: FontWeight.bold,
-                      shadows: null,
-                    ),
+                        .copyWith(fontWeight: FontWeight.bold, shadows: null),
                   ),
                 ),
               ),
@@ -442,7 +447,9 @@ class _ExamScreenState extends State<ExamScreen>
                     child: Opacity(
                       opacity: value.clamp(0.0, 1.0),
                       child: Padding(
-                        padding: EdgeInsets.only(bottom: isSmallScreen ? 12 : 16),
+                        padding: EdgeInsets.only(
+                          bottom: isSmallScreen ? 12 : 16,
+                        ),
                         child: _buildLevelCard(
                           context,
                           levels[index],
@@ -482,10 +489,7 @@ class _ExamScreenState extends State<ExamScreen>
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             gradient: themeService.getCardGradient(isDark),
-            border: Border.all(
-              color: primaryColor.withOpacity(0.3),
-              width: 2,
-            ),
+            border: Border.all(color: primaryColor.withOpacity(0.3), width: 2),
             boxShadow: ThemeService.getCardShadow(isDark),
           ),
           child: Material(
@@ -521,9 +525,9 @@ class _ExamScreenState extends State<ExamScreen>
                           style: themeService
                               .getHeadlineSmallStyle(color: Colors.white)
                               .copyWith(
-                            fontWeight: FontWeight.bold,
-                            shadows: null,
-                          ),
+                                fontWeight: FontWeight.bold,
+                                shadows: null,
+                              ),
                         ),
                       ),
                     ),
@@ -537,9 +541,9 @@ class _ExamScreenState extends State<ExamScreen>
                             style: themeService
                                 .getTitleMediumStyle(color: textColor)
                                 .copyWith(
-                              fontWeight: FontWeight.bold,
-                              shadows: null,
-                            ),
+                                  fontWeight: FontWeight.bold,
+                                  shadows: null,
+                                ),
                           ),
                           SizedBox(height: 6),
                           Text(
@@ -669,19 +673,23 @@ class _ExamScreenState extends State<ExamScreen>
                             style: themeService
                                 .getTitleLargeStyle(color: textColor)
                                 .copyWith(
-                              fontWeight: FontWeight.bold,
-                              shadows: null,
-                            ),
+                                  fontWeight: FontWeight.bold,
+                                  shadows: null,
+                                ),
                           ),
                           SizedBox(height: isSmallScreen ? 20 : 24),
-                          ...currentQuestion.options.asMap().entries.map((entry) {
+                          ...currentQuestion.options.asMap().entries.map((
+                            entry,
+                          ) {
                             final index = entry.key;
                             final option = entry.value;
                             final isSelected = selectedAnswerIndex == index;
 
                             return TweenAnimationBuilder<double>(
                               tween: Tween(begin: 0.0, end: 1.0),
-                              duration: Duration(milliseconds: 200 + (index * 50)),
+                              duration: Duration(
+                                milliseconds: 200 + (index * 50),
+                              ),
                               curve: ThemeService.springCurve,
                               builder: (context, optionValue, child) {
                                 return Transform.translate(
@@ -741,7 +749,9 @@ class _ExamScreenState extends State<ExamScreen>
                       boxShadow: ThemeService.getCardShadow(isDark),
                     ),
                     child: IconButton(
-                      onPressed: currentQuestionIndex > 0 ? _previousQuestion : null,
+                      onPressed: currentQuestionIndex > 0
+                          ? _previousQuestion
+                          : null,
                       icon: Icon(
                         Icons.chevron_left,
                         color: currentQuestionIndex > 0
@@ -801,9 +811,9 @@ class _ExamScreenState extends State<ExamScreen>
                             style: themeService
                                 .getTitleSmallStyle(color: primaryColor)
                                 .copyWith(
-                              fontWeight: FontWeight.bold,
-                              shadows: null,
-                            ),
+                                  fontWeight: FontWeight.bold,
+                                  shadows: null,
+                                ),
                           ),
                         ),
                       ),
@@ -831,12 +841,14 @@ class _ExamScreenState extends State<ExamScreen>
                       boxShadow: ThemeService.getCardShadow(isDark),
                     ),
                     child: IconButton(
-                      onPressed: currentQuestionIndex < currentQuestions.length - 1
+                      onPressed:
+                          currentQuestionIndex < currentQuestions.length - 1
                           ? _nextQuestion
                           : null,
                       icon: Icon(
                         Icons.chevron_right,
-                        color: currentQuestionIndex < currentQuestions.length - 1
+                        color:
+                            currentQuestionIndex < currentQuestions.length - 1
                             ? textColor
                             : textColor.withOpacity(0.3),
                         size: isSmallScreen ? 22 : 26,
@@ -952,12 +964,16 @@ class _ExamScreenState extends State<ExamScreen>
                     Expanded(
                       child: Text(
                         '${String.fromCharCode(65 + index)}. $option',
-                        style: themeService.getBodyLargeStyle(
-                          color: isSelected ? primaryColor : textColor,
-                        ).copyWith(
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                          shadows: null,
-                        ),
+                        style: themeService
+                            .getBodyLargeStyle(
+                              color: isSelected ? primaryColor : textColor,
+                            )
+                            .copyWith(
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                              shadows: null,
+                            ),
                       ),
                     ),
                   ],
@@ -996,14 +1012,12 @@ class _ExamScreenState extends State<ExamScreen>
             children: [
               Text(
                 'Exam Results',
-                style: TextStyle(
-                  fontSize: isSmallScreen ? 24 : 28,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                  fontFamily: Theme.of(
-                    context,
-                  ).textTheme.headlineMedium?.fontFamily,
-                ),
+                style: ThemeService()
+                    .getHeadlineMediumStyle(color: textColor)
+                    .copyWith(
+                      fontSize: isSmallScreen ? 24 : 28,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               SizedBox(height: isSmallScreen ? 20 : 24),
               Container(
@@ -1019,27 +1033,21 @@ class _ExamScreenState extends State<ExamScreen>
                 child: Center(
                   child: Text(
                     '$percentage%',
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 36 : 42,
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor,
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.headlineLarge?.fontFamily,
-                    ),
+                    style: ThemeService()
+                        .getHeadlineLargeStyle(color: primaryColor)
+                        .copyWith(
+                          fontSize: isSmallScreen ? 36 : 42,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
               ),
               SizedBox(height: isSmallScreen ? 20 : 24),
               Text(
                 'Score: $score / $totalQuestions',
-                style: TextStyle(
-                  fontSize: isSmallScreen ? 18 : 20,
-                  color: textColor.withOpacity(0.9),
-                  fontFamily: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.fontFamily,
-                ),
+                style: ThemeService()
+                    .getTitleLargeStyle(color: textColor.withOpacity(0.9))
+                    .copyWith(fontSize: isSmallScreen ? 18 : 20),
               ),
             ],
           ),
@@ -1052,14 +1060,12 @@ class _ExamScreenState extends State<ExamScreen>
               children: [
                 Text(
                   'Correct Answers',
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 18 : 20,
-                    fontWeight: FontWeight.w600,
-                    color: textColor,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.titleLarge?.fontFamily,
-                  ),
+                  style: ThemeService()
+                      .getTitleLargeStyle(color: textColor)
+                      .copyWith(
+                        fontSize: isSmallScreen ? 18 : 20,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 SizedBox(height: isSmallScreen ? 12 : 16),
                 ...currentQuestions.asMap().entries.map((entry) {
@@ -1079,6 +1085,7 @@ class _ExamScreenState extends State<ExamScreen>
                       isSmallScreen,
                       scheme,
                       isDark,
+                      ThemeService(),
                     ),
                   );
                 }),
@@ -1103,14 +1110,12 @@ class _ExamScreenState extends State<ExamScreen>
                 child: Center(
                   child: Text(
                     'Take Another Exam',
-                    style: TextStyle(
-                      fontSize: isSmallScreen ? 16 : 18,
-                      fontWeight: FontWeight.w600,
-                      color: primaryColor,
-                      fontFamily: Theme.of(
-                        context,
-                      ).textTheme.titleMedium?.fontFamily,
-                    ),
+                    style: ThemeService()
+                        .getTitleMediumStyle(color: primaryColor)
+                        .copyWith(
+                          fontSize: isSmallScreen ? 16 : 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ),
               ),
@@ -1130,6 +1135,7 @@ class _ExamScreenState extends State<ExamScreen>
     bool isSmallScreen,
     scheme,
     bool isDark,
+    ThemeService themeService,
   ) {
     final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
     final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
@@ -1161,14 +1167,12 @@ class _ExamScreenState extends State<ExamScreen>
               Expanded(
                 child: Text(
                   'Q$questionNumber: ${question.question}',
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 14 : 16,
-                    fontWeight: FontWeight.w600,
-                    color: textColor,
-                    fontFamily: Theme.of(
-                      context,
-                    ).textTheme.titleMedium?.fontFamily,
-                  ),
+                  style: themeService
+                      .getTitleMediumStyle(color: textColor)
+                      .copyWith(
+                        fontSize: isSmallScreen ? 14 : 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
               ),
             ],
@@ -1176,35 +1180,27 @@ class _ExamScreenState extends State<ExamScreen>
           SizedBox(height: isSmallScreen ? 8 : 12),
           Text(
             'Correct Answer: ${String.fromCharCode(65 + question.correctAnswerIndex)}. ${question.options[question.correctAnswerIndex]}',
-            style: TextStyle(
-              fontSize: isSmallScreen ? 13 : 14,
-              color: primaryColor,
-              fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
-            ),
+            style: themeService
+                .getBodyMediumStyle(color: primaryColor)
+                .copyWith(fontSize: isSmallScreen ? 13 : 14),
           ),
           if (userAnswer != null && !isCorrect)
             Padding(
               padding: EdgeInsets.only(top: isSmallScreen ? 4 : 6),
               child: Text(
                 'Your Answer: ${String.fromCharCode(65 + userAnswer)}. ${question.options[userAnswer]}',
-                style: TextStyle(
-                  fontSize: isSmallScreen ? 13 : 14,
-                  color: Colors.red,
-                  fontFamily: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.fontFamily,
-                ),
+                style: themeService
+                    .getBodyMediumStyle(color: Colors.red)
+                    .copyWith(fontSize: isSmallScreen ? 13 : 14),
               ),
             ),
           if (question.explanation != null) ...[
             SizedBox(height: isSmallScreen ? 8 : 12),
             Text(
               'Explanation: ${question.explanation}',
-              style: TextStyle(
-                fontSize: isSmallScreen ? 12 : 13,
-                color: textColor.withOpacity(0.7),
-                fontFamily: Theme.of(context).textTheme.bodySmall?.fontFamily,
-              ),
+              style: themeService
+                  .getBodySmallStyle(color: textColor.withOpacity(0.7))
+                  .copyWith(fontSize: isSmallScreen ? 12 : 13),
             ),
           ],
         ],

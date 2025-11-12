@@ -34,7 +34,7 @@ class TtsSpeedDropdown extends StatelessWidget {
             '0.5x',
             textColor,
             accentColor,
-            themeService.fontFamily,
+            themeService,
           ),
           _buildSpeedMenuItem(
             0.8,
@@ -42,7 +42,7 @@ class TtsSpeedDropdown extends StatelessWidget {
             '0.8x',
             textColor,
             accentColor,
-            themeService.fontFamily,
+            themeService,
           ),
         ],
         child: Padding(
@@ -58,10 +58,9 @@ class TtsSpeedDropdown extends StatelessWidget {
               SizedBox(width: 4),
               Text(
                 '${currentSpeed.toStringAsFixed(1)}x',
-                style: TextStyle(
-                  fontFamily: themeService.fontFamily,
-                  color: textColor.withOpacity(0.9),
+                style: themeService.getStyle(
                   fontSize: isTablet ? 14 : 12,
+                  color: textColor.withOpacity(0.9),
                 ),
               ),
             ],
@@ -77,7 +76,7 @@ class TtsSpeedDropdown extends StatelessWidget {
     String label,
     Color textColor,
     Color accentColor,
-    String fontFamily,
+    ThemeService themeService,
   ) {
     final isSelected = speed == currentSpeed;
 
@@ -92,10 +91,10 @@ class TtsSpeedDropdown extends StatelessWidget {
           SizedBox(width: 12),
           Text(
             label,
-            style: TextStyle(
+            style: themeService.getStyle(
               color: textColor,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              fontFamily: fontFamily,
+              fontSize: 12,
             ),
           ),
         ],

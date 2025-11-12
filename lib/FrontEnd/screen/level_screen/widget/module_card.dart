@@ -231,12 +231,10 @@ class _ModuleCardState extends State<ModuleCard>
                                                 const SizedBox(width: 4),
                                                 Text(
                                                   'Completed',
-                                                  style: TextStyle(
+                                                  style: themeService.getLabelSmallStyle(
                                                     color: successColor,
-                                                    fontSize: 12,
+                                                  ).copyWith(
                                                     fontWeight: FontWeight.w600,
-                                                    fontFamily:
-                                                        themeService.fontFamily,
                                                   ),
                                                 ),
                                               ],
@@ -270,11 +268,10 @@ class _ModuleCardState extends State<ModuleCard>
                                           const SizedBox(width: 4),
                                           Text(
                                             'Locked',
-                                            style: TextStyle(
+                                            style: themeService.getLabelSmallStyle(
                                               color: textColor.withOpacity(0.7),
-                                              fontSize: 12,
+                                            ).copyWith(
                                               fontWeight: FontWeight.w600,
-                                              fontFamily: themeService.fontFamily,
                                             ),
                                           ),
                                         ],

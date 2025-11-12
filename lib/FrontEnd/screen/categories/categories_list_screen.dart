@@ -67,24 +67,25 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
 
       return Scaffold(
         backgroundColor: backgroundColor,
-        appBar: AppBar(
-          backgroundColor: backgroundColor,
-          elevation: 0,
-          title: Hero(
-            tag: 'categories_title',
-            child: Material(
-              color: Colors.transparent,
-              child: Text(
-                'Categories',
-                style: themeService.getTitleLargeStyle(color: textColor)
-                    .copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          actions: [const TtsSpeedDropdown()],
-        ),
+
+        // appBar: AppBar(
+        //   backgroundColor: backgroundColor,
+        //   elevation: 0,
+        //   title: Hero(
+        //     tag: 'categories_title',
+        //     child: Material(
+        //       color: Colors.transparent,
+        //       child: Text(
+        //         'Categories',
+        //         style: themeService.getTitleLargeStyle(color: textColor)
+        //             .copyWith(
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   actions: [const TtsSpeedDropdown()],
+        // ),
         body: SafeArea(
           child: FadeTransition(
             opacity: _fadeAnimation,
@@ -125,10 +126,12 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                     child: Text(
                                       'Content Categories',
                                       style: themeService
-                                          .getHeadlineSmallStyle(color: Colors.white)
+                                          .getHeadlineSmallStyle(
+                                            color: Colors.white,
+                                          )
                                           .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
                                   SizedBox(height: isSmallScreen ? 8 : 12),
@@ -238,10 +241,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                   onTap: () {
                     NavigationHelper.pushWithBottomNav(
                       context,
-                      CategoryScreen(
-                        categoryName: categoryName,
-                        words: words,
-                      ),
+                      CategoryScreen(categoryName: categoryName, words: words),
                     );
                   },
                   borderRadius: BorderRadius.circular(20),
@@ -300,9 +300,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                 categoryName,
                                 style: themeService
                                     .getTitleMediumStyle(color: textColor)
-                                    .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 4),
                               Text(

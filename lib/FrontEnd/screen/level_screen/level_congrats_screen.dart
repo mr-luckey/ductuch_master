@@ -76,7 +76,7 @@ class LevelCongratsScreen extends StatelessWidget {
                       horizontal: 32,
                       vertical: 14,
                     ),
-                    textStyle: const TextStyle(fontSize: 16),
+                    textStyle: themeService.getBodyLargeStyle(),
                   ),
                 ),
               ],

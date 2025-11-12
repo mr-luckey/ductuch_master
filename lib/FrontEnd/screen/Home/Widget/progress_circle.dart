@@ -33,11 +33,10 @@ class ProgressCircle extends StatelessWidget {
           ),
           Text(
             '$progress%',
-            style: TextStyle(
+            style: themeService.getStyle(
               fontSize: size * 0.2,
               fontWeight: FontWeight.bold,
               color: textColor,
-              fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
             ),
           ),
         ],

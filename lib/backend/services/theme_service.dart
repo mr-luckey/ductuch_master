@@ -29,59 +29,91 @@ class FontScheme {
   FontScheme({
     this.primaryFont = 'Comfortaa', // Kid-friendly, rounded, playful font
     this.secondaryFont = 'Comfortaa',
-    this.headline = const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+    this.headline = const TextStyle(
+      fontSize: 32,
+      fontFamily: 'Comfortaa',
+      fontWeight: FontWeight.bold,
+    ),
     this.headlineLarge = const TextStyle(
       fontSize: 28,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.bold,
     ),
     this.headlineMedium = const TextStyle(
       fontSize: 24,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.bold,
     ),
     this.headlineSmall = const TextStyle(
       fontSize: 20,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w600,
     ),
-    this.title = const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+    this.title = const TextStyle(
+      fontSize: 22,
+      fontFamily: 'Comfortaa',
+      fontWeight: FontWeight.w600,
+    ),
     this.titleLarge = const TextStyle(
       fontSize: 22,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w600,
     ),
     this.titleMedium = const TextStyle(
       fontSize: 18,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w600,
     ),
     this.titleSmall = const TextStyle(
       fontSize: 16,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w500,
     ),
-    this.body = const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+    this.body = const TextStyle(
+      fontSize: 16,
+      fontFamily: 'Comfortaa',
+      fontWeight: FontWeight.normal,
+    ),
     this.bodyLarge = const TextStyle(
       fontSize: 16,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.normal,
     ),
     this.bodyMedium = const TextStyle(
       fontSize: 14,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.normal,
     ),
     this.bodySmall = const TextStyle(
       fontSize: 12,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.normal,
     ),
-    this.label = const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+    this.label = const TextStyle(
+      fontSize: 12,
+      fontFamily: 'Comfortaa',
+      fontWeight: FontWeight.w500,
+    ),
     this.labelLarge = const TextStyle(
       fontSize: 14,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w600,
     ),
     this.labelMedium = const TextStyle(
       fontSize: 12,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w600,
     ),
     this.labelSmall = const TextStyle(
       fontSize: 11,
+      fontFamily: 'Comfortaa',
       fontWeight: FontWeight.w500,
     ),
-    this.button = const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+    this.button = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      fontFamily: 'Comfortaa',
+    ),
   });
 
   // Get font style with color applied
@@ -279,6 +311,7 @@ class ThemeService extends GetxController {
             : currentScheme.textPrimary,
         titleTextStyle: TextStyle(
           fontSize: 20,
+          fontFamily: 'Comfortaa',
           fontWeight: FontWeight.bold,
           color: isDark
               ? currentScheme.textPrimaryDark
@@ -315,13 +348,22 @@ class ThemeService extends GetxController {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w600,
+
+            fontSize: 16,
+            fontFamily: 'Comfortaa',
+          ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: currentScheme.accentTeal,
-          textStyle: const TextStyle(fontWeight: FontWeight.w600),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w600,
+            //  fontSize: 16,
+            fontFamily: 'Comfortaa',
+          ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -353,18 +395,21 @@ class ThemeService extends GetxController {
       ),
       textTheme: GoogleFonts.comfortaaTextTheme(text).copyWith(
         bodyLarge: TextStyle(
+          fontFamily: 'Comfortaa',
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
           fontSize: 16,
         ),
         bodyMedium: TextStyle(
+          fontFamily: 'Comfortaa',
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
           fontSize: 14,
         ),
         titleLarge: TextStyle(
+          fontFamily: 'Comfortaa',
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
@@ -372,6 +417,7 @@ class ThemeService extends GetxController {
           fontWeight: FontWeight.bold,
         ),
         titleMedium: TextStyle(
+          fontFamily: 'Comfortaa',
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
@@ -379,6 +425,7 @@ class ThemeService extends GetxController {
           fontWeight: FontWeight.w600,
         ),
         labelLarge: TextStyle(
+          fontFamily: 'Comfortaa',
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,

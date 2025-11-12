@@ -7,10 +7,9 @@ class CustomStylee {
     final themeService = Get.find<ThemeService>();
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
-    return TextStyle(
-      fontSize: 20,
-      fontFamily: Theme.of(context).textTheme.bodyLarge?.fontFamily,
+    return themeService.getTitleMediumStyle(
       color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
+    ).copyWith(
       fontWeight: FontWeight.bold,
     );
   }
@@ -19,10 +18,8 @@ class CustomStylee {
     final themeService = Get.find<ThemeService>();
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
-    return TextStyle(
-      fontSize: 12,
+    return themeService.getBodySmallStyle(
       color: isDark ? scheme.textSecondaryDark : scheme.textSecondary,
-      fontFamily: Theme.of(context).textTheme.bodyMedium?.fontFamily,
     );
   }
 
@@ -30,10 +27,8 @@ class CustomStylee {
     final themeService = Get.find<ThemeService>();
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
-    return TextStyle(
-      fontSize: 28,
+    return themeService.getHeadlineMediumStyle(
       color: isDark ? scheme.textPrimaryDark : scheme.textPrimary,
-      fontFamily: Theme.of(context).textTheme.headlineMedium?.fontFamily,
     );
   }
 }

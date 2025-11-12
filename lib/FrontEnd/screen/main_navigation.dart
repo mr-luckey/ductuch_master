@@ -129,10 +129,9 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'Learn',
-        textStyle: TextStyle(
+        textStyle: themeService.getStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: themeService.fontFamily,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -141,10 +140,9 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'Levels',
-        textStyle: TextStyle(
+        textStyle: themeService.getStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: themeService.fontFamily,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -153,10 +151,9 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'Nouns',
-        textStyle: TextStyle(
+        textStyle: themeService.getStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: themeService.fontFamily,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -165,10 +162,9 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'Verbs',
-        textStyle: TextStyle(
+        textStyle: themeService.getStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: themeService.fontFamily,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -177,10 +173,9 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'Sentences',
-        textStyle: TextStyle(
+        textStyle: themeService.getStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: themeService.fontFamily,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -189,10 +184,9 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'More',
-        textStyle: TextStyle(
+        textStyle: themeService.getStyle(
           fontSize: fontSize,
           color: textColor,
-          fontFamily: themeService.fontFamily,
           fontWeight: FontWeight.w600,
         ),
       ),

@@ -105,24 +105,25 @@ class _CategoryScreenState extends State<CategoryScreen>
         },
         child: Scaffold(
           backgroundColor: backgroundColor,
-          appBar: AppBar(
-            backgroundColor: backgroundColor,
-            elevation: 0,
-            title: Hero(
-              tag: 'category_title_${widget.categoryName}',
-              child: Material(
-                color: Colors.transparent,
-                child: Text(
-                  widget.categoryName,
-                  style: themeService.getTitleLargeStyle(color: textColor)
-                      .copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            actions: [const TtsSpeedDropdown()],
-          ),
+
+          // appBar: AppBar(
+          //   backgroundColor: backgroundColor,
+          //   elevation: 0,
+          //   title: Hero(
+          //     tag: 'category_title_${widget.categoryName}',
+          //     child: Material(
+          //       color: Colors.transparent,
+          //       child: Text(
+          //         widget.categoryName,
+          //         style: themeService.getTitleLargeStyle(color: textColor)
+          //             .copyWith(
+          //           fontWeight: FontWeight.bold,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          //   actions: [const TtsSpeedDropdown()],
+          // ),
           body: SafeArea(
             child: FadeTransition(
               opacity: _fadeAnimation,
@@ -204,13 +205,11 @@ class _CategoryScreenState extends State<CategoryScreen>
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 gradient: themeService.getCardGradient(isDark),
-                border: Border.all(
-                  color: primaryColor.withOpacity(0.3),
-                ),
+                border: Border.all(color: primaryColor.withOpacity(0.3)),
                 boxShadow: ThemeService.getCardShadow(isDark),
               ),
               child: IconButton(
-                onPressed: () => Get.back(),
+                onPressed: () => Navigator.pop(context),
                 icon: Icon(
                   Icons.chevron_left,
                   color: textColor,
@@ -238,11 +237,9 @@ class _CategoryScreenState extends State<CategoryScreen>
         Flexible(
           child: Text(
             widget.categoryName,
-            style: themeService.getLabelSmallStyle(
-              color: textColor.withOpacity(0.5),
-            ).copyWith(
-              letterSpacing: 1.0,
-            ),
+            style: themeService
+                .getLabelSmallStyle(color: textColor.withOpacity(0.5))
+                .copyWith(letterSpacing: 1.0),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -271,12 +268,13 @@ class _CategoryScreenState extends State<CategoryScreen>
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
-                            ? textColor.withOpacity(0.3)
-                            : textColor.withOpacity(0.15),
+                        ? textColor.withOpacity(0.3)
+                        : textColor.withOpacity(0.15),
                   ),
                 );
               }),
             ),
+            TtsSpeedDropdown(),
           ],
         ),
       ],
@@ -359,7 +357,10 @@ class _CategoryScreenState extends State<CategoryScreen>
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             gradient: LinearGradient(
-                                              colors: [primaryColor, secondaryColor],
+                                              colors: [
+                                                primaryColor,
+                                                secondaryColor,
+                                              ],
                                             ),
                                           ),
                                         ),
@@ -367,10 +368,12 @@ class _CategoryScreenState extends State<CategoryScreen>
                                         Text(
                                           widget.categoryName.toUpperCase(),
                                           style: themeService
-                                              .getLabelSmallStyle(color: primaryColor)
+                                              .getLabelSmallStyle(
+                                                color: primaryColor,
+                                              )
                                               .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                         ),
                                       ],
                                     ),
@@ -393,10 +396,10 @@ class _CategoryScreenState extends State<CategoryScreen>
                                     style: themeService
                                         .getTitleLargeStyle(color: Colors.white)
                                         .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: isSmallScreen ? 22 : 28,
-                                      height: 1.2,
-                                    ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: isSmallScreen ? 22 : 28,
+                                          height: 1.2,
+                                        ),
                                   ),
                                 ),
                               ),
@@ -504,11 +507,16 @@ class _CategoryScreenState extends State<CategoryScreen>
                                         () => IconButton(
                                           onPressed: _playCurrentWord,
                                           icon: Icon(
-                                            ttsService.isTextPlaying(currentWord.german)
+                                            ttsService.isTextPlaying(
+                                                  currentWord.german,
+                                                )
                                                 ? Icons.volume_up
                                                 : Icons.volume_up_outlined,
                                             size: isSmallScreen ? 18 : 20,
-                                            color: ttsService.isTextPlaying(currentWord.german)
+                                            color:
+                                                ttsService.isTextPlaying(
+                                                  currentWord.german,
+                                                )
                                                 ? primaryColor
                                                 : textColor.withOpacity(0.8),
                                           ),
@@ -640,91 +648,95 @@ class _CategoryScreenState extends State<CategoryScreen>
             builder: (context, value, child) {
               return Transform.scale(
                 scale: value,
-                child: Obx(
-                  () {
-                    final isPlaying = ttsService.isTextPlaying(currentWord.german);
-                    return TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.easeOutCubic,
-                      builder: (context, pulseValue, child) {
-                        return Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            // Pulsing ring
-                            if (isPlaying)
-                              Container(
-                                width: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
-                                height: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      primaryColor.withOpacity(0.3 * (1 - pulseValue)),
-                                      primaryColor.withOpacity(0.0),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                child: Obx(() {
+                  final isPlaying = ttsService.isTextPlaying(
+                    currentWord.german,
+                  );
+                  return TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, pulseValue, child) {
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Pulsing ring
+                          if (isPlaying)
                             Container(
+                              width:
+                                  (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                              height:
+                                  (isSmallScreen ? 64 : 76) + (pulseValue * 16),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: LinearGradient(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
                                   colors: [
-                                    primaryColor.withOpacity(0.2),
-                                    secondaryColor.withOpacity(0.15),
+                                    primaryColor.withOpacity(
+                                      0.3 * (1 - pulseValue),
+                                    ),
+                                    primaryColor.withOpacity(0.0),
                                   ],
                                 ),
-                                border: Border.all(
-                                  color: primaryColor.withOpacity(0.4),
-                                  width: 2,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.3),
-                                    blurRadius: 12,
-                                    spreadRadius: 2,
-                                  ),
-                                ],
-                              ),
-                              child: IconButton(
-                                onPressed: _playCurrentWord,
-                                icon: Icon(
-                                  isPlaying ? Icons.stop : Icons.volume_up,
-                                  size: isSmallScreen ? 28 : 32,
-                                  color: primaryColor,
-                                ),
-                                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
                               ),
                             ),
-                            if (isPlaying)
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  width: isSmallScreen ? 12 : 14,
-                                  height: isSmallScreen ? 12 : 14,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: LinearGradient(
-                                      colors: [primaryColor, successColor],
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: primaryColor.withOpacity(0.8),
-                                        blurRadius: 8,
-                                        spreadRadius: 2,
-                                      ),
-                                    ],
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: LinearGradient(
+                                colors: [
+                                  primaryColor.withOpacity(0.2),
+                                  secondaryColor.withOpacity(0.15),
+                                ],
+                              ),
+                              border: Border.all(
+                                color: primaryColor.withOpacity(0.4),
+                                width: 2,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.3),
+                                  blurRadius: 12,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              onPressed: _playCurrentWord,
+                              icon: Icon(
+                                isPlaying ? Icons.stop : Icons.volume_up,
+                                size: isSmallScreen ? 28 : 32,
+                                color: primaryColor,
+                              ),
+                              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                            ),
+                          ),
+                          if (isPlaying)
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Container(
+                                width: isSmallScreen ? 12 : 14,
+                                height: isSmallScreen ? 12 : 14,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    colors: [primaryColor, successColor],
                                   ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: primaryColor.withOpacity(0.8),
+                                      blurRadius: 8,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
                                 ),
                               ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
+                            ),
+                        ],
+                      );
+                    },
+                  );
+                }),
               );
             },
           ),

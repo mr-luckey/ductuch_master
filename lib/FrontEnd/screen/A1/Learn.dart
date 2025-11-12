@@ -421,7 +421,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
             border: Border.all(color: textColor.withOpacity(0.1)),
           ),
           child: IconButton(
-            onPressed: () => Get.back(),
+            onPressed: () => Navigator.pop(context),
             icon: Icon(
               Icons.chevron_left,
               color: secondaryTextColor,
@@ -463,11 +463,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   Flexible(
                     child: Text(
                       _topicTitle,
-                      style: TextStyle(
+                      style: themeService.getStyle(
                         fontSize: isSmallScreen ? 10 : 11,
                         color: secondaryTextColor.withOpacity(0.8),
                         letterSpacing: 1.0,
-                        fontFamily: themeService.fontFamily,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -475,9 +474,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   SizedBox(width: isSmallScreen ? 2 : 4),
                   Text(
                     '•',
-                    style: TextStyle(
+                    style: themeService.getStyle(
+                      fontSize: 11,
                       color: secondaryTextColor.withOpacity(0.3),
-                      fontFamily: themeService.fontFamily,
                     ),
                   ),
                   SizedBox(width: isSmallScreen ? 2 : 4),
@@ -489,10 +488,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
               children: [
                 Text(
                   '$learnedCount/$totalPhrases',
-                  style: TextStyle(
+                  style: themeService.getStyle(
                     fontSize: isSmallScreen ? 10 : 11,
                     color: secondaryTextColor,
-                    fontFamily: themeService.fontFamily,
                   ),
                 ),
                 SizedBox(width: isSmallScreen ? 6 : 8),
@@ -708,51 +706,51 @@ class _PhraseScreenState extends State<PhraseScreen> {
                       ),
 
                       // Favorite button with animation
-                      TweenAnimationBuilder<double>(
-                        tween: Tween(
-                          begin: 0.0,
-                          end: phrase.isFavorite ? 1.0 : 0.0,
-                        ),
-                        duration: ThemeService.defaultAnimationDuration,
-                        curve: ThemeService.bounceCurve,
-                        builder: (context, favValue, child) {
-                          return Transform.scale(
-                            scale: 1.0 + (favValue * 0.2),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.red.withOpacity(0.2 * favValue),
-                                    Colors.pink.withOpacity(0.15 * favValue),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  isSmallScreen ? 12 : 14,
-                                ),
-                                border: Border.all(
-                                  color: Colors.red.withOpacity(0.4 * favValue),
-                                  width: 2,
-                                ),
-                              ),
-                              child: IconButton(
-                                onPressed: _toggleFavorite,
-                                icon: Icon(
-                                  phrase.isFavorite
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                                  color: phrase.isFavorite
-                                      ? Colors.red
-                                      : secondaryTextColor,
-                                  size: isSmallScreen ? 22 : 24,
-                                ),
-                                padding: isSmallScreen
-                                    ? const EdgeInsets.all(8)
-                                    : null,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                      // TweenAnimationBuilder<double>(
+                      //   tween: Tween(
+                      //     begin: 0.0,
+                      //     end: phrase.isFavorite ? 1.0 : 0.0,
+                      //   ),
+                      //   duration: ThemeService.defaultAnimationDuration,
+                      //   curve: ThemeService.bounceCurve,
+                      //   builder: (context, favValue, child) {
+                      //     return Transform.scale(
+                      //       scale: 1.0 + (favValue * 0.2),
+                      //       child: Container(
+                      //         decoration: BoxDecoration(
+                      //           gradient: LinearGradient(
+                      //             colors: [
+                      //               Colors.red.withOpacity(0.2 * favValue),
+                      //               Colors.pink.withOpacity(0.15 * favValue),
+                      //             ],
+                      //           ),
+                      //           borderRadius: BorderRadius.circular(
+                      //             isSmallScreen ? 12 : 14,
+                      //           ),
+                      //           border: Border.all(
+                      //             color: Colors.red.withOpacity(0.4 * favValue),
+                      //             width: 2,
+                      //           ),
+                      //         ),
+                      //         child: IconButton(
+                      //           onPressed: _toggleFavorite,
+                      //           icon: Icon(
+                      //             phrase.isFavorite
+                      //                 ? Icons.favorite
+                      //                 : Icons.favorite_border,
+                      //             color: phrase.isFavorite
+                      //                 ? Colors.red
+                      //                 : secondaryTextColor,
+                      //             size: isSmallScreen ? 22 : 24,
+                      //           ),
+                      //           padding: isSmallScreen
+                      //               ? const EdgeInsets.all(8)
+                      //               : null,
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                     ],
                   ),
 
@@ -777,10 +775,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         ),
                         child: Text(
                           'DE',
-                          style: TextStyle(
+                          style: themeService.getStyle(
                             fontSize: isSmallScreen ? 10 : 11,
                             color: secondaryTextColor,
-                            fontFamily: themeService.fontFamily,
                           ),
                         ),
                       ),
@@ -798,10 +795,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         ),
                         child: Text(
                           phrase.level,
-                          style: TextStyle(
+                          style: themeService.getStyle(
                             fontSize: isSmallScreen ? 10 : 11,
                             color: secondaryTextColor,
-                            fontFamily: themeService.fontFamily,
                           ),
                         ),
                       ),
@@ -853,13 +849,13 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                     Expanded(
                                       child: Text(
                                         phrase.translation,
-                                        style: TextStyle(
-                                          fontSize: isSmallScreen ? 14 : 15,
-                                          color: textColor.withOpacity(0.9),
-                                          fontFamily: Theme.of(
-                                            context,
-                                          ).textTheme.bodySmall?.fontFamily,
-                                        ),
+                                        style: themeService
+                                            .getBodySmallStyle(
+                                              color: textColor.withOpacity(0.9),
+                                            )
+                                            .copyWith(
+                                              fontSize: isSmallScreen ? 14 : 15,
+                                            ),
                                       ),
                                     ),
                                     Container(
@@ -893,10 +889,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                 SizedBox(height: isSmallScreen ? 2 : 4),
                                 Text(
                                   phrase.meaning,
-                                  style: TextStyle(
+                                  style: themeService.getStyle(
                                     fontSize: isSmallScreen ? 12 : 13,
                                     color: secondaryTextColor.withOpacity(0.8),
-                                    fontFamily: themeService.fontFamily,
                                   ),
                                 ),
                               ],
@@ -1197,11 +1192,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
             ),
             child: Text(
               '${rate}x',
-              style: TextStyle(
+              style: themeService.getStyle(
                 fontSize: isSmallScreen ? 14 : 16,
                 fontWeight: FontWeight.w500,
                 color: isSelected ? textColor : secondaryTextColor,
-                fontFamily: themeService.fontFamily,
               ),
             ),
           ),
@@ -1245,11 +1239,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 SizedBox(width: isSmallScreen ? 4 : 6),
                 Text(
                   'Repeat',
-                  style: TextStyle(
+                  style: themeService.getStyle(
                     fontSize: isSmallScreen ? 14 : 16,
                     fontWeight: FontWeight.w500,
                     color: _repeatOn ? textColor : secondaryTextColor,
-                    fontFamily: themeService.fontFamily,
                   ),
                 ),
               ],

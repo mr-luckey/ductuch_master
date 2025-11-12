@@ -171,6 +171,7 @@ class _LevelCardState extends State<LevelCard>
                           isDark,
                           textColor,
                           backgroundDarkColor,
+                          themeService,
                         ),
                       // PASS Tag with animation
                       Obx(() {
@@ -224,11 +225,10 @@ class _LevelCardState extends State<LevelCard>
                                       const SizedBox(width: 6),
                                       Text(
                                         'PASSED',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
+                                        style: themeService.getLabelSmallStyle(
                                           color: primaryColor,
-                                          fontFamily: themeService.fontFamily,
+                                        ).copyWith(
+                                          fontWeight: FontWeight.bold,
                                           letterSpacing: 1.2,
                                         ),
                                       ),
@@ -304,11 +304,10 @@ class _LevelCardState extends State<LevelCard>
                   child: Center(
                     child: Text(
                       widget.level.level,
-                      style: TextStyle(
+                      style: themeService.getStyle(
                         fontSize: titleSize * 0.9,
                         fontWeight: FontWeight.bold,
                         color: primaryColor,
-                        fontFamily: themeService.fontFamily,
                       ),
                     ),
                   ),
@@ -328,11 +327,10 @@ class _LevelCardState extends State<LevelCard>
                   color: Colors.transparent,
                   child: Text(
                     widget.level.title,
-                    style: TextStyle(
+                    style: themeService.getStyle(
                       fontSize: titleSize,
                       fontWeight: FontWeight.bold,
                       color: textColor,
-                      fontFamily: themeService.fontFamily,
                     ),
                   ),
                 ),
@@ -340,10 +338,9 @@ class _LevelCardState extends State<LevelCard>
               const SizedBox(height: 6),
               Text(
                 '${widget.level.moduleCount} modules · ${widget.level.lessonCount} lessons',
-                style: TextStyle(
+                style: themeService.getStyle(
                   fontSize: subtitleSize,
                   color: secondaryTextColor,
-                  fontFamily: themeService.fontFamily,
                 ),
               ),
             ],
@@ -375,19 +372,17 @@ class _LevelCardState extends State<LevelCard>
             children: [
               Text(
                 'Progress',
-                style: TextStyle(
+                style: themeService.getStyle(
                   fontSize: fontSize,
                   color: secondaryTextColor,
-                  fontFamily: themeService.fontFamily,
                 ),
               ),
               Text(
                 '${dynamicProgress}%',
-                style: TextStyle(
+                style: themeService.getStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
                   color: primaryColor,
-                  fontFamily: themeService.fontFamily,
                 ),
               ),
             ],
@@ -478,11 +473,10 @@ class _LevelCardState extends State<LevelCard>
                             const SizedBox(width: 10),
                             Text(
                               'Take Exam',
-                              style: TextStyle(
+                              style: themeService.getStyle(
                                 fontSize: fontSize,
                                 fontWeight: FontWeight.bold,
                                 color: primaryColor,
-                                fontFamily: themeService.fontFamily,
                               ),
                             ),
                           ],
@@ -504,6 +498,7 @@ class _LevelCardState extends State<LevelCard>
     bool isDark,
     Color textColor,
     Color backgroundColor,
+    ThemeService themeService,
   ) {
     return Container(
       decoration: BoxDecoration(
@@ -532,9 +527,9 @@ class _LevelCardState extends State<LevelCard>
             const SizedBox(height: 12),
             Text(
               'Locked',
-              style: TextStyle(
+              style: themeService.getBodyMediumStyle(
                 color: textColor.withOpacity(0.6),
-                fontSize: 16,
+              ).copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
