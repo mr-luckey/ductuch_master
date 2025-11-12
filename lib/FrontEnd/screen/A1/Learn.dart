@@ -1,4 +1,7 @@
+import 'dart:math' as math;
 import 'package:ductuch_master/Data/lesson_content_data.dart';
+import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/backend/data/learning_path_data.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -53,7 +56,7 @@ class PhraseScreen extends StatefulWidget {
 
 class _PhraseScreenState extends State<PhraseScreen> {
   int _currentPhraseIndex = 0;
-  int _highestReachedIndex = 0; // Track highest index reached for progress
+  final Set<int> _visitedIndices = <int>{};
   double _currentRate = 0.8;
   bool _repeatOn = false;
   bool _isPlaying = false;
@@ -61,6 +64,12 @@ class _PhraseScreenState extends State<PhraseScreen> {
   late List<PhraseData> _phrases;
   String _topicId = 'A1-M1-T1';
   late final LessonController _lessonController;
+
+  bool get _lessonCompleted =>
+      _phrases.isNotEmpty && _visitedIndices.length >= _phrases.length;
+
+  double get _lessonProgress =>
+      _phrases.isEmpty ? 0.0 : (_visitedIndices.length / _phrases.length);
 
   @override
   void initState() {
@@ -88,6 +97,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
 
     _lessonController = Get.find<LessonController>();
     _initTTS();
+    _initializeProgress();
   }
 
   String get _topicTitle {
@@ -130,6 +140,74 @@ class _PhraseScreenState extends State<PhraseScreen> {
         _isPlaying = false;
       });
       print("TTS Error: $msg");
+    });
+  }
+
+  void _initializeProgress() {
+    int? firstIncomplete;
+    for (var i = 0; i < _phrases.length; i++) {
+      if (_lessonController.isPhraseListened(_topicId, i)) {
+        _visitedIndices.add(i);
+      } else {
+        firstIncomplete ??= i;
+      }
+    }
+
+    if (_phrases.isNotEmpty) {
+      if (firstIncomplete != null) {
+        _currentPhraseIndex = firstIncomplete;
+      } else {
+        _currentPhraseIndex = math.min(
+          _currentPhraseIndex,
+          _phrases.length - 1,
+        );
+      }
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final added = _markCurrentAsConsumedInternal();
+      if (added) {
+        setState(() {});
+      }
+    });
+  }
+
+  bool _markCurrentAsConsumedInternal() {
+    if (_phrases.isEmpty) return false;
+    final added = _visitedIndices.add(_currentPhraseIndex);
+    if (added) {
+      _lessonController.markPhraseListened(
+        topicId: _topicId,
+        phraseIndex: _currentPhraseIndex,
+        totalPhrases: _phrases.length,
+      );
+    }
+    return added;
+  }
+
+  void _navigateToNextLesson() {
+    final parts = _topicId.split('-');
+    if (parts.length < 3) return;
+    final moduleId = '${parts[0]}-${parts[1]}';
+    final topics = LearningPathData.moduleTopics[moduleId];
+    if (topics == null || topics.isEmpty) return;
+
+    final currentTopicNumber =
+        int.tryParse(parts.last.replaceAll(RegExp(r'[^0-9]'), '')) ?? 1;
+    final nextIndex = currentTopicNumber; // zero-based
+    if (nextIndex >= topics.length) return;
+
+    final nextTopicId = '$moduleId-T${nextIndex + 1}';
+    final nextTopicTitle = topics[nextIndex];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      NavigationHelper.pushReplacementWithBottomNav(
+        context,
+        PhraseScreen(topicId: nextTopicId, topicTitle: nextTopicTitle),
+        withNavBar: true,
+      );
     });
   }
 
@@ -184,29 +262,31 @@ class _PhraseScreenState extends State<PhraseScreen> {
   }
 
   void _nextPhrase() {
+    if (_phrases.isEmpty) return;
     if (_isPlaying) {
       _flutterTts.stop();
     }
+    final isLastPhrase = _currentPhraseIndex >= _phrases.length - 1;
     setState(() {
       _currentPhraseIndex = (_currentPhraseIndex + 1) % _phrases.length;
-      // Update highest reached index (only increases, never decreases)
-      if (_currentPhraseIndex > _highestReachedIndex) {
-        _highestReachedIndex = _currentPhraseIndex;
-      }
       _isPlaying = false;
+      _markCurrentAsConsumedInternal();
     });
+    if (isLastPhrase && _lessonCompleted) {
+      _navigateToNextLesson();
+    }
   }
 
   void _previousPhrase() {
+    if (_phrases.isEmpty) return;
     if (_isPlaying) {
       _flutterTts.stop();
     }
     setState(() {
-      _currentPhraseIndex = (_currentPhraseIndex - 1) % _phrases.length;
-      if (_currentPhraseIndex < 0) {
-        _currentPhraseIndex = _phrases.length - 1;
-      }
+      _currentPhraseIndex =
+          (_currentPhraseIndex - 1 + _phrases.length) % _phrases.length;
       _isPlaying = false;
+      _markCurrentAsConsumedInternal();
     });
   }
 
@@ -363,88 +443,138 @@ class _PhraseScreenState extends State<PhraseScreen> {
     Color secondaryTextColor,
     ThemeService themeService,
   ) {
-    return Row(
+    final totalPhrases = _phrases.length;
+    final learnedCount = totalPhrases == 0
+        ? 0
+        : math.min(_visitedIndices.length, totalPhrases);
+    final filledDots = totalPhrases == 0
+        ? 0
+        : (_lessonProgress * 4).clamp(0.0, 4.0).ceil();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Lesson info
-        Flexible(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: Text(
-                  _topicTitle,
-                  style: TextStyle(
-                    fontSize: isSmallScreen ? 10 : 11,
-                    color: secondaryTextColor.withOpacity(0.8),
-                    letterSpacing: 1.0,
-                    fontFamily: themeService.fontFamily,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              SizedBox(width: isSmallScreen ? 2 : 4),
-              Text(
-                '•',
-                style: TextStyle(
-                  color: secondaryTextColor.withOpacity(0.3),
-                  fontFamily: themeService.fontFamily,
-                ),
-              ),
-              SizedBox(width: isSmallScreen ? 2 : 4),
-              // Flexible(
-              //   child: Text(
-              //     'Listening Practice',
-              //     style: TextStyle(
-              //       fontSize: isSmallScreen ? 10 : 11,
-              //       color: Colors.white.withOpacity(0.6, fontFamily: GoogleFonts.patrickHand().fontFamily),
-              //     ),
-              //     overflow: TextOverflow.ellipsis,
-              //   ),
-              // ),
-            ],
-          ),
-        ),
-
-        const Spacer(),
-
-        // Progress
         Row(
           children: [
-            Text(
-              '${_currentPhraseIndex + 1}/${_phrases.length}',
-              style: TextStyle(
-                fontSize: isSmallScreen ? 10 : 11,
-                color: secondaryTextColor,
-                fontFamily: themeService.fontFamily,
+            Flexible(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      _topicTitle,
+                      style: TextStyle(
+                        fontSize: isSmallScreen ? 10 : 11,
+                        color: secondaryTextColor.withOpacity(0.8),
+                        letterSpacing: 1.0,
+                        fontFamily: themeService.fontFamily,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  SizedBox(width: isSmallScreen ? 2 : 4),
+                  Text(
+                    '•',
+                    style: TextStyle(
+                      color: secondaryTextColor.withOpacity(0.3),
+                      fontFamily: themeService.fontFamily,
+                    ),
+                  ),
+                  SizedBox(width: isSmallScreen ? 2 : 4),
+                ],
               ),
             ),
-            SizedBox(width: isSmallScreen ? 6 : 8),
-
-            // Progress dots
+            const Spacer(),
             Row(
-              children: List.generate(4, (index) {
-                return Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: isSmallScreen ? 0.5 : 1,
+              children: [
+                Text(
+                  '$learnedCount/$totalPhrases',
+                  style: TextStyle(
+                    fontSize: isSmallScreen ? 10 : 11,
+                    color: secondaryTextColor,
+                    fontFamily: themeService.fontFamily,
                   ),
-                  width: index == 0
-                      ? (isSmallScreen ? 12 : 16)
-                      : (isSmallScreen ? 6 : 8),
-                  height: isSmallScreen ? 4 : 6,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: index == 0
-                        ? textColor.withOpacity(0.7)
-                        : index < 2
-                        ? textColor.withOpacity(0.3)
-                        : textColor.withOpacity(0.15),
-                  ),
-                );
-              }),
+                ),
+                SizedBox(width: isSmallScreen ? 6 : 8),
+                Row(
+                  children: List.generate(4, (index) {
+                    final isFilled = index < filledDots;
+                    return Container(
+                      margin: EdgeInsets.symmetric(
+                        horizontal: isSmallScreen ? 0.5 : 1,
+                      ),
+                      width: index == 0
+                          ? (isSmallScreen ? 12 : 16)
+                          : (isSmallScreen ? 6 : 8),
+                      height: isSmallScreen ? 4 : 6,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(2),
+                        color: isFilled
+                            ? textColor.withOpacity(0.8 - (index * 0.12))
+                            : textColor.withOpacity(0.18),
+                      ),
+                    );
+                  }),
+                ),
+              ],
             ),
           ],
         ),
+        AnimatedSwitcher(
+          duration: ThemeService.defaultAnimationDuration,
+          child: _lessonCompleted
+              ? Padding(
+                  padding: EdgeInsets.only(top: isSmallScreen ? 8 : 10),
+                  child: _buildCompletionChip(themeService, isSmallScreen),
+                )
+              : const SizedBox.shrink(),
+        ),
       ],
+    );
+  }
+
+  Widget _buildCompletionChip(ThemeService themeService, bool isSmallScreen) {
+    final scheme = themeService.currentScheme;
+    final isDark = themeService.isDarkMode.value;
+    final primary = isDark ? scheme.primaryDark : scheme.primary;
+    final accent = scheme.accentTeal;
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: isSmallScreen ? 10 : 14,
+        vertical: isSmallScreen ? 6 : 8,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          colors: [primary.withOpacity(0.2), accent.withOpacity(0.18)],
+        ),
+        border: Border.all(color: primary.withOpacity(0.4), width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: primary.withOpacity(0.25),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.emoji_events,
+            size: isSmallScreen ? 14 : 16,
+            color: accent,
+          ),
+          SizedBox(width: isSmallScreen ? 6 : 8),
+          Text(
+            'Lesson completed',
+            style: themeService
+                .getLabelSmallStyle(color: primary)
+                .copyWith(fontWeight: FontWeight.w700, letterSpacing: 0.4),
+          ),
+        ],
+      ),
     );
   }
 
@@ -793,10 +923,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                   TweenAnimationBuilder<double>(
                     tween: Tween(
                       begin: 0.0,
-                      end: _phrases.isEmpty
-                          ? 0.0
-                          : ((_highestReachedIndex + 1) / _phrases.length)
-                                .clamp(0.0, 1.0),
+                      end: _lessonProgress.clamp(0.0, 1.0),
                     ),
                     duration: ThemeService.slowAnimationDuration,
                     curve: Curves.easeOutCubic,

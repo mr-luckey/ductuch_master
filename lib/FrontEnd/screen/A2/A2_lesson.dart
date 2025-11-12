@@ -259,174 +259,234 @@ class _A2LessonScreenState extends State<A2LessonScreen>
             borderRadius: BorderRadius.circular(20),
             splashColor: primaryColor.withOpacity(0.2),
             highlightColor: primaryColor.withOpacity(0.1),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  // Animated Icon
-                  Hero(
-                    tag: 'topic_icon_${topic['id']}',
-                    child: Material(
-                      color: Colors.transparent,
-                      child: TweenAnimationBuilder<double>(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      // Animated Icon
+                      Hero(
+                        tag: 'topic_icon_${topic['id']}',
+                        child: Material(
+                          color: Colors.transparent,
+                          child: TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0.0, end: isCompleted ? 1.0 : 0.0),
+                            duration: ThemeService.defaultAnimationDuration,
+                            curve: ThemeService.bounceCurve,
+                            builder: (context, value, child) {
+                              return Transform.scale(
+                                scale: 1.0 + (value * 0.2),
+                                child: Container(
+                                  width: 56,
+                                  height: 56,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        primaryColor.withOpacity(0.25),
+                                        scheme.accentTeal.withOpacity(0.2),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: primaryColor.withOpacity(0.4),
+                                      width: 2,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: primaryColor.withOpacity(0.3 * value),
+                                        blurRadius: 8,
+                                        spreadRadius: 1,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Icon(
+                                    isCompleted
+                                        ? Icons.check_circle
+                                        : _getIconForType(topic['type']),
+                                    color: primaryColor,
+                                    size: 28,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Hero(
+                              tag: 'topic_title_${topic['id']}',
+                              child: Material(
+                                color: Colors.transparent,
+                                child: Text(
+                                  topic['title'],
+                                  style: themeService.getTitleMediumStyle(
+                                    color: textPrimaryColor,
+                                  ).copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    decoration: isCompleted
+                                        ? TextDecoration.lineThrough
+                                        : TextDecoration.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            if (!isCompleted) ...[
+                              const SizedBox(height: 6),
+                              Text(
+                                topic['content'],
+                                style: themeService.getBodySmallStyle(
+                                  color: secondaryTextColor,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          primaryColor.withOpacity(0.2),
+                                          scheme.accentTeal.withOpacity(0.15),
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color: primaryColor.withOpacity(0.4),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      topic['type'],
+                                      style: themeService.getLabelSmallStyle(
+                                        color: primaryColor,
+                                      ).copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Icon(
+                                    Icons.access_time,
+                                    size: 14,
+                                    color: secondaryTextColor,
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    topic['duration'],
+                                    style: themeService.getBodySmallStyle(
+                                      color: secondaryTextColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                      // Checkbox with animation
+                      TweenAnimationBuilder<double>(
                         tween: Tween(begin: 0.0, end: isCompleted ? 1.0 : 0.0),
                         duration: ThemeService.defaultAnimationDuration,
                         curve: ThemeService.bounceCurve,
                         builder: (context, value, child) {
                           return Transform.scale(
-                            scale: 1.0 + (value * 0.2),
+                            scale: value,
                             child: Container(
-                              width: 56,
-                              height: 56,
+                              width: 28,
+                              height: 28,
                               decoration: BoxDecoration(
+                                shape: BoxShape.circle,
                                 gradient: LinearGradient(
                                   colors: [
-                                    primaryColor.withOpacity(0.25),
-                                    scheme.accentTeal.withOpacity(0.2),
+                                    primaryColor.withOpacity(0.2 + (0.3 * value)),
+                                    scheme.accentTeal.withOpacity(0.15 + (0.2 * value)),
                                   ],
                                 ),
-                                borderRadius: BorderRadius.circular(16),
                                 border: Border.all(
-                                  color: primaryColor.withOpacity(0.4),
+                                  color: isCompleted
+                                      ? primaryColor
+                                      : textPrimaryColor.withOpacity(0.3),
                                   width: 2,
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.3 * value),
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                  ),
-                                ],
                               ),
                               child: Icon(
-                                isCompleted
-                                    ? Icons.check_circle
-                                    : _getIconForType(topic['type']),
-                                color: primaryColor,
-                                size: 28,
+                                isCompleted ? Icons.check : Icons.play_arrow,
+                                size: 16,
+                                color: isCompleted ? Colors.white : primaryColor,
                               ),
                             ),
                           );
                         },
                       ),
+                    ],
+                  ),
+                ),
+                if (isCompleted)
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      duration: ThemeService.defaultAnimationDuration,
+                      curve: ThemeService.defaultCurve,
+                      builder: (context, value, child) {
+                        return Opacity(
+                          opacity: value.clamp(0.0, 1.0),
+                          child: Transform.translate(
+                            offset: Offset(0, (1 - value) * -6),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                gradient: LinearGradient(
+                                  colors: [primaryColor, scheme.accentTeal],
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primaryColor.withOpacity(0.25),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.verified,
+                                    color: Colors.white,
+                                    size: 16,
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    'Completed',
+                                    style: themeService.getLabelSmallStyle(
+                                      color: Colors.white,
+                                    ).copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.4,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Hero(
-                          tag: 'topic_title_${topic['id']}',
-                          child: Material(
-                            color: Colors.transparent,
-                            child: Text(
-                              topic['title'],
-                              style: themeService.getTitleMediumStyle(
-                                color: textPrimaryColor,
-                              ).copyWith(
-                                fontWeight: FontWeight.bold,
-                                decoration: isCompleted
-                                    ? TextDecoration.lineThrough
-                                    : TextDecoration.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (!isCompleted) ...[
-                          const SizedBox(height: 6),
-                          Text(
-                            topic['content'],
-                            style: themeService.getBodySmallStyle(
-                              color: secondaryTextColor,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 6,
-                                ),
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      primaryColor.withOpacity(0.2),
-                                      scheme.accentTeal.withOpacity(0.15),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: primaryColor.withOpacity(0.4),
-                                  ),
-                                ),
-                                child: Text(
-                                  topic['type'],
-                                  style: themeService.getLabelSmallStyle(
-                                    color: primaryColor,
-                                  ).copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Icon(
-                                Icons.access_time,
-                                size: 14,
-                                color: secondaryTextColor,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                topic['duration'],
-                                style: themeService.getBodySmallStyle(
-                                  color: secondaryTextColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                  // Checkbox with animation
-                  TweenAnimationBuilder<double>(
-                    tween: Tween(begin: 0.0, end: isCompleted ? 1.0 : 0.0),
-                    duration: ThemeService.defaultAnimationDuration,
-                    curve: ThemeService.bounceCurve,
-                    builder: (context, value, child) {
-                      return Transform.scale(
-                        scale: value,
-                        child: Container(
-                          width: 32,
-                          height: 32,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            gradient: LinearGradient(
-                              colors: [
-                                primaryColor,
-                                scheme.accentTeal,
-                              ],
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: primaryColor.withOpacity(0.5 * value),
-                                blurRadius: 8,
-                                spreadRadius: 2,
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.check,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+              ],
             ),
           ),
         ),

@@ -116,9 +116,7 @@ class _SentencesScreenState extends State<SentencesScreen>
 
         return Scaffold(
           backgroundColor: backgroundColor,
-          body: Center(
-            child: CircularProgressIndicator(color: textColor),
-          ),
+          body: Center(child: CircularProgressIndicator(color: textColor)),
         );
       });
     }
@@ -133,24 +131,25 @@ class _SentencesScreenState extends State<SentencesScreen>
 
       return Scaffold(
         backgroundColor: backgroundColor,
-        appBar: AppBar(
-          backgroundColor: backgroundColor,
-          elevation: 0,
-          title: Hero(
-            tag: 'sentences_title',
-            child: Material(
-              color: Colors.transparent,
-              child: Text(
-                'Sentences',
-                style: themeService.getTitleLargeStyle(color: textColor)
-                    .copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          actions: [const TtsSpeedDropdown()],
-        ),
+
+        // appBar: AppBar(
+        //   backgroundColor: backgroundColor,
+        //   elevation: 0,
+        //   title: Hero(
+        //     tag: 'sentences_title',
+        //     child: Material(
+        //       color: Colors.transparent,
+        //       child: Text(
+        //         'Sentences',
+        //         style: themeService.getTitleLargeStyle(color: textColor)
+        //             .copyWith(
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   actions: [const TtsSpeedDropdown()],
+        // ),
         body: SafeArea(
           child: LayoutBuilder(
             builder: (context, constraints) {
@@ -167,8 +166,6 @@ class _SentencesScreenState extends State<SentencesScreen>
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: isSmallScreen ? 4 : 6),
-                    _buildTopBar(context, isSmallScreen, scheme, isDark),
                     SizedBox(height: isSmallScreen ? 12 : 16),
                     _buildSentenceHeader(
                       context,
@@ -209,46 +206,6 @@ class _SentencesScreenState extends State<SentencesScreen>
     });
   }
 
-  Widget _buildTopBar(
-    BuildContext context,
-    bool isSmallScreen,
-    scheme,
-    bool isDark,
-  ) {
-    final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
-    final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
-
-    return Row(
-      children: [
-        Hero(
-          tag: 'sentences_back_button',
-          child: Material(
-            color: Colors.transparent,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: themeService.getCardGradient(isDark),
-                border: Border.all(
-                  color: primaryColor.withOpacity(0.3),
-                ),
-                boxShadow: ThemeService.getCardShadow(isDark),
-              ),
-              child: IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(
-                  Icons.chevron_left,
-                  color: textColor,
-                  size: isSmallScreen ? 20 : 24,
-                ),
-                padding: isSmallScreen ? const EdgeInsets.all(8) : null,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildSentenceHeader(
     BuildContext context,
     bool isSmallScreen,
@@ -262,11 +219,9 @@ class _SentencesScreenState extends State<SentencesScreen>
         Flexible(
           child: Text(
             'Small Sentences',
-            style: themeService.getLabelSmallStyle(
-              color: textColor.withOpacity(0.5),
-            ).copyWith(
-              letterSpacing: 1.0,
-            ),
+            style: themeService
+                .getLabelSmallStyle(color: textColor.withOpacity(0.5))
+                .copyWith(letterSpacing: 1.0),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -295,12 +250,13 @@ class _SentencesScreenState extends State<SentencesScreen>
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
-                            ? textColor.withOpacity(0.3)
-                            : textColor.withOpacity(0.15),
+                        ? textColor.withOpacity(0.3)
+                        : textColor.withOpacity(0.15),
                   ),
                 );
               }),
             ),
+            TtsSpeedDropdown(),
           ],
         ),
       ],
@@ -385,18 +341,25 @@ class _SentencesScreenState extends State<SentencesScreen>
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               gradient: LinearGradient(
-                                                colors: [primaryColor, secondaryColor],
+                                                colors: [
+                                                  primaryColor,
+                                                  secondaryColor,
+                                                ],
                                               ),
                                             ),
                                           ),
-                                          SizedBox(width: isSmallScreen ? 4 : 6),
+                                          SizedBox(
+                                            width: isSmallScreen ? 4 : 6,
+                                          ),
                                           Text(
                                             'SENTENCE',
                                             style: themeService
-                                                .getLabelSmallStyle(color: primaryColor)
+                                                .getLabelSmallStyle(
+                                                  color: primaryColor,
+                                                )
                                                 .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
                                         ],
                                       ),
@@ -417,12 +380,14 @@ class _SentencesScreenState extends State<SentencesScreen>
                                     child: Text(
                                       currentSentence.german,
                                       style: themeService
-                                          .getTitleLargeStyle(color: Colors.white)
+                                          .getTitleLargeStyle(
+                                            color: Colors.white,
+                                          )
                                           .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: isSmallScreen ? 22 : 28,
-                                        height: 1.2,
-                                      ),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: isSmallScreen ? 22 : 28,
+                                            height: 1.2,
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -514,7 +479,9 @@ class _SentencesScreenState extends State<SentencesScreen>
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
                                           gradient: LinearGradient(
                                             colors: [
                                               primaryColor.withOpacity(0.2),
@@ -522,7 +489,9 @@ class _SentencesScreenState extends State<SentencesScreen>
                                             ],
                                           ),
                                           border: Border.all(
-                                            color: primaryColor.withOpacity(0.3),
+                                            color: primaryColor.withOpacity(
+                                              0.3,
+                                            ),
                                             width: 1,
                                           ),
                                         ),
@@ -530,11 +499,16 @@ class _SentencesScreenState extends State<SentencesScreen>
                                           () => IconButton(
                                             onPressed: _playCurrentSentence,
                                             icon: Icon(
-                                              ttsService.isTextPlaying(currentSentence.german)
+                                              ttsService.isTextPlaying(
+                                                    currentSentence.german,
+                                                  )
                                                   ? Icons.volume_up
                                                   : Icons.volume_up_outlined,
                                               size: isSmallScreen ? 18 : 20,
-                                              color: ttsService.isTextPlaying(currentSentence.german)
+                                              color:
+                                                  ttsService.isTextPlaying(
+                                                    currentSentence.german,
+                                                  )
                                                   ? primaryColor
                                                   : textColor.withOpacity(0.8),
                                             ),
@@ -567,7 +541,10 @@ class _SentencesScreenState extends State<SentencesScreen>
                     TweenAnimationBuilder<double>(
                       tween: Tween(
                         begin: 0.0,
-                        end: _sentences.isEmpty ? 0.0 : ((_currentSentenceIndex + 1) / _sentences.length).clamp(0.0, 1.0),
+                        end: _sentences.isEmpty
+                            ? 0.0
+                            : ((_currentSentenceIndex + 1) / _sentences.length)
+                                  .clamp(0.0, 1.0),
                       ),
                       duration: ThemeService.slowAnimationDuration,
                       curve: Curves.easeOutCubic,
@@ -666,91 +643,95 @@ class _SentencesScreenState extends State<SentencesScreen>
             builder: (context, value, child) {
               return Transform.scale(
                 scale: value,
-                child: Obx(
-                  () {
-                    final isPlaying = ttsService.isTextPlaying(currentSentence.german);
-                    return TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.easeOutCubic,
-                      builder: (context, pulseValue, child) {
-                        return Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            // Pulsing ring
-                            if (isPlaying)
-                              Container(
-                                width: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
-                                height: (isSmallScreen ? 64 : 76) + (pulseValue * 16),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      primaryColor.withOpacity(0.3 * (1 - pulseValue)),
-                                      primaryColor.withOpacity(0.0),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                child: Obx(() {
+                  final isPlaying = ttsService.isTextPlaying(
+                    currentSentence.german,
+                  );
+                  return TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 0.0, end: isPlaying ? 1.0 : 0.0),
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.easeOutCubic,
+                    builder: (context, pulseValue, child) {
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Pulsing ring
+                          if (isPlaying)
                             Container(
+                              width:
+                                  (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                              height:
+                                  (isSmallScreen ? 64 : 76) + (pulseValue * 16),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: LinearGradient(
+                                shape: BoxShape.circle,
+                                gradient: RadialGradient(
                                   colors: [
-                                    primaryColor.withOpacity(0.2),
-                                    secondaryColor.withOpacity(0.15),
+                                    primaryColor.withOpacity(
+                                      0.3 * (1 - pulseValue),
+                                    ),
+                                    primaryColor.withOpacity(0.0),
                                   ],
                                 ),
-                                border: Border.all(
-                                  color: primaryColor.withOpacity(0.4),
-                                  width: 2,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: primaryColor.withOpacity(0.3),
-                                    blurRadius: 12,
-                                    spreadRadius: 2,
-                                  ),
-                                ],
-                              ),
-                              child: IconButton(
-                                onPressed: _playCurrentSentence,
-                                icon: Icon(
-                                  isPlaying ? Icons.stop : Icons.volume_up,
-                                  size: isSmallScreen ? 28 : 32,
-                                  color: primaryColor,
-                                ),
-                                padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
                               ),
                             ),
-                            if (isPlaying)
-                              Positioned(
-                                top: 8,
-                                right: 8,
-                                child: Container(
-                                  width: isSmallScreen ? 12 : 14,
-                                  height: isSmallScreen ? 12 : 14,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    gradient: LinearGradient(
-                                      colors: [primaryColor, scheme.accentTeal],
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: primaryColor.withOpacity(0.8),
-                                        blurRadius: 8,
-                                        spreadRadius: 2,
-                                      ),
-                                    ],
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              gradient: LinearGradient(
+                                colors: [
+                                  primaryColor.withOpacity(0.2),
+                                  secondaryColor.withOpacity(0.15),
+                                ],
+                              ),
+                              border: Border.all(
+                                color: primaryColor.withOpacity(0.4),
+                                width: 2,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.3),
+                                  blurRadius: 12,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              onPressed: _playCurrentSentence,
+                              icon: Icon(
+                                isPlaying ? Icons.stop : Icons.volume_up,
+                                size: isSmallScreen ? 28 : 32,
+                                color: primaryColor,
+                              ),
+                              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                            ),
+                          ),
+                          if (isPlaying)
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Container(
+                                width: isSmallScreen ? 12 : 14,
+                                height: isSmallScreen ? 12 : 14,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    colors: [primaryColor, scheme.accentTeal],
                                   ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: primaryColor.withOpacity(0.8),
+                                      blurRadius: 8,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
                                 ),
                               ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
+                            ),
+                        ],
+                      );
+                    },
+                  );
+                }),
               );
             },
           ),

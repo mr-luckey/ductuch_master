@@ -1,9 +1,10 @@
-import 'package:ductuch_master/backend/services/theme_service.dart';
-import 'package:ductuch_master/frontend/screens/learn/learn_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/nouns/nouns_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/verbs/verbs_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/sentences/sentences_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/more/more_screen.dart';
+import 'package:ductuch_master/FrontEnd/screen/Levels/levels_overview_screen.dart';
+import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/frontend/screens/learn/learn_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:get/get.dart';
@@ -87,10 +88,7 @@ class _MainNavigationState extends State<MainNavigation>
               offset: const Offset(0, -5),
             ),
           ],
-          border: Border.all(
-            color: primaryColor.withOpacity(0.2),
-            width: 1.5,
-          ),
+          border: Border.all(color: primaryColor.withOpacity(0.2), width: 1.5),
         ),
         navBarStyle: NavBarStyle.style9,
         navBarHeight: navBarHeight,
@@ -101,6 +99,7 @@ class _MainNavigationState extends State<MainNavigation>
   List<Widget> _buildScreens() {
     return [
       const LearnScreen(),
+      const LevelsOverviewScreen(),
       const NounsScreen(),
       const VerbsScreen(),
       const SentencesScreen(),
@@ -130,6 +129,18 @@ class _MainNavigationState extends State<MainNavigation>
         activeColorPrimary: selectedColor,
         inactiveColorPrimary: unselectedColor,
         title: 'Learn',
+        textStyle: TextStyle(
+          fontSize: fontSize,
+          color: textColor,
+          fontFamily: themeService.fontFamily,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.layers_outlined, size: iconSize),
+        activeColorPrimary: selectedColor,
+        inactiveColorPrimary: unselectedColor,
+        title: 'Levels',
         textStyle: TextStyle(
           fontSize: fontSize,
           color: textColor,

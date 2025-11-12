@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
+import 'package:ductuch_master/FrontEnd/screen/level_screen/level_congrats_screen.dart';
 
 class LevelScreen extends StatefulWidget {
   final String level;
@@ -19,6 +20,7 @@ class _LevelScreenState extends State<LevelScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
+  bool _hasShownCongrats = false;
 
   @override
   void initState() {
@@ -64,12 +66,22 @@ class _LevelScreenState extends State<LevelScreen>
         LearningPathData.levelInfo['a1']!;
 
     final levelCodeUpper = currentLevelKey.toUpperCase();
-    final progressPercent = lessonController.levelProgressPercent(
-      levelCodeUpper,
-    );
-    final allDone = progressPercent >= 100;
 
     return Obx(() {
+      final progressPercent = lessonController.levelProgressPercent(
+        levelCodeUpper,
+      );
+      final allDone = progressPercent >= 100;
+      final isLevelPassed = lessonController.isLevelPassed(levelCodeUpper);
+
+      if (isLevelPassed && !_hasShownCongrats) {
+        _hasShownCongrats = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          Get.to(() => LevelCongratsScreen(level: levelCodeUpper));
+        });
+      }
+
       final scheme = themeService.currentScheme;
       final isDark = themeService.isDarkMode.value;
       final textColor = isDark ? scheme.textPrimaryDark : scheme.textPrimary;
@@ -112,12 +124,20 @@ class _LevelScreenState extends State<LevelScreen>
                                         color: Colors.transparent,
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(12),
-                                            gradient: themeService.getCardGradient(isDark),
-                                            border: Border.all(
-                                              color: primaryColor.withOpacity(0.3),
+                                            borderRadius: BorderRadius.circular(
+                                              12,
                                             ),
-                                            boxShadow: ThemeService.getCardShadow(isDark),
+                                            gradient: themeService
+                                                .getCardGradient(isDark),
+                                            border: Border.all(
+                                              color: primaryColor.withOpacity(
+                                                0.3,
+                                              ),
+                                            ),
+                                            boxShadow:
+                                                ThemeService.getCardShadow(
+                                                  isDark,
+                                                ),
                                           ),
                                           child: IconButton(
                                             onPressed: () => Get.back(),
@@ -134,23 +154,31 @@ class _LevelScreenState extends State<LevelScreen>
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Hero(
                                             tag: 'level_title_$currentLevelKey',
                                             child: Material(
                                               color: Colors.transparent,
                                               child: ShaderMask(
-                                                shaderCallback: (bounds) => LinearGradient(
-                                                  colors: [textColor, primaryColor],
-                                                ).createShader(bounds),
+                                                shaderCallback: (bounds) =>
+                                                    LinearGradient(
+                                                      colors: [
+                                                        textColor,
+                                                        primaryColor,
+                                                      ],
+                                                    ).createShader(bounds),
                                                 child: Text(
                                                   currentLevel.title,
                                                   style: themeService
-                                                      .getHeadlineSmallStyle(color: Colors.white)
+                                                      .getHeadlineSmallStyle(
+                                                        color: Colors.white,
+                                                      )
                                                       .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                 ),
                                               ),
                                             ),
@@ -160,9 +188,11 @@ class _LevelScreenState extends State<LevelScreen>
                                           TweenAnimationBuilder<double>(
                                             tween: Tween(
                                               begin: 0.0,
-                                              end: (progressPercent / 100).clamp(0.0, 1.0),
+                                              end: (progressPercent / 100)
+                                                  .clamp(0.0, 1.0),
                                             ),
-                                            duration: ThemeService.slowAnimationDuration,
+                                            duration: ThemeService
+                                                .slowAnimationDuration,
                                             curve: Curves.easeOutCubic,
                                             builder: (context, progressValue, child) {
                                               return Row(
@@ -171,21 +201,37 @@ class _LevelScreenState extends State<LevelScreen>
                                                     child: Container(
                                                       height: 8,
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(4),
-                                                        color: surfaceColor.withOpacity(0.1),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              4,
+                                                            ),
+                                                        color: surfaceColor
+                                                            .withOpacity(0.1),
                                                       ),
                                                       child: FractionallySizedBox(
-                                                        alignment: Alignment.centerLeft,
-                                                        widthFactor: progressValue,
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        widthFactor:
+                                                            progressValue,
                                                         child: Container(
                                                           decoration: BoxDecoration(
-                                                            gradient: LinearGradient(
-                                                              colors: [primaryColor, secondaryColor],
-                                                            ),
-                                                            borderRadius: BorderRadius.circular(4),
+                                                            gradient:
+                                                                LinearGradient(
+                                                                  colors: [
+                                                                    primaryColor,
+                                                                    secondaryColor,
+                                                                  ],
+                                                                ),
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  4,
+                                                                ),
                                                             boxShadow: [
                                                               BoxShadow(
-                                                                color: primaryColor.withOpacity(0.5),
+                                                                color: primaryColor
+                                                                    .withOpacity(
+                                                                      0.5,
+                                                                    ),
                                                                 blurRadius: 4,
                                                                 spreadRadius: 1,
                                                               ),
@@ -198,21 +244,27 @@ class _LevelScreenState extends State<LevelScreen>
                                                   const SizedBox(width: 12),
                                                   Text(
                                                     '$progressPercent%',
-                                                    style: themeService.getLabelSmallStyle(
-                                                      color: textColor.withOpacity(0.8),
-                                                    ),
+                                                    style: themeService
+                                                        .getLabelSmallStyle(
+                                                          color: textColor
+                                                              .withOpacity(0.8),
+                                                        ),
                                                   ),
                                                 ],
                                               );
                                             },
                                           ),
-                                          if (currentLevel.description.isNotEmpty) ...[
+                                          if (currentLevel
+                                              .description
+                                              .isNotEmpty) ...[
                                             const SizedBox(height: 8),
                                             Text(
                                               currentLevel.description,
-                                              style: themeService.getBodyMediumStyle(
-                                                color: textColor.withOpacity(0.7),
-                                              ),
+                                              style: themeService
+                                                  .getBodyMediumStyle(
+                                                    color: textColor
+                                                        .withOpacity(0.7),
+                                                  ),
                                             ),
                                           ],
                                         ],
@@ -272,9 +324,7 @@ class _LevelScreenState extends State<LevelScreen>
                                     'Coming Soon',
                                     style: themeService
                                         .getHeadlineSmallStyle(color: textColor)
-                                        .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                        .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
@@ -355,8 +405,8 @@ class _LevelScreenState extends State<LevelScreen>
                       }, childCount: currentLevel.modules.length),
                     ),
                   ),
-                // Exam button if all done
-                if (allDone)
+                // Exam button if all done but not yet passed
+                if (allDone && !isLevelPassed)
                   SliverToBoxAdapter(
                     child: TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.0, end: 1.0),
@@ -368,7 +418,12 @@ class _LevelScreenState extends State<LevelScreen>
                           child: Opacity(
                             opacity: value.clamp(0.0, 1.0),
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+                              padding: const EdgeInsets.fromLTRB(
+                                24,
+                                16,
+                                24,
+                                24,
+                              ),
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
@@ -401,7 +456,9 @@ class _LevelScreenState extends State<LevelScreen>
                                     },
                                     borderRadius: BorderRadius.circular(20),
                                     splashColor: primaryColor.withOpacity(0.2),
-                                    highlightColor: primaryColor.withOpacity(0.1),
+                                    highlightColor: primaryColor.withOpacity(
+                                      0.1,
+                                    ),
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 20,
@@ -414,9 +471,13 @@ class _LevelScreenState extends State<LevelScreen>
                                             height: 48,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(
-                                                colors: [primaryColor, secondaryColor],
+                                                colors: [
+                                                  primaryColor,
+                                                  secondaryColor,
+                                                ],
                                               ),
-                                              borderRadius: BorderRadius.circular(12),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                             ),
                                             child: Icon(
                                               Icons.assignment_turned_in,
@@ -427,22 +488,28 @@ class _LevelScreenState extends State<LevelScreen>
                                           const SizedBox(width: 16),
                                           Expanded(
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   'Take Exam',
                                                   style: themeService
-                                                      .getTitleMediumStyle(color: textColor)
+                                                      .getTitleMediumStyle(
+                                                        color: textColor,
+                                                      )
                                                       .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                 ),
                                                 const SizedBox(height: 4),
                                                 Text(
                                                   'Test your knowledge for $levelCodeUpper',
-                                                  style: themeService.getBodySmallStyle(
-                                                    color: textColor.withOpacity(0.7),
-                                                  ),
+                                                  style: themeService
+                                                      .getBodySmallStyle(
+                                                        color: textColor
+                                                            .withOpacity(0.7),
+                                                      ),
                                                 ),
                                               ],
                                             ),
@@ -455,6 +522,111 @@ class _LevelScreenState extends State<LevelScreen>
                                         ],
                                       ),
                                     ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                if (isLevelPassed)
+                  SliverToBoxAdapter(
+                    child: TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.0, end: 1.0),
+                      duration: ThemeService.defaultAnimationDuration,
+                      curve: ThemeService.defaultCurve,
+                      builder: (context, value, child) {
+                        return Transform.translate(
+                          offset: Offset(0, 16 * (1 - value)),
+                          child: Opacity(
+                            opacity: value.clamp(0.0, 1.0),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                24,
+                                16,
+                                24,
+                                24,
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      scheme.accentTeal.withOpacity(0.25),
+                                      primaryColor.withOpacity(0.2),
+                                    ],
+                                  ),
+                                  border: Border.all(
+                                    color: scheme.accentTeal.withOpacity(0.5),
+                                    width: 2,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: scheme.accentTeal.withOpacity(0.3),
+                                      blurRadius: 12,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 18,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 48,
+                                        height: 48,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              scheme.accentTeal,
+                                              primaryColor,
+                                            ],
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.emoji_events,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 16),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Level Completed! 🎉',
+                                              style: themeService
+                                                  .getTitleMediumStyle(
+                                                    color: textColor,
+                                                  )
+                                                  .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                            ),
+                                            const SizedBox(height: 6),
+                                            Text(
+                                              'You passed the $levelCodeUpper exam with flying colors. Keep exploring the next level!',
+                                              style: themeService
+                                                  .getBodySmallStyle(
+                                                    color: textColor
+                                                        .withOpacity(0.75),
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.white,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

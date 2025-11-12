@@ -873,7 +873,7 @@ class _ExamScreenState extends State<ExamScreen>
         onTap: () => _selectAnswer(index),
         child: AnimatedContainer(
           duration: ThemeService.defaultAnimationDuration,
-          curve: ThemeService.springCurve,
+          curve: ThemeService.defaultCurve,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: isSelected
@@ -913,7 +913,7 @@ class _ExamScreenState extends State<ExamScreen>
                   children: [
                     AnimatedContainer(
                       duration: ThemeService.defaultAnimationDuration,
-                      curve: ThemeService.springCurve,
+                      curve: ThemeService.defaultCurve,
                       width: isSmallScreen ? 28 : 32,
                       height: isSmallScreen ? 28 : 32,
                       decoration: BoxDecoration(

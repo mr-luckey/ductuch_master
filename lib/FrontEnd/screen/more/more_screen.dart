@@ -57,24 +57,25 @@ class _MoreScreenState extends State<MoreScreen>
 
       return Scaffold(
         backgroundColor: backgroundColor,
-        appBar: AppBar(
-          backgroundColor: backgroundColor,
-          elevation: 0,
-          title: Hero(
-            tag: 'more_title',
-            child: Material(
-              color: Colors.transparent,
-              child: Text(
-                'More',
-                style: themeService.getTitleLargeStyle(color: textColor)
-                    .copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          actions: [const TtsSpeedDropdown()],
-        ),
+
+        // appBar: AppBar(
+        //   backgroundColor: backgroundColor,
+        //   elevation: 0,
+        //   title: Hero(
+        //     tag: 'more_title',
+        //     child: Material(
+        //       color: Colors.transparent,
+        //       child: Text(
+        //         'More',
+        //         style: themeService.getTitleLargeStyle(color: textColor)
+        //             .copyWith(
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   actions: [const TtsSpeedDropdown()],
+        // ),
         body: SafeArea(
           child: FadeTransition(
             opacity: _fadeAnimation,
@@ -103,9 +104,9 @@ class _MoreScreenState extends State<MoreScreen>
                         builder: (context, value, child) {
                           return Transform.translate(
                             offset: Offset(0, 20 * (1 - value)),
-          child: Opacity(
-            opacity: value.clamp(0.0, 1.0),
-            child: Column(
+                            child: Opacity(
+                              opacity: value.clamp(0.0, 1.0),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   ShaderMask(
@@ -115,10 +116,12 @@ class _MoreScreenState extends State<MoreScreen>
                                     child: Text(
                                       'More Options',
                                       style: themeService
-                                          .getHeadlineSmallStyle(color: Colors.white)
+                                          .getHeadlineSmallStyle(
+                                            color: Colors.white,
+                                          )
                                           .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
                                   SizedBox(height: isSmallScreen ? 8 : 12),
@@ -306,9 +309,7 @@ class _MoreScreenState extends State<MoreScreen>
                                 title,
                                 style: themeService
                                     .getTitleMediumStyle(color: textColor)
-                                    .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
                               SizedBox(height: 4),
                               Text(
