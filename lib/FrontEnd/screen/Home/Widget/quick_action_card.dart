@@ -1,4 +1,5 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -73,9 +74,9 @@ class _QuickActionCardState extends State<QuickActionCard>
             child: AnimatedContainer(
               duration: ThemeService.defaultAnimationDuration,
               curve: Curves.easeInOut,
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              margin: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getSpacing(context), vertical: ResponsiveHelper.getSpacing(context) * 0.5),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                 gradient: themeService.getCardGradient(isDark),
                 border: Border.all(
                   color: _isHovered
@@ -97,7 +98,7 @@ class _QuickActionCardState extends State<QuickActionCard>
               transform: Matrix4.identity()
                 ..scale(_isHovered ? 1.02 : 1.0),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context) * 0.8),
                 child: Row(
                   children: [
                     TweenAnimationBuilder<double>(
@@ -110,7 +111,7 @@ class _QuickActionCardState extends State<QuickActionCard>
                           child: Transform.rotate(
                             angle: _isHovered ? 0.1 : 0.0,
                             child: Container(
-                              padding: const EdgeInsets.all(12),
+                              padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.75),
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
@@ -118,7 +119,7 @@ class _QuickActionCardState extends State<QuickActionCard>
                                     widget.iconColor.withOpacity(0.2),
                                   ],
                                 ),
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
                                 border: Border.all(
                                   color: widget.iconColor.withOpacity(0.4),
                                   width: 2,
@@ -134,14 +135,14 @@ class _QuickActionCardState extends State<QuickActionCard>
                               child: Icon(
                                 widget.icon,
                                 color: widget.iconColor,
-                                size: 24,
+                                size: ResponsiveHelper.getIconSize(context),
                               ),
                             ),
                           ),
                         );
                       },
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: ResponsiveHelper.getSpacing(context)),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,7 +155,7 @@ class _QuickActionCardState extends State<QuickActionCard>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 4),
+                          SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                           Text(
                             widget.description,
                             style: themeService.getBodySmallStyle(

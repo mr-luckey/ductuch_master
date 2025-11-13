@@ -1,5 +1,6 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -67,7 +68,7 @@ class _SubmoduleCardState extends State<SubmoduleCard>
             scale: _scaleAnimation,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                 gradient: themeService.getCardGradient(isDark),
                 boxShadow: ThemeService.getCardShadow(isDark),
                 border: Border.all(
@@ -79,11 +80,11 @@ class _SubmoduleCardState extends State<SubmoduleCard>
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: widget.onTap,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                   splashColor: primaryColor.withOpacity(0.2),
                   highlightColor: primaryColor.withOpacity(0.1),
                   child: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -98,8 +99,8 @@ class _SubmoduleCardState extends State<SubmoduleCard>
                               child: Transform.scale(
                                 scale: 1.0 + (value * 0.1),
                                 child: Container(
-                                  width: 56,
-                                  height: 56,
+                                  width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
+                                  height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       begin: Alignment.topLeft,
@@ -109,7 +110,7 @@ class _SubmoduleCardState extends State<SubmoduleCard>
                                         secondaryColor.withOpacity(0.15),
                                       ],
                                     ),
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                     boxShadow: [
                                       BoxShadow(
                                         color: primaryColor.withOpacity(0.3),
@@ -121,14 +122,14 @@ class _SubmoduleCardState extends State<SubmoduleCard>
                                   child: Icon(
                                     widget.moduleInfo.icon,
                                     color: primaryColor,
-                                    size: 28,
+                                    size: ResponsiveHelper.isDesktop(context) ? 32 : ResponsiveHelper.isTablet(context) ? 30 : 28,
                                   ),
                                 ),
                               ),
                             );
                           },
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: ResponsiveHelper.getSpacing(context)),
                         // Title with Hero animation
                         Hero(
                           tag: 'submodule_${widget.moduleInfo.ID}',
@@ -140,27 +141,27 @@ class _SubmoduleCardState extends State<SubmoduleCard>
                                   .getTitleMediumStyle(color: textColor)
                                   .copyWith(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                    fontSize: ResponsiveHelper.getTitleSize(context),
                                   ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                         // Subtle accent line
                         TweenAnimationBuilder<double>(
                           tween: Tween(begin: 0.0, end: _isHovered ? 1.0 : 0.0),
                           duration: ThemeService.defaultAnimationDuration,
                           builder: (context, value, child) {
                             return Container(
-                              height: 3,
-                              width: 40 * value,
+                              height: ResponsiveHelper.getProgressBarHeight(context) * 0.3,
+                              width: (ResponsiveHelper.getSpacing(context) * 2.5) * value,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [primaryColor, secondaryColor],
                                 ),
-                                borderRadius: BorderRadius.circular(2),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.1),
                               ),
                             );
                           },

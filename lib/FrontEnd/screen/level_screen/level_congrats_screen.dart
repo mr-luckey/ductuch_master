@@ -1,5 +1,6 @@
 import 'package:ductuch_master/app_routes.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,13 +26,13 @@ class LevelCongratsScreen extends StatelessWidget {
         backgroundColor: background,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 110,
-                  height: 110,
+                  width: ResponsiveHelper.isDesktop(context) ? 130 : ResponsiveHelper.isTablet(context) ? 120 : 110,
+                  height: ResponsiveHelper.isDesktop(context) ? 130 : ResponsiveHelper.isTablet(context) ? 120 : 110,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -42,13 +43,13 @@ class LevelCongratsScreen extends StatelessWidget {
                     ),
                     boxShadow: ThemeService.getCardShadow(isDark),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.emoji_events,
-                    size: 58,
+                    size: ResponsiveHelper.isDesktop(context) ? 70 : ResponsiveHelper.isTablet(context) ? 64 : 58,
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 28),
+                SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.75),
                 Text(
                   'Congratulations!',
                   style: themeService
@@ -56,7 +57,7 @@ class LevelCongratsScreen extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                 Text(
                   'You’ve completed level $level.\nKeep the momentum going!',
                   style: themeService.getBodyLargeStyle(
@@ -64,7 +65,7 @@ class LevelCongratsScreen extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: ResponsiveHelper.getSpacing(context) * 2),
                 ElevatedButton.icon(
                   onPressed: () {
                     Get.offAllNamed(AppRoutes.mainNavigation);
@@ -72,10 +73,7 @@ class LevelCongratsScreen extends StatelessWidget {
                   icon: const Icon(Icons.home_rounded),
                   label: const Text('Back to Main'),
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 14,
-                    ),
+                    padding: ResponsiveHelper.getButtonPadding(context),
                     textStyle: themeService.getBodyLargeStyle(),
                   ),
                 ),

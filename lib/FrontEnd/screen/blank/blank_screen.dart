@@ -1,4 +1,5 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,8 +47,6 @@ class _BlankScreenState extends State<BlankScreen>
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -68,7 +67,7 @@ class _BlankScreenState extends State<BlankScreen>
             'Blank',
             style: themeService.getTitleMediumStyle(color: textColor).copyWith(
               fontWeight: FontWeight.bold,
-              fontSize: isTablet ? 24 : 20,
+              fontSize: ResponsiveHelper.getTitleSize(context),
             ),
           ),
         ),
@@ -91,8 +90,8 @@ class _BlankScreenState extends State<BlankScreen>
                         child: Transform.scale(
                           scale: value,
                           child: Container(
-                            width: isTablet ? 120 : 100,
-                            height: isTablet ? 120 : 100,
+                            width: ResponsiveHelper.isDesktop(context) ? 140 : ResponsiveHelper.isTablet(context) ? 120 : 100,
+                            height: ResponsiveHelper.isDesktop(context) ? 140 : ResponsiveHelper.isTablet(context) ? 120 : 100,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
@@ -108,7 +107,7 @@ class _BlankScreenState extends State<BlankScreen>
                             ),
                             child: Icon(
                               Icons.inbox_outlined,
-                              size: isTablet ? 60 : 50,
+                              size: ResponsiveHelper.isDesktop(context) ? 70 : ResponsiveHelper.isTablet(context) ? 60 : 50,
                               color: primaryColor,
                             ),
                           ),
@@ -116,7 +115,7 @@ class _BlankScreenState extends State<BlankScreen>
                       );
                     },
                   ),
-                  SizedBox(height: isTablet ? 32 : 24),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 2),
                   ShaderMask(
                     shaderCallback: (bounds) => LinearGradient(
                       colors: [textColor, primaryColor],
@@ -130,7 +129,7 @@ class _BlankScreenState extends State<BlankScreen>
                       ),
                     ),
                   ),
-                  SizedBox(height: isTablet ? 16 : 12),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context)),
                   Text(
                     'This screen is under development',
                     style: themeService.getBodyMediumStyle(

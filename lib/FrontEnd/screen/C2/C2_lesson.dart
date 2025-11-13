@@ -4,6 +4,7 @@ import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -125,7 +126,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
               children: [
                 // Top bar with Hero animation
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(ResponsiveHelper.getPadding(context)),
                   child: Row(
                     children: [
                       Hero(
@@ -134,7 +135,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                           color: Colors.transparent,
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
                               gradient: themeService.getCardGradient(isDark),
                               border: Border.all(color: borderColor),
                               boxShadow: ThemeService.getCardShadow(isDark),
@@ -144,14 +145,14 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                               icon: Icon(
                                 Icons.chevron_left,
                                 color: textPrimaryColor,
-                                size: 24,
+                                size: ResponsiveHelper.getIconSize(context),
                               ),
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.5),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
                       Expanded(
                         child: Hero(
                           tag: 'module_title_${widget.moduleId}',
@@ -174,7 +175,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                 // Topics list with staggered animations
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getHorizontalPadding(context)),
                     itemCount: topics.length,
                     itemBuilder: (context, index) {
                       final topic = topics[index];
@@ -232,9 +233,9 @@ class _C2LessonScreenState extends State<C2LessonScreen>
       final isCompleted = lessonController.isLessonCompleted(topic['id']);
 
       return Container(
-        margin: const EdgeInsets.only(bottom: 12),
+        margin: EdgeInsets.only(bottom: ResponsiveHelper.getSpacing(context) * 0.75),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
           gradient: themeService.getCardGradient(isDark),
           border: Border.all(
             color: isCompleted
@@ -256,13 +257,13 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                 ),
               );
             },
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
             splashColor: primaryColor.withOpacity(0.2),
             highlightColor: primaryColor.withOpacity(0.1),
             child: Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(ResponsiveHelper.getPadding(context)),
                   child: Row(
                     children: [
                       // Animated Icon
@@ -278,8 +279,8 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                               return Transform.scale(
                                 scale: 1.0 + (value * 0.2),
                                 child: Container(
-                                  width: 56,
-                                  height: 56,
+                                  width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
+                                  height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -287,7 +288,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                                         scheme.accentTeal.withOpacity(0.2),
                                       ],
                                     ),
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                     border: Border.all(
                                       color: primaryColor.withOpacity(0.4),
                                       width: 2,
@@ -305,7 +306,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                                         ? Icons.check_circle
                                         : _getIconForType(topic['type']),
                                     color: primaryColor,
-                                    size: 28,
+                                    size: ResponsiveHelper.isDesktop(context) ? 32 : ResponsiveHelper.isTablet(context) ? 30 : 28,
                                   ),
                                 ),
                               );
@@ -313,7 +314,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                           ),
                         ),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: ResponsiveHelper.getSpacing(context)),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,18 +337,18 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                               ),
                             ),
                             if (!isCompleted) ...[
-                              const SizedBox(height: 6),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                               Text(
                                 topic['content'],
                                 style: themeService.getBodySmallStyle(
                                   color: secondaryTextColor,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                               Row(
                                 children: [
                                   Container(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: 10,
                                       vertical: 6,
                                     ),
@@ -358,7 +359,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                                           scheme.accentTeal.withOpacity(0.15),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
                                       border: Border.all(
                                         color: primaryColor.withOpacity(0.4),
                                       ),
@@ -372,13 +373,13 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 10),
+                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.625),
                                   Icon(
                                     Icons.access_time,
-                                    size: 14,
+                                    size: ResponsiveHelper.getSmallSize(context),
                                     color: secondaryTextColor,
                                   ),
-                                  const SizedBox(width: 4),
+                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.25),
                                   Text(
                                     topic['duration'],
                                     style: themeService.getBodySmallStyle(
@@ -419,7 +420,7 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                               ),
                               child: Icon(
                                 isCompleted ? Icons.check : Icons.play_arrow,
-                                size: 16,
+                                size: ResponsiveHelper.getSmallIconSize(context),
                                 color: isCompleted ? Colors.white : primaryColor,
                               ),
                             ),
@@ -443,12 +444,12 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                           child: Transform.translate(
                             offset: Offset(0, (1 - value) * -6),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
+                              padding: EdgeInsets.symmetric(
                                 horizontal: 12,
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
                                 gradient: LinearGradient(
                                   colors: [primaryColor, scheme.accentTeal],
                                 ),
@@ -463,12 +464,12 @@ class _C2LessonScreenState extends State<C2LessonScreen>
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(
+                                  Icon(
                                     Icons.verified,
                                     color: Colors.white,
-                                    size: 16,
+                                    size: ResponsiveHelper.getSmallIconSize(context),
                                   ),
-                                  const SizedBox(width: 6),
+                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.375),
                                   Text(
                                     'Completed',
                                     style: themeService.getLabelSmallStyle(

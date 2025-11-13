@@ -1,6 +1,7 @@
 import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
@@ -53,13 +54,11 @@ class _LevelCardState extends State<LevelCard>
   Widget build(BuildContext context) {
     final lessonController = Get.find<LessonController>();
     final themeService = ThemeService.to;
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
-    final cardHeight = isTablet ? 200.0 : 180.0;
-    final padding = isTablet ? 24.0 : 20.0;
-    final badgeSize = isTablet ? 70.0 : 60.0;
-    final titleSize = isTablet ? 24.0 : 20.0;
-    final subtitleSize = isTablet ? 14.0 : 12.0;
+    final cardHeight = ResponsiveHelper.getCardHeight(context, baseHeight: 180.0);
+    final padding = ResponsiveHelper.getCardPadding(context);
+    final badgeSize = ResponsiveHelper.isDesktop(context) ? 80.0 : ResponsiveHelper.isTablet(context) ? 70.0 : 60.0;
+    final titleSize = ResponsiveHelper.getTitleSize(context);
+    final subtitleSize = ResponsiveHelper.getBodySize(context);
 
     return Obx(() {
       final isDark = themeService.isDarkMode.value;

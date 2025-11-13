@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:ductuch_master/Data/lesson_content_data.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
@@ -299,8 +300,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
   @override
   Widget build(BuildContext context) {
     final currentPhrase = _phrases[_currentPhraseIndex];
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isSmallScreen = screenWidth < 360;
+    final isSmallScreen = ResponsiveHelper.isMobile(context);
 
     final themeService = Get.find<ThemeService>();
     return Obx(() {
@@ -337,13 +337,13 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         : constraints.maxWidth,
                   ),
                   margin: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                    vertical: constraints.maxWidth > 500 ? 30 : 20,
+                    horizontal: ResponsiveHelper.getHorizontalPadding(context),
+                    vertical: ResponsiveHelper.getVerticalPadding(context),
                   ),
                   child: Column(
                     children: [
                       // Status spacer
-                      SizedBox(height: isSmallScreen ? 4 : 6),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
 
                       // Top bar
                       _buildTopBar(
@@ -352,7 +352,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         secondaryTextColor,
                       ),
 
-                      SizedBox(height: isSmallScreen ? 12 : 16),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context)),
 
                       // Lesson header
                       _buildLessonHeader(
@@ -362,7 +362,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         themeService,
                       ),
 
-                      SizedBox(height: isSmallScreen ? 12 : 16),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context)),
 
                       // Main card
                       Expanded(
@@ -378,7 +378,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                 scheme,
                                 themeService,
                               ),
-                              SizedBox(height: isSmallScreen ? 20 : 24),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
 
                               // External Navigation Controls
                               _buildExternalNavigationControls(
@@ -388,7 +388,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                 scheme,
                               ),
 
-                              SizedBox(height: isSmallScreen ? 16 : 20),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
                             ],
                           ),
                         ),
@@ -417,7 +417,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
         // Back button
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.4),
             border: Border.all(color: textColor.withOpacity(0.1)),
           ),
           child: IconButton(
@@ -425,10 +425,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
             icon: Icon(
               Icons.chevron_left,
               color: secondaryTextColor,
-              size: isSmallScreen ? 20 : 22,
+              size: ResponsiveHelper.getIconSize(context),
             ),
             tooltip: 'Back',
-            padding: isSmallScreen ? const EdgeInsets.all(6) : null,
+            padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.375),
           ),
         ),
 
@@ -464,22 +464,22 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     child: Text(
                       _topicTitle,
                       style: themeService.getStyle(
-                        fontSize: isSmallScreen ? 10 : 11,
+                        fontSize: ResponsiveHelper.getSmallSize(context),
                         color: secondaryTextColor.withOpacity(0.8),
                         letterSpacing: 1.0,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  SizedBox(width: isSmallScreen ? 2 : 4),
+                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.25),
                   Text(
                     '•',
                     style: themeService.getStyle(
-                      fontSize: 11,
+                      fontSize: ResponsiveHelper.getSmallSize(context),
                       color: secondaryTextColor.withOpacity(0.3),
                     ),
                   ),
-                  SizedBox(width: isSmallScreen ? 2 : 4),
+                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.25),
                 ],
               ),
             ),
@@ -493,20 +493,20 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     color: secondaryTextColor,
                   ),
                 ),
-                SizedBox(width: isSmallScreen ? 6 : 8),
+                SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.5),
                 Row(
                   children: List.generate(4, (index) {
                     final isFilled = index < filledDots;
                     return Container(
                       margin: EdgeInsets.symmetric(
-                        horizontal: isSmallScreen ? 0.5 : 1,
+                        horizontal: ResponsiveHelper.getSpacing(context) * 0.0625,
                       ),
                       width: index == 0
-                          ? (isSmallScreen ? 12 : 16)
-                          : (isSmallScreen ? 6 : 8),
-                      height: isSmallScreen ? 4 : 6,
+                          ? ResponsiveHelper.getSpacing(context)
+                          : ResponsiveHelper.getSpacing(context) * 0.5,
+                      height: ResponsiveHelper.getSpacing(context) * 0.375,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.1),
                         color: isFilled
                             ? textColor.withOpacity(0.8 - (index * 0.12))
                             : textColor.withOpacity(0.18),
@@ -522,7 +522,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
           duration: ThemeService.defaultAnimationDuration,
           child: _lessonCompleted
               ? Padding(
-                  padding: EdgeInsets.only(top: isSmallScreen ? 8 : 10),
+                  padding: EdgeInsets.only(top: ResponsiveHelper.getSpacing(context) * 0.5),
                   child: _buildCompletionChip(themeService, isSmallScreen),
                 )
               : const SizedBox.shrink(),
@@ -538,12 +538,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
     final accent = scheme.accentTeal;
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isSmallScreen ? 10 : 14,
-        vertical: isSmallScreen ? 6 : 8,
-      ),
+      padding: ResponsiveHelper.getButtonPadding(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
         gradient: LinearGradient(
           colors: [primary.withOpacity(0.2), accent.withOpacity(0.18)],
         ),
@@ -561,7 +558,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
         children: [
           Icon(
             Icons.emoji_events,
-            size: isSmallScreen ? 14 : 16,
+            size: ResponsiveHelper.getSmallIconSize(context),
             color: accent,
           ),
           SizedBox(width: isSmallScreen ? 6 : 8),
@@ -599,7 +596,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
             opacity: value.clamp(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 20 : 24),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                 gradient: themeService.getCardGradient(isDark),
                 border: Border.all(
                   color: primaryColor.withOpacity(0.3),
@@ -607,7 +604,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 ),
                 boxShadow: ThemeService.getCardShadow(isDark),
               ),
-              padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+              padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -629,8 +626,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                   scale: tagValue,
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: isSmallScreen ? 8 : 10,
-                                      vertical: isSmallScreen ? 5 : 6,
+                                      horizontal: ResponsiveHelper.getSpacing(context) * 0.625,
+                                      vertical: ResponsiveHelper.getSpacing(context) * 0.375,
                                     ),
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
@@ -639,7 +636,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                           secondaryColor.withOpacity(0.15),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
                                       border: Border.all(
                                         color: primaryColor.withOpacity(0.4),
                                         width: 1.5,
@@ -649,8 +646,8 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Container(
-                                          width: isSmallScreen ? 6 : 8,
-                                          height: isSmallScreen ? 6 : 8,
+                                          width: ResponsiveHelper.getSpacing(context) * 0.5,
+                                          height: ResponsiveHelper.getSpacing(context) * 0.5,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             gradient: LinearGradient(
@@ -661,7 +658,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: isSmallScreen ? 4 : 6),
+                                        SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.375),
                                         Text(
                                           'Daily Phrase',
                                           style: themeService
@@ -678,7 +675,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                 );
                               },
                             ),
-                            SizedBox(height: isSmallScreen ? 6 : 8),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                             // Main phrase with Hero animation
                             Hero(
                               tag: 'phrase_${phrase.phrase}',
@@ -694,7 +691,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                         .getTitleLargeStyle(color: Colors.white)
                                         .copyWith(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: isSmallScreen ? 22 : 28,
+                                          fontSize: ResponsiveHelper.getTitleSize(context),
                                           height: 1.2,
                                         ),
                                   ),
@@ -754,20 +751,20 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     ],
                   ),
 
-                  SizedBox(height: isSmallScreen ? 6 : 8),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
 
                   // IPA and language tags
                   Wrap(
-                    spacing: isSmallScreen ? 6 : 8,
-                    runSpacing: isSmallScreen ? 4 : 6,
+                    spacing: ResponsiveHelper.getSpacing(context) * 0.5,
+                    runSpacing: ResponsiveHelper.getSpacing(context) * 0.375,
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: isSmallScreen ? 4 : 6,
-                          vertical: isSmallScreen ? 1 : 2,
+                          horizontal: ResponsiveHelper.getSpacing(context) * 0.375,
+                          vertical: ResponsiveHelper.getSpacing(context) * 0.125,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                           border: Border.all(color: textColor.withOpacity(0.1)),
                           color: isDark
                               ? scheme.surfaceDark.withOpacity(0.05)
@@ -776,18 +773,18 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         child: Text(
                           'DE',
                           style: themeService.getStyle(
-                            fontSize: isSmallScreen ? 10 : 11,
+                            fontSize: ResponsiveHelper.getSmallSize(context),
                             color: secondaryTextColor,
                           ),
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: isSmallScreen ? 4 : 6,
-                          vertical: isSmallScreen ? 1 : 2,
+                          horizontal: ResponsiveHelper.getSpacing(context) * 0.375,
+                          vertical: ResponsiveHelper.getSpacing(context) * 0.125,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                           border: Border.all(color: textColor.withOpacity(0.1)),
                           color: isDark
                               ? scheme.surfaceDark.withOpacity(0.05)
@@ -796,7 +793,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         child: Text(
                           phrase.level,
                           style: themeService.getStyle(
-                            fontSize: isSmallScreen ? 10 : 11,
+                            fontSize: ResponsiveHelper.getSmallSize(context),
                             color: secondaryTextColor,
                           ),
                         ),
@@ -804,7 +801,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     ],
                   ),
 
-                  SizedBox(height: isSmallScreen ? 10 : 12),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
 
                   // Translation card with animation
                   TweenAnimationBuilder<double>(
@@ -819,9 +816,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                isSmallScreen ? 14 : 16,
-                              ),
+                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                               gradient: LinearGradient(
                                 colors: [
                                   primaryColor.withOpacity(0.08),
@@ -840,7 +835,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                 ),
                               ],
                             ),
-                            padding: EdgeInsets.all(isSmallScreen ? 14 : 16),
+                            padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context) * 0.875),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -854,15 +849,13 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                               color: textColor.withOpacity(0.9),
                                             )
                                             .copyWith(
-                                              fontSize: isSmallScreen ? 14 : 15,
+                                              fontSize: ResponsiveHelper.getBodySize(context),
                                             ),
                                       ),
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          isSmallScreen ? 6 : 8,
-                                        ),
+                                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.4),
                                         border: Border.all(
                                           color: textColor.withOpacity(0.1),
                                         ),
@@ -874,23 +867,21 @@ class _PhraseScreenState extends State<PhraseScreen> {
                                         ),
                                         icon: Icon(
                                           Icons.volume_up,
-                                          size: isSmallScreen ? 16 : 18,
+                                          size: ResponsiveHelper.getSmallIconSize(context),
                                           color: secondaryTextColor.withOpacity(
                                             0.8,
                                           ),
                                         ),
-                                        padding: isSmallScreen
-                                            ? const EdgeInsets.all(4)
-                                            : null,
+                                        padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.25),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: isSmallScreen ? 2 : 4),
+                                SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                                 Text(
                                   phrase.meaning,
                                   style: themeService.getStyle(
-                                    fontSize: isSmallScreen ? 12 : 13,
+                                    fontSize: ResponsiveHelper.getSmallSize(context),
                                     color: secondaryTextColor.withOpacity(0.8),
                                   ),
                                 ),
@@ -902,7 +893,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     },
                   ),
 
-                  SizedBox(height: isSmallScreen ? 12 : 16),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context)),
 
                   // Play controls (only rate controls and repeat, no navigation)
                   _buildRateControls(
@@ -912,7 +903,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     themeService,
                   ),
 
-                  SizedBox(height: isSmallScreen ? 12 : 16),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context)),
 
                   // Animated Progress bar
                   TweenAnimationBuilder<double>(
@@ -924,10 +915,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
                     curve: Curves.easeOutCubic,
                     builder: (context, progressValue, child) {
                       return Container(
-                        height: isSmallScreen ? 6 : 8,
+                        height: ResponsiveHelper.getProgressBarHeight(context),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                           color: textColor.withOpacity(0.1),
                         ),
                         child: FractionallySizedBox(
@@ -938,7 +929,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                               gradient: LinearGradient(
                                 colors: [primaryColor, scheme.accentTeal],
                               ),
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                               boxShadow: [
                                 BoxShadow(
                                   color: primaryColor.withOpacity(0.5),
@@ -977,7 +968,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
           secondaryTextColor,
           themeService,
         ),
-        SizedBox(width: isSmallScreen ? 8 : 12),
+        SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
         _buildRateButton(
           0.8,
           isSmallScreen,
@@ -985,7 +976,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
           secondaryTextColor,
           themeService,
         ),
-        SizedBox(width: isSmallScreen ? 8 : 12),
+        SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
         _buildRepeatButton(
           isSmallScreen,
           textColor,
@@ -1003,7 +994,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
     dynamic scheme,
   ) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: isSmallScreen ? 18 : 40),
+      padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getPadding(context) * 1.25),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -1011,7 +1002,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
           Flexible(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                 border: Border.all(color: textColor.withOpacity(0.1)),
                 color: textColor.withOpacity(0.08),
               ),
@@ -1019,15 +1010,15 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 onPressed: _previousPhrase,
                 icon: Icon(
                   Icons.chevron_left,
-                  size: isSmallScreen ? 22 : 26,
+                  size: ResponsiveHelper.getIconSize(context),
                   color: textColor.withOpacity(0.9),
                 ),
-                padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+                padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context)),
               ),
             ),
           ),
 
-          SizedBox(width: isSmallScreen ? 8 : 12),
+          SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
 
           // Main play button with pulse animation
           Flexible(
@@ -1047,9 +1038,9 @@ class _PhraseScreenState extends State<PhraseScreen> {
                         if (_isPlaying)
                           Container(
                             width:
-                                (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                                (ResponsiveHelper.isDesktop(context) ? 76 : ResponsiveHelper.isTablet(context) ? 70 : 64) + (pulseValue * 16),
                             height:
-                                (isSmallScreen ? 64 : 76) + (pulseValue * 16),
+                                (ResponsiveHelper.isDesktop(context) ? 76 : ResponsiveHelper.isTablet(context) ? 70 : 64) + (pulseValue * 16),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: RadialGradient(
@@ -1064,9 +1055,7 @@ class _PhraseScreenState extends State<PhraseScreen> {
                           ),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              isSmallScreen ? 16 : 20,
-                            ),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                             gradient: LinearGradient(
                               colors: [
                                 primaryColor.withOpacity(0.2),
@@ -1089,10 +1078,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
                             onPressed: _playCurrentPhrase,
                             icon: Icon(
                               _isPlaying ? Icons.stop : Icons.volume_up,
-                              size: isSmallScreen ? 28 : 32,
+                              size: ResponsiveHelper.getIconSize(context),
                               color: primaryColor,
                             ),
-                            padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                            padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
                           ),
                         ),
                         if (_isPlaying)
@@ -1138,13 +1127,13 @@ class _PhraseScreenState extends State<PhraseScreen> {
             ),
           ),
 
-          SizedBox(width: isSmallScreen ? 8 : 12),
+          SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
 
           // Next button
           Flexible(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                 border: Border.all(color: textColor.withOpacity(0.1)),
                 color: textColor.withOpacity(0.08),
               ),
@@ -1152,10 +1141,10 @@ class _PhraseScreenState extends State<PhraseScreen> {
                 onPressed: _nextPhrase,
                 icon: Icon(
                   Icons.chevron_right,
-                  size: isSmallScreen ? 22 : 26,
+                  size: ResponsiveHelper.getIconSize(context),
                   color: textColor.withOpacity(0.9),
                 ),
-                padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
+                padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context)),
               ),
             ),
           ),

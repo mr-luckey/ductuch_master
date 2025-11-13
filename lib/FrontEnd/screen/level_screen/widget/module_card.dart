@@ -1,5 +1,6 @@
 import 'package:ductuch_master/Utilities/Models/model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
@@ -95,7 +96,7 @@ class _ModuleCardState extends State<ModuleCard>
                   scale: value,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                       gradient: themeService.getCardGradient(isDark),
                       boxShadow: ThemeService.getCardShadow(isDark),
                       border: Border.all(
@@ -111,11 +112,11 @@ class _ModuleCardState extends State<ModuleCard>
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: widget.moduleInfo.isLocked ? null : widget.onTap,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                         splashColor: primaryColor.withOpacity(0.2),
                         highlightColor: primaryColor.withOpacity(0.1),
                         child: Padding(
-                          padding: const EdgeInsets.all(24),
+                          padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -138,8 +139,8 @@ class _ModuleCardState extends State<ModuleCard>
                                         child: Transform.scale(
                                           scale: 1.0 + (value * 0.1),
                                           child: Container(
-                                            width: 56,
-                                            height: 56,
+                                            width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
+                                            height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: [
@@ -162,7 +163,7 @@ class _ModuleCardState extends State<ModuleCard>
                                                 ],
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(16),
+                                                  BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                               border: Border.all(
                                                 color: widget.moduleInfo.isLocked
                                                     ? textColor.withOpacity(0.3)
@@ -185,7 +186,7 @@ class _ModuleCardState extends State<ModuleCard>
                                                   : isCompleted
                                                       ? successColor
                                                       : primaryColor,
-                                              size: 28,
+                                              size: ResponsiveHelper.isDesktop(context) ? 32 : ResponsiveHelper.isTablet(context) ? 30 : 28,
                                             ),
                                           ),
                                         ),
@@ -202,7 +203,7 @@ class _ModuleCardState extends State<ModuleCard>
                                         return Transform.scale(
                                           scale: value,
                                           child: Container(
-                                            padding: const EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                               horizontal: 12,
                                               vertical: 6,
                                             ),
@@ -214,7 +215,7 @@ class _ModuleCardState extends State<ModuleCard>
                                                 ],
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(16),
+                                                  BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                               border: Border.all(
                                                 color: successColor,
                                                 width: 2,
@@ -225,10 +226,10 @@ class _ModuleCardState extends State<ModuleCard>
                                               children: [
                                                 Icon(
                                                   Icons.check,
-                                                  size: 16,
+                                                  size: ResponsiveHelper.getSmallIconSize(context),
                                                   color: successColor,
                                                 ),
-                                                const SizedBox(width: 4),
+                                                SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.25),
                                                 Text(
                                                   'Completed',
                                                   style: themeService.getLabelSmallStyle(
@@ -279,7 +280,7 @@ class _ModuleCardState extends State<ModuleCard>
                                     ),
                                 ],
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context)),
                               // Title with Hero animation
                               Hero(
                                 tag: 'module_title_${widget.moduleInfo.ID}',
@@ -297,7 +298,7 @@ class _ModuleCardState extends State<ModuleCard>
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                               // Progress Text
                               Text(
                                 '$completedTopics/$totalTopics topics completed',
@@ -306,7 +307,7 @@ class _ModuleCardState extends State<ModuleCard>
                                       color: textColor.withOpacity(0.6),
                                     ),
                               ),
-                              const SizedBox(height: 16),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context)),
                               // Animated Progress Bar
                               if (!widget.moduleInfo.isLocked)
                                 Column(
@@ -320,7 +321,7 @@ class _ModuleCardState extends State<ModuleCard>
                                           height: 8,
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                                             color: textColor.withOpacity(0.1),
                                           ),
                                           child: FractionallySizedBox(
@@ -340,7 +341,7 @@ class _ModuleCardState extends State<ModuleCard>
                                                   ],
                                                 ),
                                                 borderRadius:
-                                                    BorderRadius.circular(4),
+                                                    BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: (isCompleted
@@ -357,7 +358,7 @@ class _ModuleCardState extends State<ModuleCard>
                                         );
                                       },
                                     ),
-                                    const SizedBox(height: 8),
+                                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: Text(

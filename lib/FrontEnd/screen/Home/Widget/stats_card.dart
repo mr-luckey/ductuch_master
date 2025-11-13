@@ -1,4 +1,5 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,9 +65,9 @@ class _StatsCardState extends State<StatsCard>
         child: AnimatedContainer(
           duration: ThemeService.defaultAnimationDuration,
           curve: Curves.easeInOut,
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          margin: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getSpacing(context) * 0.5, vertical: ResponsiveHelper.getSpacing(context) * 0.5),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
             gradient: themeService.getCardGradient(isDark),
             border: Border.all(
               color: _isHovered
@@ -88,13 +89,13 @@ class _StatsCardState extends State<StatsCard>
           transform: Matrix4.identity()
             ..scale(_isHovered ? 1.05 : 1.0),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context) * 0.8),
             child: Row(
               children: [
                 ScaleTransition(
                   scale: _pulseAnimation,
                   child: Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.625),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -102,7 +103,7 @@ class _StatsCardState extends State<StatsCard>
                           widget.iconColor.withOpacity(0.15),
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
                       border: Border.all(
                         color: widget.iconColor.withOpacity(0.5),
                         width: 2,
@@ -118,11 +119,11 @@ class _StatsCardState extends State<StatsCard>
                     child: Icon(
                       widget.icon,
                       color: widget.iconColor,
-                      size: 24,
+                      size: ResponsiveHelper.getIconSize(context),
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +134,7 @@ class _StatsCardState extends State<StatsCard>
                           color: secondaryTextColor,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                       TweenAnimationBuilder<double>(
                         tween: Tween(begin: 0.0, end: 1.0),
                         duration: Duration(milliseconds: 600),

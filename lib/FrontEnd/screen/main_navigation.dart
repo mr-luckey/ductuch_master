@@ -5,6 +5,7 @@ import 'package:ductuch_master/FrontEnd/screen/more/more_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/Levels/levels_overview_screen.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/frontend/screens/learn/learn_screen.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 import 'package:get/get.dart';
@@ -44,11 +45,14 @@ class _MainNavigationState extends State<MainNavigation>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
-    final navBarHeight = isTablet ? 80.0 : 70.0;
-    final iconSize = isTablet ? 28.0 : 24.0;
-    final fontSize = isTablet ? 13.0 : 11.0;
+    final navBarHeight = ResponsiveHelper.isDesktop(context)
+        ? 90.0
+        : ResponsiveHelper.isTablet(context)
+            ? 80.0
+            : 70.0;
+    final iconSize = ResponsiveHelper.getIconSize(context);
+    final fontSize = ResponsiveHelper.getSmallSize(context);
+    final borderRadius = ResponsiveHelper.getBorderRadius(context);
 
     return Obx(() {
       final isDark = themeService.isDarkMode.value;
@@ -77,8 +81,8 @@ class _MainNavigationState extends State<MainNavigation>
         backgroundColor: navBarColor,
         decoration: NavBarDecoration(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(isTablet ? 24 : 20),
-            topRight: Radius.circular(isTablet ? 24 : 20),
+            topLeft: Radius.circular(borderRadius),
+            topRight: Radius.circular(borderRadius),
           ),
           boxShadow: [
             BoxShadow(

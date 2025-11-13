@@ -1,5 +1,6 @@
 import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +13,6 @@ class TtsSpeedDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final ttsService = Get.find<TtsService>();
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
 
     return Obx(() {
       final currentSpeed = ttsService.globalSpeed;
@@ -29,6 +28,7 @@ class TtsSpeedDropdown extends StatelessWidget {
         },
         itemBuilder: (context) => [
           _buildSpeedMenuItem(
+            context,
             0.5,
             currentSpeed,
             '0.5x',
@@ -37,6 +37,7 @@ class TtsSpeedDropdown extends StatelessWidget {
             themeService,
           ),
           _buildSpeedMenuItem(
+            context,
             0.8,
             currentSpeed,
             '0.8x',
@@ -46,20 +47,22 @@ class TtsSpeedDropdown extends StatelessWidget {
           ),
         ],
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: EdgeInsets.symmetric(
+            horizontal: ResponsiveHelper.getSpacing(context) * 0.5,
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 Icons.speed,
                 color: textColor.withOpacity(0.9),
-                size: isTablet ? 20 : 18,
+                size: ResponsiveHelper.getSmallIconSize(context),
               ),
-              SizedBox(width: 4),
+              SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.25),
               Text(
                 '${currentSpeed.toStringAsFixed(1)}x',
                 style: themeService.getStyle(
-                  fontSize: isTablet ? 14 : 12,
+                  fontSize: ResponsiveHelper.getSmallSize(context),
                   color: textColor.withOpacity(0.9),
                 ),
               ),
@@ -71,6 +74,7 @@ class TtsSpeedDropdown extends StatelessWidget {
   }
 
   PopupMenuItem<double> _buildSpeedMenuItem(
+    BuildContext context,
     double speed,
     double currentSpeed,
     String label,
@@ -85,16 +89,20 @@ class TtsSpeedDropdown extends StatelessWidget {
       child: Row(
         children: [
           if (isSelected)
-            Icon(Icons.check, size: 18, color: accentColor)
+            Icon(
+              Icons.check,
+              size: ResponsiveHelper.getSmallIconSize(context),
+              color: accentColor,
+            )
           else
-            SizedBox(width: 18),
-          SizedBox(width: 12),
+            SizedBox(width: ResponsiveHelper.getSpacing(context) * 1.125),
+          SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
           Text(
             label,
             style: themeService.getStyle(
               color: textColor,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              fontSize: 12,
+              fontSize: ResponsiveHelper.getSmallSize(context),
             ),
           ),
         ],

@@ -2,8 +2,8 @@ import 'package:ductuch_master/FrontEnd/screen/exam/exam_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/practice/practice_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/categories/categories_list_screen.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
-import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,8 +42,7 @@ class _MoreScreenState extends State<MoreScreen>
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isSmallScreen = screenWidth < 360;
+    final isSmallScreen = ResponsiveHelper.isMobile(context);
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -95,7 +94,7 @@ class _MoreScreenState extends State<MoreScreen>
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: isSmallScreen ? 4 : 6),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                       // Animated header
                       TweenAnimationBuilder<double>(
                         tween: Tween(begin: 0.0, end: 1.0),
@@ -124,7 +123,7 @@ class _MoreScreenState extends State<MoreScreen>
                                           ),
                                     ),
                                   ),
-                                  SizedBox(height: isSmallScreen ? 8 : 12),
+                                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                                   Text(
                                     'Explore additional learning features',
                                     style: themeService.getBodyMediumStyle(
@@ -137,7 +136,7 @@ class _MoreScreenState extends State<MoreScreen>
                           );
                         },
                       ),
-                      SizedBox(height: isSmallScreen ? 20 : 24),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
                       Expanded(
                         child: ListView(
                           children: [
@@ -156,7 +155,7 @@ class _MoreScreenState extends State<MoreScreen>
                               0,
                               themeService,
                             ),
-                            SizedBox(height: isSmallScreen ? 12 : 16),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context)),
                             _buildOptionCard(
                               context,
                               'Practice',
@@ -172,7 +171,7 @@ class _MoreScreenState extends State<MoreScreen>
                               1,
                               themeService,
                             ),
-                            SizedBox(height: isSmallScreen ? 12 : 16),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context)),
                             _buildOptionCard(
                               context,
                               'Categories',
@@ -230,7 +229,7 @@ class _MoreScreenState extends State<MoreScreen>
             opacity: value.clamp(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                 gradient: LinearGradient(
                   colors: [
                     surfaceColor.withOpacity(0.05),
@@ -253,7 +252,7 @@ class _MoreScreenState extends State<MoreScreen>
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: onTap,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                   splashColor: primaryColor.withOpacity(0.2),
                   highlightColor: primaryColor.withOpacity(0.1),
                   child: Padding(
@@ -278,7 +277,7 @@ class _MoreScreenState extends State<MoreScreen>
                                       secondaryColor.withOpacity(0.2),
                                     ],
                                   ),
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                   border: Border.all(
                                     color: primaryColor.withOpacity(0.4),
                                     width: 2,
@@ -300,7 +299,7 @@ class _MoreScreenState extends State<MoreScreen>
                             );
                           },
                         ),
-                        SizedBox(width: isSmallScreen ? 16 : 20),
+                        SizedBox(width: ResponsiveHelper.getSpacing(context) * 1.25),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,7 +310,7 @@ class _MoreScreenState extends State<MoreScreen>
                                     .getTitleMediumStyle(color: textColor)
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 4),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                               Text(
                                 subtitle,
                                 style: themeService.getBodySmallStyle(

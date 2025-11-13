@@ -1,4 +1,5 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'progress_circle.dart';
@@ -64,15 +65,15 @@ class _WelcomeCardState extends State<WelcomeCard>
         child: ScaleTransition(
           scale: _scaleAnimation,
           child: Container(
-            margin: const EdgeInsets.all(16),
+            margin: EdgeInsets.all(ResponsiveHelper.getSpacing(context)),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
               gradient: themeService.getCardGradient(isDark),
               border: Border.all(color: borderColor, width: 1.5),
               boxShadow: ThemeService.getCardShadow(isDark),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
               child: Column(
                 children: [
                   // Welcome Message and Button
@@ -85,7 +86,7 @@ class _WelcomeCardState extends State<WelcomeCard>
                     secondaryTextColor,
                     primaryColor,
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context)),
                   // Progress and Streak
                   _buildProgressSection(
                     context,
@@ -176,15 +177,12 @@ class _WelcomeCardState extends State<WelcomeCard>
                           // Navigate to levels
                         },
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 12,
-                          ),
+                          padding: ResponsiveHelper.getButtonPadding(context),
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [primaryColor, scheme.accentTeal],
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
                             boxShadow: [
                               BoxShadow(
                                 color: primaryColor.withOpacity(0.4),
@@ -196,8 +194,8 @@ class _WelcomeCardState extends State<WelcomeCard>
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Icon(Icons.play_arrow, size: 20, color: Colors.white),
-                              const SizedBox(width: 8),
+                              Icon(Icons.play_arrow, size: ResponsiveHelper.getSmallIconSize(context), color: Colors.white),
+                              SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.5),
                               Text(
                                 'Continue Learning',
                                 style: themeService.getBodyMediumStyle(
@@ -248,8 +246,8 @@ class _WelcomeCardState extends State<WelcomeCard>
                         color: secondaryTextColor,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    ProgressCircle(progress: 60, size: 80),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
+                    ProgressCircle(progress: 60, size: ResponsiveHelper.isDesktop(context) ? 100 : ResponsiveHelper.isTablet(context) ? 90 : 80),
                   ],
                 ),
               ),
@@ -273,7 +271,7 @@ class _WelcomeCardState extends State<WelcomeCard>
                         color: secondaryTextColor,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                     StreakCounter(days: 12, size: StreakSize.large),
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
@@ -115,8 +116,7 @@ class _VerbsScreenState extends State<VerbsScreen>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isSmallScreen = screenWidth < 360;
+    final isSmallScreen = ResponsiveHelper.isMobile(context);
 
     if (_isLoading) {
       return Obx(() {
@@ -180,7 +180,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                   children: [
                     // SizedBox(height: isSmallScreen ? 12 : 16),
                     _buildVerbHeader(context, isSmallScreen, scheme, isDark),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -191,14 +191,14 @@ class _VerbsScreenState extends State<VerbsScreen>
                               scheme,
                               isDark,
                             ),
-                            SizedBox(height: isSmallScreen ? 20 : 24),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
                             _buildExternalNavigationControls(
                               context,
                               isSmallScreen,
                               scheme,
                               isDark,
                             ),
-                            SizedBox(height: isSmallScreen ? 16 : 20),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
                           ],
                         ),
                       ),
@@ -241,7 +241,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                 color: textColor.withOpacity(0.6),
               ),
             ),
-            SizedBox(width: isSmallScreen ? 6 : 8),
+            SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.5),
             Row(
               children: List.generate(4, (index) {
                 return Container(
@@ -253,7 +253,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                       : (isSmallScreen ? 6 : 8),
                   height: isSmallScreen ? 4 : 6,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.1),
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
@@ -296,7 +296,7 @@ class _VerbsScreenState extends State<VerbsScreen>
               opacity: value.clamp(0.0, 1.0),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                   gradient: themeService.getCardGradient(isDark),
                   border: Border.all(
                     color: primaryColor.withOpacity(0.3),
@@ -335,7 +335,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                                             secondaryColor.withOpacity(0.15),
                                           ],
                                         ),
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
                                         border: Border.all(
                                           color: primaryColor.withOpacity(0.4),
                                           width: 1.5,
@@ -376,7 +376,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                                   );
                                 },
                               ),
-                              SizedBox(height: isSmallScreen ? 8 : 12),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                               // Main verb with Hero animation
                               Hero(
                                 tag: 'verb_${currentVerb.infinitive}',
@@ -394,7 +394,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                                           )
                                           .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: isSmallScreen ? 22 : 28,
+                                            fontSize: ResponsiveHelper.getTitleSize(context),
                                             height: 1.2,
                                           ),
                                     ),
@@ -406,7 +406,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                         ),
                       ],
                     ),
-                    SizedBox(height: isSmallScreen ? 8 : 12),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                     // Language tag
                     Wrap(
                       spacing: isSmallScreen ? 6 : 8,
@@ -418,7 +418,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                             vertical: isSmallScreen ? 3 : 4,
                           ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.4),
                             gradient: LinearGradient(
                               colors: [
                                 primaryColor.withOpacity(0.15),
@@ -439,7 +439,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                         ),
                       ],
                     ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     // Translation card with animation
                     TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.0, end: 1.0),
@@ -453,7 +453,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                 gradient: LinearGradient(
                                   colors: [
                                     primaryColor.withOpacity(0.08),
@@ -522,20 +522,20 @@ class _VerbsScreenState extends State<VerbsScreen>
                                                   : textColor.withOpacity(0.8),
                                             ),
                                             padding: isSmallScreen
-                                                ? const EdgeInsets.all(6)
+                                                ? EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.375)
                                                 : null,
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: isSmallScreen ? 8 : 12),
+                                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                                   Container(
                                     padding: EdgeInsets.all(
                                       isSmallScreen ? 10 : 12,
                                     ),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
                                       gradient: LinearGradient(
                                         colors: [
                                           surfaceColor.withOpacity(0.05),
@@ -561,12 +561,12 @@ class _VerbsScreenState extends State<VerbsScreen>
                         );
                       },
                     ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     // Examples button and expandable section
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                         gradient: LinearGradient(
                           colors: [
                             surfaceColor.withOpacity(0.05),
@@ -584,7 +584,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () => _toggleExamples(_currentVerbIndex),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                               splashColor: primaryColor.withOpacity(0.2),
                               highlightColor: primaryColor.withOpacity(0.1),
                               child: Padding(
@@ -724,7 +724,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                         ],
                       ),
                     ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     // Animated Progress bar
                     TweenAnimationBuilder<double>(
                       tween: Tween(
@@ -743,7 +743,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                           height: isSmallScreen ? 6 : 8,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                             color: textColor.withOpacity(0.1),
                           ),
                           child: FractionallySizedBox(
@@ -754,7 +754,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                                 gradient: LinearGradient(
                                   colors: [primaryColor, scheme.accentTeal],
                                 ),
-                                borderRadius: BorderRadius.circular(4),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                                 boxShadow: [
                                   BoxShadow(
                                     color: primaryColor.withOpacity(0.5),
@@ -866,7 +866,7 @@ class _VerbsScreenState extends State<VerbsScreen>
                             ),
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                               gradient: LinearGradient(
                                 colors: [
                                   primaryColor.withOpacity(0.2),

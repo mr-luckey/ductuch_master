@@ -1,6 +1,7 @@
 import 'package:ductuch_master/FrontEnd/screen/Home/Widget/level_card.dart';
 import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,7 +61,7 @@ class _LevelsOverviewScreenState extends State<LevelsOverviewScreen>
           child: FadeTransition(
             opacity: CurvedAnimation(parent: _controller, curve: Curves.easeIn),
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding: ResponsiveHelper.getButtonPadding(context),
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return _buildHeaderCard(
@@ -88,7 +89,7 @@ class _LevelsOverviewScreenState extends State<LevelsOverviewScreen>
                   child: LevelCard(level: level),
                 );
               },
-              separatorBuilder: (context, index) => const SizedBox(height: 18),
+              separatorBuilder: (context, index) => SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.125),
               itemCount: LevelModel.mockLevels.length + 1,
             ),
           ),
@@ -108,9 +109,9 @@ class _LevelsOverviewScreenState extends State<LevelsOverviewScreen>
     final primary = isDark ? scheme.primaryDark : scheme.primary;
 
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 1.2),
         gradient: LinearGradient(
           colors: [primary.withOpacity(0.14), accent.withOpacity(0.12)],
           begin: Alignment.topLeft,
@@ -125,10 +126,10 @@ class _LevelsOverviewScreenState extends State<LevelsOverviewScreen>
           Row(
             children: [
               Container(
-                width: 56,
-                height: 56,
+                width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
+                height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.9),
                   gradient: LinearGradient(
                     colors: [
                       accent.withOpacity(0.3),
@@ -137,9 +138,9 @@ class _LevelsOverviewScreenState extends State<LevelsOverviewScreen>
                   ),
                   border: Border.all(color: accent.withOpacity(0.45), width: 2),
                 ),
-                child: Icon(Icons.map_outlined, color: accent, size: 26),
+                child: Icon(Icons.map_outlined, color: accent, size: ResponsiveHelper.getIconSize(context)),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: ResponsiveHelper.getSpacing(context)),
               Expanded(
                 child: Text(
                   'Choose your next milestone',
@@ -150,7 +151,7 @@ class _LevelsOverviewScreenState extends State<LevelsOverviewScreen>
               ),
             ],
           ),
-          const SizedBox(height: 14),
+          SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.875),
           Text(
             'Browse all CEFR-aligned levels, track what you\'ve completed, and dive deeper into the skills you need most.',
             style: themeService.getBodyMediumStyle(

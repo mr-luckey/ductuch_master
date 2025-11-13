@@ -1,4 +1,5 @@
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
@@ -245,8 +246,7 @@ class _ExamScreenState extends State<ExamScreen>
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isSmallScreen = screenWidth < 360;
+    final isSmallScreen = ResponsiveHelper.isMobile(context);
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -277,7 +277,7 @@ class _ExamScreenState extends State<ExamScreen>
           actions: [
             if (isExamStarted)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getHorizontalPadding(context)),
                 child: Center(
                   child: TweenAnimationBuilder<double>(
                     tween: Tween(begin: 0.0, end: 1.0),
@@ -292,7 +292,7 @@ class _ExamScreenState extends State<ExamScreen>
                             vertical: 6,
                           ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.4),
                             gradient: LinearGradient(
                               colors: remainingSeconds < 300
                                   ? [
@@ -390,7 +390,7 @@ class _ExamScreenState extends State<ExamScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: isSmallScreen ? 4 : 6),
+        SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
         TweenAnimationBuilder<double>(
           tween: Tween(begin: 0.0, end: 1.0),
           duration: ThemeService.defaultAnimationDuration,
@@ -487,7 +487,7 @@ class _ExamScreenState extends State<ExamScreen>
         onTap: () => _startExam(level),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
             gradient: themeService.getCardGradient(isDark),
             border: Border.all(color: primaryColor.withOpacity(0.3), width: 2),
             boxShadow: ThemeService.getCardShadow(isDark),
@@ -496,7 +496,7 @@ class _ExamScreenState extends State<ExamScreen>
             color: Colors.transparent,
             child: InkWell(
               onTap: () => _startExam(level),
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
               splashColor: primaryColor.withOpacity(0.2),
               highlightColor: primaryColor.withOpacity(0.1),
               child: Padding(
@@ -507,7 +507,7 @@ class _ExamScreenState extends State<ExamScreen>
                       width: isSmallScreen ? 60 : 70,
                       height: isSmallScreen ? 60 : 70,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                         gradient: LinearGradient(
                           colors: [primaryColor, secondaryColor],
                         ),
@@ -531,7 +531,7 @@ class _ExamScreenState extends State<ExamScreen>
                         ),
                       ),
                     ),
-                    SizedBox(width: isSmallScreen ? 16 : 20),
+                    SizedBox(width: ResponsiveHelper.getSpacing(context) * 1.25),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -545,7 +545,7 @@ class _ExamScreenState extends State<ExamScreen>
                                   shadows: null,
                                 ),
                           ),
-                          SizedBox(height: 6),
+                          SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                           Text(
                             '150+ questions • ${_getTimeForLevel(level) ~/ 60} minutes',
                             style: themeService.getBodySmallStyle(
@@ -595,7 +595,7 @@ class _ExamScreenState extends State<ExamScreen>
               height: isSmallScreen ? 6 : 8,
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                 color: textColor.withOpacity(0.1),
               ),
               child: FractionallySizedBox(
@@ -606,7 +606,7 @@ class _ExamScreenState extends State<ExamScreen>
                     gradient: LinearGradient(
                       colors: [primaryColor, secondaryColor],
                     ),
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                     boxShadow: [
                       BoxShadow(
                         color: primaryColor.withOpacity(0.5),
@@ -620,7 +620,7 @@ class _ExamScreenState extends State<ExamScreen>
             );
           },
         ),
-        SizedBox(height: isSmallScreen ? 12 : 16),
+        SizedBox(height: ResponsiveHelper.getSpacing(context)),
 
         // Question counter
         Row(
@@ -640,7 +640,7 @@ class _ExamScreenState extends State<ExamScreen>
             ),
           ],
         ),
-        SizedBox(height: isSmallScreen ? 16 : 20),
+        SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
 
         // Question card with animation
         Expanded(
@@ -656,7 +656,7 @@ class _ExamScreenState extends State<ExamScreen>
                     opacity: value.clamp(0.0, 1.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                         gradient: themeService.getCardGradient(isDark),
                         border: Border.all(
                           color: primaryColor.withOpacity(0.3),
@@ -677,7 +677,7 @@ class _ExamScreenState extends State<ExamScreen>
                                   shadows: null,
                                 ),
                           ),
-                          SizedBox(height: isSmallScreen ? 20 : 24),
+                          SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
                           ...currentQuestion.options.asMap().entries.map((
                             entry,
                           ) {
@@ -725,7 +725,7 @@ class _ExamScreenState extends State<ExamScreen>
           ),
         ),
 
-        SizedBox(height: isSmallScreen ? 16 : 20),
+        SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
 
         // Navigation buttons with animations
         Row(
@@ -740,7 +740,7 @@ class _ExamScreenState extends State<ExamScreen>
                   scale: value,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                       gradient: themeService.getCardGradient(isDark),
                       border: Border.all(
                         color: primaryColor.withOpacity(0.3),
@@ -775,7 +775,7 @@ class _ExamScreenState extends State<ExamScreen>
                   scale: value,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                       gradient: LinearGradient(
                         colors: [
                           primaryColor.withOpacity(0.2),
@@ -798,7 +798,7 @@ class _ExamScreenState extends State<ExamScreen>
                       color: Colors.transparent,
                       child: InkWell(
                         onTap: _submitExam,
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                         splashColor: primaryColor.withOpacity(0.3),
                         highlightColor: primaryColor.withOpacity(0.2),
                         child: Padding(
@@ -832,7 +832,7 @@ class _ExamScreenState extends State<ExamScreen>
                   scale: value,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                       gradient: themeService.getCardGradient(isDark),
                       border: Border.all(
                         color: primaryColor.withOpacity(0.3),
@@ -1067,7 +1067,7 @@ class _ExamScreenState extends State<ExamScreen>
                         fontWeight: FontWeight.w600,
                       ),
                 ),
-                SizedBox(height: isSmallScreen ? 12 : 16),
+                SizedBox(height: ResponsiveHelper.getSpacing(context)),
                 ...currentQuestions.asMap().entries.map((entry) {
                   final index = entry.key;
                   final question = entry.value;
@@ -1093,7 +1093,7 @@ class _ExamScreenState extends State<ExamScreen>
             ),
           ),
         ),
-        SizedBox(height: isSmallScreen ? 16 : 20),
+        SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(isSmallScreen ? 14 : 16),

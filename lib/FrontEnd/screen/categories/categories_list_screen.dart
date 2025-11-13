@@ -2,8 +2,8 @@ import 'package:ductuch_master/FrontEnd/screen/categories/category_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/categories/category_data.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
-import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,8 +53,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isSmallScreen = screenWidth < 360;
+    final isSmallScreen = ResponsiveHelper.isMobile(context);
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -99,13 +98,13 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                         : constraints.maxWidth,
                   ),
                   margin: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth > 500 ? 20 : 16,
-                    vertical: constraints.maxWidth > 500 ? 30 : 20,
+                    horizontal: ResponsiveHelper.getHorizontalPadding(context),
+                    vertical: ResponsiveHelper.getVerticalPadding(context),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: isSmallScreen ? 4 : 6),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                       // Animated header
                       TweenAnimationBuilder<double>(
                         tween: Tween(begin: 0.0, end: 1.0),
@@ -134,7 +133,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                           ),
                                     ),
                                   ),
-                                  SizedBox(height: isSmallScreen ? 8 : 12),
+                                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                                   Text(
                                     'Explore words by category',
                                     style: themeService.getBodyMediumStyle(
@@ -147,7 +146,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                           );
                         },
                       ),
-                      SizedBox(height: isSmallScreen ? 20 : 24),
+                      SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
                       Expanded(
                         child: isLoading
                             ? Center(
@@ -161,7 +160,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                   final category = categories[index];
                                   return Padding(
                                     padding: EdgeInsets.only(
-                                      bottom: isSmallScreen ? 12 : 16,
+                                      bottom: ResponsiveHelper.getSpacing(context) * 0.75,
                                     ),
                                     child: _buildCategoryCard(
                                       context,
@@ -216,7 +215,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
             opacity: value.clamp(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                 gradient: LinearGradient(
                   colors: [
                     surfaceColor.withOpacity(0.05),
@@ -244,11 +243,11 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                       CategoryScreen(categoryName: categoryName, words: words),
                     );
                   },
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                   splashColor: primaryColor.withOpacity(0.2),
                   highlightColor: primaryColor.withOpacity(0.1),
                   child: Padding(
-                    padding: EdgeInsets.all(isSmallScreen ? 16 : 20),
+                    padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
                     child: Row(
                       children: [
                         // Animated Icon Container
@@ -260,8 +259,8 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                             return Transform.scale(
                               scale: iconValue,
                               child: Container(
-                                width: isSmallScreen ? 56 : 64,
-                                height: isSmallScreen ? 56 : 64,
+                                width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
+                                height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
@@ -269,7 +268,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                       secondaryColor.withOpacity(0.2),
                                     ],
                                   ),
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                   border: Border.all(
                                     color: primaryColor.withOpacity(0.4),
                                     width: 2,
@@ -285,13 +284,13 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                 child: Icon(
                                   icon,
                                   color: primaryColor,
-                                  size: isSmallScreen ? 28 : 32,
+                                  size: ResponsiveHelper.getIconSize(context),
                                 ),
                               ),
                             );
                           },
                         ),
-                        SizedBox(width: isSmallScreen ? 16 : 20),
+                        SizedBox(width: ResponsiveHelper.getSpacing(context) * 1.25),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,7 +301,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                                     .getTitleMediumStyle(color: textColor)
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 4),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                               Text(
                                 '${words.length} words',
                                 style: themeService.getBodySmallStyle(
@@ -315,7 +314,7 @@ class _CategoriesListScreenState extends State<CategoriesListScreen>
                         Icon(
                           Icons.arrow_forward_ios,
                           color: primaryColor.withOpacity(0.7),
-                          size: isSmallScreen ? 18 : 20,
+                          size: ResponsiveHelper.getSmallIconSize(context),
                         ),
                       ],
                     ),

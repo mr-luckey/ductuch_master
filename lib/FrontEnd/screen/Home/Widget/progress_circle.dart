@@ -1,4 +1,5 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +27,7 @@ class ProgressCircle extends StatelessWidget {
             height: size,
             child: CircularProgressIndicator(
               value: progress / 100,
-              strokeWidth: 8,
+              strokeWidth: ResponsiveHelper.isDesktop(context) ? 10 : ResponsiveHelper.isTablet(context) ? 9 : 8,
               backgroundColor: backgroundColor.withOpacity(0.3),
               valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
             ),

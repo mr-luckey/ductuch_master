@@ -1,4 +1,5 @@
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -73,8 +74,8 @@ class _C1LessonScreenState extends State<C1LessonScreen>
                         child: RotationTransition(
                           turns: _rotationController,
                           child: Container(
-                            width: 120,
-                            height: 120,
+                            width: ResponsiveHelper.isDesktop(context) ? 140 : ResponsiveHelper.isTablet(context) ? 130 : 120,
+                            height: ResponsiveHelper.isDesktop(context) ? 140 : ResponsiveHelper.isTablet(context) ? 130 : 120,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
@@ -97,7 +98,7 @@ class _C1LessonScreenState extends State<C1LessonScreen>
                             ),
                             child: Icon(
                               Icons.construction,
-                              size: 60,
+                              size: ResponsiveHelper.isDesktop(context) ? 70 : ResponsiveHelper.isTablet(context) ? 65 : 60,
                               color: primaryColor,
                             ),
                           ),
@@ -105,7 +106,7 @@ class _C1LessonScreenState extends State<C1LessonScreen>
                       );
                     },
                   ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 2),
                   // Title with gradient
                   TweenAnimationBuilder<double>(
                     tween: Tween(begin: 0.0, end: 1.0),
@@ -133,7 +134,7 @@ class _C1LessonScreenState extends State<C1LessonScreen>
                       );
                     },
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: ResponsiveHelper.getSpacing(context)),
                   // Subtitle
                   TweenAnimationBuilder<double>(
                     tween: Tween(begin: 0.0, end: 1.0),

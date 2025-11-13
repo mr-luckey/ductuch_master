@@ -1,6 +1,7 @@
 import 'package:ductuch_master/FrontEnd/screen/A1/Learn.dart';
 import 'package:ductuch_master/FrontEnd/screen/Levels/levels_overview_screen.dart';
 import 'package:ductuch_master/Utilities/navigation_helper.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
@@ -43,10 +44,8 @@ class _LearnScreenState extends State<LearnScreen>
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
-    final padding = isTablet ? 24.0 : 16.0;
-    final spacing = isTablet ? 32.0 : 24.0;
+    final padding = ResponsiveHelper.getPadding(context);
+    final spacing = ResponsiveHelper.getSpacing(context);
 
     return Obx(() {
       final isDark = themeService.isDarkMode.value;
@@ -68,7 +67,6 @@ class _LearnScreenState extends State<LearnScreen>
         appBar: _buildAnimatedAppBar(
           context: context,
           themeService: themeService,
-          isTablet: isTablet,
           progressFraction: progressFraction,
           completedTopics: completedTopics,
           totalTopics: totalTopics,
@@ -80,7 +78,7 @@ class _LearnScreenState extends State<LearnScreen>
               padding: EdgeInsets.all(padding),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: isTablet ? 800 : double.infinity,
+                  maxWidth: ResponsiveHelper.getMaxContentWidth(context),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +89,6 @@ class _LearnScreenState extends State<LearnScreen>
                         context: context,
                         themeService: themeService,
                         nextLesson: nextLesson,
-                        isTablet: isTablet,
                       ),
                       SizedBox(height: spacing),
                     ],
@@ -99,14 +96,12 @@ class _LearnScreenState extends State<LearnScreen>
                       themeService: themeService,
                       primaryColor: primaryColor,
                       textColor: textColor,
-                      isTablet: isTablet,
                       progressFraction: progressFraction,
                     ),
                     SizedBox(height: spacing),
                     _buildLevelsCallout(
                       context: context,
                       themeService: themeService,
-                      isTablet: isTablet,
                     ),
                   ],
                 ),
@@ -121,12 +116,11 @@ class _LearnScreenState extends State<LearnScreen>
   PreferredSizeWidget _buildAnimatedAppBar({
     required BuildContext context,
     required ThemeService themeService,
-    required bool isTablet,
     required double progressFraction,
     required int completedTopics,
     required int totalTopics,
   }) {
-    final appBarHeight = isTablet ? 220.0 : 240.0;
+    final appBarHeight = ResponsiveHelper.isDesktop(context) ? 220.0 : ResponsiveHelper.isTablet(context) ? 220.0 : 255.0;
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
     final primary = isDark ? scheme.primaryDark : scheme.primary;
@@ -150,8 +144,8 @@ class _LearnScreenState extends State<LearnScreen>
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(isTablet ? 32 : 26),
-            bottomRight: Radius.circular(isTablet ? 32 : 26),
+            bottomLeft: Radius.circular(ResponsiveHelper.getBorderRadius(context) * 1.6),
+            bottomRight: Radius.circular(ResponsiveHelper.getBorderRadius(context) * 1.6),
           ),
           boxShadow: [
             BoxShadow(
@@ -165,12 +159,12 @@ class _LearnScreenState extends State<LearnScreen>
           bottom: false,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: isTablet ? 28 : 20,
-              vertical: isTablet ? 20 : 16,
+              horizontal: ResponsiveHelper.getHorizontalPadding(context),
+              vertical: ResponsiveHelper.getVerticalPadding(context),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +188,7 @@ class _LearnScreenState extends State<LearnScreen>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                           AnimatedSwitcher(
                             duration: ThemeService.defaultAnimationDuration,
                             child: Text(
@@ -208,11 +202,11 @@ class _LearnScreenState extends State<LearnScreen>
                         ],
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                         border: Border.all(
                           color: Colors.white.withOpacity(0.3),
                         ),
@@ -228,16 +222,16 @@ class _LearnScreenState extends State<LearnScreen>
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                 TweenAnimationBuilder<double>(
                   tween: Tween(begin: 0.0, end: progressFraction),
                   duration: ThemeService.slowAnimationDuration,
                   curve: Curves.easeOutCubic,
                   builder: (context, value, child) {
                     return ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                       child: SizedBox(
-                        height: 15,
+                        height: ResponsiveHelper.getProgressBarHeight(context) * 1.5,
                         child: Stack(
                           fit: StackFit.expand,
                           children: [
@@ -279,10 +273,10 @@ class _LearnScreenState extends State<LearnScreen>
                     );
                   },
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                 Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
+                  spacing: ResponsiveHelper.getSpacing(context) * 0.5,
+                  runSpacing: ResponsiveHelper.getSpacing(context) * 0.375,
                   children: [
                     _buildBadgeChip(
                       themeService: themeService,
@@ -315,7 +309,7 @@ class _LearnScreenState extends State<LearnScreen>
     required String label,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: ResponsiveHelper.getButtonPadding(context),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.16),
         borderRadius: BorderRadius.circular(14),
@@ -324,8 +318,8 @@ class _LearnScreenState extends State<LearnScreen>
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: Colors.white),
-          const SizedBox(width: 6),
+          Icon(icon, size: ResponsiveHelper.getSmallIconSize(context), color: Colors.white),
+          SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.375),
           Text(
             label,
             style: themeService
@@ -341,7 +335,6 @@ class _LearnScreenState extends State<LearnScreen>
     required BuildContext context,
     required ThemeService themeService,
     required Map<String, String> nextLesson,
-    required bool isTablet,
   }) {
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
@@ -372,9 +365,9 @@ class _LearnScreenState extends State<LearnScreen>
         },
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.all(isTablet ? 24 : 20),
+          padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 1.2),
             gradient: LinearGradient(
               colors: [
                 primaryColor.withOpacity(0.15),
@@ -387,8 +380,8 @@ class _LearnScreenState extends State<LearnScreen>
           child: Row(
             children: [
               Container(
-                width: isTablet ? 62 : 56,
-                height: isTablet ? 62 : 56,
+                width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 62 : 56,
+                height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 62 : 56,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -396,7 +389,7 @@ class _LearnScreenState extends State<LearnScreen>
                       primaryColor.withOpacity(0.25),
                     ],
                   ),
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.9),
                   border: Border.all(
                     color: accentColor.withOpacity(0.5),
                     width: 2,
@@ -412,10 +405,10 @@ class _LearnScreenState extends State<LearnScreen>
                 child: Icon(
                   Icons.play_circle_fill,
                   color: accentColor,
-                  size: isTablet ? 34 : 30,
+                  size: ResponsiveHelper.getIconSize(context),
                 ),
               ),
-              const SizedBox(width: 18),
+              SizedBox(width: ResponsiveHelper.getSpacing(context) * 1.125),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -426,14 +419,14 @@ class _LearnScreenState extends State<LearnScreen>
                         color: textColor.withOpacity(0.7),
                       ),
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                     Text(
                       nextLesson['topicTitle'] ?? 'Next topic',
                       style: themeService
                           .getTitleMediumStyle(color: textColor)
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                     Text(
                       'Tap to pick up right where you left off',
                       style: themeService.getBodySmallStyle(
@@ -443,8 +436,8 @@ class _LearnScreenState extends State<LearnScreen>
                   ],
                 ),
               ),
-              const SizedBox(width: 12),
-              Icon(Icons.arrow_forward_ios, color: accentColor, size: 18),
+              SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
+              Icon(Icons.arrow_forward_ios, color: accentColor, size: ResponsiveHelper.getSmallIconSize(context)),
             ],
           ),
         ),
@@ -456,7 +449,6 @@ class _LearnScreenState extends State<LearnScreen>
     required ThemeService themeService,
     required Color primaryColor,
     required Color textColor,
-    required bool isTablet,
     required double progressFraction,
   }) {
     final scheme = themeService.currentScheme;
@@ -494,7 +486,7 @@ class _LearnScreenState extends State<LearnScreen>
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 720;
-        final spacing = isTablet ? 20.0 : 16.0;
+        final spacing = ResponsiveHelper.getSpacing(context);
 
         return Wrap(
           spacing: spacing,
@@ -508,9 +500,9 @@ class _LearnScreenState extends State<LearnScreen>
                             stats.length
                       : constraints.maxWidth,
                   child: Container(
-                    padding: EdgeInsets.all(isTablet ? 24 : 20),
+                    padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context)),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(22),
+                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 1.1),
                       gradient: themeService.getCardGradient(isDark),
                       border: Border.all(
                         color: primaryColor.withOpacity(0.18),
@@ -539,24 +531,24 @@ class _LearnScreenState extends State<LearnScreen>
                           child: Icon(
                             stat.icon,
                             color: scheme.accentTeal,
-                            size: 22,
+                            size: ResponsiveHelper.getIconSize(context),
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                         Text(
                           stat.title,
                           style: themeService.getLabelLargeStyle(
                             color: secondaryText.withOpacity(0.9),
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                         Text(
                           stat.value,
                           style: themeService
                               .getTitleLargeStyle(color: textColor)
                               .copyWith(fontWeight: FontWeight.bold),
                         ),
-                        const SizedBox(height: 6),
+                        SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                         Text(
                           stat.description,
                           style: themeService.getBodySmallStyle(
@@ -577,7 +569,6 @@ class _LearnScreenState extends State<LearnScreen>
   Widget _buildLevelsCallout({
     required BuildContext context,
     required ThemeService themeService,
-    required bool isTablet,
   }) {
     final scheme = themeService.currentScheme;
     final isDark = themeService.isDarkMode.value;
@@ -606,9 +597,9 @@ class _LearnScreenState extends State<LearnScreen>
         },
         child: Container(
           width: double.infinity,
-          padding: EdgeInsets.all(isTablet ? 28 : 22),
+          padding: EdgeInsets.all(ResponsiveHelper.getCardPadding(context) * 1.1),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(26),
+            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 1.3),
             gradient: LinearGradient(
               colors: [primary.withOpacity(0.15), accent.withOpacity(0.12)],
               begin: Alignment.topLeft,
@@ -621,8 +612,8 @@ class _LearnScreenState extends State<LearnScreen>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: isTablet ? 72 : 60,
-                height: isTablet ? 72 : 60,
+                width: ResponsiveHelper.isDesktop(context) ? 72 : ResponsiveHelper.isTablet(context) ? 68 : 60,
+                height: ResponsiveHelper.isDesktop(context) ? 72 : ResponsiveHelper.isTablet(context) ? 68 : 60,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
@@ -642,7 +633,7 @@ class _LearnScreenState extends State<LearnScreen>
                 ),
                 child: Icon(
                   Icons.auto_graph,
-                  size: isTablet ? 32 : 28,
+                  size: ResponsiveHelper.getIconSize(context),
                   color: accent,
                 ),
               ),
@@ -657,7 +648,7 @@ class _LearnScreenState extends State<LearnScreen>
                           .getTitleMediumStyle(color: textColor)
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 6),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                     Text(
                       'Jump into tailored modules for every proficiency stage.',
                       style: themeService.getBodyMediumStyle(

@@ -1,6 +1,7 @@
 import 'package:ductuch_master/backend/services/tts_service.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/Utilities/Widgets/tts_speed_dropdown.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:ductuch_master/Data/data_loaders.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
 import 'package:flutter/material.dart';
@@ -102,8 +103,7 @@ class _SentencesScreenState extends State<SentencesScreen>
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isSmallScreen = screenWidth < 360;
+    final isSmallScreen = ResponsiveHelper.isMobile(context);
 
     if (_isLoading) {
       return Obx(() {
@@ -166,14 +166,14 @@ class _SentencesScreenState extends State<SentencesScreen>
                 ),
                 child: Column(
                   children: [
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     _buildSentenceHeader(
                       context,
                       isSmallScreen,
                       scheme,
                       isDark,
                     ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -184,14 +184,14 @@ class _SentencesScreenState extends State<SentencesScreen>
                               scheme,
                               isDark,
                             ),
-                            SizedBox(height: isSmallScreen ? 20 : 24),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
                             _buildExternalNavigationControls(
                               context,
                               isSmallScreen,
                               scheme,
                               isDark,
                             ),
-                            SizedBox(height: isSmallScreen ? 16 : 20),
+                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
                           ],
                         ),
                       ),
@@ -234,7 +234,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                 color: textColor.withOpacity(0.6),
               ),
             ),
-            SizedBox(width: isSmallScreen ? 6 : 8),
+            SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.5),
             Row(
               children: List.generate(4, (index) {
                 return Container(
@@ -246,7 +246,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                       : (isSmallScreen ? 6 : 8),
                   height: isSmallScreen ? 4 : 6,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
+                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.1),
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
@@ -287,7 +287,7 @@ class _SentencesScreenState extends State<SentencesScreen>
               opacity: value.clamp(0.0, 1.0),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                   gradient: themeService.getCardGradient(isDark),
                   border: Border.all(
                     color: primaryColor.withOpacity(0.3),
@@ -326,7 +326,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                                             secondaryColor.withOpacity(0.15),
                                           ],
                                         ),
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
                                         border: Border.all(
                                           color: primaryColor.withOpacity(0.4),
                                           width: 1.5,
@@ -367,7 +367,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                                   );
                                 },
                               ),
-                              SizedBox(height: isSmallScreen ? 8 : 12),
+                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                               // Main sentence with Hero animation
                               Hero(
                                 tag: 'sentence_${currentSentence.german}',
@@ -385,7 +385,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                                           )
                                           .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: isSmallScreen ? 22 : 28,
+                                            fontSize: ResponsiveHelper.getTitleSize(context),
                                             height: 1.2,
                                           ),
                                     ),
@@ -397,7 +397,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                         ),
                       ],
                     ),
-                    SizedBox(height: isSmallScreen ? 8 : 12),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                     // Language tag
                     Wrap(
                       spacing: isSmallScreen ? 6 : 8,
@@ -409,7 +409,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                             vertical: isSmallScreen ? 3 : 4,
                           ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.4),
                             gradient: LinearGradient(
                               colors: [
                                 primaryColor.withOpacity(0.15),
@@ -430,7 +430,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                         ),
                       ],
                     ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     // Translation card with animation
                     TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.0, end: 1.0),
@@ -444,7 +444,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                             child: Container(
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
                                 gradient: LinearGradient(
                                   colors: [
                                     primaryColor.withOpacity(0.08),
@@ -513,7 +513,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                                                   : textColor.withOpacity(0.8),
                                             ),
                                             padding: isSmallScreen
-                                                ? const EdgeInsets.all(6)
+                                                ? EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.375)
                                                 : null,
                                           ),
                                         ),
@@ -521,7 +521,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                                     ],
                                   ),
                                   if (currentSentence.meaning != null) ...[
-                                    SizedBox(height: isSmallScreen ? 6 : 8),
+                                    SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                                     Text(
                                       currentSentence.meaning!,
                                       style: themeService.getBodyMediumStyle(
@@ -536,7 +536,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                         );
                       },
                     ),
-                    SizedBox(height: isSmallScreen ? 12 : 16),
+                    SizedBox(height: ResponsiveHelper.getSpacing(context)),
                     // Animated Progress bar
                     TweenAnimationBuilder<double>(
                       tween: Tween(
@@ -553,7 +553,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                           height: isSmallScreen ? 6 : 8,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                             color: textColor.withOpacity(0.1),
                           ),
                           child: FractionallySizedBox(
@@ -564,7 +564,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                                 gradient: LinearGradient(
                                   colors: [primaryColor, scheme.accentTeal],
                                 ),
-                                borderRadius: BorderRadius.circular(4),
+                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
                                 boxShadow: [
                                   BoxShadow(
                                     color: primaryColor.withOpacity(0.5),
@@ -614,7 +614,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                 scale: value,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                     gradient: themeService.getCardGradient(isDark),
                     border: Border.all(
                       color: primaryColor.withOpacity(0.3),
@@ -676,7 +676,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                             ),
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                               gradient: LinearGradient(
                                 colors: [
                                   primaryColor.withOpacity(0.2),
@@ -745,7 +745,7 @@ class _SentencesScreenState extends State<SentencesScreen>
                 scale: value,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
                     gradient: themeService.getCardGradient(isDark),
                     border: Border.all(
                       color: primaryColor.withOpacity(0.3),

@@ -1,6 +1,7 @@
 import 'package:ductuch_master/backend/data/learning_path_data.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
 import 'package:ductuch_master/FrontEnd/screen/level_screen/widget/module_card.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ductuch_master/controllers/lesson_controller.dart';
@@ -102,7 +103,12 @@ class _LevelScreenState extends State<LevelScreen>
                 // Animated Header
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+                    padding: EdgeInsets.fromLTRB(
+                      ResponsiveHelper.getHorizontalPadding(context),
+                      ResponsiveHelper.getVerticalPadding(context),
+                      ResponsiveHelper.getHorizontalPadding(context),
+                      ResponsiveHelper.getSpacing(context),
+                    ),
                     child: TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0.0, end: 1.0),
                       duration: ThemeService.defaultAnimationDuration,
@@ -125,7 +131,7 @@ class _LevelScreenState extends State<LevelScreen>
                                         child: Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(
-                                              12,
+                                              ResponsiveHelper.getBorderRadius(context) * 0.6,
                                             ),
                                             gradient: themeService
                                                 .getCardGradient(isDark),
@@ -144,14 +150,14 @@ class _LevelScreenState extends State<LevelScreen>
                                             icon: Icon(
                                               Icons.chevron_left,
                                               color: textColor,
-                                              size: 24,
+                                              size: ResponsiveHelper.getIconSize(context),
                                             ),
-                                            padding: const EdgeInsets.all(8),
+                                            padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.5),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
+                                    SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -183,7 +189,7 @@ class _LevelScreenState extends State<LevelScreen>
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(height: 12),
+                                          SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
                                           // Animated Progress Bar
                                           TweenAnimationBuilder<double>(
                                             tween: Tween(
@@ -203,7 +209,7 @@ class _LevelScreenState extends State<LevelScreen>
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.circular(
-                                                              4,
+                                                              ResponsiveHelper.getBorderRadius(context) * 0.2,
                                                             ),
                                                         color: surfaceColor
                                                             .withOpacity(0.1),
@@ -224,7 +230,7 @@ class _LevelScreenState extends State<LevelScreen>
                                                                 ),
                                                             borderRadius:
                                                                 BorderRadius.circular(
-                                                                  4,
+                                                                  ResponsiveHelper.getBorderRadius(context) * 0.2,
                                                                 ),
                                                             boxShadow: [
                                                               BoxShadow(
@@ -241,7 +247,7 @@ class _LevelScreenState extends State<LevelScreen>
                                                       ),
                                                     ),
                                                   ),
-                                                  const SizedBox(width: 12),
+                                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
                                                   Text(
                                                     '$progressPercent%',
                                                     style: themeService
@@ -257,7 +263,7 @@ class _LevelScreenState extends State<LevelScreen>
                                           if (currentLevel
                                               .description
                                               .isNotEmpty) ...[
-                                            const SizedBox(height: 8),
+                                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                                             Text(
                                               currentLevel.description,
                                               style: themeService
@@ -315,18 +321,18 @@ class _LevelScreenState extends State<LevelScreen>
                                     ),
                                     child: Icon(
                                       Icons.construction,
-                                      size: 50,
+                                      size: ResponsiveHelper.getIconSize(context) * 2,
                                       color: primaryColor,
                                     ),
                                   ),
-                                  const SizedBox(height: 24),
+                                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
                                   Text(
                                     'Coming Soon',
                                     style: themeService
                                         .getHeadlineSmallStyle(color: textColor)
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
-                                  const SizedBox(height: 8),
+                                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
                                   Text(
                                     'This level is under development',
                                     style: themeService.getBodyMediumStyle(
@@ -343,7 +349,7 @@ class _LevelScreenState extends State<LevelScreen>
                   )
                 else
                   SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getHorizontalPadding(context)),
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
                         final module = currentLevel.modules[index];
@@ -357,7 +363,7 @@ class _LevelScreenState extends State<LevelScreen>
                               child: Opacity(
                                 opacity: value.clamp(0.0, 1.0),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 16),
+                                  padding: EdgeInsets.only(bottom: ResponsiveHelper.getSpacing(context)),
                                   child: ModuleCard(
                                     moduleInfo: module,
                                     onTap: () {
@@ -418,15 +424,15 @@ class _LevelScreenState extends State<LevelScreen>
                           child: Opacity(
                             opacity: value.clamp(0.0, 1.0),
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                24,
-                                16,
-                                24,
-                                24,
+                              padding: EdgeInsets.fromLTRB(
+                                ResponsiveHelper.getHorizontalPadding(context),
+                                ResponsiveHelper.getSpacing(context),
+                                ResponsiveHelper.getHorizontalPadding(context),
+                                ResponsiveHelper.getVerticalPadding(context),
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                                   gradient: LinearGradient(
                                     colors: [
                                       primaryColor.withOpacity(0.2),
@@ -454,13 +460,13 @@ class _LevelScreenState extends State<LevelScreen>
                                         arguments: {'level': levelCodeUpper},
                                       );
                                     },
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                                     splashColor: primaryColor.withOpacity(0.2),
                                     highlightColor: primaryColor.withOpacity(
                                       0.1,
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(
+                                      padding: EdgeInsets.symmetric(
                                         horizontal: 20,
                                         vertical: 16,
                                       ),
@@ -477,15 +483,15 @@ class _LevelScreenState extends State<LevelScreen>
                                                 ],
                                               ),
                                               borderRadius:
-                                                  BorderRadius.circular(12),
+                                                  BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
                                             ),
                                             child: Icon(
                                               Icons.assignment_turned_in,
                                               color: Colors.white,
-                                              size: 24,
+                                              size: ResponsiveHelper.getIconSize(context),
                                             ),
                                           ),
-                                          const SizedBox(width: 16),
+                                          SizedBox(width: ResponsiveHelper.getSpacing(context)),
                                           Expanded(
                                             child: Column(
                                               crossAxisAlignment:
@@ -502,7 +508,7 @@ class _LevelScreenState extends State<LevelScreen>
                                                             FontWeight.bold,
                                                       ),
                                                 ),
-                                                const SizedBox(height: 4),
+                                                SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
                                                 Text(
                                                   'Test your knowledge for $levelCodeUpper',
                                                   style: themeService
@@ -517,7 +523,7 @@ class _LevelScreenState extends State<LevelScreen>
                                           Icon(
                                             Icons.arrow_forward_ios,
                                             color: primaryColor,
-                                            size: 20,
+                                            size: ResponsiveHelper.getSmallIconSize(context),
                                           ),
                                         ],
                                       ),
@@ -543,15 +549,15 @@ class _LevelScreenState extends State<LevelScreen>
                           child: Opacity(
                             opacity: value.clamp(0.0, 1.0),
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                24,
-                                16,
-                                24,
-                                24,
+                              padding: EdgeInsets.fromLTRB(
+                                ResponsiveHelper.getHorizontalPadding(context),
+                                ResponsiveHelper.getSpacing(context),
+                                ResponsiveHelper.getHorizontalPadding(context),
+                                ResponsiveHelper.getVerticalPadding(context),
                               ),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
                                   gradient: LinearGradient(
                                     colors: [
                                       scheme.accentTeal.withOpacity(0.25),
@@ -571,7 +577,7 @@ class _LevelScreenState extends State<LevelScreen>
                                   ],
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                  padding: EdgeInsets.symmetric(
                                     horizontal: 20,
                                     vertical: 18,
                                   ),
@@ -610,7 +616,7 @@ class _LevelScreenState extends State<LevelScreen>
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                             ),
-                                            const SizedBox(height: 6),
+                                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
                                             Text(
                                               'You passed the $levelCodeUpper exam with flying colors. Keep exploring the next level!',
                                               style: themeService
@@ -636,7 +642,7 @@ class _LevelScreenState extends State<LevelScreen>
                       },
                     ),
                   ),
-                const SliverToBoxAdapter(child: SizedBox(height: 40)),
+                SliverToBoxAdapter(child: SizedBox(height: ResponsiveHelper.getSpacing(context) * 2.5)),
               ],
             ),
           ),

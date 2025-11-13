@@ -1,6 +1,7 @@
 import 'package:ductuch_master/FrontEnd/screen/Home/Widget/level_card.dart';
 import 'package:ductuch_master/backend/models/level_model.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
+import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,10 +40,9 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final themeService = Get.find<ThemeService>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isTablet = screenWidth > 600;
-    final padding = isTablet ? 24.0 : 16.0;
-    final titleSize = isTablet ? 36.0 : 28.0;
+    final padding = ResponsiveHelper.getPadding(context);
+    final titleSize = ResponsiveHelper.getHeadlineSize(context);
+    final spacing = ResponsiveHelper.getSpacing(context);
 
     return Obx(() {
       final scheme = themeService.currentScheme;
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage>
                     secondaryColor,
                     padding,
                     titleSize,
-                    isTablet,
+                    spacing,
                   ),
                 ],
               ),
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage>
     Color secondaryColor,
     double padding,
     double titleSize,
-    bool isTablet,
+    double spacing,
   ) {
     return Padding(
       padding: EdgeInsets.all(padding),
@@ -125,22 +125,24 @@ class _HomePageState extends State<HomePage>
               );
             },
           ),
-          SizedBox(height: isTablet ? 24 : 20),
-          _buildLevelsGrid(),
+          SizedBox(height: spacing),
+          _buildLevelsGrid(context),
         ],
       ),
     );
   }
 
-  Widget _buildLevelsGrid() {
+  Widget _buildLevelsGrid(BuildContext context) {
     final levels = LevelModel.mockLevels;
+    final spacing = ResponsiveHelper.getSpacing(context);
+    final aspectRatio = ResponsiveHelper.getCardAspectRatio(context);
 
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 1.4,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: ResponsiveHelper.isDesktop(context) ? 2 : 1,
+        crossAxisSpacing: spacing,
+        mainAxisSpacing: spacing,
+        childAspectRatio: aspectRatio,
       ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
