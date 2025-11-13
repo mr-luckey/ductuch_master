@@ -240,6 +240,62 @@ class _LevelCardState extends State<LevelCard>
                           ),
                         );
                       }),
+                      // Coming Soon Tag for C1 and C2
+                      if (widget.level.isLocked && (widget.level.level == 'C1' || widget.level.level == 'C2'))
+                        Positioned(
+                          top: 12,
+                          right: 12,
+                          child: TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            duration: ThemeService.defaultAnimationDuration,
+                            curve: ThemeService.bounceCurve,
+                            builder: (context, value, child) {
+                              final scheme = themeService.currentScheme;
+                              final successColor = scheme.accentTeal;
+                              return Transform.scale(
+                                scale: value,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        successColor.withOpacity(0.2),
+                                        successColor.withOpacity(0.1),
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: successColor,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.schedule,
+                                        size: 16,
+                                        color: successColor,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        'Coming Soon',
+                                        style: themeService.getLabelSmallStyle(
+                                          color: successColor,
+                                        ).copyWith(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -322,7 +378,7 @@ class _LevelCardState extends State<LevelCard>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
-                tag: 'level_title_${widget.level.level}',
+                tag: 'level_title_${widget.level.level.toLowerCase()}_card',
                 child: Material(
                   color: Colors.transparent,
                   child: Text(
@@ -337,7 +393,7 @@ class _LevelCardState extends State<LevelCard>
               ),
               const SizedBox(height: 6),
               Text(
-                '${widget.level.moduleCount} modules · ${widget.level.lessonCount} lessons',
+                '${widget.level.actualModuleCount} modules · ${widget.level.actualLessonCount} lessons',
                 style: themeService.getStyle(
                   fontSize: subtitleSize,
                   color: secondaryTextColor,

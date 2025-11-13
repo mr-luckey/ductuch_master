@@ -1,190 +1,423 @@
 {
   "id": "A1",
   "title": "A1 - Beginner",
-  "description": "Master basic greetings, self-introductions, daily routines, and essential vocabulary.",
+  "description": "Master basic greetings, self-introductions, daily routines, and essential vocabulary for everyday situations.",
   "progress": 0,
   "modules": [
     {
       "id": "A1-M1",
-      "title": "👋 Module 1: Hello!",
+      "title": "👋 Module 1: Greetings & Basics",
       "icon": "waving_hand",
       "topics": [
         "Greetings & Farewells",
-        "The Alphabet & Pronunciation",
-        "Numbers 0-20"
+        "Numbers 0-20",
+        "Numbers 21-100",
+        "Colors",
+        "Common Questions"
       ]
     },
     {
       "id": "A1-M2",
-      "title": "👤 Module 2: Me and You",
+      "title": "👤 Module 2: People & Family",
       "icon": "person",
       "topics": [
-        "Personal Pronouns (I, you, he, she...)",
-        "Verbs: `to be` (sein) & `to have` (haben)",
-        "Introducing Yourself",
-        "Jobs & Nationalities"
+        "Personal Pronouns",
+        "Family Members",
+        "People & Relationships",
+        "Jobs & Professions"
       ]
     },
     {
       "id": "A1-M3",
-      "title": "🏠 Module 3: At Home and Out",
+      "title": "🏠 Module 3: Home & Objects",
       "icon": "home",
       "topics": [
-        "Articles (der, die, das)",
-        "Family & Hobbies",
-        "Food & Drinks (In a Café)",
-        "Telling Time & Days of the Week"
+        "House & Rooms",
+        "Furniture & Objects",
+        "Food & Drinks",
+        "Clothing & Accessories"
       ]
     },
     {
       "id": "A1-M4",
-      "title": "📅 Module 4: Daily Life",
-      "icon": "calendar_today",
+      "title": "📍 Module 4: City & Transportation",
+      "icon": "world",
       "topics": [
-        "Regular Verbs (Present Tense)",
-        "Numbers 20-100",
-        "My City & Directions",
-        "Modal Verbs (can, must, want...)"
+        "Places in City",
+        "Transportation",
+        "Directions & Locations",
+        "Shopping & Money"
+      ]
+    },
+    {
+      "id": "A1-M5",
+      "title": "💬 Module 5: Daily Life & Activities",
+      "icon": "chat",
+      "topics": [
+        "Daily Routines",
+        "Time & Dates",
+        "Weather & Seasons",
+        "Hobbies & Activities"
       ]
     }
-  ]
-  ,
+  ],
   "content": {
     "A1-M1-T1": [
       {
-        "phrase": "Guten Morgen!",
-        "translation": "Good morning!",
-        "meaning": "A common morning greeting (used until around noon).",
+        "phrase": "Hallo",
+        "translation": "Hello",
+        "meaning": "Basic greeting",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Guten Tag!",
-        "translation": "Good day!",
-        "meaning": "A formal greeting used during the day.",
+        "phrase": "Guten Morgen",
+        "translation": "Good morning",
+        "meaning": "Morning greeting",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Guten Abend!",
-        "translation": "Good evening!",
-        "meaning": "A greeting used in the evening.",
+        "phrase": "Guten Tag",
+        "translation": "Good day",
+        "meaning": "Formal daytime greeting",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Hallo!",
-        "translation": "Hello!",
-        "meaning": "A casual, friendly greeting.",
+        "phrase": "Guten Abend",
+        "translation": "Good evening",
+        "meaning": "Evening greeting",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Auf Wiedersehen!",
-        "translation": "Goodbye!",
-        "meaning": "A formal way to say goodbye.",
+        "phrase": "Gute Nacht",
+        "translation": "Good night",
+        "meaning": "Said before sleeping",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Tschüss!",
-        "translation": "Bye!",
-        "meaning": "A casual way to say goodbye.",
+        "phrase": "Tschüss",
+        "translation": "Bye",
+        "meaning": "Informal goodbye",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Auf Wiedersehen",
+        "translation": "Goodbye",
+        "meaning": "Formal goodbye",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M1-T2": [
       {
-        "phrase": "A",
-        "translation": "A",
-        "meaning": "The first letter of the German alphabet.",
-        "languageCode": "de-DE",
-        "level": "A1"
-      },
-      {
-        "phrase": "B",
-        "translation": "B",
-        "meaning": "The second letter of the German alphabet.",
-        "languageCode": "de-DE",
-        "level": "A1"
-      },
-      {
-        "phrase": "C",
-        "translation": "C",
-        "meaning": "The third letter of the German alphabet.",
-        "languageCode": "de-DE",
-        "level": "A1"
-      },
-      {
-        "phrase": "Ä",
-        "translation": "A-umlaut",
-        "meaning": "A special German letter with an umlaut.",
-        "languageCode": "de-DE",
-        "level": "A1"
-      },
-      {
-        "phrase": "Ö",
-        "translation": "O-umlaut",
-        "meaning": "A special German letter with an umlaut.",
-        "languageCode": "de-DE",
-        "level": "A1"
-      },
-      {
-        "phrase": "Ü",
-        "translation": "U-umlaut",
-        "meaning": "A special German letter with an umlaut.",
-        "languageCode": "de-DE",
-        "level": "A1"
-      },
-      {
-        "phrase": "ß",
-        "translation": "Eszett",
-        "meaning": "A special German letter (sharp S).",
-        "languageCode": "de-DE",
-        "level": "A1"
-      }
-    ],
-    "A1-M1-T3": [
-      {
         "phrase": "null",
         "translation": "zero",
-        "meaning": "The number 0.",
+        "meaning": "Number 0",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "eins",
         "translation": "one",
-        "meaning": "The number 1.",
+        "meaning": "Number 1",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "zwei",
         "translation": "two",
-        "meaning": "The number 2.",
+        "meaning": "Number 2",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "drei",
         "translation": "three",
-        "meaning": "The number 3.",
+        "meaning": "Number 3",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "vier",
+        "translation": "four",
+        "meaning": "Number 4",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "fünf",
+        "translation": "five",
+        "meaning": "Number 5",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "sechs",
+        "translation": "six",
+        "meaning": "Number 6",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "sieben",
+        "translation": "seven",
+        "meaning": "Number 7",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "acht",
+        "translation": "eight",
+        "meaning": "Number 8",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "neun",
+        "translation": "nine",
+        "meaning": "Number 9",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "zehn",
         "translation": "ten",
-        "meaning": "The number 10.",
+        "meaning": "Number 10",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "elf",
+        "translation": "eleven",
+        "meaning": "Number 11",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "zwölf",
+        "translation": "twelve",
+        "meaning": "Number 12",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "dreizehn",
+        "translation": "thirteen",
+        "meaning": "Number 13",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "vierzehn",
+        "translation": "fourteen",
+        "meaning": "Number 14",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "fünfzehn",
+        "translation": "fifteen",
+        "meaning": "Number 15",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "sechzehn",
+        "translation": "sixteen",
+        "meaning": "Number 16",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "siebzehn",
+        "translation": "seventeen",
+        "meaning": "Number 17",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "achtzehn",
+        "translation": "eighteen",
+        "meaning": "Number 18",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "neunzehn",
+        "translation": "nineteen",
+        "meaning": "Number 19",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "zwanzig",
         "translation": "twenty",
-        "meaning": "The number 20.",
+        "meaning": "Number 20",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M1-T3": [
+      {
+        "phrase": "einundzwanzig",
+        "translation": "twenty-one",
+        "meaning": "Number 21",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "dreißig",
+        "translation": "thirty",
+        "meaning": "Number 30",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "vierzig",
+        "translation": "forty",
+        "meaning": "Number 40",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "fünfzig",
+        "translation": "fifty",
+        "meaning": "Number 50",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "sechzig",
+        "translation": "sixty",
+        "meaning": "Number 60",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "siebzig",
+        "translation": "seventy",
+        "meaning": "Number 70",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "achtzig",
+        "translation": "eighty",
+        "meaning": "Number 80",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "neunzig",
+        "translation": "ninety",
+        "meaning": "Number 90",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "hundert",
+        "translation": "one hundred",
+        "meaning": "Number 100",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M1-T4": [
+      {
+        "phrase": "rot",
+        "translation": "red",
+        "meaning": "Color red",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "blau",
+        "translation": "blue",
+        "meaning": "Color blue",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "grün",
+        "translation": "green",
+        "meaning": "Color green",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "gelb",
+        "translation": "yellow",
+        "meaning": "Color yellow",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "schwarz",
+        "translation": "black",
+        "meaning": "Color black",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "weiß",
+        "translation": "white",
+        "meaning": "Color white",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "braun",
+        "translation": "brown",
+        "meaning": "Color brown",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "grau",
+        "translation": "gray",
+        "meaning": "Color gray",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M1-T5": [
+      {
+        "phrase": "Wie geht's?",
+        "translation": "How are you?",
+        "meaning": "Informal way to ask how someone is",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Wie heißt du?",
+        "translation": "What's your name?",
+        "meaning": "Asking someone's name informally",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Wo ist die Toilette?",
+        "translation": "Where is the bathroom?",
+        "meaning": "Asking for bathroom location",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Wie viel kostet das?",
+        "translation": "How much does it cost?",
+        "meaning": "Asking for price",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Sprechen Sie Englisch?",
+        "translation": "Do you speak English?",
+        "meaning": "Asking if someone speaks English",
         "languageCode": "de-DE",
         "level": "A1"
       }
@@ -193,306 +426,726 @@
       {
         "phrase": "ich",
         "translation": "I",
-        "meaning": "First person singular pronoun.",
+        "meaning": "First person singular",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "du",
         "translation": "you (informal)",
-        "meaning": "Second person singular, informal.",
+        "meaning": "Second person singular informal",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "er",
         "translation": "he",
-        "meaning": "Third person singular, masculine.",
+        "meaning": "Third person masculine",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "sie",
         "translation": "she",
-        "meaning": "Third person singular, feminine.",
+        "meaning": "Third person feminine",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "es",
         "translation": "it",
-        "meaning": "Third person singular, neuter.",
+        "meaning": "Third person neuter",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "wir",
         "translation": "we",
-        "meaning": "First person plural.",
+        "meaning": "First person plural",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "ihr",
+        "translation": "you (plural informal)",
+        "meaning": "Second person plural informal",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "sie",
+        "translation": "they",
+        "meaning": "Third person plural",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Sie",
+        "translation": "you (formal)",
+        "meaning": "Second person formal",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M2-T2": [
       {
-        "phrase": "Ich bin",
-        "translation": "I am",
-        "meaning": "Conjugation of 'sein' (to be) for 'ich'.",
+        "phrase": "die Mutter",
+        "translation": "the mother",
+        "meaning": "Female parent",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Du bist",
-        "translation": "You are",
-        "meaning": "Conjugation of 'sein' (to be) for 'du'.",
+        "phrase": "der Vater",
+        "translation": "the father",
+        "meaning": "Male parent",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Er ist",
-        "translation": "He is",
-        "meaning": "Conjugation of 'sein' (to be) for 'er'.",
+        "phrase": "die Schwester",
+        "translation": "the sister",
+        "meaning": "Female sibling",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich habe",
-        "translation": "I have",
-        "meaning": "Conjugation of 'haben' (to have) for 'ich'.",
+        "phrase": "der Bruder",
+        "translation": "the brother",
+        "meaning": "Male sibling",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Du hast",
-        "translation": "You have",
-        "meaning": "Conjugation of 'haben' (to have) for 'du'.",
+        "phrase": "die Eltern",
+        "translation": "the parents",
+        "meaning": "Mother and father",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Oma",
+        "translation": "the grandma",
+        "meaning": "Grandmother",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Opa",
+        "translation": "the grandpa",
+        "meaning": "Grandfather",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M2-T3": [
       {
-        "phrase": "Ich heiße Maria.",
-        "translation": "My name is Maria.",
-        "meaning": "A way to introduce yourself.",
+        "phrase": "der Mann",
+        "translation": "the man",
+        "meaning": "Adult male",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich komme aus Deutschland.",
-        "translation": "I come from Germany.",
-        "meaning": "Stating your country of origin.",
+        "phrase": "die Frau",
+        "translation": "the woman",
+        "meaning": "Adult female",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich bin Studentin.",
-        "translation": "I am a student.",
-        "meaning": "Stating your occupation or status.",
+        "phrase": "das Kind",
+        "translation": "the child",
+        "meaning": "Young person",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Freut mich!",
-        "translation": "Nice to meet you!",
-        "meaning": "A polite response when meeting someone.",
+        "phrase": "der Junge",
+        "translation": "the boy",
+        "meaning": "Male child",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Mädchen",
+        "translation": "the girl",
+        "meaning": "Female child",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Freund",
+        "translation": "the friend (male)",
+        "meaning": "Male friend or boyfriend",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Freundin",
+        "translation": "the friend (female)",
+        "meaning": "Female friend or girlfriend",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M2-T4": [
       {
-        "phrase": "Ich bin Lehrer.",
-        "translation": "I am a teacher.",
-        "meaning": "Stating your profession.",
+        "phrase": "der Lehrer",
+        "translation": "the teacher (male)",
+        "meaning": "Male teacher",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich bin Deutscher.",
-        "translation": "I am German.",
-        "meaning": "Stating your nationality (masculine).",
+        "phrase": "die Lehrerin",
+        "translation": "the teacher (female)",
+        "meaning": "Female teacher",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich bin Deutsche.",
-        "translation": "I am German.",
-        "meaning": "Stating your nationality (feminine).",
+        "phrase": "der Student",
+        "translation": "the student (male)",
+        "meaning": "Male university student",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Studentin",
+        "translation": "the student (female)",
+        "meaning": "Female university student",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Arzt",
+        "translation": "the doctor (male)",
+        "meaning": "Male doctor",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Ärztin",
+        "translation": "the doctor (female)",
+        "meaning": "Female doctor",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M3-T1": [
       {
-        "phrase": "der Tisch",
-        "translation": "the table",
-        "meaning": "Masculine article 'der' with noun 'Tisch'.",
+        "phrase": "das Haus",
+        "translation": "the house",
+        "meaning": "Building where people live",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Wohnung",
+        "translation": "the apartment",
+        "meaning": "Flat or apartment",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Zimmer",
+        "translation": "the room",
+        "meaning": "Room in a building",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
         "phrase": "die Tür",
         "translation": "the door",
-        "meaning": "Feminine article 'die' with noun 'Tür'.",
+        "meaning": "Entrance or exit",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "das Buch",
-        "translation": "the book",
-        "meaning": "Neuter article 'das' with noun 'Buch'.",
+        "phrase": "das Fenster",
+        "translation": "the window",
+        "meaning": "Opening in wall with glass",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M3-T2": [
       {
-        "phrase": "Meine Familie",
-        "translation": "My family",
-        "meaning": "Talking about family members.",
+        "phrase": "der Tisch",
+        "translation": "the table",
+        "meaning": "Furniture for eating or working",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich lese gerne.",
-        "translation": "I like to read.",
-        "meaning": "Expressing a hobby or interest.",
+        "phrase": "der Stuhl",
+        "translation": "the chair",
+        "meaning": "Furniture for sitting",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Mein Hobby ist Musik.",
-        "translation": "My hobby is music.",
-        "meaning": "Stating your hobby.",
+        "phrase": "das Bett",
+        "translation": "the bed",
+        "meaning": "Furniture for sleeping",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Buch",
+        "translation": "the book",
+        "meaning": "Object for reading",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Stift",
+        "translation": "the pen",
+        "meaning": "Writing instrument",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Schlüssel",
+        "translation": "the key",
+        "meaning": "Object for locking/unlocking",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M3-T3": [
       {
-        "phrase": "Ich möchte einen Kaffee.",
-        "translation": "I would like a coffee.",
-        "meaning": "Ordering in a café.",
+        "phrase": "das Wasser",
+        "translation": "the water",
+        "meaning": "Clear liquid for drinking",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Das Brot, bitte.",
-        "translation": "The bread, please.",
-        "meaning": "Ordering food politely.",
+        "phrase": "der Kaffee",
+        "translation": "the coffee",
+        "meaning": "Hot drink made from beans",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Guten Appetit!",
-        "translation": "Enjoy your meal!",
-        "meaning": "A common phrase before eating.",
+        "phrase": "der Tee",
+        "translation": "the tea",
+        "meaning": "Hot drink made from leaves",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Milch",
+        "translation": "the milk",
+        "meaning": "White liquid from animals",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Brot",
+        "translation": "the bread",
+        "meaning": "Baked food made from flour",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Apfel",
+        "translation": "the apple",
+        "meaning": "Round fruit",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Obst",
+        "translation": "the fruit",
+        "meaning": "Sweet food from plants",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Gemüse",
+        "translation": "the vegetables",
+        "meaning": "Plants used as food",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M3-T4": [
       {
-        "phrase": "Wie spät ist es?",
-        "translation": "What time is it?",
-        "meaning": "Asking for the time.",
+        "phrase": "der Schuh",
+        "translation": "the shoe",
+        "meaning": "Footwear",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Es ist drei Uhr.",
-        "translation": "It is three o'clock.",
-        "meaning": "Telling the time.",
+        "phrase": "das Hemd",
+        "translation": "the shirt",
+        "meaning": "Clothing for upper body",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Montag",
-        "translation": "Monday",
-        "meaning": "The first day of the week.",
+        "phrase": "die Hose",
+        "translation": "the pants",
+        "meaning": "Clothing for legs",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Hut",
+        "translation": "the hat",
+        "meaning": "Head covering",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Tasche",
+        "translation": "the bag",
+        "meaning": "Container for carrying things",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M4-T1": [
       {
-        "phrase": "Ich lerne Deutsch.",
-        "translation": "I learn German.",
-        "meaning": "Present tense of regular verb 'lernen'.",
+        "phrase": "die Stadt",
+        "translation": "the city",
+        "meaning": "Large populated area",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Du spielst Fußball.",
-        "translation": "You play soccer.",
-        "meaning": "Present tense of regular verb 'spielen'.",
+        "phrase": "das Dorf",
+        "translation": "the village",
+        "meaning": "Small populated area",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Straße",
+        "translation": "the street",
+        "meaning": "Road for vehicles",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Geschäft",
+        "translation": "the shop",
+        "meaning": "Place to buy things",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Restaurant",
+        "translation": "the restaurant",
+        "meaning": "Place to eat food",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "das Hotel",
+        "translation": "the hotel",
+        "meaning": "Place to stay overnight",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "die Schule",
+        "translation": "the school",
+        "meaning": "Place for learning",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M4-T2": [
       {
-        "phrase": "dreißig",
-        "translation": "thirty",
-        "meaning": "The number 30.",
+        "phrase": "das Auto",
+        "translation": "the car",
+        "meaning": "Road vehicle",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "fünfzig",
-        "translation": "fifty",
-        "meaning": "The number 50.",
+        "phrase": "das Fahrrad",
+        "translation": "the bicycle",
+        "meaning": "Two-wheeled vehicle",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "hundert",
-        "translation": "one hundred",
-        "meaning": "The number 100.",
+        "phrase": "der Bus",
+        "translation": "the bus",
+        "meaning": "Large public transport vehicle",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Zug",
+        "translation": "the train",
+        "meaning": "Rail vehicle",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Bahnhof",
+        "translation": "the train station",
+        "meaning": "Place for trains",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Flughafen",
+        "translation": "the airport",
+        "meaning": "Place for airplanes",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M4-T3": [
       {
-        "phrase": "Wo ist die Bank?",
-        "translation": "Where is the bank?",
-        "meaning": "Asking for directions.",
+        "phrase": "links",
+        "translation": "left",
+        "meaning": "Direction opposite of right",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Geradeaus",
-        "translation": "Straight ahead",
-        "meaning": "Giving directions.",
+        "phrase": "rechts",
+        "translation": "right",
+        "meaning": "Direction opposite of left",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "geradeaus",
+        "translation": "straight ahead",
+        "meaning": "Continuing in same direction",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "hier",
+        "translation": "here",
+        "meaning": "At this place",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "dort",
+        "translation": "there",
+        "meaning": "At that place",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ],
     "A1-M4-T4": [
       {
-        "phrase": "Ich kann schwimmen.",
-        "translation": "I can swim.",
-        "meaning": "Using modal verb 'können' (can).",
+        "phrase": "das Geld",
+        "translation": "the money",
+        "meaning": "Currency for buying things",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Du musst lernen.",
-        "translation": "You must study.",
-        "meaning": "Using modal verb 'müssen' (must).",
+        "phrase": "der Preis",
+        "translation": "the price",
+        "meaning": "Cost of something",
         "languageCode": "de-DE",
         "level": "A1"
       },
       {
-        "phrase": "Ich möchte Kaffee.",
-        "translation": "I would like coffee.",
-        "meaning": "Using modal verb 'möchten' (would like).",
+        "phrase": "ein Euro",
+        "translation": "one euro",
+        "meaning": "European currency unit",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich möchte zahlen",
+        "translation": "I would like to pay",
+        "meaning": "Requesting the bill",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M5-T1": [
+      {
+        "phrase": "Ich stehe auf",
+        "translation": "I get up",
+        "meaning": "Wake up and leave bed",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich esse",
+        "translation": "I eat",
+        "meaning": "Consume food",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich trinke",
+        "translation": "I drink",
+        "meaning": "Consume liquid",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich arbeite",
+        "translation": "I work",
+        "meaning": "Do job or task",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich schlafe",
+        "translation": "I sleep",
+        "meaning": "Rest in bed",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M5-T2": [
+      {
+        "phrase": "heute",
+        "translation": "today",
+        "meaning": "This day",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "morgen",
+        "translation": "tomorrow",
+        "meaning": "The day after today",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "gestern",
+        "translation": "yesterday",
+        "meaning": "The day before today",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "jetzt",
+        "translation": "now",
+        "meaning": "At this moment",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Montag",
+        "translation": "Monday",
+        "meaning": "First day of week",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Mittwoch",
+        "translation": "Wednesday",
+        "meaning": "Middle of week",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Januar",
+        "translation": "January",
+        "meaning": "First month",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M5-T3": [
+      {
+        "phrase": "der Frühling",
+        "translation": "the spring",
+        "meaning": "Season after winter",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Sommer",
+        "translation": "the summer",
+        "meaning": "Warm season",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Herbst",
+        "translation": "the autumn",
+        "meaning": "Season after summer",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "der Winter",
+        "translation": "the winter",
+        "meaning": "Cold season",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Es ist sonnig",
+        "translation": "It is sunny",
+        "meaning": "Weather with sun",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Es regnet",
+        "translation": "It is raining",
+        "meaning": "Weather with rain",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Es ist kalt",
+        "translation": "It is cold",
+        "meaning": "Low temperature",
+        "languageCode": "de-DE",
+        "level": "A1"
+      }
+    ],
+    "A1-M5-T4": [
+      {
+        "phrase": "Ich lese",
+        "translation": "I read",
+        "meaning": "Look at and understand written words",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich schreibe",
+        "translation": "I write",
+        "meaning": "Create text with pen or keyboard",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich spiele",
+        "translation": "I play",
+        "meaning": "Engage in game or sport",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich singe",
+        "translation": "I sing",
+        "meaning": "Make musical sounds with voice",
+        "languageCode": "de-DE",
+        "level": "A1"
+      },
+      {
+        "phrase": "Ich tanze",
+        "translation": "I dance",
+        "meaning": "Move body to music",
         "languageCode": "de-DE",
         "level": "A1"
       }
     ]
   }
 }
-

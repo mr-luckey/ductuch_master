@@ -9,7 +9,6 @@
     ".idea": true,
     ".metadata": true,
     ".vscode": true,
-    "Assets": true,
     "README.md": true,
     "analysis_options.yaml": true,
     "build": true,

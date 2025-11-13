@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:get/route_manager.dart';
+import 'package:ductuch_master/backend/data/learning_path_data.dart';
 
 class LevelModel {
   final String level;
@@ -22,6 +23,23 @@ class LevelModel {
     required this.primaryColor,
     this.ontap,
   });
+
+  /// Get the actual module count from LearningPathData
+  int get actualModuleCount {
+    final levelInfo = LearningPathData.levelInfo[level.toLowerCase()];
+    if (levelInfo == null) return moduleCount; // Fallback to hardcoded value
+    return levelInfo.modules.length;
+  }
+
+  /// Get the actual lesson count (total topics) from LearningPathData
+  int get actualLessonCount {
+    final levelInfo = LearningPathData.levelInfo[level.toLowerCase()];
+    if (levelInfo == null) return lessonCount; // Fallback to hardcoded value
+    return levelInfo.modules.fold<int>(
+      0,
+      (sum, module) => sum + module.lessonCount,
+    );
+  }
 
   static List<LevelModel> get mockLevels => [
     LevelModel(
@@ -81,7 +99,7 @@ class LevelModel {
       ontap: () {
         Get.toNamed('/second', arguments: 'c1');
       },
-      isLocked: false,
+      isLocked: true,
       primaryColor: const Color(0xFFEC4899),
     ),
     LevelModel(
@@ -93,7 +111,7 @@ class LevelModel {
         Get.toNamed('/second', arguments: 'c2');
       },
       progress: 0,
-      isLocked: false,
+      isLocked: true,
       primaryColor: const Color(0xFFEF4444),
     ),
   ];
