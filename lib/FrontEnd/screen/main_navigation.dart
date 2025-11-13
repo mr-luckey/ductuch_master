@@ -1,10 +1,11 @@
+import 'package:ductuch_master/FrontEnd/screen/learn/learn_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/nouns/nouns_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/verbs/verbs_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/sentences/sentences_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/more/more_screen.dart';
 import 'package:ductuch_master/FrontEnd/screen/Levels/levels_overview_screen.dart';
 import 'package:ductuch_master/backend/services/theme_service.dart';
-import 'package:ductuch_master/frontend/screens/learn/learn_screen.dart';
+// import 'package:ductuch_master/frontend/screens/learn/learn_screen.dart';
 import 'package:ductuch_master/Utilities/responsive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
@@ -48,8 +49,8 @@ class _MainNavigationState extends State<MainNavigation>
     final navBarHeight = ResponsiveHelper.isDesktop(context)
         ? 90.0
         : ResponsiveHelper.isTablet(context)
-            ? 80.0
-            : 70.0;
+        ? 80.0
+        : 70.0;
     final iconSize = ResponsiveHelper.getIconSize(context);
     final fontSize = ResponsiveHelper.getSmallSize(context);
     final borderRadius = ResponsiveHelper.getBorderRadius(context);
@@ -80,10 +81,10 @@ class _MainNavigationState extends State<MainNavigation>
         ),
         backgroundColor: navBarColor,
         decoration: NavBarDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(borderRadius),
-            topRight: Radius.circular(borderRadius),
-          ),
+          // borderRadius: BorderRadius.only(
+          //   topLeft: Radius.circular(borderRadius),
+          //   topRight: Radius.circular(borderRadius),
+          // ),
           boxShadow: [
             BoxShadow(
               color: primaryColor.withOpacity(isDark ? 0.2 : 0.1),

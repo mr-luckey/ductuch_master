@@ -1,12 +1,12 @@
-import 'package:ductuch_master/frontend/screens/lessons/A1/a1_lesson.dart';
-import 'package:ductuch_master/frontend/screens/lessons/A2/a2_lesson.dart';
-import 'package:ductuch_master/frontend/screens/lessons/B1/b1_lesson.dart';
-import 'package:ductuch_master/frontend/screens/lessons/B2/b2_lesson.dart';
-import 'package:ductuch_master/frontend/screens/lessons/C1/c1_lesson.dart';
-import 'package:ductuch_master/frontend/screens/lessons/C2/c2_lesson.dart';
-import 'package:ductuch_master/frontend/screens/home/home_screen.dart';
-import 'package:ductuch_master/frontend/screens/level/level_screen.dart';
-import 'package:ductuch_master/frontend/screens/main_navigation.dart';
+import 'package:ductuch_master/FrontEnd/screen/A1/A1_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/A2/A2_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/B1/B1_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/B2/B2_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/C1/C1_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/C2/C2_lesson.dart';
+import 'package:ductuch_master/FrontEnd/screen/Home/home_Screen.dart';
+import 'package:ductuch_master/FrontEnd/screen/level_screen/level_screen.dart';
+import 'package:ductuch_master/FrontEnd/screen/main_navigation.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
