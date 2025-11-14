@@ -47,9 +47,30 @@
         "Simple Past (Präteritum) of `to be` & `to have`",
         "Weather & Seasons"
       ]
+    },
+    {
+      "id": "A2-M9",
+      "title": "🍽️ Module 9: Food & Restaurants",
+      "icon": "restaurant",
+      "topics": [
+        "Ordering Food",
+        "Restaurants & Menus",
+        "Asking & Giving Opinions",
+        "Expressing Preferences"
+      ]
+    },
+    {
+      "id": "A2-M10",
+      "title": "🎨 Module 10: Hobbies & Leisure",
+      "icon": "sports_esports",
+      "topics": [
+        "Talking about Hobbies",
+        "Sports & Activities",
+        "Leisure Time Conversations",
+        "Expressing Likes & Dislikes"
+      ]
     }
-  ]
-  ,
+  ],
   "content": {
     "A2-M5-T1": [
       {
@@ -306,7 +327,154 @@
         "languageCode": "de-DE",
         "level": "A2"
       }
+    ],
+    "A2-M9-T1": [
+      {
+        "phrase": "Ich möchte einen Tisch für zwei Personen.",
+        "translation": "I would like a table for two.",
+        "meaning": "Booking a table at a restaurant.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Könnte ich bitte die Speisekarte haben?",
+        "translation": "Could I have the menu, please?",
+        "meaning": "Asking for a menu.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich nehme die Suppe und einen Salat.",
+        "translation": "I'll have the soup and a salad.",
+        "meaning": "Ordering food.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Wie schmeckt das?",
+        "translation": "How does it taste?",
+        "meaning": "Asking for opinion on food.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Das Essen ist sehr lecker.",
+        "translation": "The food is very delicious.",
+        "meaning": "Giving opinion on taste.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M9-T2": [
+      {
+        "phrase": "Ich bevorzuge vegetarisches Essen.",
+        "translation": "I prefer vegetarian food.",
+        "meaning": "Expressing food preference.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich hätte gerne ein Glas Wasser.",
+        "translation": "I would like a glass of water.",
+        "meaning": "Ordering drinks.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Können Sie mir empfehlen?",
+        "translation": "Can you recommend something?",
+        "meaning": "Asking for recommendation.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Die Pizza ist zu salzig.",
+        "translation": "The pizza is too salty.",
+        "meaning": "Giving negative feedback politely.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich möchte die Rechnung bitte.",
+        "translation": "I would like the bill, please.",
+        "meaning": "Asking for the check.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M10-T1": [
+      {
+        "phrase": "Ich spiele gern Fußball.",
+        "translation": "I like playing football.",
+        "meaning": "Talking about hobbies.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich lese jeden Abend ein Buch.",
+        "translation": "I read a book every evening.",
+        "meaning": "Describing leisure activity.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich höre gern Musik.",
+        "translation": "I like listening to music.",
+        "meaning": "Expressing preference.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich schwimme im Sommer im See.",
+        "translation": "I swim in the lake in summer.",
+        "meaning": "Talking about seasonal activities.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Was machst du in deiner Freizeit?",
+        "translation": "What do you do in your free time?",
+        "meaning": "Asking about hobbies.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
+    ],
+    "A2-M10-T2": [
+      {
+        "phrase": "Ich gehe oft ins Kino.",
+        "translation": "I often go to the cinema.",
+        "meaning": "Describing leisure activity.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich treibe Sport dreimal pro Woche.",
+        "translation": "I do sports three times a week.",
+        "meaning": "Talking about routines.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Ich mag Tanzen nicht so sehr.",
+        "translation": "I don't like dancing very much.",
+        "meaning": "Expressing dislikes politely.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Wir gehen am Wochenende wandern.",
+        "translation": "We go hiking on the weekend.",
+        "meaning": "Talking about weekend activities.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      },
+      {
+        "phrase": "Mein Lieblingshobby ist Malen.",
+        "translation": "My favorite hobby is painting.",
+        "meaning": "Talking about favorite hobby.",
+        "languageCode": "de-DE",
+        "level": "A2"
+      }
     ]
   }
 }
-

@@ -48,8 +48,7 @@
         "Final Mastery & Review"
       ]
     }
-  ]
-  ,
+  ],
   "content": {
     "B2-M13-T1": [
       {
@@ -63,6 +62,34 @@
         "phrase": "Das ist von großer Bedeutung.",
         "translation": "That is of great importance.",
         "meaning": "More sophisticated synonym.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist relevant.",
+        "translation": "That is relevant.",
+        "meaning": "Synonym with slightly different nuance.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist ausschlaggebend.",
+        "translation": "That is decisive/crucial.",
+        "meaning": "Stronger synonym.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist bedeutsam.",
+        "translation": "That is meaningful.",
+        "meaning": "Formal synonym.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Man könnte sagen, es ist essenziell.",
+        "translation": "One could say it is essential.",
+        "meaning": "Stylistic variation.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -81,6 +108,34 @@
         "meaning": "Formal register.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Hey, kannst du kurz kommen?",
+        "translation": "Hey, can you come for a moment?",
+        "meaning": "Very informal, friendly.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Würden Sie mir bitte kurz Auskunft geben?",
+        "translation": "Would you please give me brief information?",
+        "meaning": "Polite, formal request.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Danke dir.",
+        "translation": "Thanks (to you).",
+        "meaning": "Casual thanks.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich danke Ihnen sehr.",
+        "translation": "I thank you very much.",
+        "meaning": "Formal thanks.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M13-T3": [
@@ -95,6 +150,34 @@
         "phrase": "Das Lernen ist wichtig.",
         "translation": "Learning is important.",
         "meaning": "Nominalized form (verb to noun).",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das Schreiben fällt mir leicht.",
+        "translation": "Writing comes easy to me.",
+        "meaning": "Nominalization 'das Schreiben'.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das Lesen fördert den Wortschatz.",
+        "translation": "Reading promotes vocabulary.",
+        "meaning": "Nominalization with effect.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Planung dauert lange.",
+        "translation": "The planning takes a long time.",
+        "meaning": "Nominalized activity as subject.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Seine Prüfungsvorbereitung war erfolgreich.",
+        "translation": "His exam preparation was successful.",
+        "meaning": "Complex nominalization.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -113,6 +196,34 @@
         "meaning": "Present participle as attribute.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "der zerbrochene Stuhl",
+        "translation": "the broken chair",
+        "meaning": "Past participle attributive use.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "die abgeschlossene Prüfung",
+        "translation": "the completed exam",
+        "meaning": "Nominal + participle attribute.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "das gewinnende Team",
+        "translation": "the winning team",
+        "meaning": "Present participle used adjectivally.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "der schnell gelesene Text",
+        "translation": "the quickly read text",
+        "meaning": "Compound participle attribute.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M14-T1": [
@@ -127,6 +238,34 @@
         "phrase": "Die Forschung zeigt interessante Ergebnisse.",
         "translation": "Research shows interesting results.",
         "meaning": "Academic language.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Debatte über Migration ist kontrovers.",
+        "translation": "The debate about migration is controversial.",
+        "meaning": "Politics: neutral phrasing.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Neue Studien belegen den Effekt.",
+        "translation": "New studies demonstrate the effect.",
+        "meaning": "Science phrasing.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Reform zielt auf Effizienzsteigerung.",
+        "translation": "The reform aims at increasing efficiency.",
+        "meaning": "Policy/technical wording.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Statistik zeigt einen Trend.",
+        "translation": "The statistic shows a trend.",
+        "meaning": "Basic data interpretation.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -145,6 +284,34 @@
         "meaning": "Research vocabulary.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Die Methodik ist transparent beschrieben.",
+        "translation": "The methodology is described transparently.",
+        "meaning": "Academic description.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Ergebnisse sind signifikant.",
+        "translation": "The results are significant.",
+        "meaning": "Statistical term.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Eine Kontrollgruppe wurde verwendet.",
+        "translation": "A control group was used.",
+        "meaning": "Experimental vocabulary.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Schlussfolgerung beruht auf Daten.",
+        "translation": "The conclusion is based on data.",
+        "meaning": "Academic claim language.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M14-T3": [
@@ -159,6 +326,34 @@
         "phrase": "Während des Gesprächs",
         "translation": "During the conversation",
         "meaning": "Genitive with preposition.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Bedeutung des Wortes",
+        "translation": "The meaning of the word",
+        "meaning": "Genitive noun phrase.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Trotz des Fehlers blieb die Folge bestehen.",
+        "translation": "Despite the error the sequence persisted.",
+        "meaning": "Genitive after 'trotz' variation.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Angesichts steigender Preise...",
+        "translation": "In view of rising prices...",
+        "meaning": "Genitive construct for formal writing.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Werte der Studie zeigen...",
+        "translation": "The values of the study show...",
+        "meaning": "Genitive plural usage.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -177,6 +372,34 @@
         "meaning": "Idiom meaning insufficient help.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Sie hat das Herz am rechten Fleck.",
+        "translation": "She has her heart in the right place.",
+        "meaning": "Complimentary figurative phrase.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist die Spitze des Eisbergs.",
+        "translation": "That is the tip of the iceberg.",
+        "meaning": "Figurative phrase: small visible part.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Er trägt die Verantwortung wie ein Mantel.",
+        "translation": "He carries responsibility like a coat.",
+        "meaning": "Metaphorical comparison.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Metapher unterstreicht das Thema.",
+        "translation": "The metaphor underlines the theme.",
+        "meaning": "Literal description of figurative device.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M15-T1": [
@@ -191,6 +414,34 @@
         "phrase": "Na ja, das ist so eine Sache.",
         "translation": "Well, that's a thing.",
         "meaning": "Expressing uncertainty or reservation.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das war ironisch gemeint.",
+        "translation": "That was meant ironically.",
+        "meaning": "Pointing out ironic tone.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist sarkastisch gesagt.",
+        "translation": "That is said sarcastically.",
+        "meaning": "Explicit explanation of humor.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das ist sprachlicher Witz.",
+        "translation": "That is a linguistic joke.",
+        "meaning": "Describing wordplay.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Er macht eine Anspielung.",
+        "translation": "He makes an allusion.",
+        "meaning": "Indirect humorous reference.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -209,6 +460,34 @@
         "meaning": "Idiom meaning 'that's the real problem'.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Den Nagel auf den Kopf treffen.",
+        "translation": "To hit the nail on the head.",
+        "meaning": "To express exactly the right point.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Jemandem einen Bären aufbinden.",
+        "translation": "To pull someone's leg (lit. tie a bear on someone).",
+        "meaning": "To tell someone a tall tale.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Katze aus dem Sack lassen.",
+        "translation": "Let the cat out of the bag.",
+        "meaning": "Reveal a secret.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Mit dem Kopf durch die Wand wollen.",
+        "translation": "Want to get through the wall with your head.",
+        "meaning": "To be stubborn/forceful.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M15-T3": [
@@ -223,6 +502,34 @@
         "phrase": "Wie soll ich das ausdrücken?",
         "translation": "How should I express that?",
         "meaning": "Hesitation phrase in conversation.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Gute Frage, ich bin mir nicht sicher.",
+        "translation": "Good question, I'm not sure.",
+        "meaning": "Spontaneous admission of uncertainty.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Also, um ehrlich zu sein...",
+        "translation": "So, to be honest...",
+        "meaning": "Preface for an honest comment.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Kurz gesagt, ...",
+        "translation": "In short, ...",
+        "meaning": "Summarizing phrase during speech.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich meine, man könnte sagen...",
+        "translation": "I mean, one could say...",
+        "meaning": "Softening an opinion.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -241,6 +548,34 @@
         "meaning": "Northern German greeting.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Servus!",
+        "translation": "Hi/bye!",
+        "meaning": "Southern German informal greeting.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Na, alles klar?",
+        "translation": "Hi, everything OK?",
+        "meaning": "Northern casual colloquialism.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Wie geht's? — Läuft.",
+        "translation": "How are you? — Going well.",
+        "meaning": "Informal regional reply.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich komme aus Hamburg, nicht aus München.",
+        "translation": "I come from Hamburg, not from Munich.",
+        "meaning": "Simple regional identification phrase.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M16-T1": [
@@ -255,6 +590,34 @@
         "phrase": "Zusammenfassend lässt sich feststellen, dass...",
         "translation": "In summary, it can be stated that...",
         "meaning": "Conclusion phrase in essays.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Einleitung: Ziel dieser Arbeit ist es, ...",
+        "translation": "Introduction: The aim of this paper is to ...",
+        "meaning": "Essay/report intro formula.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Diese Beobachtung stützt die These, dass...",
+        "translation": "This observation supports the thesis that...",
+        "meaning": "Argument linking evidence to claim.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Abschließend empfehle ich folgende Maßnahmen.",
+        "translation": "In conclusion I recommend the following measures.",
+        "meaning": "Practical recommendation sentence.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Der Bericht behandelt Ursachen und Folgen.",
+        "translation": "The report treats causes and consequences.",
+        "meaning": "Summary clause for reports.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -273,6 +636,34 @@
         "meaning": "Analyzing literary devices.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Der Stil ist knapp und präzise.",
+        "translation": "The style is concise and precise.",
+        "meaning": "Commenting on style.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Der Erzähler ist unzuverlässig.",
+        "translation": "The narrator is unreliable.",
+        "meaning": "Interpretation statement.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Perspektive wechselt zwischen Ich- und Er-Erzähler.",
+        "translation": "The perspective alternates between first- and third-person narrator.",
+        "meaning": "Describing narrative technique.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Die Metaphern verstärken die Aussage des Textes.",
+        "translation": "The metaphors reinforce the message of the text.",
+        "meaning": "Effect of literary device.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ],
     "B2-M16-T3": [
@@ -287,6 +678,34 @@
         "phrase": "Ich hatte gelernt.",
         "translation": "I had learned.",
         "meaning": "Past perfect tense.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das Projekt wird abgeschlossen werden.",
+        "translation": "The project will be completed.",
+        "meaning": "Future passive.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Das Projekt ist abgeschlossen worden.",
+        "translation": "The project has been completed.",
+        "meaning": "Perfect passive.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Wenn er früher gekommen wäre, hätte er geholfen.",
+        "translation": "If he had come earlier, he would have helped.",
+        "meaning": "Conditional past (pluperfect conditional).",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Man liest den Bericht.",
+        "translation": "One reads the report.",
+        "meaning": "General present passive/impersonal use.",
         "languageCode": "de-DE",
         "level": "B2"
       }
@@ -305,8 +724,35 @@
         "meaning": "Advanced language proficiency.",
         "languageCode": "de-DE",
         "level": "B2"
+      },
+      {
+        "phrase": "Ich habe ein hohes Sprachniveau erreicht.",
+        "translation": "I have achieved a high language level.",
+        "meaning": "Self-evaluation phrase.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich führe komplexe Diskussionen auf Deutsch.",
+        "translation": "I conduct complex discussions in German.",
+        "meaning": "Claim about conversational ability.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich kann Texte kritisch analysieren.",
+        "translation": "I can analyze texts critically.",
+        "meaning": "Analytical competence claim.",
+        "languageCode": "de-DE",
+        "level": "B2"
+      },
+      {
+        "phrase": "Ich formuliere präzise Argumente.",
+        "translation": "I formulate precise arguments.",
+        "meaning": "Final mastery statement.",
+        "languageCode": "de-DE",
+        "level": "B2"
       }
     ]
   }
 }
-

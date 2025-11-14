@@ -48,8 +48,7 @@
         "Writing a Short Essay"
       ]
     }
-  ]
-  ,
+  ],
   "content": {
     "B1-M9-T1": [
       {
@@ -60,9 +59,44 @@
         "level": "B1"
       },
       {
-        "phrase": "Mit freundlichen Grüßen",
-        "translation": "Best regards",
+        "phrase": "Sehr geehrte Frau Müller,",
+        "translation": "Dear Ms. Müller,",
+        "meaning": "Formal greeting to a named person.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Mit freundlichen Grüßen,",
+        "translation": "Best regards,",
         "meaning": "Formal email closing.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Anbei finden Sie meinen Lebenslauf.",
+        "translation": "Please find my CV attached.",
+        "meaning": "Indicating attachment in an email.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich schreibe Ihnen bezüglich der ausgeschriebenen Stelle.",
+        "translation": "I am writing to you regarding the advertised position.",
+        "meaning": "Opening sentence in application email.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Könnten Sie mir bitte nähere Informationen senden?",
+        "translation": "Could you please send me further information?",
+        "meaning": "Polite request for details.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Vielen Dank für Ihre Zeit und Rückmeldung.",
+        "translation": "Thank you for your time and feedback.",
+        "meaning": "Polite closing sentence.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -81,6 +115,41 @@
         "meaning": "Stating qualifications.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Meine Stärken sind Zuverlässigkeit und Teamarbeit.",
+        "translation": "My strengths are reliability and teamwork.",
+        "meaning": "Describing strengths.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Referenzen sind auf Anfrage erhältlich.",
+        "translation": "References are available upon request.",
+        "meaning": "Offering references.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich freue mich auf ein Vorstellungsgespräch.",
+        "translation": "I look forward to an interview.",
+        "meaning": "Polite closing for an application.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich habe fundierte Kenntnisse in Marketing und Vertrieb.",
+        "translation": "I have solid knowledge in marketing and sales.",
+        "meaning": "Stating specific skills.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich bin flexibel und motiviert, Neues zu lernen.",
+        "translation": "I am flexible and motivated to learn new things.",
+        "meaning": "Expressing attitude.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M9-T3": [
@@ -95,6 +164,41 @@
         "phrase": "Ich weiß, dass du recht hast.",
         "translation": "I know that you are right.",
         "meaning": "Subordinate clause with 'dass' (that).",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Wenn es regnet, bleibe ich zu Hause.",
+        "translation": "If it rains, I stay at home.",
+        "meaning": "Conditional clause with 'wenn'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Obwohl er müde war, arbeitete er weiter.",
+        "translation": "Although he was tired, he continued working.",
+        "meaning": "Concessive subordinate clause with 'obwohl'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Falls du Hilfe brauchst, ruf mich an.",
+        "translation": "If you need help, call me.",
+        "meaning": "Conditional with 'falls'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Er sagt, dass er morgen kommt.",
+        "translation": "He says that he will come tomorrow.",
+        "meaning": "Reported content with 'dass'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Damit ich pünktlich bin, fahre ich früh los.",
+        "translation": "So that I'm on time, I leave early.",
+        "meaning": "Purpose clause with 'damit'.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -113,6 +217,41 @@
         "meaning": "Reflexive verb 'sich interessieren'.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Ich freue mich auf das Wochenende.",
+        "translation": "I am looking forward to the weekend.",
+        "meaning": "Reflexive expression 'sich freuen'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Er erinnert sich an den Urlaub.",
+        "translation": "He remembers the holiday.",
+        "meaning": "Reflexive verb 'sich erinnern'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Wir treffen uns jeden Freitag.",
+        "translation": "We meet every Friday.",
+        "meaning": "Reciprocal/reflexive meeting.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Du solltest dich ausruhen.",
+        "translation": "You should rest.",
+        "meaning": "Reflexive advice.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich entschuldige mich für den Fehler.",
+        "translation": "I apologize for the mistake.",
+        "meaning": "Reflexive 'sich entschuldigen'.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M10-T1": [
@@ -127,6 +266,34 @@
         "phrase": "Wahlen finden nächste Woche statt.",
         "translation": "Elections take place next week.",
         "meaning": "News headline structure.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Die Polizei untersucht den Vorfall.",
+        "translation": "The police are investigating the incident.",
+        "meaning": "Short news sentence.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Wirtschaft wächst langsam.",
+        "translation": "Economy grows slowly.",
+        "meaning": "Headline-style summary.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Neue Studie zeigt Gesundheitstrends.",
+        "translation": "New study shows health trends.",
+        "meaning": "Headline with study result.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Minister kündigt Reformen an.",
+        "translation": "Minister announces reforms.",
+        "meaning": "News short sentence.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -145,6 +312,34 @@
         "meaning": "Formal way to express opinion.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Ich bin überzeugt, dass wir handeln müssen.",
+        "translation": "I am convinced that we must act.",
+        "meaning": "Stronger opinion.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Aus meiner Sicht ist das problematisch.",
+        "translation": "From my point of view that is problematic.",
+        "meaning": "Opinion phrase.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Das sehe ich anders.",
+        "translation": "I see that differently.",
+        "meaning": "Polite disagreement.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Man sollte bedenken, dass es Kosten gibt.",
+        "translation": "One should consider that there are costs.",
+        "meaning": "Pointing out a consideration.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M10-T3": [
@@ -159,6 +354,34 @@
         "phrase": "Das Haus wurde gebaut.",
         "translation": "The house was built.",
         "meaning": "Passive voice in past tense.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Die Aufgabe wird erledigt.",
+        "translation": "The task will be done.",
+        "meaning": "Passive for tasks.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Die Fotos wurden gestern gemacht.",
+        "translation": "The photos were taken yesterday.",
+        "meaning": "Passive past action.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Hier wird Deutsch gesprochen.",
+        "translation": "German is spoken here.",
+        "meaning": "Present passive statement.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Der Vertrag ist unterschrieben worden.",
+        "translation": "The contract has been signed.",
+        "meaning": "Perfect passive form.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -177,6 +400,27 @@
         "meaning": "Preposition 'trotz' with genitive.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Angesichts der Lage müssen wir vorsichtig sein.",
+        "translation": "In view of the situation we must be careful.",
+        "meaning": "Genitive after 'angesichts'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Wegen des Streiks fallen die Züge aus.",
+        "translation": "Because of the strike the trains are cancelled.",
+        "meaning": "Genitive after 'wegen'.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Trotz seiner Erfahrung machte er Fehler.",
+        "translation": "Despite his experience he made mistakes.",
+        "meaning": "Genitive pronoun usage.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M11-T1": [
@@ -188,9 +432,30 @@
         "level": "B1"
       },
       {
-        "phrase": "In Deutschland isst man viel Brot.",
-        "translation": "In Germany, people eat a lot of bread.",
-        "meaning": "Describing cultural habits.",
+        "phrase": "Silvester wird oft mit Feuerwerk gefeiert.",
+        "translation": "New Year's Eve is often celebrated with fireworks.",
+        "meaning": "Cultural custom.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "In Deutschland trinkt man gern Kaffee und isst Kuchen.",
+        "translation": "In Germany people like to drink coffee and eat cake.",
+        "meaning": "Cultural habit.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Pünktlichkeit ist in der Arbeit sehr wichtig.",
+        "translation": "Punctuality is very important at work.",
+        "meaning": "Common social norm.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Viele Städte haben Weihnachtsmärkte.",
+        "translation": "Many cities have Christmas markets.",
+        "meaning": "Cultural event.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -204,9 +469,30 @@
         "level": "B1"
       },
       {
+        "phrase": "Die Hauptrolle war überzeugend.",
+        "translation": "The lead role was convincing.",
+        "meaning": "Commenting on acting.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Die Handlung war vorhersehbar.",
+        "translation": "The plot was predictable.",
+        "meaning": "Critique of plot.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
         "phrase": "Ich empfehle dieses Buch.",
         "translation": "I recommend this book.",
         "meaning": "Making a recommendation.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Der Autor beschreibt die Figuren gut.",
+        "translation": "The author describes the characters well.",
+        "meaning": "Comment on writing style.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -225,6 +511,27 @@
         "meaning": "Adjective ending with feminine article.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "den roten Apfel",
+        "translation": "the red apple",
+        "meaning": "Adjective ending in accusative masculine.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "einem alten Mann",
+        "translation": "an old man (dative)",
+        "meaning": "Adjective ending in dative masculine.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "keine guten Nachrichten",
+        "translation": "no good news",
+        "meaning": "Adjective ending in plural negation.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M11-T4": [
@@ -239,6 +546,27 @@
         "phrase": "Das Buch, das ich lese, ist interessant.",
         "translation": "The book that I am reading is interesting.",
         "meaning": "Relative clause with neuter relative pronoun.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Das ist die Frau, deren Sohn in Berlin wohnt.",
+        "translation": "That is the woman whose son lives in Berlin.",
+        "meaning": "Relative clause with genitive relative pronoun.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Der Lehrer, mit dem ich spreche, ist nett.",
+        "translation": "The teacher I am speaking to is nice.",
+        "meaning": "Relative clause with prepositional phrase.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Das ist das Auto, das ich kaufen möchte.",
+        "translation": "This is the car that I want to buy.",
+        "meaning": "Relative clause expressing desire.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -257,6 +585,27 @@
         "meaning": "Expressing wishes with Konjunktiv II.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Hätte ich mehr Geld, würde ich ein Haus kaufen.",
+        "translation": "If I had more money, I would buy a house.",
+        "meaning": "Konjunktiv II with hypothetical.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Könntest du mir helfen, wäre ich dankbar.",
+        "translation": "If you could help me, I would be grateful.",
+        "meaning": "Polite conditional request.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Wäre ich du, würde ich das Angebot annehmen.",
+        "translation": "If I were you, I would accept the offer.",
+        "meaning": "Advice using Konjunktiv II.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M12-T2": [
@@ -271,6 +620,27 @@
         "phrase": "Obwohl es regnet, gehe ich raus.",
         "translation": "Although it is raining, I go outside.",
         "meaning": "Connector expressing concession.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Deshalb habe ich entschieden, zu bleiben.",
+        "translation": "Therefore I decided to stay.",
+        "meaning": "Connector expressing cause-consequence.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Dennoch ist die Lage schwierig.",
+        "translation": "Nevertheless the situation is difficult.",
+        "meaning": "Contrast connector.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Obgleich er krank war, kam er zur Arbeit.",
+        "translation": "Although he was ill, he came to work.",
+        "meaning": "Formal concession connector.",
         "languageCode": "de-DE",
         "level": "B1"
       }
@@ -289,6 +659,27 @@
         "meaning": "Indirect question with 'wann'.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Kannst du mir sagen, wo das Büro ist?",
+        "translation": "Can you tell me where the office is?",
+        "meaning": "Polite indirect question.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ich frage mich, warum er nein gesagt hat.",
+        "translation": "I wonder why he said no.",
+        "meaning": "Indirect question expression.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Weißt du, wie viel das kostet?",
+        "translation": "Do you know how much that costs?",
+        "meaning": "Indirect question about price.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ],
     "B1-M12-T4": [
@@ -305,8 +696,28 @@
         "meaning": "Essay conclusion phrase.",
         "languageCode": "de-DE",
         "level": "B1"
+      },
+      {
+        "phrase": "Im Folgenden diskutiere ich die wichtigsten Punkte.",
+        "translation": "In the following I discuss the main points.",
+        "meaning": "Essay structural phrase.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Ein weiterer wichtiger Aspekt ist...",
+        "translation": "Another important aspect is...",
+        "meaning": "Adding a supporting point.",
+        "languageCode": "de-DE",
+        "level": "B1"
+      },
+      {
+        "phrase": "Abschließend möchte ich betonen, dass...",
+        "translation": "In conclusion I would like to emphasize that...",
+        "meaning": "Strong concluding sentence.",
+        "languageCode": "de-DE",
+        "level": "B1"
       }
     ]
   }
 }
-
