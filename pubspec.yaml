@@ -1,7 +1,7 @@
 name: ductuch_master
 description: "A new Flutter project."
 publish_to: 'none'
-version: 0.1.0
+version: 2.0.0
 
 environment:
   sdk: ^3.8.1
@@ -26,3 +26,27 @@ flutter:
   assets:
     - lib/Data/json/
     - assets/learn_module/
+  fonts:
+    - family: Comfortaa
+      fonts:
+        
+        - asset: assets/Fonts/Comfortaa/Comfortaa-Regular.ttf
+          weight: 400
+        - asset: assets/Fonts/Comfortaa/Comfortaa-Medium.ttf
+          weight: 500
+        - asset: assets/Fonts/Comfortaa/Comfortaa-SemiBold.ttf
+          weight: 600
+        - asset: assets/Fonts/Comfortaa/Comfortaa-Bold.ttf
+          weight: 700
+    - family: Comfortaa-Regular
+      fonts:
+        - asset: assets/Fonts/Comfortaa/Comfortaa-Regular.ttf
+    - family: Comfortaa-Medium
+      fonts:
+        - asset: assets/Fonts/Comfortaa/Comfortaa-Medium.ttf
+    - family: Comfortaa-SemiBold
+      fonts:
+        - asset: assets/Fonts/Comfortaa/Comfortaa-SemiBold.ttf
+    - family: Comfortaa-Bold
+      fonts:
+        - asset: assets/Fonts/Comfortaa/Comfortaa-Bold.ttf

@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'DeutschMaster',
+      title: 'DEUTSCH',
       theme: themeService.appTheme,
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.mainNavigation,

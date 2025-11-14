@@ -1,4 +1,4 @@
-package com.appwaretech.DeutschLerningApp
+package com.appwaretech.GermanLanguageLearningApp
 
 import io.flutter.embedding.android.FlutterActivity
 

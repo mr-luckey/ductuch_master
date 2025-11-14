@@ -26,147 +26,110 @@ class FontScheme {
   final TextStyle labelSmall;
   final TextStyle button;
 
-  FontScheme({
-    this.primaryFont = 'Comfortaa', // Kid-friendly, rounded, playful font
-    this.secondaryFont = 'Comfortaa',
-    this.headline = const TextStyle(
-      fontSize: 32,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.bold,
-    ),
-    this.headlineLarge = const TextStyle(
-      fontSize: 28,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.bold,
-    ),
-    this.headlineMedium = const TextStyle(
-      fontSize: 24,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.bold,
-    ),
-    this.headlineSmall = const TextStyle(
-      fontSize: 20,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w600,
-    ),
-    this.title = const TextStyle(
-      fontSize: 22,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w600,
-    ),
-    this.titleLarge = const TextStyle(
-      fontSize: 22,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w600,
-    ),
-    this.titleMedium = const TextStyle(
-      fontSize: 18,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w600,
-    ),
-    this.titleSmall = const TextStyle(
-      fontSize: 16,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w500,
-    ),
-    this.body = const TextStyle(
-      fontSize: 16,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.normal,
-    ),
-    this.bodyLarge = const TextStyle(
-      fontSize: 16,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.normal,
-    ),
-    this.bodyMedium = const TextStyle(
-      fontSize: 14,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.normal,
-    ),
-    this.bodySmall = const TextStyle(
-      fontSize: 12,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.normal,
-    ),
-    this.label = const TextStyle(
-      fontSize: 12,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w500,
-    ),
-    this.labelLarge = const TextStyle(
-      fontSize: 14,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w600,
-    ),
-    this.labelMedium = const TextStyle(
-      fontSize: 12,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w600,
-    ),
-    this.labelSmall = const TextStyle(
-      fontSize: 11,
-      fontFamily: 'Comfortaa',
-      fontWeight: FontWeight.w500,
-    ),
-    this.button = const TextStyle(
-      fontSize: 14,
-      fontWeight: FontWeight.w600,
-      fontFamily: 'Comfortaa',
-    ),
-  });
+  FontScheme({this.primaryFont = 'Comfortaa', this.secondaryFont = 'Comfortaa'})
+    : headline = GoogleFonts.comfortaa(
+        fontSize: 32,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineLarge = GoogleFonts.comfortaa(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineMedium = GoogleFonts.comfortaa(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineSmall = GoogleFonts.comfortaa(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+      ),
+      title = GoogleFonts.comfortaa(fontSize: 22, fontWeight: FontWeight.w600),
+      titleLarge = GoogleFonts.comfortaa(
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+      ),
+      titleMedium = GoogleFonts.comfortaa(
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+      ),
+      titleSmall = GoogleFonts.comfortaa(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      body = GoogleFonts.comfortaa(fontSize: 16, fontWeight: FontWeight.normal),
+      bodyLarge = GoogleFonts.comfortaa(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+      ),
+      bodyMedium = GoogleFonts.comfortaa(
+        fontSize: 14,
+        fontWeight: FontWeight.normal,
+      ),
+      bodySmall = GoogleFonts.comfortaa(
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+      ),
+      label = GoogleFonts.comfortaa(fontSize: 12, fontWeight: FontWeight.w500),
+      labelLarge = GoogleFonts.comfortaa(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+      ),
+      labelMedium = GoogleFonts.comfortaa(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+      ),
+      labelSmall = GoogleFonts.comfortaa(
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
+      ),
+      button = GoogleFonts.comfortaa(fontSize: 14, fontWeight: FontWeight.w600);
 
   // Get font style with color applied
-  TextStyle getHeadlineStyle({Color? color}) =>
-      headline.copyWith(color: color, fontFamily: primaryFont);
+  TextStyle getHeadlineStyle({Color? color}) => headline.copyWith(color: color);
 
   TextStyle getHeadlineLargeStyle({Color? color}) =>
-      headlineLarge.copyWith(color: color, fontFamily: primaryFont);
+      headlineLarge.copyWith(color: color);
 
   TextStyle getHeadlineMediumStyle({Color? color}) =>
-      headlineMedium.copyWith(color: color, fontFamily: primaryFont);
+      headlineMedium.copyWith(color: color);
 
   TextStyle getHeadlineSmallStyle({Color? color}) =>
-      headlineSmall.copyWith(color: color, fontFamily: primaryFont);
+      headlineSmall.copyWith(color: color);
 
-  TextStyle getTitleStyle({Color? color}) =>
-      title.copyWith(color: color, fontFamily: primaryFont);
+  TextStyle getTitleStyle({Color? color}) => title.copyWith(color: color);
 
   TextStyle getTitleLargeStyle({Color? color}) =>
-      titleLarge.copyWith(color: color, fontFamily: primaryFont);
+      titleLarge.copyWith(color: color);
 
   TextStyle getTitleMediumStyle({Color? color}) =>
-      titleMedium.copyWith(color: color, fontFamily: primaryFont);
+      titleMedium.copyWith(color: color);
 
   TextStyle getTitleSmallStyle({Color? color}) =>
-      titleSmall.copyWith(color: color, fontFamily: primaryFont);
+      titleSmall.copyWith(color: color);
 
-  TextStyle getBodyStyle({Color? color}) =>
-      body.copyWith(color: color, fontFamily: primaryFont);
+  TextStyle getBodyStyle({Color? color}) => body.copyWith(color: color);
 
   TextStyle getBodyLargeStyle({Color? color}) =>
-      bodyLarge.copyWith(color: color, fontFamily: primaryFont);
+      bodyLarge.copyWith(color: color);
 
   TextStyle getBodyMediumStyle({Color? color}) =>
-      bodyMedium.copyWith(color: color, fontFamily: primaryFont);
+      bodyMedium.copyWith(color: color);
 
   TextStyle getBodySmallStyle({Color? color}) =>
-      bodySmall.copyWith(color: color, fontFamily: primaryFont);
+      bodySmall.copyWith(color: color);
 
-  TextStyle getLabelStyle({Color? color}) =>
-      label.copyWith(color: color, fontFamily: primaryFont);
+  TextStyle getLabelStyle({Color? color}) => label.copyWith(color: color);
 
   TextStyle getLabelLargeStyle({Color? color}) =>
-      labelLarge.copyWith(color: color, fontFamily: primaryFont);
+      labelLarge.copyWith(color: color);
 
   TextStyle getLabelMediumStyle({Color? color}) =>
-      labelMedium.copyWith(color: color, fontFamily: primaryFont);
+      labelMedium.copyWith(color: color);
 
   TextStyle getLabelSmallStyle({Color? color}) =>
-      labelSmall.copyWith(color: color, fontFamily: primaryFont);
+      labelSmall.copyWith(color: color);
 
-  TextStyle getButtonStyle({Color? color}) =>
-      button.copyWith(color: color, fontFamily: primaryFont);
+  TextStyle getButtonStyle({Color? color}) => button.copyWith(color: color);
 
   // Generic style getter
   TextStyle getStyle({
@@ -175,11 +138,10 @@ class FontScheme {
     Color? color,
     double? height,
     double? letterSpacing,
-  }) => TextStyle(
+  }) => GoogleFonts.comfortaa(
     fontSize: fontSize,
     fontWeight: fontWeight,
     color: color,
-    fontFamily: primaryFont,
     height: height,
     letterSpacing: letterSpacing,
   );
@@ -231,6 +193,7 @@ class ThemeService extends GetxController {
   static ThemeService get to => Get.find();
 
   final RxInt selectedSchemeIndex = 0.obs;
+  // Set default theme to dark mode
   final RxBool isDarkMode = false.obs;
 
   // Centralized font scheme
@@ -275,8 +238,7 @@ class ThemeService extends GetxController {
     final isDark = isDarkMode.value;
     final base = isDark
         ? ThemeData(brightness: Brightness.dark)
-        : ThemeData(brightness: Brightness.light);
-    final text = base.textTheme;
+        : ThemeData(brightness: Brightness.dark);
 
     return ThemeData(
       brightness: isDark ? Brightness.dark : Brightness.light,
@@ -309,9 +271,8 @@ class ThemeService extends GetxController {
         foregroundColor: isDark
             ? currentScheme.textPrimaryDark
             : currentScheme.textPrimary,
-        titleTextStyle: TextStyle(
+        titleTextStyle: GoogleFonts.comfortaa(
           fontSize: 20,
-          fontFamily: 'Comfortaa',
           fontWeight: FontWeight.bold,
           color: isDark
               ? currentScheme.textPrimaryDark
@@ -328,7 +289,6 @@ class ThemeService extends GetxController {
           : currentScheme.textSecondary.withOpacity(0.3),
       cardTheme: CardThemeData(
         color: isDark ? currentScheme.surfaceDark : currentScheme.surface,
-        surfaceTintColor: Colors.transparent,
         shadowColor: isDark ? Colors.black : Colors.black26,
         elevation: 2,
         shape: RoundedRectangleBorder(
@@ -348,22 +308,16 @@ class ThemeService extends GetxController {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: const TextStyle(
+          textStyle: GoogleFonts.comfortaa(
             fontWeight: FontWeight.w600,
-
             fontSize: 16,
-            fontFamily: 'Comfortaa',
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: currentScheme.accentTeal,
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.w600,
-            //  fontSize: 16,
-            fontFamily: 'Comfortaa',
-          ),
+          textStyle: GoogleFonts.comfortaa(fontWeight: FontWeight.w600),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -381,51 +335,46 @@ class ThemeService extends GetxController {
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: currentScheme.accentTeal, width: 2),
         ),
-        labelStyle: TextStyle(
+        labelStyle: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textSecondaryDark
               : currentScheme.textSecondary,
           fontWeight: FontWeight.w500,
         ),
-        hintStyle: TextStyle(
+        hintStyle: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textSecondaryDark.withOpacity(0.7)
               : currentScheme.textSecondary.withOpacity(0.7),
         ),
       ),
-      textTheme: GoogleFonts.comfortaaTextTheme(text).copyWith(
-        bodyLarge: TextStyle(
-          fontFamily: 'Comfortaa',
+      textTheme: GoogleFonts.comfortaaTextTheme().copyWith(
+        bodyLarge: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
           fontSize: 16,
         ),
-        bodyMedium: TextStyle(
-          fontFamily: 'Comfortaa',
+        bodyMedium: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
           fontSize: 14,
         ),
-        titleLarge: TextStyle(
-          fontFamily: 'Comfortaa',
+        titleLarge: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
           fontSize: 22,
           fontWeight: FontWeight.bold,
         ),
-        titleMedium: TextStyle(
-          fontFamily: 'Comfortaa',
+        titleMedium: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
           fontSize: 18,
           fontWeight: FontWeight.w600,
         ),
-        labelLarge: TextStyle(
-          fontFamily: 'Comfortaa',
+        labelLarge: GoogleFonts.comfortaa(
           color: isDark
               ? currentScheme.textPrimaryDark
               : currentScheme.textPrimary,
