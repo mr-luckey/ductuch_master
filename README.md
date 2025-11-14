@@ -134,7 +134,14 @@ DeutschMaster is a feature-rich mobile application that provides structured Germ
 #### Android
 - Minimum SDK: 21
 - Target SDK: Latest
-- No additional configuration required
+- For Play Store builds, create a `key.properties` file in the project root (never commit it) with:
+  ```
+  storeFile=/absolute/path/to/your/keystore.jks
+  storePassword=your-store-password
+  keyAlias=your-key-alias
+  keyPassword=your-key-password
+  ```
+- The Gradle script in `android/app/build.gradle.kts` will automatically load these values when the file exists.
 
 #### iOS
 - Minimum iOS version: 12.0

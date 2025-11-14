@@ -13,7 +13,6 @@
     "analysis_options.yaml": true,
     "build": true,
     "ductuch_master.iml": true,
-    "ios": true,
     "linux": true,
     "macos": true,
     "pubspec.lock": true,

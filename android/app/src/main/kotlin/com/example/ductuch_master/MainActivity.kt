@@ -1,4 +1,4 @@
-package com.example.ductuch_master
+package com.appwaretech.DeutschLerningApp
 
 import io.flutter.embedding.android.FlutterActivity
 
