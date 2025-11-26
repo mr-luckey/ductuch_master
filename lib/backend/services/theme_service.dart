@@ -194,7 +194,7 @@ class ThemeService extends GetxController {
 
   final RxInt selectedSchemeIndex = 0.obs;
   // Set default theme to dark mode
-  final RxBool isDarkMode = false.obs;
+  final RxBool isDarkMode = true.obs;
 
   // Centralized font scheme
   late FontScheme fontScheme = FontScheme();
@@ -206,29 +206,57 @@ class ThemeService extends GetxController {
   static final List<ColorSchemeData> colorSchemes = [
     // 1. Playful Learning - Bright, engaging colors for active learning
     ColorSchemeData(
-      name: 'Playful Learning',
-      primary: const Color(0xFFFF6B35), // Vibrant orange - promotes energy
-      secondary: const Color(0xFFFFB627), // Sunny yellow - promotes happiness
-      surface: const Color(0xFFFFF9F0), // Warm cream - soft on eyes
-      background: const Color(0xFFFFFDF7), // Almost white with warmth
-      textPrimary: const Color(
-        0xFF2C3E50,
-      ), // Dark blue-gray - excellent readability
-      textSecondary: const Color(0xFF7F8C8D), // Medium gray
+      name: 'German Learning Blue',
+      primary: const Color(0xFF3A7BFF), // Primary glossy blue
+      secondary: const Color(0xFF6DA9FF), // Light secondary blue
+      surface: const Color(0xFFFFFFFF), // Card surface white
+      background: const Color(0xFFF3F7FF), // Soft blue background
+      textPrimary: const Color(0xFF1E2A40), // Deep navy text
+      textSecondary: const Color(0xFF6C7A92), // Gray-blue secondary text
+
       gradient: const LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [Color(0xFFFF6B35), Color(0xFFFFB627), Color(0xFF4ECDC4)],
+        colors: [Color(0xFF3A7BFF), Color(0xFF6DA9FF)],
       ),
-      primaryDark: const Color(0xFFFF8C65), // Lighter orange for dark mode
-      secondaryDark: const Color(0xFFFFD54F), // Brighter yellow
-      surfaceDark: const Color(0xFF1A1A1A), // Dark surface
-      backgroundDark: const Color(0xFF121212), // Very dark background
-      textPrimaryDark: const Color(0xFFFFFFFF), // White text
-      textSecondaryDark: const Color(0xFFB0B0B0), // Light gray
-      nounsSurface: const Color(0xFF2A2A2A), // Slightly lighter dark surface
-      accentTeal: const Color(0xFF4ECDC4), // Turquoise - calming yet engaging
+
+      // Dark Mode Colors
+      primaryDark: const Color(0xFF4B8AFF),
+      secondaryDark: const Color(0xFF80B7FF),
+      surfaceDark: const Color(0xFF1A1D26),
+      backgroundDark: const Color(0xFF12141C),
+      textPrimaryDark: const Color.fromARGB(255, 255, 255, 255),
+      textSecondaryDark: const Color(0xFFB5C0D0),
+
+      // Nouns theme colors
+      nounsSurface: const Color(0xFF1F2430),
+      accentTeal: const Color(0xFFFCD34D), // Soft yellow (German hint)
     ),
+
+    // ColorSchemeData(
+    //   name: 'Playful Learning',
+    //   primary: const Color(0xFFFF6B35), // Vibrant orange - promotes energy
+    //   secondary: const Color(0xFFFFB627), // Sunny yellow - promotes happiness
+    //   surface: const Color(0xFFFFF9F0), // Warm cream - soft on eyes
+    //   background: const Color(0xFFFFFDF7), // Almost white with warmth
+    //   textPrimary: const Color(
+    //     0xFF2C3E50,
+    //   ), // Dark blue-gray - excellent readability
+    //   textSecondary: const Color(0xFF7F8C8D), // Medium gray
+    //   gradient: const LinearGradient(
+    //     begin: Alignment.topLeft,
+    //     end: Alignment.bottomRight,
+    //     colors: [Color(0xFFFF6B35), Color(0xFFFFB627), Color(0xFF4ECDC4)],
+    //   ),
+    //   primaryDark: const Color(0xFFFF8C65), // Lighter orange for dark mode
+    //   secondaryDark: const Color(0xFFFFD54F), // Brighter yellow
+    //   surfaceDark: const Color(0xFF1A1A1A), // Dark surface
+    //   backgroundDark: const Color(0xFF121212), // Very dark background
+    //   textPrimaryDark: const Color(0xFFFFFFFF), // White text
+    //   textSecondaryDark: const Color(0xFFB0B0B0), // Light gray
+    //   nounsSurface: const Color(0xFF2A2A2A), // Slightly lighter dark surface
+    //   accentTeal: const Color(0xFF4ECDC4), // Turquoise - calming yet engaging
+    // ),
   ];
 
   ColorSchemeData get currentScheme => colorSchemes[selectedSchemeIndex.value];
@@ -251,16 +279,12 @@ class ThemeService extends GetxController {
               primary: currentScheme.accentTeal,
               secondary: currentScheme.accentTeal,
               surface: currentScheme.nounsSurface,
-              background: currentScheme.backgroundDark,
-              onBackground: currentScheme.textPrimaryDark,
               onSurface: currentScheme.textPrimaryDark,
             )
           : ColorScheme.light(
               primary: currentScheme.accentTeal,
               secondary: currentScheme.accentTeal,
               surface: currentScheme.surface,
-              background: currentScheme.background,
-              onBackground: currentScheme.textPrimary,
               onSurface: currentScheme.textPrimary,
             ),
       appBarTheme: AppBarTheme(

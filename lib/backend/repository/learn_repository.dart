@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:ductuch_master/Utilities/Models/model.dart';
 
 class LearnRepository {
-  static Map<String, LevelInfo> _levelInfo = {};
-  static Map<String, List<String>> _moduleTopics = {};
-  static Map<String, List<Map<String, dynamic>>> _topicPhrases = {};
+  static final Map<String, LevelInfo> _levelInfo = {};
+  static final Map<String, List<String>> _moduleTopics = {};
+  static final Map<String, List<Map<String, dynamic>>> _topicPhrases = {};
   static bool _initialized = false;
 
   static Map<String, LevelInfo> get levelInfo {
@@ -16,6 +16,7 @@ class LearnRepository {
   static Map<String, List<String>> get moduleTopics {
     return _moduleTopics;
   }
+
   static List<Map<String, dynamic>>? getPhrasesRaw(String topicId) {
     return _topicPhrases[topicId];
   }
@@ -24,8 +25,9 @@ class LearnRepository {
     if (_initialized) return;
     final List<String> levels = ['A1', 'A2', 'B1', 'B2'];
     for (final levelId in levels) {
-      final jsonStr =
-          await rootBundle.loadString('assets/learn_module/$levelId.json');
+      final jsonStr = await rootBundle.loadString(
+        'assets/learn_module/$levelId.json',
+      );
       final Map<String, dynamic> data = json.decode(jsonStr);
       _ingestLevelJson(data);
     }
@@ -67,8 +69,8 @@ class LearnRepository {
     );
 
     // Optional phrases content under "content"
-    final Map<String, dynamic>? content =
-        (jsonMap['content'] as Map?)?.cast<String, dynamic>();
+    final Map<String, dynamic>? content = (jsonMap['content'] as Map?)
+        ?.cast<String, dynamic>();
     if (content != null) {
       content.forEach((topicId, value) {
         final List<dynamic> rawList = (value as List<dynamic>);
@@ -119,5 +121,3 @@ class LearnRepository {
     }
   }
 }
-
-

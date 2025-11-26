@@ -39,7 +39,7 @@ class _PracticeScreenState extends State<PracticeScreen>
   final LessonController lessonController = Get.find<LessonController>();
   late AnimationController _fadeController;
   late Animation<double> _fadeAnimation;
-  Map<int, bool> _expandedExamples = {};
+  final Map<int, bool> _expandedExamples = {};
   List<PracticeItem> _practiceItems = [];
   bool _isLoading = true;
 
@@ -186,7 +186,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                     ),
                     child: Column(
                       children: [
-                        SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.25),
+                        SizedBox(
+                          height: ResponsiveHelper.getSpacing(context) * 0.25,
+                        ),
                         // _buildTopBar(context, isSmallScreen, scheme, isDark),
                         SizedBox(height: ResponsiveHelper.getSpacing(context)),
                         _buildPracticeHeader(
@@ -206,14 +208,22 @@ class _PracticeScreenState extends State<PracticeScreen>
                                   scheme,
                                   isDark,
                                 ),
-                                SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.5),
+                                SizedBox(
+                                  height:
+                                      ResponsiveHelper.getSpacing(context) *
+                                      1.5,
+                                ),
                                 _buildExternalNavigationControls(
                                   context,
                                   isSmallScreen,
                                   scheme,
                                   isDark,
                                 ),
-                                SizedBox(height: ResponsiveHelper.getSpacing(context) * 1.25),
+                                SizedBox(
+                                  height:
+                                      ResponsiveHelper.getSpacing(context) *
+                                      1.25,
+                                ),
                               ],
                             ),
                           ),
@@ -249,7 +259,9 @@ class _PracticeScreenState extends State<PracticeScreen>
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
+                borderRadius: BorderRadius.circular(
+                  ResponsiveHelper.getBorderRadius(context) * 0.6,
+                ),
                 gradient: themeService.getCardGradient(isDark),
                 border: Border.all(color: borderColor),
                 boxShadow: ThemeService.getCardShadow(isDark),
@@ -261,7 +273,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                   color: textColor,
                   size: isSmallScreen ? 20 : 24,
                 ),
-                padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.5),
+                padding: EdgeInsets.all(
+                  ResponsiveHelper.getSpacing(context) * 0.5,
+                ),
               ),
             ),
           ),
@@ -310,7 +324,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                       : (isSmallScreen ? 6 : 8),
                   height: isSmallScreen ? 4 : 6,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.1),
+                    borderRadius: BorderRadius.circular(
+                      ResponsiveHelper.getBorderRadius(context) * 0.1,
+                    ),
                     color: index == 0
                         ? textColor.withOpacity(0.7)
                         : index < 2
@@ -352,7 +368,9 @@ class _PracticeScreenState extends State<PracticeScreen>
             opacity: value.clamp(0.0, 1.0),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
+                borderRadius: BorderRadius.circular(
+                  ResponsiveHelper.getBorderRadius(context),
+                ),
                 gradient: themeService.getCardGradient(isDark),
                 border: Border.all(
                   color: primaryColor.withOpacity(0.3),
@@ -391,7 +409,12 @@ class _PracticeScreenState extends State<PracticeScreen>
                                           secondaryColor.withOpacity(0.15),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
+                                      borderRadius: BorderRadius.circular(
+                                        ResponsiveHelper.getBorderRadius(
+                                              context,
+                                            ) *
+                                            0.5,
+                                      ),
                                       border: Border.all(
                                         color: primaryColor.withOpacity(0.4),
                                         width: 1.5,
@@ -413,7 +436,13 @@ class _PracticeScreenState extends State<PracticeScreen>
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.375),
+                                        SizedBox(
+                                          width:
+                                              ResponsiveHelper.getSpacing(
+                                                context,
+                                              ) *
+                                              0.375,
+                                        ),
                                         Text(
                                           currentItem.type.toUpperCase(),
                                           style: themeService
@@ -430,7 +459,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                                 );
                               },
                             ),
-                            SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.75),
+                            SizedBox(
+                              height:
+                                  ResponsiveHelper.getSpacing(context) * 0.75,
+                            ),
                             // Main text with Hero animation
                             Hero(
                               tag: 'practice_text_${currentItem.german}',
@@ -446,7 +478,10 @@ class _PracticeScreenState extends State<PracticeScreen>
                                         .getTitleLargeStyle(color: Colors.white)
                                         .copyWith(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: ResponsiveHelper.getTitleSize(context),
+                                          fontSize:
+                                              ResponsiveHelper.getTitleSize(
+                                                context,
+                                              ),
                                           height: 1.2,
                                         ),
                                   ),
@@ -470,7 +505,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                           vertical: isSmallScreen ? 3 : 4,
                         ),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.4),
+                          borderRadius: BorderRadius.circular(
+                            ResponsiveHelper.getBorderRadius(context) * 0.4,
+                          ),
                           gradient: LinearGradient(
                             colors: [
                               primaryColor.withOpacity(0.15),
@@ -505,7 +542,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
+                              borderRadius: BorderRadius.circular(
+                                ResponsiveHelper.getBorderRadius(context) * 0.8,
+                              ),
                               gradient: LinearGradient(
                                 colors: [
                                   primaryColor.withOpacity(0.08),
@@ -540,7 +579,12 @@ class _PracticeScreenState extends State<PracticeScreen>
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
+                                        borderRadius: BorderRadius.circular(
+                                          ResponsiveHelper.getBorderRadius(
+                                                context,
+                                              ) *
+                                              0.5,
+                                        ),
                                         gradient: LinearGradient(
                                           colors: [
                                             primaryColor.withOpacity(0.2),
@@ -570,7 +614,12 @@ class _PracticeScreenState extends State<PracticeScreen>
                                                 : textColor.withOpacity(0.8),
                                           ),
                                           padding: isSmallScreen
-                                              ? EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.375)
+                                              ? EdgeInsets.all(
+                                                  ResponsiveHelper.getSpacing(
+                                                        context,
+                                                      ) *
+                                                      0.375,
+                                                )
                                               : null,
                                         ),
                                       ),
@@ -578,7 +627,11 @@ class _PracticeScreenState extends State<PracticeScreen>
                                   ],
                                 ),
                                 if (currentItem.meaning != null) ...[
-                                  SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
+                                  SizedBox(
+                                    height:
+                                        ResponsiveHelper.getSpacing(context) *
+                                        0.5,
+                                  ),
                                   Text(
                                     currentItem.meaning!,
                                     style: themeService.getBodyMediumStyle(
@@ -599,7 +652,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                     Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
+                        borderRadius: BorderRadius.circular(
+                          ResponsiveHelper.getBorderRadius(context) * 0.8,
+                        ),
                         gradient: LinearGradient(
                           colors: [
                             surfaceColor.withOpacity(0.05),
@@ -617,7 +672,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () => _toggleExamples(_currentItemIndex),
-                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
+                              borderRadius: BorderRadius.circular(
+                                ResponsiveHelper.getBorderRadius(context) * 0.8,
+                              ),
                               splashColor: primaryColor.withOpacity(0.2),
                               highlightColor: primaryColor.withOpacity(0.1),
                               child: Padding(
@@ -775,7 +832,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                         height: isSmallScreen ? 6 : 8,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
+                          borderRadius: BorderRadius.circular(
+                            ResponsiveHelper.getBorderRadius(context) * 0.2,
+                          ),
                           color: textColor.withOpacity(0.1),
                         ),
                         child: FractionallySizedBox(
@@ -786,7 +845,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                               gradient: LinearGradient(
                                 colors: [primaryColor, scheme.accentTeal],
                               ),
-                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.2),
+                              borderRadius: BorderRadius.circular(
+                                ResponsiveHelper.getBorderRadius(context) * 0.2,
+                              ),
                               boxShadow: [
                                 BoxShadow(
                                   color: primaryColor.withOpacity(0.5),
@@ -835,7 +896,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                 scale: value,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
+                    borderRadius: BorderRadius.circular(
+                      ResponsiveHelper.getBorderRadius(context) * 0.7,
+                    ),
                     gradient: themeService.getCardGradient(isDark),
                     border: Border.all(
                       color: primaryColor.withOpacity(0.3),
@@ -897,7 +960,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                             ),
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
+                              borderRadius: BorderRadius.circular(
+                                ResponsiveHelper.getBorderRadius(context),
+                              ),
                               gradient: LinearGradient(
                                 colors: [
                                   primaryColor.withOpacity(0.2),
@@ -966,7 +1031,9 @@ class _PracticeScreenState extends State<PracticeScreen>
                 scale: value,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.7),
+                    borderRadius: BorderRadius.circular(
+                      ResponsiveHelper.getBorderRadius(context) * 0.7,
+                    ),
                     gradient: themeService.getCardGradient(isDark),
                     border: Border.all(
                       color: primaryColor.withOpacity(0.3),

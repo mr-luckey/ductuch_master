@@ -7,15 +7,15 @@ class TtsService extends GetxController {
   static TtsService get to => Get.find();
 
   final FlutterTts _flutterTts = FlutterTts();
-  
+
   // Global voice speed (0.5 or 0.8)
   final RxDouble _globalSpeed = 0.8.obs;
-  
+
   // Whether TTS is currently playing
   final RxBool _isPlaying = false.obs;
-  
+
   // Current playing text
-  final RxString? _currentPlayingText = RxString('');
+  final RxString _currentPlayingText = RxString('');
 
   double get globalSpeed => _globalSpeed.value;
   bool get isPlaying => _isPlaying.value;
@@ -79,7 +79,7 @@ class TtsService extends GetxController {
       if (useGlobalSpeed) {
         await _flutterTts.setSpeechRate(_globalSpeed.value);
       }
-      
+
       await _flutterTts.setLanguage(languageCode);
       await _flutterTts.speak(text);
     } catch (e) {
@@ -101,6 +101,3 @@ class TtsService extends GetxController {
     return _isPlaying.value && _currentPlayingText?.value == text;
   }
 }
-
-
-

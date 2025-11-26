@@ -54,9 +54,16 @@ class _LevelCardState extends State<LevelCard>
   Widget build(BuildContext context) {
     final lessonController = Get.find<LessonController>();
     final themeService = ThemeService.to;
-    final cardHeight = ResponsiveHelper.getCardHeight(context, baseHeight: 180.0);
+    final cardHeight = ResponsiveHelper.getCardHeight(
+      context,
+      baseHeight: 180.0,
+    );
     final padding = ResponsiveHelper.getCardPadding(context);
-    final badgeSize = ResponsiveHelper.isDesktop(context) ? 80.0 : ResponsiveHelper.isTablet(context) ? 70.0 : 60.0;
+    final badgeSize = ResponsiveHelper.isDesktop(context)
+        ? 80.0
+        : ResponsiveHelper.isTablet(context)
+        ? 70.0
+        : 60.0;
     final titleSize = ResponsiveHelper.getTitleSize(context);
     final subtitleSize = ResponsiveHelper.getBodySize(context);
 
@@ -72,7 +79,9 @@ class _LevelCardState extends State<LevelCard>
           : scheme.textSecondary;
       final primaryColor = isDark ? scheme.primaryDark : scheme.primary;
       final secondaryColor = isDark ? scheme.secondaryDark : scheme.secondary;
-      final progress = lessonController.levelProgressPercent(widget.level.level);
+      final progress = lessonController.levelProgressPercent(
+        widget.level.level,
+      );
       final isPassed = lessonController.isLevelPassed(widget.level.level);
       final dynamicHeight = (progress == 100 && !isPassed)
           ? cardHeight + 28.0
@@ -174,9 +183,8 @@ class _LevelCardState extends State<LevelCard>
                         ),
                       // PASS Tag with animation
                       Obx(() {
-                        final passed = Get.find<LessonController>().isLevelPassed(
-                          widget.level.level,
-                        );
+                        final passed = Get.find<LessonController>()
+                            .isLevelPassed(widget.level.level);
                         if (!passed) return const SizedBox.shrink();
                         return Positioned(
                           top: 12,
@@ -224,12 +232,14 @@ class _LevelCardState extends State<LevelCard>
                                       const SizedBox(width: 6),
                                       Text(
                                         'PASSED',
-                                        style: themeService.getLabelSmallStyle(
-                                          color: primaryColor,
-                                        ).copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1.2,
-                                        ),
+                                        style: themeService
+                                            .getLabelSmallStyle(
+                                              color: primaryColor,
+                                            )
+                                            .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: 1.2,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -240,7 +250,9 @@ class _LevelCardState extends State<LevelCard>
                         );
                       }),
                       // Coming Soon Tag for C1 and C2
-                      if (widget.level.isLocked && (widget.level.level == 'C1' || widget.level.level == 'C2'))
+                      if (widget.level.isLocked &&
+                          (widget.level.level == 'C1' ||
+                              widget.level.level == 'C2'))
                         Positioned(
                           top: 12,
                           right: 12,
@@ -282,11 +294,13 @@ class _LevelCardState extends State<LevelCard>
                                       const SizedBox(width: 4),
                                       Text(
                                         'Coming Soon',
-                                        style: themeService.getLabelSmallStyle(
-                                          color: successColor,
-                                        ).copyWith(
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: themeService
+                                            .getLabelSmallStyle(
+                                              color: successColor,
+                                            )
+                                            .copyWith(
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -433,7 +447,7 @@ class _LevelCardState extends State<LevelCard>
                 ),
               ),
               Text(
-                '${dynamicProgress}%',
+                '$dynamicProgress%',
                 style: themeService.getStyle(
                   fontSize: fontSize,
                   fontWeight: FontWeight.bold,
@@ -582,11 +596,9 @@ class _LevelCardState extends State<LevelCard>
             const SizedBox(height: 12),
             Text(
               'Locked',
-              style: themeService.getBodyMediumStyle(
-                color: textColor.withOpacity(0.6),
-              ).copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: themeService
+                  .getBodyMediumStyle(color: textColor.withOpacity(0.6))
+                  .copyWith(fontWeight: FontWeight.bold),
             ),
           ],
         ),

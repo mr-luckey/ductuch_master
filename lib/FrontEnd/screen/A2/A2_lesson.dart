@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class A2LessonScreen extends StatefulWidget {
   final String moduleId;
 
-  A2LessonScreen({super.key, required this.moduleId});
+  const A2LessonScreen({super.key, required this.moduleId});
 
   @override
   State<A2LessonScreen> createState() => _A2LessonScreenState();
@@ -135,7 +135,9 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                           color: Colors.transparent,
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
+                              borderRadius: BorderRadius.circular(
+                                ResponsiveHelper.getBorderRadius(context) * 0.6,
+                              ),
                               gradient: themeService.getCardGradient(isDark),
                               border: Border.all(color: borderColor),
                               boxShadow: ThemeService.getCardShadow(isDark),
@@ -147,12 +149,16 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                 color: textPrimaryColor,
                                 size: ResponsiveHelper.getIconSize(context),
                               ),
-                              padding: EdgeInsets.all(ResponsiveHelper.getSpacing(context) * 0.5),
+                              padding: EdgeInsets.all(
+                                ResponsiveHelper.getSpacing(context) * 0.5,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.75),
+                      SizedBox(
+                        width: ResponsiveHelper.getSpacing(context) * 0.75,
+                      ),
                       Expanded(
                         child: Hero(
                           tag: 'module_title_${widget.moduleId}',
@@ -160,11 +166,9 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                             color: Colors.transparent,
                             child: Text(
                               moduleTitle,
-                              style: themeService.getTitleLargeStyle(
-                                color: textPrimaryColor,
-                              ).copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: themeService
+                                  .getTitleLargeStyle(color: textPrimaryColor)
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -175,15 +179,17 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                 // Topics list with staggered animations
                 Expanded(
                   child: ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: ResponsiveHelper.getHorizontalPadding(context)),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ResponsiveHelper.getHorizontalPadding(
+                        context,
+                      ),
+                    ),
                     itemCount: topics.length,
                     itemBuilder: (context, index) {
                       final topic = topics[index];
                       return TweenAnimationBuilder<double>(
                         tween: Tween(begin: 0.0, end: 1.0),
-                        duration: Duration(
-                          milliseconds: 300 + (index * 100),
-                        ),
+                        duration: Duration(milliseconds: 300 + (index * 100)),
                         curve: ThemeService.springCurve,
                         builder: (context, value, child) {
                           return Transform.translate(
@@ -228,19 +234,21 @@ class _A2LessonScreenState extends State<A2LessonScreen>
     ThemeService themeService,
   ) {
     final lessonController = Get.find<LessonController>();
-    
+
     return Obx(() {
       final isCompleted = lessonController.isLessonCompleted(topic['id']);
 
       return Container(
-        margin: EdgeInsets.only(bottom: ResponsiveHelper.getSpacing(context) * 0.75),
+        margin: EdgeInsets.only(
+          bottom: ResponsiveHelper.getSpacing(context) * 0.75,
+        ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
+          borderRadius: BorderRadius.circular(
+            ResponsiveHelper.getBorderRadius(context),
+          ),
           gradient: themeService.getCardGradient(isDark),
           border: Border.all(
-            color: isCompleted
-                ? primaryColor.withOpacity(0.6)
-                : borderColor,
+            color: isCompleted ? primaryColor.withOpacity(0.6) : borderColor,
             width: isCompleted ? 2.5 : 1.5,
           ),
           boxShadow: ThemeService.getCardShadow(isDark),
@@ -251,13 +259,12 @@ class _A2LessonScreenState extends State<A2LessonScreen>
             onTap: () {
               NavigationHelper.pushWithBottomNav(
                 context,
-                PhraseScreen(
-                  topicId: topic['id'],
-                  topicTitle: topic['title'],
-                ),
+                PhraseScreen(topicId: topic['id'], topicTitle: topic['title']),
               );
             },
-            borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context)),
+            borderRadius: BorderRadius.circular(
+              ResponsiveHelper.getBorderRadius(context),
+            ),
             splashColor: primaryColor.withOpacity(0.2),
             highlightColor: primaryColor.withOpacity(0.1),
             child: Stack(
@@ -272,15 +279,26 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                         child: Material(
                           color: Colors.transparent,
                           child: TweenAnimationBuilder<double>(
-                            tween: Tween(begin: 0.0, end: isCompleted ? 1.0 : 0.0),
+                            tween: Tween(
+                              begin: 0.0,
+                              end: isCompleted ? 1.0 : 0.0,
+                            ),
                             duration: ThemeService.defaultAnimationDuration,
                             curve: ThemeService.bounceCurve,
                             builder: (context, value, child) {
                               return Transform.scale(
                                 scale: 1.0 + (value * 0.2),
                                 child: Container(
-                                  width: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
-                                  height: ResponsiveHelper.isDesktop(context) ? 64 : ResponsiveHelper.isTablet(context) ? 60 : 56,
+                                  width: ResponsiveHelper.isDesktop(context)
+                                      ? 64
+                                      : ResponsiveHelper.isTablet(context)
+                                      ? 60
+                                      : 56,
+                                  height: ResponsiveHelper.isDesktop(context)
+                                      ? 64
+                                      : ResponsiveHelper.isTablet(context)
+                                      ? 60
+                                      : 56,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -288,14 +306,21 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                         scheme.accentTeal.withOpacity(0.2),
                                       ],
                                     ),
-                                    borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.8),
+                                    borderRadius: BorderRadius.circular(
+                                      ResponsiveHelper.getBorderRadius(
+                                            context,
+                                          ) *
+                                          0.8,
+                                    ),
                                     border: Border.all(
                                       color: primaryColor.withOpacity(0.4),
                                       width: 2,
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: primaryColor.withOpacity(0.3 * value),
+                                        color: primaryColor.withOpacity(
+                                          0.3 * value,
+                                        ),
                                         blurRadius: 8,
                                         spreadRadius: 1,
                                       ),
@@ -306,7 +331,11 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                         ? Icons.check_circle
                                         : _getIconForType(topic['type']),
                                     color: primaryColor,
-                                    size: ResponsiveHelper.isDesktop(context) ? 32 : ResponsiveHelper.isTablet(context) ? 30 : 28,
+                                    size: ResponsiveHelper.isDesktop(context)
+                                        ? 32
+                                        : ResponsiveHelper.isTablet(context)
+                                        ? 30
+                                        : 28,
                                   ),
                                 ),
                               );
@@ -325,26 +354,35 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                 color: Colors.transparent,
                                 child: Text(
                                   topic['title'],
-                                  style: themeService.getTitleMediumStyle(
-                                    color: textPrimaryColor,
-                                  ).copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    decoration: isCompleted
-                                        ? TextDecoration.lineThrough
-                                        : TextDecoration.none,
-                                  ),
+                                  style: themeService
+                                      .getTitleMediumStyle(
+                                        color: textPrimaryColor,
+                                      )
+                                      .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: isCompleted
+                                            ? TextDecoration.lineThrough
+                                            : TextDecoration.none,
+                                      ),
                                 ),
                               ),
                             ),
                             if (!isCompleted) ...[
-                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.375),
+                              SizedBox(
+                                height:
+                                    ResponsiveHelper.getSpacing(context) *
+                                    0.375,
+                              ),
                               Text(
                                 topic['content'],
                                 style: themeService.getBodySmallStyle(
                                   color: secondaryTextColor,
                                 ),
                               ),
-                              SizedBox(height: ResponsiveHelper.getSpacing(context) * 0.5),
+                              SizedBox(
+                                height:
+                                    ResponsiveHelper.getSpacing(context) * 0.5,
+                              ),
                               Row(
                                 children: [
                                   Container(
@@ -359,27 +397,44 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                           scheme.accentTeal.withOpacity(0.15),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.5),
+                                      borderRadius: BorderRadius.circular(
+                                        ResponsiveHelper.getBorderRadius(
+                                              context,
+                                            ) *
+                                            0.5,
+                                      ),
                                       border: Border.all(
                                         color: primaryColor.withOpacity(0.4),
                                       ),
                                     ),
                                     child: Text(
                                       topic['type'],
-                                      style: themeService.getLabelSmallStyle(
-                                        color: primaryColor,
-                                      ).copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      style: themeService
+                                          .getLabelSmallStyle(
+                                            color: primaryColor,
+                                          )
+                                          .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                     ),
                                   ),
-                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.625),
+                                  SizedBox(
+                                    width:
+                                        ResponsiveHelper.getSpacing(context) *
+                                        0.625,
+                                  ),
                                   Icon(
                                     Icons.access_time,
-                                    size: ResponsiveHelper.getSmallSize(context),
+                                    size: ResponsiveHelper.getSmallSize(
+                                      context,
+                                    ),
                                     color: secondaryTextColor,
                                   ),
-                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.25),
+                                  SizedBox(
+                                    width:
+                                        ResponsiveHelper.getSpacing(context) *
+                                        0.25,
+                                  ),
                                   Text(
                                     topic['duration'],
                                     style: themeService.getBodySmallStyle(
@@ -407,8 +462,12 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                 shape: BoxShape.circle,
                                 gradient: LinearGradient(
                                   colors: [
-                                    primaryColor.withOpacity(0.2 + (0.3 * value)),
-                                    scheme.accentTeal.withOpacity(0.15 + (0.2 * value)),
+                                    primaryColor.withOpacity(
+                                      0.2 + (0.3 * value),
+                                    ),
+                                    scheme.accentTeal.withOpacity(
+                                      0.15 + (0.2 * value),
+                                    ),
                                   ],
                                 ),
                                 border: Border.all(
@@ -420,8 +479,12 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                               ),
                               child: Icon(
                                 isCompleted ? Icons.check : Icons.play_arrow,
-                                size: ResponsiveHelper.getSmallIconSize(context),
-                                color: isCompleted ? Colors.white : primaryColor,
+                                size: ResponsiveHelper.getSmallIconSize(
+                                  context,
+                                ),
+                                color: isCompleted
+                                    ? Colors.white
+                                    : primaryColor,
                               ),
                             ),
                           );
@@ -449,7 +512,10 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                 vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(ResponsiveHelper.getBorderRadius(context) * 0.6),
+                                borderRadius: BorderRadius.circular(
+                                  ResponsiveHelper.getBorderRadius(context) *
+                                      0.6,
+                                ),
                                 gradient: LinearGradient(
                                   colors: [primaryColor, scheme.accentTeal],
                                 ),
@@ -467,17 +533,23 @@ class _A2LessonScreenState extends State<A2LessonScreen>
                                   Icon(
                                     Icons.verified,
                                     color: Colors.white,
-                                    size: ResponsiveHelper.getSmallIconSize(context),
+                                    size: ResponsiveHelper.getSmallIconSize(
+                                      context,
+                                    ),
                                   ),
-                                  SizedBox(width: ResponsiveHelper.getSpacing(context) * 0.375),
+                                  SizedBox(
+                                    width:
+                                        ResponsiveHelper.getSpacing(context) *
+                                        0.375,
+                                  ),
                                   Text(
                                     'Completed',
-                                    style: themeService.getLabelSmallStyle(
-                                      color: Colors.white,
-                                    ).copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.4,
-                                    ),
+                                    style: themeService
+                                        .getLabelSmallStyle(color: Colors.white)
+                                        .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 0.4,
+                                        ),
                                   ),
                                 ],
                               ),
