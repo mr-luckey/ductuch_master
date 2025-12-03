@@ -35,8 +35,8 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = maxOf(flutter.minSdkVersion, 24)
         targetSdk = 36
-        versionCode = 4  // Build number - must increment for each Play Store upload
-        versionName = "4.0.0"  // Version name shown to users
+        versionCode = 5  // Build number - must increment for each Play Store upload
+        versionName = "5.0.0"  // Version name shown to users
     }
 
     signingConfigs {
